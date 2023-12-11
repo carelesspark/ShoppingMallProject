@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문 상세 조회 페이지(관리자)</title>
+<title>주문 환불/교환 요청 조회 페이지(관리자)</title>
 <link href="../css/orderRefundOrChange.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
