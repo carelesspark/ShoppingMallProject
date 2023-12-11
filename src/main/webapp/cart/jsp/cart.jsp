@@ -27,7 +27,7 @@
 					<table id="cart_table">
 						<tr id="cart_table_first_tr">
 							<td id="cart_table_first_td"><input type="checkbox"
-								id="cart_check_all" name="checkAll" value="check_value"/>선택</td>
+								id="cart_check_all" name="checkAll" value="check_value" />선택</td>
 							<td id="cart_table_product_name">제품명</td>
 							<td>수량</td>
 							<td>가격</td>
@@ -36,7 +36,8 @@
 						</tr>
 						<tr id="cart_table_other_tr">
 							<td id="cart_table_first_td"><input type="checkbox"
-								id="cart_check_1" name="checkbox" value="check_value2" class="cart_product_checkbox" /></td>
+								id="cart_check_1" name="checkbox" value="check_value2"
+								class="cart_product_checkbox" /></td>
 							<td id="cart_table_product_name">제품 이름1</td>
 							<td><input type="number" id="cart_product_count1"></td>
 							<td>19,000원</td>
@@ -46,7 +47,8 @@
 						</tr>
 						<tr id="cart_table_other_tr">
 							<td id="cart_table_first_td"><input type="checkbox"
-								id="cart_check_2" name="checkbox" value="check_value3" class="cart_product_checkbox" /></td>
+								id="cart_check_2" name="checkbox" value="check_value3"
+								class="cart_product_checkbox" /></td>
 							<td id="cart_table_product_name">제품 이름2</td>
 							<td><input type="number" id="cart_product_count2"></td>
 							<td>19,000원</td>
@@ -56,7 +58,8 @@
 						</tr>
 						<tr id="cart_table_other_tr">
 							<td id="cart_table_first_td"><input type="checkbox"
-								id="cart_check_3" name="checkbox" value="check_value4" class="cart_product_checkbox" /></td>
+								id="cart_check_3" name="checkbox" value="check_value4"
+								class="cart_product_checkbox" /></td>
 							<td id="cart_table_product_name">제품 이름3</td>
 							<td><input type="number" id="cart_product_count3"></td>
 							<td>19,000원</td>
@@ -66,7 +69,8 @@
 						</tr>
 						<tr id="cart_table_other_tr">
 							<td id="cart_table_first_td"><input type="checkbox"
-								id="cart_check_4" name="checkbox" value="check_value5" class="cart_product_checkbox" /></td>
+								id="cart_check_4" name="checkbox" value="check_value5"
+								class="cart_product_checkbox" /></td>
 							<td id="cart_table_product_name">제품 이름4</td>
 							<td><input type="number" id="cart_product_count4"></td>
 							<td>19,000원</td>
@@ -76,7 +80,8 @@
 						</tr>
 						<tr id="cart_table_other_tr">
 							<td id="cart_table_first_td"><input type="checkbox"
-								id="cart_check_5" name="checkbox" value="check_value6" class="cart_product_checkbox" /></td>
+								id="cart_check_5" name="checkbox" value="check_value6"
+								class="cart_product_checkbox" /></td>
 							<td id="cart_table_product_name">제품 이름5</td>
 							<td><input type="number" id="cart_product_count5"></td>
 							<td>19,000원</td>

@@ -8,7 +8,8 @@
 <link href="../css/orderInfo.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<header>임시 헤더</header>
@@ -204,11 +205,12 @@
 						<div class="card">
 							<div class="card-header">
 								<a class="btn" data-bs-toggle="collapse" href="#collapseOne">
-									 [배송] 구매한 상품이 어디에 있는지 알고 싶어요!</a>
+									[배송] 구매한 상품이 어디에 있는지 알고 싶어요!</a>
 							</div>
 							<div id="collapseOne" class="collapse show"
 								data-bs-parent="#accordion">
-								<div class="card-body" id="answer">제공해드리는 송장번호를 이용하여 해당 택배사 페이지에서 구매하신 상품의 위치를 알 수 있습니다:)</div>
+								<div class="card-body" id="answer">제공해드리는 송장번호를 이용하여 해당
+									택배사 페이지에서 구매하신 상품의 위치를 알 수 있습니다:)</div>
 							</div>
 						</div>
 
@@ -219,8 +221,11 @@
 							</div>
 							<div id="collapseTwo" class="collapse"
 								data-bs-parent="#accordion">
-								<div class="card-body" id="answer">만약 상품이 파손되어 배송되었을 경우, 저희 홈페이지에 있는 이메일 또는 번호로 연락을 주시면 새 상품으로<br/> 교환해드리고 있습니다.<br/>
-								다른 방법으로는, 상세 홈페이지의 '교환' 버튼을 클릭하여 새 상품으로 교환 받으실 수 있습니다:)</div>
+								<div class="card-body" id="answer">
+									만약 상품이 파손되어 배송되었을 경우, 저희 홈페이지에 있는 이메일 또는 번호로 연락을 주시면 새 상품으로<br />
+									교환해드리고 있습니다.<br /> 다른 방법으로는, 상세 홈페이지의 '교환' 버튼을 클릭하여 새 상품으로 교환
+									받으실 수 있습니다:)
+								</div>
 							</div>
 						</div>
 
@@ -231,7 +236,8 @@
 							</div>
 							<div id="collapseThree" class="collapse"
 								data-bs-parent="#accordion">
-								<div class="card-body" id="answer">일요일을 제외한 월~토요일에 구매하신 상품을 받아보실 수 있습니다:)</div>
+								<div class="card-body" id="answer">일요일을 제외한 월~토요일에 구매하신
+									상품을 받아보실 수 있습니다:)</div>
 							</div>
 						</div>
 					</div>

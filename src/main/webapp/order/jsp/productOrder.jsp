@@ -180,12 +180,11 @@
 				</div>
 				<div id="order_buttons">
 					<div id="order_buttons_div1">
-						<button type="button" class="btn btn-dark"
-							id="return_home_button" onclick="location.href='orderListAdmin.jsp';">홈으로 돌아가기</button>
+						<button type="button" class="btn btn-dark" id="return_home_button"
+							onclick="location.href='orderListAdmin.jsp';">홈으로 돌아가기</button>
 					</div>
 					<div id="order_buttons_div2">
-						<button type="submit" class="btn btn-dark"
-							id="order_buy_button">구매하기</button>
+						<button type="submit" class="btn btn-dark" id="order_buy_button">구매하기</button>
 					</div>
 				</div>
 			</form>

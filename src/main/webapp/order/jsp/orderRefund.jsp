@@ -117,7 +117,8 @@
 							</tr>
 							<tr>
 								<td id="refund_table_left">취소/환불 사유</td>
-								<td id="refund_table_right"><select id="select"><option value="damaged">상품 불량</option>
+								<td id="refund_table_right"><select id="select"><option
+											value="damaged">상품 불량</option>
 										<option value="simple_change">단순 변심</option>
 										<option value="late_deliever">배송 지연</option>
 										<option value="different_info">상품정보와 상이</option>
@@ -125,19 +126,25 @@
 							</tr>
 							<tr>
 								<td id="refund_table_left_textarea">사유 설명</td>
-								<td id="refund_table_right2"><textarea id="textarea" placeholder="취소/환불 사유를 상세하게 적어주세요.&#13;&#10;단순 변심의 경우 7일 이내에 취소/환불 신청 시 청약철회가 가능합니다.&#13;&#10;(최대 1000자 작성 가능)"></textarea></td>
+								<td id="refund_table_right2"><textarea id="textarea"
+										placeholder="취소/환불 사유를 상세하게 적어주세요.&#13;&#10;단순 변심의 경우 7일 이내에 취소/환불 신청 시 청약철회가 가능합니다.&#13;&#10;(최대 1000자 작성 가능)"></textarea></td>
 							</tr>
 						</table>
 					</div>
 					<div id="refund_agreement">
 						<div>
-							<label><input type="checkbox"/><span>청약 후 또는 상품을 공급 받은 날로부터 7일 이내에는 소비자의 귀책사유로 인한 상품의 멸실 또는 훼손된 경우 등을 제외하고는<br/> 단순변심으로 인한 청약철회가 가능합니다.</span></label>
+							<label><input type="checkbox" /><span>청약 후 또는 상품을
+									공급 받은 날로부터 7일 이내에는 소비자의 귀책사유로 인한 상품의 멸실 또는 훼손된 경우 등을 제외하고는<br />
+									단순변심으로 인한 청약철회가 가능합니다.
+							</span></label>
 						</div>
 						<div>
-							<label><input type="checkbox"/><span>고의적인 파손, 사용 흔적이 발견될 경우 환불 진행이 불가합니다.</span></label>
+							<label><input type="checkbox" /><span>고의적인 파손, 사용
+									흔적이 발견될 경우 환불 진행이 불가합니다.</span></label>
 						</div>
 						<div>
-							<label><input type="checkbox"/><span>취소/환불 진행에 동의합니다.</span></label>
+							<label><input type="checkbox" /><span>취소/환불 진행에
+									동의합니다.</span></label>
 						</div>
 					</div>
 					<div id="buttons">
@@ -145,7 +152,8 @@
 							<button type="button" class="btn btn-outline-secondary">돌아가기</button>
 						</div>
 						<div id="button2">
-							<button type="button" class="btn btn-outline-secondary">취소/환불 등록</button>
+							<button type="button" class="btn btn-outline-secondary">취소/환불
+								등록</button>
 						</div>
 					</div>
 				</div>
