@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.wrapper {
+	padding: 10px 15% 0;
+}
+
+.wrapper a {
+	text-decoration: none;
+	color: black;
+}
+
+.wrapper a:visited {
+	color: black;
+}

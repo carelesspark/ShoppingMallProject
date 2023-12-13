@@ -5,52 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	html, body {
-		height: 100%;
-	}
-	
-	.wrapper {
-		padding: 10px 15% 0;
-		height: 100%;
-	}
-	
-	.content {
-		height: 60%;
-	}
-	
-	.content_title input {
-		width: 90%;
-	}
-	
-	.content_content {
-		height: 60%;
-		margin-top: 20px;
-	}
-	
-	.content_content textarea {
-		width: 95%;
-		height: 100%;
-		resize: none;
-	}
-	
-	.button_box {
-		text-align: right;
-		margin-right: 5%;
-	}
-	
-	.button_box input {
-		background-color: white;
-		width: 100px;
-		height: 50px;
-		border: 1px solid;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="../resources/css/boardCSS/noticeWrite.css">
 </head>
 <body>
 	<div class="wrapper">
 		<div class="title">
-			<p>공지작성</p>
+			<p>문의작성</p>
 		</div>
 		
 		<div class="content">
