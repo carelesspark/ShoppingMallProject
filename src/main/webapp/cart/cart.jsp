@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
-<link href="../css/cart.css" rel="stylesheet" />
+<link href="../resources/css/cart/cart.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="../js/cart.js"></script>
+<script src="../resources/js/cart/cart.js"></script>
 </head>
 <body>
 	<header>임시 헤더</header>
@@ -20,7 +20,7 @@
 						<h1>장바구니</h1>
 					</div>
 					<div id="cart_img">
-						<img src="../img/cart.png" id="order_cart_img" />
+						<img src="../resources/image/cart/cart.png" id="order_cart_img" />
 					</div>
 				</div>
 				<div id="cart_middle">

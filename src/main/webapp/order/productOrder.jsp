@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>주문/결제 페이지</title>
-<link href="../css/productOrder.css" rel="stylesheet" />
+<link href="../resources/css/order/productOrder.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
@@ -23,7 +23,7 @@
 				<div id="order_list_box">
 					<div id="order_list_grid">
 						<div id="order_list_pic">
-							<a href=""><img src="../img/shirt.png" id="order_list_pic1" /></a>
+							<a href=""><img src="../resources/image/order/shirt.png" id="order_list_pic1" /></a>
 						</div>
 						<div id="order_list_price">
 							<p>19,000</p>

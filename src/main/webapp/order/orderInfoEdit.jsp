@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문 취소/환불 승인(관리자)</title>
-<link href="../css/orderRefundAccept.css" rel="stylesheet" />
+<title>주문 수정 페이지(관리자)</title>
+<link href="../resources/css/order/orderInfoEdit.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
@@ -89,53 +89,103 @@
 				</div>
 			</section>
 			<main>
-				<div id="main_refund">
-					<div id="refund_title">
-						<h1>000님 주문 취소/환불</h1>
+				<div id="admin_order_info_edit">
+					<div id="order_info_edit_title">
+						<h1>000님 주문 정보 수정</h1>
 					</div>
-					<div id="refund_content">
-						<table id="refund_table">
-							<tr>
-								<td id="refund_table_left">주문 번호</td>
-								<td id="refund_table_right">123213231</td>
-							</tr>
-							<tr>
-								<td id="refund_table_left">고객명</td>
-								<td id="refund_table_right">박종혁</td>
-							</tr>
-							<tr>
-								<td id="refund_table_left">환불액</td>
-								<td id="refund_table_right">49,000원</td>
-							</tr>
-							<tr>
-								<td id="refund_table_left">은행명</td>
-								<td id="refund_table_right">국민은행</td>
-							</tr>
-							<tr>
-								<td id="refund_table_left">계좌번호</td>
-								<td id="refund_table_right">000000-00-000000</td>
-							</tr>
-							<tr>
-								<td id="refund_table_left">취소/환불 사유</td>
-								<td id="refund_table_right"><select id="select"><option
-											value="damaged">상품 불량</option>
-										<option value="simple_change">단순 변심</option>
-										<option value="late_deliever">배송 지연</option>
-										<option value="shortage">재고 부족</option>
-										<option value="different_info">상품정보와 상이</option>
-										<option value="etc">기타</option></select></td>
-							</tr>
-							<tr>
-								<td id="refund_table_left_textarea">전달 내용</td>
-								<td id="refund_table_right2"><textarea id="textarea"
-										placeholder="전달 내용 입력"></textarea></td>
-							</tr>
-						</table>
+					<div id="order_info_box">
+						<div id="info_box_grid">
+							<div id="order_pic">
+								<a href="#"><img src="../resources/image/order/shirt.png" id="pic"></a>
+							</div>
+							<div id="info_box_middle_grid">
+								<div id="border_bottom">
+									<p>제품명</p>
+								</div>
+								<div id="border_bottom">
+									<p>주문 번호</p>
+								</div>
+								<div id="border_bottom">
+									<p>주문일</p>
+								</div>
+								<div id="border_bottom">
+									<p>결제 금액</p>
+								</div>
+								<div id="border_bottom">
+									<p>고객명</p>
+								</div>
+								<div id="border_bottom">
+									<p>주소</p>
+								</div>
+								<div id="border_bottom">
+									<p>전화번호</p>
+								</div>
+								<div id="border_bottom">
+									<p>요청사항</p>
+								</div>
+								<div id="border_bottom">
+									<p>택배사</p>
+								</div>
+								<div id="border_bottom">
+									<p>진행상태</p>
+								</div>
+								<div id="">
+									<p>송장번호</p>
+								</div>
+							</div>
+							<div id="info_box_right_grid">
+								<div id="border_bottom">
+									<p>00000000셔츠</p>
+								</div>
+								<div id="border_bottom">
+									<p>123124213</p>
+								</div>
+								<div id="border_bottom">
+									<p>2023/12/05</p>
+								</div>
+								<div id="border_bottom">
+									<p>429,000원</p>
+								</div>
+								<div id="border_bottom">
+									<p>박종혁</p>
+								</div>
+								<div id="border_bottom">
+									<p>00시 00구 00동</p>
+								</div>
+								<div id="border_bottom">
+									<p>000-0000-0000</p>
+								</div>
+								<div id="border_bottom">
+									<p>배송 시 문 앞으로 배송해주세요</p>
+								</div>
+								<div id="border_bottom">
+									<p>
+										<select><option value="default">택배사</option>
+											<option value="cj">CJ대한통운</option>
+											<option value="hanjin">한진택배</option>
+											<option value="lotte">롯데택배</option>
+											<option value="post">우체국소포</option>
+											<option value="logen">로젠택배</option></select>
+									</p>
+								</div>
+								<div id="border_bottom">
+									<p>
+										<select><option value="default">진행 상태</option>
+											<option value="prepare">상품 준비 중</option>
+											<option value="start">배송 시작</option>
+											<option value="ing">배송 중</option>
+											<option value="finish">배송 완료</option></select>
+								</div>
+								<div>
+									<p id="textbox"><input type="text"/></p>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div id="bottom_buttons">
 						<div id="bottom_button_div1">
 							<button type="button" class="btn btn-outline-secondary"
-								id="button3">취소/환불</button>
+								id="button3">저장하기</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-outline-secondary"

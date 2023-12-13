@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>주문 목록 조회 페이지</title>
-<link href="../css/orderList.css" rel="stylesheet" />
+<link href="../resources/css/order/orderList.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
@@ -156,7 +156,7 @@
 							<input type="text" placeholder="주문한 상품의 이름을 검색해보세요!"
 								id="search_order_list" />
 							<button onclick="location.href='#'">
-								<img alt="button" src="../img/search_button.png" id="button_img">
+								<img alt="button" src="../resources/image/order/search_button.png" id="button_img">
 							</button>
 						</div>
 					</div>
@@ -176,7 +176,7 @@
 								<td>주문 완료</td>
 								<td>미정</td>
 								<td id="order_pic"><a href='#'><img
-										src="../img/shirt.png" id="order_pic" /></a></td>
+										src="../resources/image/order/shirt.png" id="order_pic" /></a></td>
 								<td>00000옷</td>
 								<td>39,000원</td>
 								<td id="order_table_buttons">
@@ -193,7 +193,7 @@
 								<td>배송 완료</td>
 								<td>2023/12/09</td>
 								<td id="order_pic"><a href='#'><img
-										src="../img/hat.png" id="order_pic" /></a></td>
+										src="../resources/image/order/hat.png" id="order_pic" /></a></td>
 								<td>000000모자</td>
 								<td>23,000원</td>
 								<td id="order_table_buttons">
@@ -210,7 +210,7 @@
 								<td>배송 완료</td>
 								<td>2023/10/11</td>
 								<td id="order_pic"><a href='#'><img
-										src="../img/shoe.png" id="order_pic" /></a></td>
+										src="../resources/image/order/shoe.png" id="order_pic" /></a></td>
 								<td>0000신발</td>
 								<td>55,500</td>
 								<td id="order_table_buttons">
@@ -227,7 +227,7 @@
 								<td>교환 완료</td>
 								<td>2023/06/13</td>
 								<td id="order_pic"><a href='#'><img
-										src="../img/shorts.png" id="order_pic" /></a></td>
+										src="../resources/image/order/shorts.png" id="order_pic" /></a></td>
 								<td>00000반바지</td>
 								<td>33,000원</td>
 								<td id="order_table_buttons">

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>주문 목록 상세 조회</title>
-<link href="../css/orderInfo.css" rel="stylesheet" />
+<link href="../resources/css/order/orderInfo.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script
@@ -104,7 +104,7 @@
 					<div id="product_info_box">
 						<div id="prdocut_info_box_grid">
 							<div>
-								<img src="../img/shirt.png" id="shirt"/>
+								<img src="../resources/image/order/shirt.png" id="shirt"/>
 							</div>
 							<div id="product_info_left">
 								<div>
@@ -153,7 +153,7 @@
 					<div id="order_info_box">
 						<div id="order_info_box_grid">
 							<div>
-								<img src="../img/truck.png" id="truck" />
+								<img src="../resources/image/order/truck.png" id="truck" />
 							</div>
 							<div id="info_box_left1">
 								<div></div>
