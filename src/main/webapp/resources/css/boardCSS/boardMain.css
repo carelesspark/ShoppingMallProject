@@ -6,6 +6,7 @@
 
 .wrapper a {
 	text-decoration: none;	
+	color: black;
 }
 
 .wrapper a:visited {

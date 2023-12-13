@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/boardCSS/board.css">
+<link rel="stylesheet" href="../resources/css/boardCSS/boardMain.css">
 <script src="../resources/js/boardJS/code.jquery.com_jquery-3.7.0.min.js"></script>
 <script src="../resources/js/boardJS/board.js"></script>
 <link >

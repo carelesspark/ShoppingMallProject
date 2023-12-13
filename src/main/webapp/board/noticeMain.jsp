@@ -5,19 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	.wrapper {
-		padding: 10px 15% 0;
-	}
-	
-	.wrapper a {
-		text-decoration: none;
-	}
-	
-	.wrapper a:visited {
-		color: black;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="../resources/css/boardCSS/noticeMain.css">
 </head>
 <body>
 	<div class="wrapper">
