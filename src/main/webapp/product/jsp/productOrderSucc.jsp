@@ -114,12 +114,12 @@
                             <div><%= product.getProduct_info() %></div>
                         </div>
                         <div class="product-price">
-	                    <div class="column">판매가격</div>
+	                    <div class="column">구매가격</div>
 		                    <div><%= numberFormat.format(product.getProduct_price()) %> 원</div>
 		                </div>
                         <div class="sales-volume">
-                            <div class="column">판매수량</div>
-                            <div><%= product.getSalesVolume() %></div>
+                            <div class="column">구매수량</div>
+                            <div><%= product.getSalesVolume() %> 개</div>
                         </div>
                         <div class="sum">
                             <div class="column">합계</div>
