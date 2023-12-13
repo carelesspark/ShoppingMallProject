@@ -10,110 +10,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="user_menu.css" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-		#faq {
-            width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            
-        }
-        
-        .buttons {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-end;
-            align-items: flex-end;
-            margin-top: auto;
-        }
-
-		.buttons button{
-			margin-left: 10px;
-     		margin-right: 10px;
-		}
-
-        hr {
-            margin: 10px 0;
-            border: 1px solid black;
-        }
-
-        button {
-            height: 30px;
-            background-color: white;
-            border-color: black;
-            cursor: pointer;
-        }
-
-        #faq_title {
-            font-size: 25px;
-            margin-bottom: 10px;
-           	text-align: center;
-           	
-        }
-
-        .section {
-            margin-bottom: 30px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-
-        td {
-            text-align: left;
-            padding: 8px;
-        }
-
-         .column{
-            width: 150px;
-            background-color: gray;
-            text-align: right;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-
-       	table tr{
-        	border: 1px solid black;
-        }
-
-        #faq_header{
-        	background-color: gray;
-        	height: 60px;
-        	display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        #faq_write{
-        	width: 80%;
-            height: 70%;
-            background-color: white;
-        }
-        
-        .category_select{
-        	width: 100%;
-        	font-size: 15px;
-        	border: none;
-        }
-        
-        .input, #textarea{
-        	width: 100%;
-        	font-size: 15px;
-        	border: none;
-        	resize: none;
-        }
-    </style>
-</head>
+    <link href="../css/faqEdit.css" rel="stylesheet" />
+    <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	</head>
 <body>
     <header>임시 헤더</header>
     <div id="main-container">
@@ -197,19 +99,15 @@
         </section>
         <main>
 			<div id ="faq">
-			    <div class="section">
-			        <div id="faq_header">
-			        	<div id="faq_write" >
-			        		<div id="faq_title">FAQ 추가하기</div>
-				       	</div>
-			        </div>
+			    <div id="faq_title">
+			       	<h1>FAQ 작성하기</h1>
 			    </div>
 			
 			    <div class="section">
-			        <table>
+			        <table id="faq_table">
 			            <tr>
-			                <td class="column">카테고리</td>
-			                <td>
+			                <td class="left">카테고리</td>
+			                <td class="right">
 			                    <select class="category_select" name="category">
 						            <option value="취소/반품">취소/반품</option>
 						            <option value="회원">회원</option>
@@ -224,8 +122,8 @@
 			                </td>
 			            </tr>
 			            <tr>
-			                <td class="column">세부 카테고리</td>
-			                <td>
+			                <td class="left">세부 카테고리</td>
+			                <td class="right">
 			                    <select class="category_select" name="category">
 						            <option value="전체">취소신청/철회</option>
 						            <option value="전체">반품신청/철회</option>
@@ -234,31 +132,31 @@
 			                </td>
 			            </tr>
 			            <tr>
-			                <td class="column">질문</td>
-			                <td>
+			                <td class="left">질문</td>
+			                <td class="right">
 			                    <input class="input">
 			                </td>
 			            </tr>
 			            <tr>
-			                <td class="column">답변</td>
-			                <td>
+			                <td class="left2">답변</td>
+			                <td class="right2">
 			                    <textarea rows="20" id="textarea"></textarea>
 			                </td>
 			            </tr>
 			        </table>
 			       
 			    </div>
-			    
-			    <div class="buttons">
-			    	<button>다시쓰기</button>
-			    	<button>작성하기</button>
-			    </div>
+			    <div id="buttons">
+					<button type="button" class="btn btn-dark">다시쓰기</button>
+					<button type="button" class="btn btn-dark">작성하기</button>
+	
+				</div>
 			</div>
+			
         </main>
       </div>
     </div>
     <footer>임시 푸터</footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   </body>
-
 </html>
