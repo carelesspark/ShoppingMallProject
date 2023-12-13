@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/CSS/post.css">
-<script src="resources/js/code.jquery.com_jquery-3.7.0.min.js"></script>
+<link rel="stylesheet" href="../resources/css/boardCSS/post.css">
+<script src="../resources/js/boardJS/code.jquery.com_jquery-3.7.0.min.js"></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -18,10 +18,10 @@
 		
 		<div class="content">
 			<div class="content_img">
-				<img alt="옷사진" src="./resources/images/all.png">
-				<img alt="옷사진" src="./resources/images/classic.jpg">
-				<img alt="옷사진" src="./resources/images/casual.jpg">
-				<img alt="옷사진" src="./resources/images/post.jpg">
+				<img alt="옷사진" src="../resources/image/boardIMG/all.png">
+				<img alt="옷사진" src="../resources/image/boardIMG/classic.jpg">
+				<img alt="옷사진" src="../resources/image/boardIMG/casual.jpg">
+				<img alt="옷사진" src="../resources/image/boardIMG/post.jpg">
 			</div>
 			
 			<div class="reply_box">
@@ -176,7 +176,7 @@
 			<div class="product_box">
 				<div class="product_img">
 					<a href="">
-						<img alt="상품" src="./resources/images/all.png">
+						<img alt="상품" src="../resources/image/boardIMG/all.png">
 						
 						<p>상품 이름</p>
 					</a>
@@ -184,7 +184,7 @@
 				
 				<div class="product_img">
 					<a href="">
-						<img alt="상품" src="./resources/images/post.jpg">
+						<img alt="상품" src="../resources/image/boardIMG/post.jpg">
 						
 						<p>상품 이름</p>
 					</a>
@@ -192,7 +192,7 @@
 				
 				<div class="product_img">
 					<a href="">
-						<img alt="상품" src="./resources/images/post.jpg">
+						<img alt="상품" src="../resources/image/boardIMG/post.jpg">
 						
 						<p>상품 이름</p>
 					</a>
@@ -200,7 +200,7 @@
 				
 				<div class="product_img">
 					<a href="">
-						<img alt="상품" src="./resources/images/post.jpg">
+						<img alt="상품" src="../resources/image/boardIMG/post.jpg">
 						
 						<p>상품 이름</p>
 					</a>
@@ -208,7 +208,7 @@
 				
 				<div class="product_img">
 					<a href="">
-						<img alt="상품" src="./resources/images/post.jpg">
+						<img alt="상품" src="../resources/image/boardIMG/post.jpg">
 						
 						<p>상품 이름</p>
 					</a>
