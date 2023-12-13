@@ -46,12 +46,13 @@
 
         <div id="mcf-cb">
           <input type="checkbox" name="" id="" />
-          <p>이용약관 동의</p>
+          <p>[필수] 이용약관 동의</p>
           <input type="checkbox" name="" id="" />
-          <p>전자금융거래 이용약관 동의</p>
+          <p>[필수] 전자금융거래 이용약관 동의</p>
           <input type="checkbox" name="" id="" />
-          <p>개인정보 수집 및 이용 동의</p>
+          <p>[필수] 개인정보 수집 및 이용 동의</p>
         </div>
+        <div id="mcf-cb-check">필수 항목을 전부 체크해 주세요.</div>
         <input type="submit" value="회원가입" />
       </form>
     </div>
