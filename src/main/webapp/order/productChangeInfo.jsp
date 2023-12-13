@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문 취소/환불 상세 조회 페이지(관리자)</title>
-<link href="../css/orderRefundInfo.css" rel="stylesheet" />
+<title>주문 교환 상세 조회(관리자)</title>
+<link href="../resources/css/order/productChangeInfo.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
@@ -89,14 +89,14 @@
 				</div>
 			</section>
 			<main>
-				<div id="admin_order_refund_info">
-					<div id="order_refund_info_title">
-						<h1>000님 주문 취소/환불 요청 정보</h1>
+				<div id="admin_order_change_info">
+					<div id="order_change_info_title">
+						<h1>000님 상품 교환 요청 정보</h1>
 					</div>
 					<div id="order_info_box">
 						<div id="info_box_grid">
 							<div id="order_pic">
-								<a href="#"><img src="../img/shirt.png" id="pic"></a>
+								<a href="#"><img src="../resources/image/order/shirt.png" id="pic"></a>
 							</div>
 							<div id="info_box_middle_grid">
 								<div id="border_bottom">
@@ -104,9 +104,6 @@
 								</div>
 								<div id="border_bottom">
 									<p>주문 번호</p>
-								</div>
-								<div id="border_bottom">
-									<p>결제 금액</p>
 								</div>
 								<div id="border_bottom">
 									<p>결제일</p>
@@ -124,7 +121,10 @@
 									<p>전화번호</p>
 								</div>
 								<div id="border_bottom">
-									<p>취소/환불 사유</p>
+									<p>주소</p>
+								</div>
+								<div id="border_bottom">
+									<p>상품 교환 사유</p>
 								</div>
 								<div>
 									<p>요청 상세 설명</p>
@@ -138,16 +138,13 @@
 									<p>123124213</p>
 								</div>
 								<div id="border_bottom">
-									<p>429,000원</p>
-								</div>
-								<div id="border_bottom">
-									<p>2023/11/31</p>
+									<p>2023/12/03</p>
 								</div>
 								<div id="border_bottom">
 									<p>2023/12/05</p>
 								</div>
 								<div id="border_bottom">
-									<p>취소/환불 요청</p>
+									<p>교환 요청</p>
 								</div>
 								<div id="border_bottom">
 									<p>박종혁</p>
@@ -156,9 +153,10 @@
 									<p>000-0000-0000</p>
 								</div>
 								<div id="border_bottom">
-									<p>
-										파손 상품
-									</p>
+									<p>00도 00시 00구</p>
+								</div>
+								<div id="border_bottom">
+									<p>파손 상품</p>
 								</div>
 								<div>
 									<textarea id="textarea" readonly>
@@ -171,7 +169,7 @@
 					<div id="bottom_buttons">
 						<div id="bottom_button_div1">
 							<button type="button" class="btn btn-outline-secondary"
-								id="button3">취소/환불 승인</button>
+								id="button3">교환 승인</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-outline-secondary"

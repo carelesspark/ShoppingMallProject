@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문 상세 조회 페이지(관리자)</title>
-<link href="../css/orderInfoAdmin.css" rel="stylesheet" />
+<title>주문 교환 승인(관리자)</title>
+<link href="../resources/css/order/productChangeAccept.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<header>임시 헤더</header>
+		<header>임시 헤더</header>
 	<div id="main-container">
 		<div id="user-explanation">
 			<div id="user-explanation-grid">
@@ -89,55 +89,51 @@
 				</div>
 			</section>
 			<main>
-				<div id="admin_order_info">
-					<div id="order_info_title">
-						<h1>000님 주문 정보</h1>
+				<div id="main_change">
+					<div id="change_title">
+						<h1>000님 상품 교환</h1>
 					</div>
-					<div id="order_info_box">
-						<div id="info_box_grid">
-							<div id="order_pic">
-								<a href="#"><img src="../img/shirt.png" id="pic"></a>
-							</div>
-							<div id="info_box_middle_grid">
-								<div id="border_bottom"><p>제품명</p></div>
-								<div id="border_bottom"><p>주문 번호</p></div>
-								<div id="border_bottom"><p>주문일</p></div>
-								<div id="border_bottom"><p>결제 금액</p></div>
-								<div id="border_bottom"><p>고객명</p></div>
-								<div id="border_bottom"><p>주소</p></div>
-								<div id="border_bottom"><p>전화번호</p></div>
-								<div id="border_bottom"><p>요청사항</p></div>
-								<div id="border_bottom"><p>택배사</p></div>
-								<div id="border_bottom"><p>진행상태</p></div>
-								<div id=""><p>송장번호</p></div>
-							</div>
-							<div id="info_box_right_grid">
-								<div id="border_bottom"><p>00000000셔츠</p></div>
-								<div id="border_bottom"><p>123124213</p></div>
-								<div id="border_bottom"><p>2023/12/05</p></div>
-								<div id="border_bottom"><p>429,000원</p></div>
-								<div id="border_bottom"><p>박종혁</p></div>
-								<div id="border_bottom"><p>00시 00구 00동</p></div>
-								<div id="border_bottom"><p>000-0000-0000</p></div>
-								<div id="border_bottom"><p>배송 시 문 앞으로 배송해주세요</p></div>
-								<div id="border_bottom"><p></p></div>
-								<div id="border_bottom"><p>상품 준비 중</p></div>
-								<div><p></p></div>
-							</div>
-						</div>
+					<div id="change_content">
+						<table id="change_table">
+							<tr>
+								<td id="change_table_left">주문 번호</td>
+								<td id="change_table_right">123213231</td>
+							</tr>
+							<tr>
+								<td id="change_table_left">고객명</td>
+								<td id="change_table_right">박종혁</td>
+							</tr>
+							<tr>
+								<td id="change_table_left">전화번호</td>
+								<td id="change_table_right">000-0000-0000</td>
+							</tr>
+							<tr>
+								<td id="change_table_left">주소</td>
+								<td id="change_table_right">00도 00시 00구</td>
+							</tr>
+							<tr>
+								<td id="change_table_left">교환 사유</td>
+								<td id="change_table_right"><select id="select"><option
+											value="damaged">상품 불량</option>
+										<option value="simple_change">단순 변심</option>
+										<option value="different_info">상품정보와 상이</option>
+										<option value="etc">기타</option></select></td>
+							</tr>
+							<tr>
+								<td id="change_table_left_textarea">전달 내용</td>
+								<td id="change_table_right2"><textarea id="textarea"
+										placeholder="전달 내용 입력"></textarea></td>
+							</tr>
+						</table>
 					</div>
 					<div id="bottom_buttons">
 						<div id="bottom_button_div1">
 							<button type="button" class="btn btn-outline-secondary"
-								id="button3">주문 수정</button>
-						</div>
-						<div id="bottom_button_div2">
-							<button type="button" class="btn btn-outline-secondary"
-								id="button4">주문 취소</button>
+								id="button3">저장하기</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-outline-secondary"
-								id="button5">목록</button>
+								id="button4">목록</button>
 						</div>
 					</div>
 				</div>
