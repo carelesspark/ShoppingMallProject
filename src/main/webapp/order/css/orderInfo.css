@@ -238,7 +238,7 @@ main {
 #order_info_text {
 	box-sizing: border-box;
 	border-bottom: 1px solid black;
-	margin-bottom: 20px;
+	margin-bottom: 50px;
 	text-align: center;
 	height: 70px;
 }
@@ -250,6 +250,69 @@ main {
 	font-size: 13pt;
 	font-weight: bold;
 	height: 30px;
+}
+
+#product_info_title{
+	text-align: center;
+	width: 840px;
+	font-weight: bold;
+}
+
+#product_info_title p {
+	margin: 0;
+}
+
+#product_info_box {
+	box-sizing: border-box;
+	border-top: 1px solid #C3C3C3;
+	border-bottom: 1px solid #C3C3C3;
+	margin-bottom: 50px;
+	width: 840px;
+	height: 180px;
+}
+
+#prdocut_info_box_grid{
+	display: grid;
+	grid-template-columns: 100px 140px 600px;
+	width: 840px;
+	height: 180px;
+	place-items: center;
+}
+
+#shirt {
+	width: 100px;
+	height: 100px;
+}
+
+#product_info_left {
+	border-right: 1px solid #C3C3C3;
+	padding-right: 10px;
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	width: 140px;
+	height: 180px;
+	text-align: right;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#product_info_left p {
+	padding-top: 3px;
+}
+
+#product_info_right {
+	padding-left: 10px;
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	width: 600px;
+	height: 180px;
+	text-align: left;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#product_info_right p {
+	padding-top: 3px;
 }
 
 #order_info_box {
@@ -367,9 +430,3 @@ main {
 #accordion {
 	margin-top: 10px;
 }
-
-
-.card-body {
-	font-weight: bold;
-}
-
