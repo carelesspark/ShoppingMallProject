@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../resources/css/footer.css" />
 <link rel="stylesheet" href="../resources/css/body.css" />
 <link rel="stylesheet" href="../resources/css/sign/sign_in.css" />
-<title>login</title>
+<title>sign in</title>
 </head>
 <body>
 	<!--include header-->
