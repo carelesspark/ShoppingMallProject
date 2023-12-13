@@ -1,76 +1,80 @@
 @charset "UTF-8";
 
 #mc {
-  width: 480px;
-  margin: 0 auto 300px auto;
-  display: grid;
-  grid-template-columns: auto;
-  justify-content: center;
+	width: 480px;
+	margin: 0 auto 300px auto;
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: center;
 }
 
 #mch {
-  width: 480px;
-  height: 60px;
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  font-size: 36px;
-  font-weight: bold;
+	width: 480px;
+	height: 60px;
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+	font-size: 36px;
+	font-weight: bold;
 }
 
 #mcs {
-  height: 60px;
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-  margin-bottom: 40px;
+	height: 60px;
+	display: grid;
+	grid-template-columns: auto auto;
+	align-items: center;
+	margin-bottom: 40px;
 }
+
 #mcs- {
-  height: 60px;
-  box-sizing: border-box;
-  border-bottom: 2px solid #191919;
+	height: 60px;
+	box-sizing: border-box;
+	border-bottom: 2px solid #191919;
 }
+
 #mcs div {
-  width: 240px;
-  display: grid;
-  justify-content: center;
-  align-items: center;
+	width: 240px;
+	display: grid;
+	justify-content: center;
+	align-items: center;
 }
+
 #mcs a {
-  text-decoration: none;
-  color: #191919;
-  font-size: 18px;
-  margin: 0;
+	text-decoration: none;
+	color: #191919;
+	font-size: 18px;
+	margin: 0;
 }
 
 #mcp {
-  height: 60px;
-  margin-bottom: 40px;
+	margin-bottom: 40px;
 }
+
 #mcp p {
-  font-size: 18px;
-  margin: 0;
+	font-size: 18px;
+	margin: 0;
 }
 
 #mcf {
-  display: grid;
-  grid-template-columns: auto;
+	display: grid;
+	grid-template-columns: auto;
 }
+
 #mcf input {
-  box-sizing: border-box;
-  width: 480px;
-  height: 60px;
-  background-color: #f8f8f8;
-  border: 0;
-  border-bottom: 1px solid #d4d4d4;
-  font-size: 18px;
-  color: #888888;
-  margin-bottom: 40px;
+	box-sizing: border-box;
+	width: 480px;
+	height: 60px;
+	background-color: #f8f8f8;
+	border: 0;
+	border-bottom: 1px solid #d4d4d4;
+	font-size: 18px;
+	color: #888888;
+	margin-bottom: 40px;
 }
 
 #mcf input[type="submit"] {
-  background-color: #191919;
-  color: #f8f8f8;
-  margin-bottom: 0;
+	background-color: #191919;
+	color: #f8f8f8;
+	margin-bottom: 0;
 }
