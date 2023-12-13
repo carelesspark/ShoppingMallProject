@@ -98,6 +98,50 @@
 					<div id="order_info_text">
 						<h1>상품이 배송되고 있습니다!</h1>
 					</div>
+					<div id="product_info_title">
+						<p>구매 정보</p>
+					</div>
+					<div id="product_info_box">
+						<div id="prdocut_info_box_grid">
+							<div>
+								<img src="../img/shirt.png" id="shirt"/>
+							</div>
+							<div id="product_info_left">
+								<div>
+									<p>제품 이름</p>
+								</div>
+								<div>
+									<p>사이즈</p>
+								</div>
+								<div>
+									<p>색상</p>
+								</div>
+								<div>
+									<p>수량</p>
+								</div>
+								<div>
+									<p>금액</p>
+								</div>
+							</div>
+							<div id="product_info_right">
+								<div>
+									<p>0000000옷</p>
+								</div>
+								<div>
+									<p>M</p>
+								</div>
+								<div>
+									<p>Blue</p>
+								</div>
+								<div>
+									<p>1개</p>
+								</div>
+								<div>
+									<p>49,000원</p>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div id="order_info_box_title">
 						<div>
 							<p>배송 정보</p>
