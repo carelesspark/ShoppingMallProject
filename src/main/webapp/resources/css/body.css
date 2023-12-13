@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+body {
+  margin: 0;
+}
+
+body p {
+  font-size: 18px;
+  color: #191919;
+}
