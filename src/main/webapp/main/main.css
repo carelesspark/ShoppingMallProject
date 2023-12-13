@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+button {
+  background-color: rgb(121, 121, 121);
+  color: white;
+}
+
+main {
+  margin: 0 379px;
+}
