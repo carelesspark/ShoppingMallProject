@@ -251,7 +251,7 @@
 								<a class="btn" data-bs-toggle="collapse" href="#collapseOne">
 									[배송] 구매한 상품이 어디에 있는지 알고 싶어요!</a>
 							</div>
-							<div id="collapseOne" class="collapse show"
+							<div id="collapseOne" class="collapse"
 								data-bs-parent="#accordion">
 								<div class="card-body" id="answer">제공해드리는 송장번호를 이용하여 해당
 									택배사 페이지에서 구매하신 상품의 위치를 알 수 있습니다:)</div>

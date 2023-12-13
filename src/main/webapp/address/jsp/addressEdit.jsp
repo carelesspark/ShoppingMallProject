@@ -5,85 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-    	*{
-    		margin-top:2px;
-    		margin-bottom: 2px;
-    		
-    	}
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-		
-		hr {
-            margin: 10px 0;
-            border: 1px solid black;
-        }
-        
-        #addr-add {
-            width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid black;
-            border-radius: 40px;
-        }
-        
-
-        #addr-add h2 {
-            text-align: center;
-        }
-        
-        #search{
-        	border: 1px solid black;
-        }
- 
-        button {
-            margin-top: 10px;
-            background-color: white;
-            border-color: black;
-            height: 30px;
-            cursor: pointer;
-        }
-        
-        #search{
-        	cursor: pointer;
-        }
-        
-        #base{
-        	height: auto;
-        }
-        
-        input{
-        	height: 30px;
-        }
-        button#edit,
-        button#close,
-        .full{
-            width: 100%;
-        }
-        
-        #postalCode {
-		    display: flex;
-		    flex-direction: row;
-		    justify-content: space-between; /* 변경된 부분 */
-		    align-items: center;
-		}
-		
-		#postal {
-		    width: 385px; 
-		    }
-		    
-		.marg{
-			margin-bottom: 8px;
-			margin-top: 8px;
-		}
-
-
-       
-        
-        
-    </style>
+    <link href="../css/addressEdit.css" rel="stylesheet" />
 </head>
 <body>
     <div id="addr-add">
@@ -121,7 +43,7 @@
         <br>
         <br>
         <br>
-        <div id="bottom">
+        <div id="button">
             <button id="edit">수정하기</button>
             <button id="close">닫기</button>
         </div>
