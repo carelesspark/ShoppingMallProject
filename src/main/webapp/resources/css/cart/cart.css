@@ -44,6 +44,18 @@ footer {
 
 #cart_img{
 	padding-top: 10px;
+	display: grid;
+	grid-template-columns: 800px 120px;
+}
+
+#cart_all_delete {
+	padding-top: 20px;
+}
+
+#cart_all_delete_a {
+	font-size: 10pt;
+	font-weight: bold;
+	text-decoration-line: none;
 }
 
 #order_cart_img {
@@ -73,8 +85,12 @@ footer {
 	text-align: left;
 }
 
+#cart_table_product_img {
+	width: 150px;
+}
+
 #cart_table_product_name {
-	width: 500px;
+	width: 350px;
 }
 
 #cart_table_other_tr {
@@ -114,9 +130,45 @@ footer {
 	font-size: 8pt;
 }
 
+
 #cart_total_price {
-	text-align: right;
+	box-sizing: border-box;
+	border: 1px solid #C3C3C3;
+	margin-top: 30px;
 	margin-bottom: 50px;
+	width: 300px;
+	margin-left: 780px;
+	border-radius: 5px;
+	padding: 20px;
+}
+
+#total_price {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+#total_price_right {
+	text-align: right;
+	color: red;
+	font-weight: bold;
+}
+
+#total_delivery {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+#total_delivery_right {
+	text-align: right;
+	font-weight: bold;
+}
+
+#total_price_value {
+	padding-top: 10px;
+	border-top: 1px solid #C3C3C3;
+	text-align: right;
+	font-size: 18pt;
+	font-weight: bold;
 }
 
 #cart_bottom_buttons_grid {
