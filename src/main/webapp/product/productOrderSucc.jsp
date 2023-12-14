@@ -5,55 +5,60 @@
 <%@ page import="com.dazzle.shop.address.*" %>
 <%@ page import="com.dazzle.shop.order.*" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.Timestamp" %>
 <%
 	List<OrderedProductVO> productList = new ArrayList();
 	
 	// ProductVO 객체 생성 및 값 설정
 	
 	OrderedProductVO product1 = new OrderedProductVO();
-	product1.setProduct_id(1);
-	product1.setProduct_info("반팔 티셔츠");
-	product1.setProduct_price(50000);
-	product1.setSalesVolume(3);	
-	product1.setImage("image1.jpg");
+	product1.setProduct_code("T000001");
+	product1.setProduct_name("반팔 티셔츠1");
+	product1.setColor_name("Black");
+	product1.setSize_name("L");
+	product1.setTotal_price(50000);
+	product1.setCount(3);	
+	product1.setMain_img("image1.jpg");
 	productList.add(product1);
 	
 	for (int i = 2; i <= 8; i++) {
 		OrderedProductVO additionalproduct = new OrderedProductVO();
-		additionalproduct.setProduct_id(i);
-		additionalproduct.setProduct_info("반팔 티셔츠");
-		additionalproduct.setProduct_price(50000);
-		additionalproduct.setSalesVolume(i);	
-		additionalproduct.setImage("image1.jpg");
+		additionalproduct.setProduct_code("T00000"+i);
+		additionalproduct.setProduct_name("반팔 티셔츠"+i);
+		additionalproduct.setColor_name("Black");
+		additionalproduct.setSize_name("L");
+		additionalproduct.setTotal_price(10000*i);
+		additionalproduct.setCount(i);	
+		additionalproduct.setMain_img("image1.jpg");
 		productList.add(additionalproduct);
     }
 	
 	
 	int totalOrderAmount = 0;
     for (OrderedProductVO product : productList) {
-        totalOrderAmount += product.getProduct_price() * product.getSalesVolume();
+        totalOrderAmount += product.getTotal_price() * product.getCount();
     }
-
-    // Shipping cost
-    int shippingCost = 0; // You can set your shipping cost here
-
+    
+    OrderVO order = new OrderVO();
+    order.setAddress("서울시 노원구 광운로 21");
+    order.setDelivery_price(0);
+    order.setDetail_address("101동 1001호");
+    order.setOrder_date(new Timestamp(System.currentTimeMillis()));
+    order.setOrder_num(1);
+    order.setPayment("국민카드");
+    order.setPhone_num("010-0000-0000");
+    order.setPostal_num("01830");
+    order.setRecipient("김철수");
+    order.setRequest("무인 택배보관함에 맡겨주세요.");
+    
     // Total payment amount
-    int totalPaymentAmount = totalOrderAmount + shippingCost;
+    int totalPaymentAmount = totalOrderAmount + order.getDelivery_price();
     
     // Format numbers with commas
     NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
     String formattedTotalOrderAmount = numberFormat.format(totalOrderAmount);
-    String formattedShippingCost = numberFormat.format(shippingCost);
+    String formattedShippingCost = numberFormat.format(order.getDelivery_price());
     String formattedTotalPaymentAmount = numberFormat.format(totalPaymentAmount);
-    
-    AddressVO address = new AddressVO();
-    address.setBase(1);
-    address.setName("홍길동");
-    address.setPostalCode("[우편번호1]");
-    address.setAddr("주소1");
-    address.setDetailAddr("상세주소1");
-    address.setPhoneNumber("전화번호1");
-    address.setRequest("배송 요청 사항1");
 %>
 
 <!DOCTYPE html>
@@ -61,7 +66,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="../css/productOrderSucc.css" rel="stylesheet" />
+    <link href="../resources/css/product/productOrderSucc.css" rel="stylesheet" />
     <title>Document</title>
 
   </head>
@@ -80,14 +85,14 @@
         		<div style="font-size: 20px; font-weight: bold;">주문 성공</div>
         		<div>주문하신 상품은 주문내역조회에서 확인 가능합니다.</div>
         		<br>
-        		<div>주문번호 : 00000000</div>
-        		<div>주문날짜 : 2000-00-00 00:00:00</div>
+        		<div>주문번호 : <%= order.getOrder_num() %></div>
+        		<div>주문날짜 : <%= order.getOrder_date() %></div>
         	</div>
         </div>
         <br>
         <hr>
         <div>
-            <div style="text-align: center"><h3>주문내역</h3></div>
+            <div style="text-align: center"><h3>주문 내역</h3></div>
             <hr>
             
             <%
@@ -95,7 +100,6 @@
             %>
                 <div class="product-list">
                 	<div class="image">
-                        <!-- 예: <img src="<%= product.getImage() %>" alt="Product Image"> -->
                         <svg width="197" height="163" viewBox="0 0 197 163" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 						<rect width="197" height="163" fill="url(#pattern0)"/>
 						<defs>
@@ -107,23 +111,27 @@
 						</svg>
                     </div>
                     <div class="product">
-                        <div class="product-name"><%= product.getProduct_info() %></div>
+                        <div class="product-name"><%= product.getProduct_name() %></div>
                         <br>
+                        <div class="product-code">
+                            <div class="column">상품코드</div>
+                            <div><%= product.getProduct_code() %></div>
+                        </div>
                         <div class="product-info">
                             <div class="column">상품정보</div>
-                            <div><%= product.getProduct_info() %></div>
+                            <div><%= product.getSize_name() %> / <%= product.getColor_name() %> </div>
                         </div>
                         <div class="product-price">
 	                    <div class="column">구매가격</div>
-		                    <div><%= numberFormat.format(product.getProduct_price()) %> 원</div>
+		                    <div><%= numberFormat.format(product.getTotal_price()) %> 원</div>
 		                </div>
                         <div class="sales-volume">
                             <div class="column">구매수량</div>
-                            <div><%= product.getSalesVolume() %> 개</div>
+                            <div><%= product.getCount() %> 개</div>
                         </div>
                         <div class="sum">
                             <div class="column">합계</div>
-                            <div><%= numberFormat.format(product.getProduct_price() * product.getSalesVolume()) %> 원</div>
+                            <div><%= numberFormat.format(product.getTotal_price() * product.getCount()) %> 원</div>
                         </div>
                     </div>
                 </div>
@@ -132,46 +140,55 @@
                 }
             %>
         </div>
-        <div style="text-align: center"><h3>총 주문 금액</h3></div>
-            <hr>
-        <div id="order-fee">
-	        <div>
-	            <div>총 주문 금액</div>
-	            <div><%= formattedTotalOrderAmount %> 원</div>
-	        </div>
-	        <div>
-	            <svg width="49" height="47" viewBox="0 0 49 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-	                <path d="M17.8718 18.027V1H23.8974H29.9231V18.027H48V28.973H29.9231V46H17.8718V44.7838V36.8784V28.973H1V18.027H17.8718Z" fill="black" stroke="black"/>
-	            </svg>
-	        </div>
-	        <div>
-	            <div>배송비</div>
-	            <div><%= formattedShippingCost %> 원</div>
-	        </div>
-	        <div>
-	            <svg width="50" height="30" viewBox="0 0 50 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-	                <path d="M49 10H1V1H49V10Z" fill="black" stroke="black"/>
-	                <path d="M49 29H1V20H49V29Z" fill="black" stroke="black"/>
-	            </svg>
-	        </div>
-	        <div>
-	            <div>총 결재 금액</div>
-	            <div><%= formattedTotalPaymentAmount %> 원</div>
-	        </div>
+        <div style="text-align: center"><h3>결제 금액</h3></div>
+        <hr>
+        <div>
+	        <div id="order-fee">
+		        <div>
+		            <div>총 주문 금액</div>
+		            <div><%= formattedTotalOrderAmount %> 원</div>
+		        </div>
+		        <div>
+		            <svg width="49" height="47" viewBox="0 0 49 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+		                <path d="M17.8718 18.027V1H23.8974H29.9231V18.027H48V28.973H29.9231V46H17.8718V44.7838V36.8784V28.973H1V18.027H17.8718Z" fill="black" stroke="black"/>
+		            </svg>
+		        </div>
+		        <div>
+		            <div>배송비</div>
+		            <div><%= formattedShippingCost %> 원</div>
+		        </div>
+		        <div>
+		            <svg width="50" height="30" viewBox="0 0 50 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+		                <path d="M49 10H1V1H49V10Z" fill="black" stroke="black"/>
+		                <path d="M49 29H1V20H49V29Z" fill="black" stroke="black"/>
+		            </svg>
+		        </div>
+		        <div>
+		            <div>총 결재 금액</div>
+		            <div><%= formattedTotalPaymentAmount %> 원</div>
+		        </div>
+	    	</div>
+	    
     	</div>
+    	<hr>
+    	<div style="text-align: center"><h3>결제 수단</h3></div>
+        <hr>
+        <div id="payment">
+	   		<div>결제 수단</div>
+	   		<div><%= order.getPayment() %></div>
+	   	</div>
+    
         <hr>
         <div style="text-align: center"><h3>배송 정보</h3></div>
             <hr>
         <div class="addr-list">
 		    <div class="addr-info">
 		        <div class="recipient">
-		            <div class="name"><%= address.getName() %></div>
+		            <div class="name"><%= order.getRecipient() %></div>
 		        </div>
-		        <div class="postal-code"><%= address.getPostalCode() %></div>
-		        <div class="addr"><%= address.getAddr() %></div>
-		        <div class="addr-detail"><%= address.getDetailAddr() %></div>
-		        <div class="phn"><%= address.getPhoneNumber() %></div>
-		        <div class="request"><%= address.getRequest() %></div>
+		        <div class="postal-code">[<%= order.getPostal_num() %>] <%= order.getAddress() %> <%= order.getDetail_address() %></div>
+		        <div class="phn"><%= order.getPhone_num() %></div>
+		        <div class="request"><%= order.getRequest() %></div>
 		    </div>
 		</div>
         <hr>
