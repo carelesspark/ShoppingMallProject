@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="../css/addressEdit.css" rel="stylesheet" />
+    <link href="../resources/css/address/addressAdd.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <div id="addr-add">
-        <div><h2>배송지 수정</h2></div>
+        <div><h2>배송지 추가</h2></div>
         <hr>
         <div>
            <div class="marg">
@@ -44,7 +46,7 @@
         <br>
         <br>
         <div id="button">
-            <button id="edit">수정하기</button>
+            <button id="add">추가하기</button>
             <button id="close">닫기</button>
         </div>
     </div>

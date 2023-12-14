@@ -10,17 +10,7 @@
         #addr-choice h2 {
             text-align: center;
         }
-
-        .addr-list {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-
-        .addr-info {
-            width: 70%;
-        }
+        
 
         .recipient {
             display: flex;
@@ -40,12 +30,13 @@
         }
 
         .button {
-            width: 400px;
+            width: 100%;
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
             align-items: flex-end;
             margin-top: auto; 
+            
         }
 
         .button button {
@@ -66,13 +57,18 @@
         }
 
         button {
-        	height: 30px;
             margin-top: 10px;
             background-color: white;
             border-color: black;
+            height: 30px;
             cursor: pointer;
+            
         }
-        button#add,
-        button#close {
+        
+        #close{
+        	margin-top: 10px;
+        }
+        #add,
+       	#close {
             width: 100%;
         }

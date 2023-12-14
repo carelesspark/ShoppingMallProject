@@ -5,10 +5,11 @@ import lombok.Data;
 @Data
 
 public class OrderedProductVO {
-	private int product_id;
-	private String product_info;
-	private int product_price;
-	private int salesVolume;
-	private String image;
-
+	private String product_code;
+	private String size_name;
+	private String color_name;
+	private String product_name;
+	private String main_img;
+	private int total_price;
+	private int count;
 }
