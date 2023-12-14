@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.dazzle.shop.address.*" %>
+<%@ page import="com.dazzle.shop.model.address.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%
     // AddressVO 객체 리스트 생성
