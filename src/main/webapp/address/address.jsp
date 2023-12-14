@@ -8,7 +8,7 @@
     
     // AddressVO 객체 생성 및 리스트에 추가 (실제로는 데이터베이스나 다른 소스로부터 가져와야 함)
     AddressVO address1 = new AddressVO();
-    address1.setAddr_id(1);
+    address1.setAddr_num(1);
     address1.setBase(1);
     address1.setRecipient("홍길동");
     address1.setPostal_num("00001");
@@ -21,7 +21,7 @@
     for (int i = 2; i <= 8; i++) {
         AddressVO additionalAddress = new AddressVO();
         
-        additionalAddress.setAddr_id(1);
+        additionalAddress.setAddr_num(1);
         additionalAddress.setBase(0);
         additionalAddress.setRecipient("이름" + i);
         additionalAddress.setPostal_num("0000" + i);
