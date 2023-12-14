@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+#m {
+	width: 1080px;
+	margin: 0 auto 80px auto;
+	display: grid;
+}
+
+#mc {
+	width: 1080px;
+	display: grid;
+	grid-template-columns: auto auto;
+}

@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+#mc {
+	width: 480px;
+	margin: 0 auto 300px auto;
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: center;
+}
+
+#mch {
+	width: 480px;
+	height: 60px;
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 70px;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+#mcp {
+	margin-bottom: 20px;
+	font-size: 18px;
+}
+
+#mcf {
+	display: grid;
+	grid-template-columns: auto;
+}
+
+#mcf input {
+	box-sizing: border-box;
+	width: 480px;
+	height: 60px;
+	background-color: #f8f8f8;
+	border: 0;
+	border-bottom: 1px solid #d4d4d4;
+	font-size: 18px;
+	color: #888888;
+	margin-bottom: 20px;
+}
+
+#mcf #id-dupl {
+	display: none;
+	margin-bottom: 40px;
+}
+
+#mcf #pwd-check {
+	display: none;
+	margin-bottom: 40px;
+}
+
+#mcf #pwd-dupl {
+	display: none;
+	margin-bottom: 40px;
+}
+
+#mcf-cb {
+	display: grid;
+	grid-template-columns: 30px auto;
+	row-gap: 10px;
+	justify-content: left;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+#mcf input[type="checkbox"] {
+	width: 22px;
+	height: 22px;
+	appearance: none;
+	border: 1px solid #191919;
+	border-radius: 50%;
+	margin: 0;
+}
+
+#mcf input[type="checkbox"]:checked {
+	background-color: #191919;
+}
+
+#mcf-cb p {
+	margin: 0;
+}
+
+#mcf #mcf-cb-check {
+	display: none;
+	margin-bottom: 40px;
+}
+
+#mcf input[type="submit"] {
+	background-color: #191919;
+	color: #f8f8f8;
+	margin-bottom: 20px;
+}

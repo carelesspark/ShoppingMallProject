@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+html, body {
+	height: 100%;
+}
+
+.wrapper {
+	padding: 10px 0 0 15%;
+	height: 100%;
+	display: flex;
+}
+
+.img_box {
+	width: 60%;
+	display: flex;
+	flex-wrap: wrap;
+	height: 80%;
+}
+
+.each_img {
+	margin: 10px 10px;
+	width: 40%;
+}
+
+.file_upload {
+	display: flex;
+	justify-content: center;
+	background-color: #f1f1f1;
+	height: 100%;
+	align-items: center;
+}
+
+.file {
+	visibility: hidden;
+}
+
+.content {
+	width: 40%;
+	height: 80%;
+}
+
+.title {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.title input {
+	width: 80%;
+}
+
+.cate {
+	margin-bottom: 20px;
+}
+
+.cate select {
+	width: 80%;
+}
+
+.search input {
+	width: 80%;
+}
+
+.search {
+	margin-bottom: 20px;
+}
+
+.search img {
+	width: 10px;
+}
+
+.select textarea {
+	resize: none;
+	width: 70%;
+	height: 60px;
+	border: none;
+}
+
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.button input {
+	background-color: white;
+	width: 100px;
+	height: 50px;
+	border: 1px solid;
+	margin-right: 10px;
+}
+
+.select {
+	height: 70%;
+}
