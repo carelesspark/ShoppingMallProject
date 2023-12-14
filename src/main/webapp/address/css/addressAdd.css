@@ -45,10 +45,12 @@
         input{
         	height: 30px;
         }
+        button#edit,
         button#add,
         button#close,
         .full{
             width: 100%;
+            margin-top: 10px
         }
         
         #postalCode {
@@ -59,7 +61,7 @@
 		}
 		
 		#postal {
-		    width: 385px; 
+		    width: 330px; 
 		    }
 		    
 		.marg{
