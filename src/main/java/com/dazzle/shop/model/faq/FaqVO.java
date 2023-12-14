@@ -1,4 +1,4 @@
-package com.dazzle.shop.faq;
+package com.dazzle.shop.model.faq;
 
 import lombok.Data;
 

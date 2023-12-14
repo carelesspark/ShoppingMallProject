@@ -2,8 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
-<%@ page import="com.dazzle.shop.address.*" %>
-<%@ page import="com.dazzle.shop.order.*" %>
+<%@ page import="com.dazzle.shop.model.address.*" %>
+<%@ page import="com.dazzle.shop.model.order.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.Timestamp" %>
 <%
