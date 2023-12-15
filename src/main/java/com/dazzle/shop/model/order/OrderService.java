@@ -1,5 +1,9 @@
 package com.dazzle.shop.model.order;
 
-public class OrderService {
+import java.util.List;
+
+public interface OrderService {
+	
+	List<OrderListVO> getOrderList(OrderListVO vo);
 
 }
