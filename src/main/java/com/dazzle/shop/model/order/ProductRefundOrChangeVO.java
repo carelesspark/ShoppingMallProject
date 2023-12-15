@@ -1,4 +1,4 @@
-package com.dazzle.shop.model.product;
+package com.dazzle.shop.model.order;
 
 import java.sql.Timestamp;
 
