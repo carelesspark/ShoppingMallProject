@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +68,7 @@
 				<div id="menu-product-container" class="menu-section">
 					<p class="menu-section-name">주문</p>
 					<a href="" class="menu-section-anchor"><p
-							class="menu-section-name-detail">장바구니</p></a> <a href=""
+							class="menu-section-name-detail">장바구니</p></a> <a href="/orderList.do"
 						class="menu-section-anchor"><p
 							class="menu-section-name-detail">주문 목록 조회</p></a> <a href=""
 						class="menu-section-anchor"><p
@@ -104,7 +105,7 @@
 					<div id="product_info_box">
 						<div id="prdocut_info_box_grid">
 							<div>
-								<img src="../resources/image/order/shirt.png" id="shirt"/>
+								<img src="../resources/image/order/shirt.png" id="shirt" />
 							</div>
 							<div id="product_info_left">
 								<div>
@@ -123,23 +124,25 @@
 									<p>금액</p>
 								</div>
 							</div>
+							<c:forEach items="${orderInfo}" var="order">
 							<div id="product_info_right">
 								<div>
-									<p>0000000옷</p>
+									<p>${order.product_name }</p>
 								</div>
 								<div>
-									<p>M</p>
+									<p>${order.size_name }</p>
 								</div>
 								<div>
-									<p>Blue</p>
+									<p>${order.color_name }</p>
 								</div>
 								<div>
-									<p>1개</p>
+									<p>${order.count }</p>
 								</div>
 								<div>
-									<p>49,000원</p>
+									<p>${order.product_price }</p>
 								</div>
 							</div>
+							</c:forEach>
 						</div>
 					</div>
 					<div id="order_info_box_title">
@@ -174,25 +177,27 @@
 								</div>
 								<div></div>
 							</div>
+							<c:forEach items="${orderInfo}" var="order">
 							<div id="info_box_right1">
 								<div></div>
 								<div id="info_box_right1_div">
-									<p>1231234</p>
+									<p>${order.order_num }</p>
 								</div>
 								<div id="info_box_right1_div">
-									<p>배송 중</p>
+									<p>${order.product_state }</p>
 								</div>
 								<div id="info_box_right1_div">
-									<p>2023/12/11 예정</p>
+									<p>${order.delivery_date } 예정</p>
 								</div>
 								<div id="info_box_right1_div">
-									<p>CJ대한통운</p>
+									<p>${order.delivery_company }</p>
 								</div>
 								<div id="info_box_right1_div">
-									<p>124123224</p>
+									<p>${order.invoice_num }</p>
 								</div>
 								<div></div>
 							</div>
+							</c:forEach>
 							<div></div>
 							<div id="info_box_left2">
 								<div></div>
@@ -210,22 +215,24 @@
 								</div>
 								<div></div>
 							</div>
+							<c:forEach items="${orderInfo }" var="order">
 							<div id="info_box_right2">
 								<div></div>
 								<div id="info_box_right2_div">
-									<p>박종혁</p>
+									<p>${order.recipient }</p>
 								</div>
 								<div id="info_box_right2_div">
-									<p>경기도 00시 00구 00동</p>
+									<p>${order.address} + ${order.detail_address}</p>
 								</div>
 								<div id="info_box_right2_div">
-									<p>000-0000-0000</p>
+									<p>${order.phone_num }</p>
 								</div>
 								<div id="info_box_right2_div">
-									<p>문 앞으로 배송해주세요!</p>
+									<p>${order.request}</p>
 								</div>
 								<div></div>
 							</div>
+							</c:forEach>
 						</div>
 					</div>
 					<div id="buttons">
