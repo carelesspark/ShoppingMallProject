@@ -16,7 +16,7 @@ public class OrderInfoRowMapper implements RowMapper<OrderVO>{
 		orderInfo.setProduct_name(rs.getString("product_name"));
 		orderInfo.setSize_name(rs.getString("size_name"));
 		orderInfo.setColor_name(rs.getString("color_name"));
-		orderInfo.setCount(rs.getInt("count"));
+		orderInfo.setAmount(rs.getInt("amount"));
 		orderInfo.setProduct_price(rs.getInt("product_price"));
 		orderInfo.setOrder_num(rs.getInt("order_num"));
 		orderInfo.setProduct_state(rs.getString("product_state"));

@@ -166,7 +166,7 @@
 							<tr id="order_table_first_tr">
 								<td id="order_table_product_num">주문번호</td>
 								<td id="order_table_product_state">물품상태</td>
-								<td id="order_table_product_date">배송 도착일</td>
+								<td id="order_table_product_date">구매 날짜</td>
 								<td id="order_table_product_pic"></td>
 								<td id="order_table_product_name">상품명</td>
 								<td id="order_table_product_price">가격</td>
@@ -177,7 +177,7 @@
 							<tr id="order_table_other_tr">
 								<td id="order_num">${order.order_num }</td>
 								<td>${order.product_state}</td>
-								<td>${order.delivery_date}</td>
+								<td>${order.order_date}</td>
 								<td id="order_pic"><a href='#'><img
 										src="../resources/image/order/shirt.png" id="order_pic" /></a></td>
 								<td>${order.product_name }</td>

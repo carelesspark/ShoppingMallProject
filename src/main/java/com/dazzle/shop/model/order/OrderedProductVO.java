@@ -11,5 +11,5 @@ public class OrderedProductVO {
 	private String product_name;
 	private String main_img;
 	private int total_price;
-	private int count;
+	private int amount;
 }
