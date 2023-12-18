@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
 
-	<context:component-scan base-package="com.dazzle.shop"></context:component-scan>
+	<context:component-scan base-package="com.dazzle.shop.model"></context:component-scan>
 	
 	
 	<context:property-placeholder location="classpath:config/database.properties"></context:property-placeholder>

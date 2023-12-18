@@ -3,9 +3,9 @@ package com.dazzle.shop.model.address;
 import lombok.Data;
 
 @Data
-
 public class AddressVO {
-	private int addr_id;
+	private int user_num;
+	private int addr_num;
 	private int base;
 	private String address;
 	private String recipient;
