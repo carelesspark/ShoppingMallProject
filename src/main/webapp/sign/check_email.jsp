@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/sign/finding_id.css" />
+	href="${pageContext.request.contextPath}/resources/css/sign/check_email.css" />
 <title>finding id</title>
 </head>
 <body>
