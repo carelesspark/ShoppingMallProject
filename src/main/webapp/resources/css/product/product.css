@@ -1,0 +1,174 @@
+@charset "UTF-8";
+
+body {
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+	background-color: #000;
+}
+
+.carousel-indicators [data-bs-target] {
+	background-color: #000;
+}
+
+.product-info {
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+.product-info h2 {
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.product-info .price {
+	font-size: 1.5rem;
+	color: #000;
+	margin-bottom: 0.5rem;
+}
+
+.product-info .discount {
+	color: #000;
+	margin-bottom: 1rem;
+}
+
+.product-info .delivery-info {
+	margin-bottom: 1rem;
+}
+
+.product-info .options {
+	margin-bottom: 1rem;
+}
+
+.product-info .options select {
+	width: 100%;
+	margin-bottom: 0.5rem;
+}
+
+.product-info .quantity {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.product-info .quantity input {
+	text-align: center;
+	width: 50px;
+}
+
+.product-info .quantity button {
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	line-height: 30px;
+	vertical-align: middle;
+}
+
+.product-info .buttons {
+	display: flex;
+	gap: 1rem;
+}
+
+.product-info .buttons button {
+	flex-grow: 1;
+}
+
+.section-title {
+	font-size: 1.25rem;
+	font-weight: bold;
+	border-bottom: 1px solid #000;
+	padding-bottom: 0.5rem;
+	margin-bottom: 1rem;
+}
+
+.product-tabs {
+	display: flex;
+	justify-content: space-around;
+	border-top: 1px solid #000;
+	padding-top: 0.5rem;
+	border: 1px solid black;
+	border-radius: 15px;
+	margin-bottom: 1rem;
+}
+
+.product-tab {
+	font-size: 1rem;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.product-tab a {
+	text-decoration: none;
+	color: #000;
+}
+
+.review-qna-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.review-qna-title {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.review-qna-date {
+	font-size: 14px;
+	color: #888;
+}
+
+.review-qna-item {
+	border-top: 1px solid #ccc;
+	padding: 20px 0;
+}
+
+.review-qna-item:last-child {
+	border-bottom: 1px solid #ccc;
+}
+
+.review-qna-rating {
+	margin-bottom: 5px;
+}
+
+.review-qna-author {
+	font-size: 14px;
+	color: #888;
+	margin-bottom: 5px;
+}
+
+.review-qna-content {
+	font-size: 16px;
+	color: #333;
+	margin-bottom: 15px;
+}
+
+.review-qna-pagination {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.review-qna-pagination .page-item.active .page-link {
+	background-color: #858585;
+	border-color: #858585;
+}
+
+.review-qna-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+}
+
+.review-qna-footer a {
+	color: #858585;
+	text-decoration: none;
+}
+
+.review-qna-footer a:hover {
+	text-decoration: underline;
+}
