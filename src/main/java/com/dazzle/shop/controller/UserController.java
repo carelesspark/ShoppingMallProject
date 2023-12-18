@@ -23,13 +23,13 @@ public class UserController {
 	@PostMapping("/signInId.do")
 	public String signInId(UserVO vo, Model model) {
 		System.out.println("===> UserController: sign in id");
-		
-		UserVO user = userService.signInUser(vo);
 
-		if (user == null) {
-			return "sign/sign_in";
+		int userNum = userService.signInUser(vo);
+
+		if (userNum == 0) {
+			return "sign/sign_in.jsp";
 		} else {
-			model.addAttribute("user_num", user.getUser_num());
+			model.addAttribute("user_num", userNum);
 			return "user/user_order_tracking.jsp";
 		}
 	}

@@ -7,8 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/body.css" />
-<link rel="stylesheet" href="../resources/css/sign/sign_in.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/sign/sign_in.css" />
 <title>sign in</title>
 </head>
 <body>
@@ -27,7 +27,7 @@
 			<input type="submit" value="로그인" />
 		</form>
 		<div id="mcl">
-			<a href="">아이디 찾기</a> <a href="">비밀번호 찾기</a> <a href="">회원가입</a>
+			<a href="sign/find_id.jsp">아이디 찾기</a> <a href="">비밀번호 찾기</a> <a href="">회원가입</a>
 		</div>
 	</div>
 
