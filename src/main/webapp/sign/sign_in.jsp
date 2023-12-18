@@ -7,23 +7,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/header.css" />
-<link rel="stylesheet" href="../resources/css/footer.css" />
 <link rel="stylesheet" href="../resources/css/body.css" />
 <link rel="stylesheet" href="../resources/css/sign/sign_in.css" />
 <title>sign in</title>
 </head>
 <body>
 	<!--include header-->
-	<header></header>
+	<%@ include file="../header.jsp"%>
 
 	<div id="mc">
 		<div id="mch">로그인</div>
-		<form id="mcf" action="" method="post">
-			<input type="text" placeholder="아이디를 입력해 주세요." /> <input
-				type="password" name="" id="" placeholder="비밀번호를 입력해 주세요." />
+		<form id="mcf" action="../signInId.do" method="post">
+			<input type="text" name="id" placeholder="아이디를 입력해 주세요." /> <input
+				type="password" name="pwd" placeholder="비밀번호를 입력해 주세요." />
 			<div id="mcf-cb">
-				<input type="checkbox" name="" id="" />
+				<input type="checkbox" name="saveId" />
 				<p>아이디 저장</p>
 			</div>
 			<input type="submit" value="로그인" />
@@ -34,6 +32,6 @@
 	</div>
 
 	<!--include footer-->
-	<footer></footer>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>

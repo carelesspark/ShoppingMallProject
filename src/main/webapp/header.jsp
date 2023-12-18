@@ -1,63 +1,60 @@
-<script src="https://cdn.tailwindcss.com"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<div class="bg-white">
-  <header
-    class="flex justify-between items-center py-4 px-8 border-b h-[100px]"
-  >
-    <div class="text-lg font-bold"><a href="#">DAZZLE</a></div>
-    <div class="flex space-x-4">
-      <a class="block font-bold text-gray-600" href="#" id="gdtfw3g918e">
-        HOME
-      </a>
-      <a class="block" href="#"> TOP </a>
-      <a class="block" href="#"> BOTTOM </a>
-      <a class="block" href="#"> OUTER </a>
-      <a class="block" href="#"> SHOES </a>
-      <a class="block" href="#"> ETC </a>
-    </div>
-    <div class="flex items-center space-x-4">
-      <input
-        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-        placeholder="Search"
-      />
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="h-6 w-6 cursor-pointer"
-      >
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.3-4.3"></path>
-      </svg>
-      <a class="block" href="#">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="h-6 w-6 cursor-pointer"
-        >
-          <circle cx="8" cy="21" r="1"></circle>
-          <circle cx="19" cy="21" r="1"></circle>
-          <path
-            d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-          ></path>
-        </svg>
-      </a>
-      <a class="block" href="#"> JOIN </a>
-      <a class="block" href="#"> LOGIN </a>
-    </div>
-  </header>
-</div>
-<link rel="stylesheet" href="header.css" />
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/header.css">
+<header>
+	<nav class="navbar navbar-expand-lg">
+		<div class="container">
+			<a class="navbar-brand" href="#">DAZZLE</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="#">HOME</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">TOP</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">BOTTOM</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">OUTER</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">SHOES</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">ETC</a></li>
+				</ul>
+
+				<ul class="navbar-nav gap-2">
+					<li class="nav-item"><a class="nav-link" href="#">CART</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">MY PAGE</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">JOIN</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">LOGIN</a></li>
+				</ul>
+
+				<form class="d-flex mt-3">
+					<input class="form-control me-1" type="search" placeholder="Search"
+						aria-label="Search" />
+					<button class="btn btn-outline-success" type="submit">
+						<i class="fas fa-search"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+</header>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kQtW33rZJAHjy8F/xC0k+O2eFgHgOnMm7e3f0sM/9f0zUYGPtFhQJhXdJiV6pG5a"
+	crossorigin="anonymous"></script>
