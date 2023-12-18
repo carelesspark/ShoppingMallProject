@@ -33,4 +33,9 @@ public class AddressServiceImpl implements AddressService {
     public void insertAddress(AddressVO vo) {
         addressDAO.insertAddress(vo);
     }
+
+	@Override
+	public AddressVO getAddress(AddressVO vo) {
+		return addressDAO.getAddress(vo);
+	}
 }

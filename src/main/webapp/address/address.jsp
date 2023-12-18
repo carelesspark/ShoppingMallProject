@@ -35,11 +35,11 @@
 		                <div class="phn">${address.phone_num}</div>
 		                <div class="request">${address.request}</div>
 		            </div>
-		            <div class="button">
-		                <button class="edit">수정하기</button>
-		                <button class="delete">삭제하기</button>
-		                <button class="choice">선택하기</button>
-		            </div>
+		             <div class="button">
+                        <button class="edit" onclick="editAddress(${address.addr_num})">수정하기</button>
+                        <button class="delete" onclick="deleteAddress(${address.addr_num},${address.user_num})">삭제하기</button>
+                     	<button class="choice" onclick="selectAddress(${address.addr_num})">선택하기</button>
+                     </div>
 		        </div>
 		        <hr>
 		    </c:if>
@@ -59,11 +59,11 @@
 		                <div class="phn">${address.phone_num}</div>
 		                <div class="request">${address.request}</div>
 		            </div>
-		            <div class="button">
-		                <button class="edit">수정하기</button>
-		                <button class="delete">삭제하기</button>
-		                <button class="choice">선택하기</button>
-		            </div>
+		             <div class="button">
+                        <button class="edit" onclick="editAddress(${address.addr_num})">수정하기</button>
+                        <button class="delete" onclick="deleteAddress(${address.addr_num},${address.user_num})">삭제하기</button>
+                     	<button class="choice" onclick="selectAddress(${address.addr_num})">선택하기</button>
+                     </div>
 		        </div>
 		        <hr>
 		    </c:forEach>
@@ -76,10 +76,28 @@
 
         </div>
         <br>
-        <div>
-            <button id="add">새 배송지 추가하기</button>
-            <button id="close">확인</button>
+		<div id="buttons">
+            <button id="add" onclick="location.href='addressAdd.do?user_num=${addressList[0].user_num}'">새 배송지 추가하기</button>
+            <button id="close" onclick="closePage()">확인</button>
         </div>
     </div>
+    <script>
+        function editAddress(addrNum) {
+            location.href = 'addressEdit.do?addr_num=' + addrNum;
+        }
+
+        function deleteAddress(addrNum, userNum) {
+            location.href = 'addressDelete.do?addr_num=' + addrNum + '&user_num=' + userNum;
+        }
+
+        function closePage() {
+        	 window.close();
+        }
+        
+        function selectAddress(addrNum) {
+            /* window.opener.receiveAddressNumAndReload(addrNum); */
+            closePage();
+        }
+    </script>
 </body>
 </html>
