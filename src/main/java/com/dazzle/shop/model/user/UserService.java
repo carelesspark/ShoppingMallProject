@@ -4,5 +4,5 @@ public interface UserService {
 
 	// 회원가입
 	// 로그인 
-	UserVO signInUser(UserVO vo);
+	int signInUser(UserVO vo);
 }

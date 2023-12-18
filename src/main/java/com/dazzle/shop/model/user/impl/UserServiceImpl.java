@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
 
 	// 로그인
 	@Override
-	public UserVO signInUser(UserVO vo) {
+	public int signInUser(UserVO vo) {
 		return userDAO.signInUser(vo);
 	}
 
