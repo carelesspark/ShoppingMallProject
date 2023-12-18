@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #f8f9fa;
+	color: #000000;
+	padding: 1rem 0;
+	font-size: 0.875rem;
+	text-align: center;
+	z-index: 1;
+}
+
+.footer a {
+	color: #000000;
+	text-decoration: none;
+	margin-right: 1rem;
+}
+
+.footer a:last-child {
+	margin-right: 0;
+}
+
+.footer .social-icons {
+	font-size: 1.25rem;
+}
+
+.footer .social-icons a {
+	margin-right: 0.5rem;
+}
+
+.footer .social-icons a:last-child {
+	margin-right: 0;
+}

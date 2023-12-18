@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+header {
+	background-color: #f8f9fa;
+	position: sticky;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1;
+}
+.navbar-brand {
+	font-weight: 700;
+}
+
+.nav-link {
+	color: black;
+}
+
+@media ( max-width : 991.98px) {
+	.navbar-collapse {
+		position: absolute;
+		background-color: #f8f9fa;
+		top: 100%;
+		left: 0;
+		right: 0;
+		z-index: 1000;
+		text-align: center;
+	}
+	.navbar-toggler {
+		outline: none;
+	}
+	.navbar-toggler:focus, .navbar-toggler:active, .navbar-toggler-icon:focus
+		{
+		outline: none;
+		box-shadow: none;
+	}
+}
