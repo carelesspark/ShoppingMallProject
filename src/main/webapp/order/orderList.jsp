@@ -66,7 +66,7 @@
 				<div id="menu-product-container" class="menu-section">
 					<p class="menu-section-name">주문</p>
 					<a href="" class="menu-section-anchor"><p
-							class="menu-section-name-detail">장바구니</p></a> <a href=""
+							class="menu-section-name-detail">장바구니</p></a> <a href="/orderList.do"
 						class="menu-section-anchor"><p
 							class="menu-section-name-detail">주문 목록 조회</p></a> <a href=""
 						class="menu-section-anchor"><p
@@ -172,74 +172,26 @@
 								<td id="order_table_product_price">가격</td>
 								<td id="order_table_product_button"></td>
 							</tr>
+							<c:forEach items="${orderList}" var="order">
+							
 							<tr id="order_table_other_tr">
-								<td id="order_num">12312312</td>
-								<td>주문 완료</td>
-								<td>미정</td>
+								<td id="order_num">${order.order_num }</td>
+								<td>${order.product_state}</td>
+								<td>${order.delivery_date}</td>
 								<td id="order_pic"><a href='#'><img
 										src="../resources/image/order/shirt.png" id="order_pic" /></a></td>
-								<td>00000옷</td>
-								<td>39,000원</td>
+								<td>${order.product_name }</td>
+								<td>${order.product_price}원</td>
 								<td id="order_table_buttons">
 									<div id="order_table_div_button">
-										<a href="#">> 상세 조회</a>
+										<a href="/orderInfo.do?order_num=${order.order_num}">> 상세 조회</a>
 									</div>
 									<div id="order_table_div_button">
 										<a href="#">> 판매자 문의</a>
 									</div>
 								</td>
 							</tr>
-							<tr id="order_table_other_tr">
-								<td id="order_num">2223132</td>
-								<td>배송 완료</td>
-								<td>2023/12/09</td>
-								<td id="order_pic"><a href='#'><img
-										src="../resources/image/order/hat.png" id="order_pic" /></a></td>
-								<td>000000모자</td>
-								<td>23,000원</td>
-								<td id="order_table_buttons">
-									<div id="order_table_div_button">
-										<a href="#">> 상세 조회</a>
-									</div>
-									<div id="order_table_div_button">
-										<a href="#">> 판매자 문의</a>
-									</div>
-								</td>
-							</tr>
-							<tr id="order_table_other_tr">
-								<td id="order_num">35312323</td>
-								<td>배송 완료</td>
-								<td>2023/10/11</td>
-								<td id="order_pic"><a href='#'><img
-										src="../resources/image/order/shoe.png" id="order_pic" /></a></td>
-								<td>0000신발</td>
-								<td>55,500</td>
-								<td id="order_table_buttons">
-									<div id="order_table_div_button">
-										<a href="#">> 상세 조회</a>
-									</div>
-									<div id="order_table_div_button">
-										<a href="#">> 판매자 문의</a>
-									</div>
-								</td>
-							</tr>
-							<tr id="order_table_other_tr">
-								<td id="order_num">12312323</td>
-								<td>교환 완료</td>
-								<td>2023/06/13</td>
-								<td id="order_pic"><a href='#'><img
-										src="../resources/image/order/shorts.png" id="order_pic" /></a></td>
-								<td>00000반바지</td>
-								<td>33,000원</td>
-								<td id="order_table_buttons">
-									<div id="order_table_div_button">
-										<a href="#">> 상세 조회</a>
-									</div>
-									<div id="order_table_div_button">
-										<a href="#">> 판매자 문의</a>
-									</div>
-								</td>
-							</tr>
+							</c:forEach>
 						</table>
 					</div>
 					<div id="order_list_bottom">
