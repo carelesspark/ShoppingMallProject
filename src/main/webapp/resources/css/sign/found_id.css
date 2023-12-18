@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+body {
+	margin: 0;
+	font-size: 18px;
+	color: #191919;
+}
+
 #mc {
 	width: 480px;
 	margin: 0 auto 300px auto;

@@ -1,5 +1,7 @@
 package com.dazzle.shop.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,7 @@ public class UserController {
 
 	// 로그인
 	@PostMapping("/signInId.do")
-	public String signInId(UserVO vo, Model model) {
+	public String signInId(UserVO vo, Model model, HttpSession session) {
 		System.out.println("===> UserController: sign in id");
 
 		int userNum = userService.signInUser(vo);
@@ -30,7 +32,8 @@ public class UserController {
 			return "sign/sign_in.jsp";
 		} else {
 			model.addAttribute("user_num", userNum);
-			return "user/user_order_tracking.jsp";
+			session.setAttribute("savedId", vo.getId());
+			return "redirect:/user/user_order_tracking.jsp";
 		}
 	}
 
