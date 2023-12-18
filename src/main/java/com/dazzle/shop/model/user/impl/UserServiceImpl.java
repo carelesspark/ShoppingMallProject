@@ -1,5 +1,21 @@
 package com.dazzle.shop.model.user.impl;
 
-public class UserServiceImpl {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.dazzle.shop.model.user.UserService;
+import com.dazzle.shop.model.user.UserVO;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserDAO userDAO;
+
+	// 로그인
+	@Override
+	public UserVO signInUser(UserVO vo) {
+		return userDAO.signInUser(vo);
+	}
 
 }

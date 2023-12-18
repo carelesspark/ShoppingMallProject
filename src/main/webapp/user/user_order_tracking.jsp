@@ -4,10 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/header.css"
-	type="text/css" />
-<link rel="stylesheet" href="../resources/css/footer.css"
-	type="text/css" />
 <link rel="stylesheet" href="../resources/css/body.css" type="text/css" />
 <link rel="stylesheet"
 	href="../resources/css/user/user_order_tracking.css" type="text/css" />
@@ -15,7 +11,7 @@
 </head>
 <body>
 	<!--include header-->
-	<header></header>
+	<%@ include file="../header.jsp"%>
 
 	<div id="m">
 		<!--include user_card-->
@@ -28,7 +24,7 @@
 	</div>
 
 	<!--include footer-->
-	<footer></footer>
+	<%@ include file="../footer.jsp"%>
 </body>
 
 </html>
