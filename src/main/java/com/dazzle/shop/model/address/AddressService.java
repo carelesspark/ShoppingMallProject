@@ -9,6 +9,9 @@ public interface AddressService {
 	//주소 목록 조회
 	List<AddressVO> getAddressList(AddressVO vo);
 	
+	//주소 조회
+	public AddressVO getAddress(AddressVO vo);
+	
 	//주소 수정
 	void updateAddress(AddressVO vo);
 	
