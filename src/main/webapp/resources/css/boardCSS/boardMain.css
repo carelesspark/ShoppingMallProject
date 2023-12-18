@@ -21,6 +21,17 @@
 	font-weight: bold;
 }
 
+.board button {
+	background-color: white;
+	width: 100px;
+	height: 50px;
+	border: 1px solid;
+	position: absolute;
+	top: 30px;
+	right: 17%;
+	
+}
+
 .wrapper hr {
 	background: silver;
 	height: 1px;
@@ -62,6 +73,7 @@
 .feed_card {
 	display: flex;
 	width: 100%;
+	flex-wrap: wrap;
 }
 
 .feed_card a {

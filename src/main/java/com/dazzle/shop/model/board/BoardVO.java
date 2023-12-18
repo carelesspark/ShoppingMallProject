@@ -1,5 +1,15 @@
 package com.dazzle.shop.model.board;
 
-public class BoardVO {
+import java.sql.Date;
 
+import lombok.Data;
+
+@Data
+public class BoardVO {
+	private int pno;
+	private int userNum;
+	private String title;
+	private String cate;
+	private Date posttime;
+	private int productCode;
 }

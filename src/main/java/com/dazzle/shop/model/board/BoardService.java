@@ -1,5 +1,9 @@
 package com.dazzle.shop.model.board;
 
-public class BoardService {
+import java.util.List;
 
+public interface BoardService {
+	List<BoardVO> getBoardList();
+	
+	BoardVO getBoard(BoardVO vo);
 }
