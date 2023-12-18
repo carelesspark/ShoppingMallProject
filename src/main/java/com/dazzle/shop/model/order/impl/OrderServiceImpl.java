@@ -17,6 +17,22 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	@Override
+	public List<OrderVO> insertProductOrder(OrderVO vo) {
+		
+		return orderDAO.insertProductOrder(vo);
+	}
+
+
+
+	@Override
+	public List<OrderVO> insertBuyOrder(OrderVO vo) {
+
+		return orderDAO.insertBuyOrder(vo);
+	}
+
+
+
+	@Override
 	public OrderVO getOrderInfo(OrderVO vo) {
 		
 		return orderDAO.getOrderInfo(vo);

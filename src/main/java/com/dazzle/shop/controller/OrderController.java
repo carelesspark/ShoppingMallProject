@@ -42,4 +42,21 @@ public class OrderController {
 	
 		return "/order/orderInfo.jsp";
 	}
+	
+	@RequestMapping(value="/productOrder.do")
+	public String insertProductOrder(OrderVO vo, Model model) throws Exception {
+		System.out.println("상품 주문 페이지 이동");
+		List<OrderVO> productOrder = orderService.insertProductOrder(vo);
+		
+		return "/order/productList.jsp";
+	}
+	
+	@RequestMapping(value="/buyOrder.do")
+	public String insertBuyOrder(OrderVO vo, Model model) throws Exception{
+		System.out.println("주문 목록 입력 처리");
+		
+		List<OrderVO> buyOrder = orderService.insertBuyOrder(vo);
+		
+		return "/product/productOrderSucc.jsp";
+	}
 }

@@ -25,5 +25,5 @@ public class OrderVO {
 	private String payment;
 	private String color_name;
 	private String size_name;
-	private int count;
+	private int amount;
 }
