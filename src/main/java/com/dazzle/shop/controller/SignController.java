@@ -2,6 +2,7 @@ package com.dazzle.shop.controller;
 
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,15 @@ public class SignController {
 
 	// check_email
 	@GetMapping("/checkEmailPwd.do")
-	public String checkEmailPwd() {
-		
-		return null;
+	public String checkEmailPwd(Model model, HttpServletRequest request) {
+		System.out.println("===> SignController: check email auth - pwd");
+
+		if (!signService.checkEmailPwd(request)) { // fail
+			model.addAttribute("failFindPwd", "fail");
+			return "sign/find_pwd.jsp";
+		}
+
+		return "redirect:/sign/update_pwd.jsp";
 	}
 
 	// find_id
@@ -62,12 +69,10 @@ public class SignController {
 		// uuid 생성 및 앞 6자리 session에 저장
 		UUID uuid4 = UUID.randomUUID();
 		String authStr = uuid4.toString().substring(0, 6); // 6자리 문자열 생성
+		session.setAttribute("authStr", authStr);
 
 		// 이메일로 uuid 전송
 		signService.sendEmail(vo.getUser_email(), authStr);
-
-		// model로 이메일 넘겨줌
-		model.addAttribute("authStr", authStr);
 
 		return "redirect:/sign/check_email_pwd.jsp";
 	}
@@ -75,7 +80,7 @@ public class SignController {
 	// sign_in
 	// 로그인 기능
 	@PostMapping("/signIn.do")
-	public String signId(SignVO vo, Model model, HttpSession session, RedirectAttributes rttr) {
+	public String signId(SignVO vo, Model model, HttpSession session) {
 		System.out.println("===> SignController: sign in");
 
 		int user_num = signService.signIn(vo);

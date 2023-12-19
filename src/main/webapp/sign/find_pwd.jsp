@@ -56,6 +56,7 @@
 			return true;
 		}
 	</script>
+
 	<c:if test="${!empty failFindPwd}">
 		<script type="text/javascript">
 			alert("등록된 정보와 일치하지 않습니다. 다시 입력해 주세요.");

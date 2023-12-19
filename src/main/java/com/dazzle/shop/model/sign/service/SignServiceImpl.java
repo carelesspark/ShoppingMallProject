@@ -1,6 +1,8 @@
 package com.dazzle.shop.model.sign.service;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -40,9 +42,21 @@ public class SignServiceImpl implements SignService {
 
 	// check_email_pwd
 	@Override
-	public int checkEmailPwd() {
+	public boolean checkEmailPwd(HttpServletRequest request) {
+		// 세션에 저장해놓은 인증번호
+		HttpSession session = request.getSession();
+		String authStrEmail = (String) session.getAttribute("authStr");
+		// 사용이 끝난 authStr 세션에서 삭제
+		session.removeAttribute("authStr");
 
-		return 0;
+		// 유저가 전송한 인증번호
+		String authStrUser = request.getParameter("authStr");
+
+		if (!authStrEmail.equals(authStrUser)) { // fail
+			return false;
+		}
+
+		return true;
 	}
 
 	// send_email
