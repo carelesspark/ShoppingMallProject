@@ -97,7 +97,17 @@
 						<p id="order_info_title">주문 목록 상세 조회</p>
 					</div>
 					<div id="order_info_text">
-						<h1>상품이 배송되고 있습니다!</h1>
+						<c:choose>
+							<c:when test="${orderInfo.product_state eq '상품 준비 중'}">
+								<h1>상품 배송 준비 중입니다!</h1>
+							</c:when>
+							<c:when test="${orderInfo.product_state eq '배송 중'}">
+								<h1>상품이 배송되고 있습니다!</h1>
+							</c:when>
+							<c:otherwise>
+								<h1>상품 배송이 완료되었습니다!</h1>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div id="product_info_title">
 						<p>구매 정보</p>
@@ -124,25 +134,23 @@
 									<p>금액</p>
 								</div>
 							</div>
-							<c:forEach items="${orderInfo}" var="order">
 							<div id="product_info_right">
 								<div>
-									<p>${order.product_name }</p>
+									<p>${orderInfo.product_name }</p>
 								</div>
 								<div>
-									<p>${order.size_name }</p>
+									<p>${orderInfo.size_name }</p>
 								</div>
 								<div>
-									<p>${order.color_name }</p>
+									<p>${orderInfo.color_name }</p>
 								</div>
 								<div>
-									<p>${order.count }</p>
+									<p>${orderInfo.amount }</p>
 								</div>
 								<div>
-									<p>${order.product_price }</p>
+									<p>${orderInfo.product_price }</p>
 								</div>
 							</div>
-							</c:forEach>
 						</div>
 					</div>
 					<div id="order_info_box_title">
@@ -177,27 +185,25 @@
 								</div>
 								<div></div>
 							</div>
-							<c:forEach items="${orderInfo}" var="order">
 							<div id="info_box_right1">
 								<div></div>
 								<div id="info_box_right1_div">
-									<p>${order.order_num }</p>
+									<p>${orderInfo.order_num }</p>
 								</div>
 								<div id="info_box_right1_div">
-									<p>${order.product_state }</p>
+									<p>${orderInfo.product_state }</p>
 								</div>
 								<div id="info_box_right1_div">
-									<p>${order.delivery_date } 예정</p>
+									<p>${orderInfo.delivery_date }예정</p>
 								</div>
 								<div id="info_box_right1_div">
-									<p>${order.delivery_company }</p>
+									<p>${orderInfo.delivery_company }</p>
 								</div>
 								<div id="info_box_right1_div">
-									<p>${order.invoice_num }</p>
+									<p>${orderInfo.invoice_num }</p>
 								</div>
 								<div></div>
 							</div>
-							</c:forEach>
 							<div></div>
 							<div id="info_box_left2">
 								<div></div>
@@ -215,37 +221,35 @@
 								</div>
 								<div></div>
 							</div>
-							<c:forEach items="${orderInfo }" var="order">
 							<div id="info_box_right2">
 								<div></div>
 								<div id="info_box_right2_div">
-									<p>${order.recipient }</p>
+									<p>${orderInfo.recipient }</p>
 								</div>
 								<div id="info_box_right2_div">
-									<p>${order.address} + ${order.detail_address}</p>
+									<p>${orderInfo.address}${orderInfo.detail_address}</p>
 								</div>
 								<div id="info_box_right2_div">
-									<p>${order.phone_num }</p>
+									<p>${orderInfo.phone_num }</p>
 								</div>
 								<div id="info_box_right2_div">
-									<p>${order.request}</p>
+									<p>${orderInfo.request}</p>
 								</div>
 								<div></div>
 							</div>
-							</c:forEach>
 						</div>
 					</div>
 					<div id="buttons">
 						<div>
-							<button type="button" class="btn btn-dark" id="button_1">교환
+							<button type="button" class="btn btn-dark" id="button_1" onclick="location.href='/orderRefund.do?order_num=${orderInfo.order_num}'">교환
 								요청</button>
 						</div>
 						<div>
-							<button type="button" class="btn btn-dark" id="button_2">
+							<button type="button" class="btn btn-dark" id="button_2" onclick="location.href='/productChange.do?order_num=${orderInfo.order_num}'">
 								취소/환불 요청</button>
 						</div>
 						<div>
-							<button type="button" class="btn btn-dark" id="button_3">목록으로
+							<button type="button" class="btn btn-dark" id="button_3" onclick="location.href='/orderList.do'">목록으로
 								돌아가기</button>
 						</div>
 					</div>

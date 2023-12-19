@@ -1,5 +1,13 @@
+<%@page import="com.dazzle.shop.model.board.BoardVO"%>
+<%@page import="com.dazzle.shop.model.board.impl.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	BoardDAO dao = new BoardDAO();
+	int pno = Integer.parseInt(request.getParameter("pno"));
+
+	BoardVO board = dao.getBoard(pno);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +18,10 @@
 </head>
 <body>
 	<div class="wrapper">
-		<div class="title"><div class="title_content">
-				<p>제목</p>
-				<p>아이디</p>
+		<div class="title">
+			<div class="title_content">
+				<p><%=board.getTitle() %></p>
+				<p><%=board.getUserNum() %></p>
 			</div>
 		</div>
 		
@@ -169,7 +178,12 @@
 		
 		<div class="product">
 			<div class="product_info">
-				<p><a href="board.jsp">#오오티디</a></p>
+				<p><a href="board.jsp">
+					<%if(board.getCate() != null) { %>
+					<%=board.getCate() %>
+					<%} %>
+					</a>
+				</p>
 				<span>상품 태그</span>
 			</div>
 			

@@ -4,35 +4,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/header.css" />
-<link rel="stylesheet" href="../resources/css/footer.css" />
-<link rel="stylesheet" href="../resources/css/body.css" />
-<link rel="stylesheet" href="../resources/css/sign/found_id.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/sign/found_id.css" />
 <title>found id</title>
 </head>
 <body>
-	<!--include header-->
-	<header></header>
+	<%@ include file="../header.jsp"%>
 
 	<div id="mc">
 		<div id="mch">계정 찾기</div>
 		<div id="mcs">
 			<div id="mcs-">
-				<a href="">아이디 찾기</a>
+				<a href="sign/find_id.jsp">아이디 찾기</a>
 			</div>
 			<div>
-				<a href="">비밀번호 찾기</a>
+				<a href="sign/find_pwd.jsp">비밀번호 찾기</a>
 			</div>
 		</div>
 		<div id="mcp">
 			<p>사용자의 아이디는</p>
-			<p id="mcp-uid">${user_id}- 값 forwarding으로 넘기기?</p>
+			<p id="mcp-uid">${id}</p>
 			<p>입니다.</p>
 		</div>
-		<a id="mcl" href="">로그인</a>
+		<a id="mcl" href="sign/sign_in.jsp">로그인</a>
 	</div>
 
-	<!--include footer-->
-	<footer></footer>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>

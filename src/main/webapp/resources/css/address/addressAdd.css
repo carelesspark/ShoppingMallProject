@@ -47,7 +47,7 @@
         }
         button#edit,
         button#add,
-        button#close,
+        button#return,
         .full{
             width: 100%;
             margin-top: 10px
