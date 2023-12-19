@@ -3,7 +3,7 @@ package com.dazzle.shop.model.sign.service;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -20,37 +20,36 @@ public class SignServiceImpl implements SignService {
 
 	// find_id
 	@Override
-	public String findId(SignVO vo) {
+	public SignVO findId(SignVO vo) {
 		return signDAO.findId(vo);
 	}
 
 	// find_pwd
 	@Override
-	public int findPwd(SignVO vo) {
+	public SignVO findPwd(SignVO vo) {
 		return signDAO.findPwd(vo);
 	}
 
 	// sign_in
 	@Override
-	public int signIn(SignVO vo) {
+	public SignVO signIn(SignVO vo) {
 		return signDAO.signIn(vo);
 	}
 
-	////////////////////////////// DB에 없는 Service
-
-	// check_email_pwd
+	// update_pwd
 	@Override
-	public int checkEmailPwd() {
-
-		return 0;
+	public void updatePwd(SignVO vo) {
+		signDAO.updatePwd(vo);
 	}
+
+	////////////////////////////// DB에 없는 Service
 
 	// send_email
 	@Override
 	public void sendEmail(String user_email, String authStr) {
 		System.out.println("===> SignService sendEmail()");
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 
 		JavaMailSenderImpl mailSender = (JavaMailSenderImpl) context.getBean("mailSender");
 
@@ -78,6 +77,8 @@ public class SignServiceImpl implements SignService {
 			mailSender.send(mail);
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			context.close();
 		}
 	}
 

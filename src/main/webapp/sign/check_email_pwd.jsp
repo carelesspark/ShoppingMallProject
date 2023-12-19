@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/sign/check_email_pwd.css" />
-<title>finding id</title>
+<title>check email pwd</title>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -25,12 +25,25 @@
 			<p>사용자의 이메일로 인증번호를 전송했습니다.</p>
 			<p>아래에 인증번호를 입력해주시기 바랍니다.</p>
 		</div>
-		<form id="mcf" action="../checkEmailPwd.do" method="get">
-			<input type="text" name="authNum" placeholder="인증번호를 입력해 주세요." /> <input
+		<form id="mcf" action="/practice/checkEmailPwd.do" method="get">
+			<input type="text" name="authStr" placeholder="인증번호를 입력해 주세요." /> <input
 				type="submit" value="비밀번호 재설정" />
 		</form>
 	</div>
 
 	<%@ include file="../footer.jsp"%>
+
+	<script type="text/javascript">
+		function validateForm(form, event) {
+			if (form.authNum.value.trim() === "") {
+				alert("인증번호를 입력해 주세요.");
+				event.preventDefault();
+
+				return false;
+			}
+
+			return true;
+		}
+	</script>
 </body>
 </html>
