@@ -10,7 +10,7 @@ public interface OrderService {
 	
 	List<OrderVO> insertBuyOrder(OrderVO vo);
 	
-	OrderVO getProductOrder(int userNum, String productCode, int amount, OrderVO vo);
+	List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo);
 	
 	List<OrderVO> getProductOrderFromCart(OrderVO vo);
 

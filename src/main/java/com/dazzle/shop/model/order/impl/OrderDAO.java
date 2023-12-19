@@ -37,7 +37,7 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE o.order_num = ?;";
 
-	private final String PRODUCT_ORDER = "SELECT pimg.main_img, (p.product_price * ?) AS total_price, c.amount, p.product_name, pco.color_name, ps.size_name, ui.user_point"
+	private final String PRODUCT_ORDER = "SELECT pimg.main_img, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, ui.user_point"
 			+ " FROM cart c\r\n" + " JOIN users u ON u.user_num = c.user_num"
 			+ " JOIN user_info ui ON ui.user_num = u.user_num"
 			+ " JOIN product_code pc ON pc.product_code = c.product_code"
@@ -56,7 +56,7 @@ public class OrderDAO {
 			+ " JOIN product p ON p.product_num = pco.product_num"
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE c.user_num = ?";
 
-	private final String BUY_ORDER = "";
+	private final String BUY_ORDER = "INSERT INTO orders VALUES (DEFAULT, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	public OrderVO getOrderInfo(OrderVO vo) {
 		System.out.println("getOrderInfo()");
@@ -70,12 +70,12 @@ public class OrderDAO {
 		return jdbcTemplate.query(ORDER_LIST, new OrderListRowMapper());
 	}
 
-	public OrderVO getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
+	public List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
 		try {
 			System.out.println("getProductOrder()");
-			Object[] args = { userNum, productCode, amount};
+			Object[] args = { amount, amount, productCode, userNum };
 
-			return jdbcTemplate.queryForObject(PRODUCT_ORDER, args, new ProductOrderRowMapper());
+			return jdbcTemplate.query(PRODUCT_ORDER, args, new ProductOrderRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
@@ -86,14 +86,21 @@ public class OrderDAO {
 			System.out.println("getProductOrderFromCart()");
 			Object[] args = { vo.getUser_num() };
 
-			return jdbcTemplate.query(PRODUCT_ORDER_CART, args, new ProductOrderFromCartRowMapper());
+			return jdbcTemplate.query(PRODUCT_ORDER_CART, args, new ProductOrderRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
 	}
 
-	public List<OrderVO> insertBuyOrder(OrderVO vo) {
-		System.out.println("buyOrder()");
+	public OrderVO insertBuyOrder(OrderVO vo) {
+		System.out.println("insertBuyOrder()");
+
+		
+		return jdbcTemplate.update(BUY_ORDER, VO);
+	}
+	
+	public List<OrderVO> insertBuyOrderDetail(OrderVO vo) {
+		System.out.println("insertBuyOrderDetail()");
 
 		return null;
 	}

@@ -29,9 +29,9 @@ public class OrderServiceImpl implements OrderService {
 
 
 	@Override
-	public OrderVO getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
+	public List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
 
-		return orderDAO.getProductOrder(vo);
+		return orderDAO.getProductOrder(userNum, productCode, amount, vo);
 	}
 
 
