@@ -12,16 +12,4 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
 
-	// find id
-	@Override
-	public String findId(UserVO vo) {
-		return userDAO.findId(vo);
-	}
-
-	// sign in
-	@Override
-	public int signInId(UserVO vo) {
-		return userDAO.signInId(vo);
-	}
-
 }

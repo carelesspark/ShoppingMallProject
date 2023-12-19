@@ -15,7 +15,7 @@
 
 	<div id="mc">
 		<div id="mch">로그인</div>
-		<form id="mcf" action="/practice/signInId.do" method="post"
+		<form id="mcf" action="/practice/signIn.do" method="post"
 			onsubmit="validateForm(this, event)">
 			<input type="text" name="id" value="${savedId}"
 				placeholder="아이디를 입력해 주세요." /> <input type="password" name="pwd"

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/sign/check_email.css" />
+	href="${pageContext.request.contextPath}/resources/css/sign/check_email_pwd.css" />
 <title>finding id</title>
 </head>
 <body>
@@ -14,18 +14,18 @@
 	<div id="mc">
 		<div id="mch">계정 찾기</div>
 		<div id="mcs">
-			<div id="mcs-">
-				<a href="sign/find_id.jsp">아이디 찾기</a>
-			</div>
 			<div>
-				<a href="sign/find_pwd.jsp">비밀번호 찾기</a>
+				<a href="/practice/sign/find_id.jsp">아이디 찾기</a>
+			</div>
+			<div id="mcs-">
+				<a href="/practicesign/find_pwd.jsp">비밀번호 찾기</a>
 			</div>
 		</div>
 		<div id="mcp">
 			<p>사용자의 이메일로 인증번호를 전송했습니다.</p>
 			<p>아래에 인증번호를 입력해주시기 바랍니다.</p>
 		</div>
-		<form id="mcf" action="../findingId.do" method="get">
+		<form id="mcf" action="../checkEmailPwd.do" method="get">
 			<input type="text" name="authNum" placeholder="인증번호를 입력해 주세요." /> <input
 				type="submit" value="비밀번호 재설정" />
 		</form>
