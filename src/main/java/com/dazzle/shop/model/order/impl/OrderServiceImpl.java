@@ -14,13 +14,29 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderDAO orderDAO;
 
-	
-	
+
+
 	@Override
-	public List<OrderVO> insertProductOrder(OrderVO vo) {
-		
-		return orderDAO.insertProductOrder(vo);
+	public List<OrderVO> getProductOrderFromCart(OrderVO vo) {
+
+		return orderDAO.getProductOrderFromCart(vo);
 	}
+
+
+
+
+
+
+
+	@Override
+	public OrderVO getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
+
+		return orderDAO.getProductOrder(vo);
+	}
+
+
+
+
 
 
 
@@ -29,6 +45,10 @@ public class OrderServiceImpl implements OrderService {
 
 		return orderDAO.insertBuyOrder(vo);
 	}
+
+
+
+	
 
 
 
