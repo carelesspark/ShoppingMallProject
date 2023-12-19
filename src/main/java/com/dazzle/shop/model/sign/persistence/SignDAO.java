@@ -17,15 +17,20 @@ public class SignDAO {
 	private final String FIND_ID = "select auth_id.id from auth_id "
 			+ "join users on auth_id.user_num = users.user_num "
 			+ "where users.user_name = ? and auth_id.user_email = ?";
-	private final String FIND_PWD = "select count(*) from auth_id where id = ? and user_email = ?";
-
+	private final String FIND_PWD = "select user_num from auth_id where id = ? and user_email = ?";
 	private final String SIGN_IN = "SELECT user_num FROM auth_id WHERE id = ? AND pwd = ?";
+	private final String UPDATE_PWD = "update auth_id set pwd = ? where user_num = ?";
 
 	// find_id
-	public String findId(SignVO vo) {
+	public SignVO findId(SignVO vo) {
 		System.out.println("===> SignDAO findId()");
 
-		RowMapper<String> rowMapper = (rs, rowNum) -> rs.getString("id");
+		RowMapper<SignVO> rowMapper = (rs, rowNum) -> {
+			SignVO user = new SignVO();
+			user.setId(rs.getString("id"));
+			return user;
+
+		};
 
 		try {
 			return template.queryForObject(FIND_ID, rowMapper, vo.getUser_name(), vo.getUser_email());
@@ -35,29 +40,44 @@ public class SignDAO {
 	}
 
 	// find_pwd
-	public int findPwd(SignVO vo) {
+	public SignVO findPwd(SignVO vo) {
 		System.out.println("===> SignDAO findPwd()");
 
-		RowMapper<Integer> rowMapper = (rs, rowNum) -> rs.getInt(1);
+		RowMapper<SignVO> rowMapper = (rs, rowNum) -> {
+			SignVO user = new SignVO();
+			user.setUser_num(rs.getInt("user_num"));
+			return user;
+
+		};
 
 		try {
 			return template.queryForObject(FIND_PWD, rowMapper, vo.getId(), vo.getUser_email());
 		} catch (EmptyResultDataAccessException e) {
-			return 0;
+			return null;
 		}
 	}
 
 	// sign_in
-	public int signIn(SignVO vo) {
+	public SignVO signIn(SignVO vo) {
 		System.out.println("===> SignDAO signIn()");
 
-		RowMapper<Integer> rowMapper = (rs, rowNum) -> rs.getInt("user_num");
+		RowMapper<SignVO> rowMapper = (rs, rowNum) -> {
+			SignVO user = new SignVO();
+			user.setUser_num(rs.getInt("user_num"));
+			return user;
+		};
 
 		try {
 			return template.queryForObject(SIGN_IN, rowMapper, vo.getId(), vo.getPwd());
 		} catch (EmptyResultDataAccessException e) {
-			return 0;
+			return null;
 		}
 	}
 
+	// update_pwd
+	public void updatePwd(SignVO vo) {
+		System.out.println("===> SignDAO updatePwd()");
+
+		template.update(UPDATE_PWD, vo.getPwd(), vo.getUser_num());
+	}
 }

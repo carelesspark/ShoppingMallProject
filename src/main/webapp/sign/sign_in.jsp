@@ -17,9 +17,8 @@
 		<div id="mch">로그인</div>
 		<form id="mcf" action="/practice/signIn.do" method="post"
 			onsubmit="validateForm(this, event)">
-			<input type="text" name="id" value="${savedId}"
-				placeholder="아이디를 입력해 주세요." /> <input type="password" name="pwd"
-				placeholder="비밀번호를 입력해 주세요." />
+			<input type="text" name="id" placeholder="아이디를 입력해 주세요." /> <input
+				type="password" name="pwd" placeholder="비밀번호를 입력해 주세요." />
 			<div id="em"></div>
 			<div id="mcf-cb">
 				<input type="checkbox" name="saveId" />
@@ -57,8 +56,34 @@
 
 			return true;
 		}
+
+		function setSavedId() {
+			var savedIdCookie = getCookie('savedId');
+
+			if (savedIdCookie !== null && savedIdCookie !== '') {
+				document.querySelector('#mcf input[name="id"]').value = savedIdCookie;
+			}
+		}
+
+		function getCookie(cookieName) {
+			var name = cookieName + '=';
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var cookieArray = decodedCookie.split(';');
+			for (var i = 0; i < cookieArray.length; i++) {
+				var cookie = cookieArray[i].trim();
+				if (cookie.indexOf(name) === 0) {
+					return cookie.substring(name.length, cookie.length);
+				}
+			}
+			return null;
+		}
+		
+	    // Call setSavedId when the DOM is ready
+	    document.addEventListener('DOMContentLoaded', function() {
+	        setSavedId();
+	    });
 	</script>
-	<c:if test="${!empty failSignIn}">
+	<c:if test="${!empty error}">
 		<script type="text/javascript">
 			// 'block'은 'default'와 같은 의미입니다.
 			document.querySelector('#mcf input[type="password"]').style.marginBottom = '5px';
