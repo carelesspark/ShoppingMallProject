@@ -1,11 +1,9 @@
-package com.dazzle.shop.model.user;
-
-import java.sql.Date;
+package com.dazzle.shop.model.sign.domain;
 
 import lombok.Data;
 
 @Data
-public class UserVO {
+public class SignVO {
 	// users
 	private int user_num;
 	private String user_name;
@@ -20,13 +18,4 @@ public class UserVO {
 	private int kakao_num;
 	private String kakao_email;
 	private String refresh_token;
-	//user_info
-	private int user_info_num;
-	private String user_phone;
-	private String user_rank;
-	private int user_point;
-	private Date user_join_date;
-	private Date user_update_date;
-	private Date user_delete_date;
-	private int is_black_list;
 }

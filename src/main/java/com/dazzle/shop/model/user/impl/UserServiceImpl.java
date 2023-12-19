@@ -12,10 +12,4 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
 
-	// 로그인
-	@Override
-	public int signInUser(UserVO vo) {
-		return userDAO.signInUser(vo);
-	}
-
 }

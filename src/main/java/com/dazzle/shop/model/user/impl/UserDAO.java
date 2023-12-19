@@ -14,22 +14,6 @@ public class UserDAO {
 	@Autowired
 	private JdbcTemplate template;
 
-	private final String USER_SIGN_IN = "SELECT user_num FROM auth_id WHERE id = ? AND pwd = ?";
 
-	// 회원가입
-
-	// 로그인
-	public int signInUser(UserVO vo) {
-		System.out.println("===> UserDAO signInUser()");
-
-		RowMapper<Integer> rowMapper = (rs, rowNum) -> rs.getInt("user_num");
-
-		try {
-			return template.queryForObject(USER_SIGN_IN, rowMapper, vo.getId(), vo.getPwd());
-		} catch (EmptyResultDataAccessException e) {
-			return 0;
-		}
-
-	}
 
 }
