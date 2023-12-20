@@ -98,21 +98,17 @@
           </div>
         </section>
         <main>
-			<div id ="faq">
+			<div id ="faq">			   	   
 			    <div class="section">
-			        <div id="search">
-			        	<div id="search_tab" >
-			        		<input placeholder="질문을 검색하세요" id="input_tab">
-				       		<input type="submit" value=" " class="submit-button">
-				       	</div>
-			        </div>
-			    </div>
-	
-			   	   
-			    <div class="section">
-			        <hr>
+			   
 			        <div id="faq_title">자주 묻는 질문</div>
+			        <div>
 			     		<ul class="nav nav-tabs">
+			     			<li class="nav-item dropdown">
+			     			<div class="nav-link">
+						       <a href="faq.do">전체</a>
+						       </div>
+			     			</li>
 						    <c:forEach var="category" items="${faqCtgr}">
 						        <li class="nav-item dropdown">
 						            <div class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -133,7 +129,7 @@
 						        </li>
 						    </c:forEach>
 						</ul>
-
+					</div>
 			     		   
 			        </div>
 			    </div>
