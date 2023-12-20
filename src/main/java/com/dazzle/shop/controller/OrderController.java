@@ -2,10 +2,13 @@ package com.dazzle.shop.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,14 +45,35 @@ public class OrderController {
 	
 		return "/order/orderInfo.jsp";
 	}
-	
-	@RequestMapping(value="/productOrder.do")
-	public String insertProductOrder(OrderVO vo, Model model) throws Exception {
-		System.out.println("상품 주문 페이지 이동");
-		List<OrderVO> productOrder = orderService.insertProductOrder(vo);
 		
-		return "/order/productList.jsp";
+	// 주문 상세 페이지에서 바로 구매할 때,
+	@RequestMapping(value="/productOrder.do")
+	public String getProductOrder(@RequestParam(name = "user_num") int userNum, @RequestParam(name = "product_code") String productCode, @RequestParam(name = "amount") int count, @RequestParam(name = "amount") int amount, OrderVO vo, Model model) throws Exception {
+		System.out.println("상품 주문 페이지 이동(상품 상세페이지로 부터)");
+		
+		List<OrderVO> productOrder = orderService.getProductOrder(userNum, productCode, amount, vo);
+		
+		model.addAttribute("productOrder", productOrder);
+
+		System.out.println(productOrder);
+
+		return "/order/productOrder.jsp";
 	}
+	
+	// 장바구니 페이지에서 구매할 때,
+	@RequestMapping(value="/productOrderFromCart.do")
+	public String getProductOrderFromCart(OrderVO vo, Model model) throws Exception {
+		System.out.println("상품 주문 페이지 이동(장바구니로 부터)");
+		List<OrderVO> productOrder = orderService.getProductOrderFromCart(vo);
+		
+		model.addAttribute("productOrder", productOrder);
+		
+		System.out.println(productOrder);
+			
+		return "/order/productOrder.jsp";
+	}
+	
+	
 	
 	@RequestMapping(value="/buyOrder.do")
 	public String insertBuyOrder(OrderVO vo, Model model) throws Exception{
