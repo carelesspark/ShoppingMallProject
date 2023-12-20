@@ -29,11 +29,11 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="#">HOME</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">TOP</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">BOTTOM</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">OUTER</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">SHOES</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">ETC</a></li>
+					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=top">TOP</a></li>
+					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=bottom">BOTTOM</a></li>
+					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=outer">OUTER</a></li>
+					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=shoes">SHOES</a></li>
+					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=etc">ETC</a></li>
 				</ul>
 
 				<ul class="navbar-nav gap-2">
