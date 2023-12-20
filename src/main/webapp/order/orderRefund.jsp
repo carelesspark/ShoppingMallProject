@@ -89,74 +89,85 @@
 				</div>
 			</section>
 			<main>
-				<div id="main_refund">
-					<div id="refund_title">
-						<h1>주문 취소/환불 요청</h1>
+				<form action="insertOrderRefund.do" method="post">
+					<div id="main_refund">
+						<div id="refund_title">
+							<h1>주문 취소/환불 요청</h1>
+						</div>
+						<div id="refund_content">
+
+							<input type="hidden" name="amount" value="${orderRefund.amount}" />
+							<input type="hidden" name="order_detail_num" value="${orderRefund.order_detail_num}" />
+							<input type="hidden" name="order_num" value="${orderRefund.order_num}"/>
+							<table id="refund_table">
+								<tr>
+									<td id="refund_table_left">주문 번호</td>
+									<td id="refund_table_right">${orderRefund.order_num }</td>
+								</tr>
+								<tr>
+									<td id="refund_table_left">고객명</td>
+									<td id="refund_table_right">${orderRefund.recipient }</td>
+								</tr>
+								<tr>
+									<td id="refund_table_left">환불액</td>
+									<td id="refund_table_right">${orderRefund.amountMultiPrice }원</td>
+								</tr>
+								<tr>
+									<td id="refund_table_left">은행명</td>
+									<td id="refund_table_right"><input type="text" name="bank"
+										id="input1" /></td>
+								</tr>
+								<tr>
+									<td id="refund_table_left">계좌번호</td>
+									<td id="refund_table_right"><input type="text"
+										name="account_num" id="input2" /></td>
+								</tr>
+								<tr>
+									<td id="refund_table_left">취소/환불 사유</td>
+									<td id="refund_table_right"><select id="select"
+										name="refund_or_change_reason"><option
+												value="damaged">상품 불량</option>
+											<option value="simple_change">단순 변심</option>
+											<option value="late_deliever">배송 지연</option>
+											<option value="different_info">상품정보와 상이</option>
+											<option value="etc">기타</option></select></td>
+								</tr>
+								<tr>
+									<td id="refund_table_left_textarea">사유 설명</td>
+									<td id="refund_table_right2"><textarea id="textarea"
+											name="reason_detail"
+											placeholder="취소/환불 사유를 상세하게 적어주세요.&#13;&#10;단순 변심의 경우 7일 이내에 취소/환불 신청 시 청약철회가 가능합니다.&#13;&#10;(최대 1000자 작성 가능)"></textarea></td>
+								</tr>
+							</table>
+
+						</div>
+						<div id="refund_agreement">
+							<div>
+								<label><input type="checkbox" /><span>청약 후 또는
+										상품을 공급 받은 날로부터 7일 이내에는 소비자의 귀책사유로 인한 상품의 멸실 또는 훼손된 경우 등을 제외하고는<br />
+										단순변심으로 인한 청약철회가 가능합니다.
+								</span></label>
+							</div>
+							<div>
+								<label><input type="checkbox" /><span>고의적인 파손,
+										사용 흔적이 발견될 경우 환불 진행이 불가합니다.</span></label>
+							</div>
+							<div>
+								<label><input type="checkbox" /><span>취소/환불 진행에
+										동의합니다.</span></label>
+							</div>
+						</div>
+						<div id="buttons">
+							<div id="button1">
+								<button type="button" class="btn btn-outline-secondary">돌아가기</button>
+							</div>
+							<div id="button2">
+								<button type="submit" class="btn btn-outline-secondary">취소/환불
+									등록</button>
+							</div>
+						</div>
 					</div>
-					<div id="refund_content">
-						<table id="refund_table">
-							<tr>
-								<td id="refund_table_left">주문 번호</td>
-								<td id="refund_table_right">${orderRefund.order_num }</td>
-							</tr>
-							<tr>
-								<td id="refund_table_left">고객명</td>
-								<td id="refund_table_right">${orderRefund.recipient }</td>
-							</tr>
-							<tr>
-								<td id="refund_table_left">환불액</td>
-								<td id="refund_table_right">${orderRefund.amountMultiPrice }원</td>
-							</tr>
-							<tr>
-								<td id="refund_table_left">은행명</td>
-								<td id="refund_table_right"><input type="text" name="bank" id="input1"/></td>
-							</tr>
-							<tr>
-								<td id="refund_table_left">계좌번호</td>
-								<td id="refund_table_right"><input type="text" name="bank" id="input1"/></td>
-							</tr>
-							<tr>
-								<td id="refund_table_left">취소/환불 사유</td>
-								<td id="refund_table_right"><select id="select"><option
-											value="damaged">상품 불량</option>
-										<option value="simple_change">단순 변심</option>
-										<option value="late_deliever">배송 지연</option>
-										<option value="different_info">상품정보와 상이</option>
-										<option value="etc">기타</option></select></td>
-							</tr>
-							<tr>
-								<td id="refund_table_left_textarea">사유 설명</td>
-								<td id="refund_table_right2"><textarea id="textarea"
-										placeholder="취소/환불 사유를 상세하게 적어주세요.&#13;&#10;단순 변심의 경우 7일 이내에 취소/환불 신청 시 청약철회가 가능합니다.&#13;&#10;(최대 1000자 작성 가능)"></textarea></td>
-							</tr>
-						</table>
-					</div>
-					<div id="refund_agreement">
-						<div>
-							<label><input type="checkbox" /><span>청약 후 또는 상품을
-									공급 받은 날로부터 7일 이내에는 소비자의 귀책사유로 인한 상품의 멸실 또는 훼손된 경우 등을 제외하고는<br />
-									단순변심으로 인한 청약철회가 가능합니다.
-							</span></label>
-						</div>
-						<div>
-							<label><input type="checkbox" /><span>고의적인 파손, 사용
-									흔적이 발견될 경우 환불 진행이 불가합니다.</span></label>
-						</div>
-						<div>
-							<label><input type="checkbox" /><span>취소/환불 진행에
-									동의합니다.</span></label>
-						</div>
-					</div>
-					<div id="buttons">
-						<div id="button1">
-							<button type="button" class="btn btn-outline-secondary">돌아가기</button>
-						</div>
-						<div id="button2">
-							<button type="button" class="btn btn-outline-secondary">취소/환불
-								등록</button>
-						</div>
-					</div>
-				</div>
+				</form>
 			</main>
 		</div>
 	</div>

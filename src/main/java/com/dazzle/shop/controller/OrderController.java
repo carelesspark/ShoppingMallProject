@@ -100,4 +100,15 @@ public class OrderController {
 		return "/order/orderRefund.jsp";
 	}
 	
+	@RequestMapping(value="/insertOrderRefund.do")
+	public String insertOrderRefund(OrderVO vo, Model model) throws Exception {
+		System.out.println("주문 취소/환불 요청");
+		
+		orderService.insertOrderRefund(vo);
+		orderService.updateProduct_state(vo);
+		model.addAttribute("order_num", vo.getOrder_num());
+		
+		return "redirect:orderInfo.do";
+	}
+	
 }

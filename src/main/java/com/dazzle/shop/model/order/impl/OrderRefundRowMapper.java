@@ -18,6 +18,7 @@ public class OrderRefundRowMapper implements RowMapper<OrderVO>{
 		orderRefund.setAmount(rs.getInt("amount"));
 		orderRefund.setAmountMultiPrice(rs.getInt("total_price"));
 		orderRefund.setRecipient(rs.getString("recipient"));
+		orderRefund.setOrder_detail_num(rs.getInt("order_detail_num"));
 		
 		
 		

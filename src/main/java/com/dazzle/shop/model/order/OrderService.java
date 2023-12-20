@@ -11,6 +11,10 @@ public interface OrderService {
 	void insertBuyOrder(OrderVO vo);
 	
 	void insertBuyOrderDetail(OrderVO vo);
+	
+	void insertOrderRefund(OrderVO vo);
+	
+	void updateProduct_state(OrderVO vo);
 
 	List<OrderVO> getOrderList(OrderVO vo);
 	
@@ -21,5 +25,5 @@ public interface OrderService {
 	List<OrderVO> getProductOrderWhenSuccess(OrderVO vo);
 	
 	
-
+	
 }

@@ -32,4 +32,9 @@ public class OrderVO {
 	private int user_point;
 	private String main_img;
 	private int amountMultiPrice;
+	private int order_detail_num;
+	private String refund_or_change_reason;
+	private String reason_detail;
+	private String bank;
+	private String account_num;
 }
