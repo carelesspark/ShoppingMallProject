@@ -97,23 +97,23 @@
 						<table id="refund_table">
 							<tr>
 								<td id="refund_table_left">주문 번호</td>
-								<td id="refund_table_right">123213231</td>
+								<td id="refund_table_right">${orderRefund.order_num }</td>
 							</tr>
 							<tr>
 								<td id="refund_table_left">고객명</td>
-								<td id="refund_table_right">박종혁</td>
+								<td id="refund_table_right">${orderRefund.recipient }</td>
 							</tr>
 							<tr>
 								<td id="refund_table_left">환불액</td>
-								<td id="refund_table_right">49,000원</td>
+								<td id="refund_table_right">${orderRefund.amountMultiPrice }원</td>
 							</tr>
 							<tr>
 								<td id="refund_table_left">은행명</td>
-								<td id="refund_table_right">국민은행</td>
+								<td id="refund_table_right"><input type="text" name="bank" id="input1"/></td>
 							</tr>
 							<tr>
 								<td id="refund_table_left">계좌번호</td>
-								<td id="refund_table_right">000000-00-000000</td>
+								<td id="refund_table_right"><input type="text" name="bank" id="input1"/></td>
 							</tr>
 							<tr>
 								<td id="refund_table_left">취소/환불 사유</td>

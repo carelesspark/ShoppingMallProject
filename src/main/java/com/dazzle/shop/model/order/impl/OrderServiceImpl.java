@@ -65,6 +65,18 @@ public class OrderServiceImpl implements OrderService {
 
 
 	@Override
+	public OrderVO getOrderRefund(OrderVO vo) {
+		
+		return orderDAO.getOrderRefund(vo);
+	}
+
+
+
+
+
+
+
+	@Override
 	public OrderVO getOrderInfo(OrderVO vo) {
 		
 		return orderDAO.getOrderInfo(vo);
