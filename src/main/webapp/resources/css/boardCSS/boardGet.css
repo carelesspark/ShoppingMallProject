@@ -27,18 +27,19 @@
 	margin: 0;
 }
 
-.title_content .id {
-	display: inline;
+.title_btn {
+	display: flex;
 }
 
-.title_content a {
+.title_btn a {
 	float: right;
+	margin-right: 10px;
 }
 
-.title_content button {
+.title_btn button {
 	background-color: white;
 	width: 50px;
-	border: 0;
+	border: 1px solid black;
 }
 
 .content {

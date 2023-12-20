@@ -34,4 +34,10 @@ public interface BoardService {
 	void deleteNotice(BoardVO vo);
 	
 	void deleteQuest(BoardVO vo);
+	
+	void editBoard(BoardVO vo);
+	
+	void editNotice(BoardVO vo);
+	
+	void editQuest(BoardVO vo);
 }
