@@ -45,6 +45,14 @@ public class OrderController {
 	
 		return "/order/orderInfo.jsp";
 	}
+	
+	@RequestMapping(value="/returnOrderList.do")
+	public String returnOrderList(OrderVO vo, Model model) throws Exception {
+		
+		model.addAttribute("user_num", vo.getUser_num());
+	
+		return "redirect:orderList.do";
+	}
 		
 	// 주문 상세 페이지에서 바로 구매할 때,
 	@RequestMapping(value="/productOrder.do")
@@ -79,13 +87,16 @@ public class OrderController {
 	public String insertBuyOrder(OrderVO vo, Model model) throws Exception{
 		System.out.println("주문 목록 입력 처리");
 		
-		orderService.insertBuyOrder(vo);
-		orderService.insertBuyOrderDetail(vo);
+		/*
+		 * orderService.insertBuyOrder(vo); orderService.insertBuyOrderDetail(vo);
+		 */
 		
-		List<OrderVO> orderSuccess = orderService.getProductOrderWhenSuccess(vo);
-		model.addAttribute("orderSuccess", orderSuccess);
+		/*
+		 * List<OrderVO> orderSuccess = orderService.getProductOrderWhenSuccess(vo);
+		 * model.addAttribute("orderSuccess", orderSuccess);
+		 */
 		
-		return "/product/productOrderSucc.jsp";
+		return "/order/productOrderSucc.jsp";
 	}
 	
 	@RequestMapping(value="/orderRefund.do")
@@ -109,6 +120,18 @@ public class OrderController {
 		model.addAttribute("order_num", vo.getOrder_num());
 		
 		return "redirect:orderInfo.do";
+	}
+	
+	@RequestMapping(value="/productChange.do")
+	public String getOrderChange(OrderVO vo, Model model) throws Exception {
+		System.out.println("주문 취소/환불 요청 페이지 이동");
+		
+		OrderVO orderRefund = orderService.getOrderRefund(vo);
+		model.addAttribute("orderRefund", orderRefund);
+		
+		System.out.println(orderRefund);
+		
+		return "/order/productChange.jsp";
 	}
 	
 }

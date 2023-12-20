@@ -1,5 +1,8 @@
 package com.dazzle.shop.model.cart;
 
-public class CartService {
+import java.util.List;
 
+public interface CartService {
+	
+	List<CartVO> getCart(CartVO vo);
 }

@@ -13,7 +13,7 @@
 <body>
 	<header>임시 헤더</header>
 	<main>
-		<form action="buyOrder.do" method="post">
+		<form action="/orderSuccess.do" method="post">
 			<div id="main_container">
 				<div id="order_list">
 					<div id="order_list_title">
@@ -23,178 +23,177 @@
 						<h3>주문 내역</h3>
 					</div>
 					<c:forEach items="${productOrder}" var="order">
-					<div id="order_list_box">
-						<div id="order_list_grid">
-							<div id="order_list_pic">
-								<a href="${order.main_img }"><img src="${order.main_img }"
-									id="order_list_pic1" /></a>
-							</div>
-							<div id="order_list_price">
-								<p>${order.amountMultiPrice}</p>
-							</div>
-							<div id="order_list_amount">
-								<p>수량/${order.amount }개</p>
-							</div>
-							<div id="order_list_name">
-								<p>${order.product_name}(색상 : ${order.color_name}, 사이즈 : ${order.size_name})</p>
+						<div id="order_list_box">
+							<div id="order_list_grid">
+								<div id="order_list_pic">
+									<a href="${order.main_img }"><img src="${order.main_img }"
+										id="order_list_pic1" /></a>
+								</div>
+								<div id="order_list_price">
+									<p>${order.amountMultiPrice}</p>
+								</div>
+								<div id="order_list_amount">
+									<p>수량/${order.amount }개</p>
+								</div>
+								<div id="order_list_name">
+									<p>${order.product_name}(색상:${order.color_name}, 사이즈 :
+										${order.size_name})</p>
+								</div>
 							</div>
 						</div>
-					</div>
 					</c:forEach>
 					<div id="order_list_total_price">
 						<p>전체 가격 : 19,000원</p>
 					</div>
 				</div>
-				<form>
-					<div id="order_address">
-						<div id="order_address_title">
-							<div>
-								<h3>배송지 정보</h3>
-							</div>
-							<div>
-								<button type="button" class="btn btn-dark"
-									id="order_address_button">배송지 주소 변경</button>
-							</div>
+
+				<div id="order_address">
+					<div id="order_address_title">
+						<div>
+							<h3>배송지 정보</h3>
 						</div>
-						<div id="order_address_box">
-							<div id="order_address_grid">
-								<div id="order_address_grid_rows_1">
-									<div id="order_address_name">
-										<p>이름</p>
-									</div>
-									<div id="order_address_address">
-										<p>주소</p>
-									</div>
-									<div id="order_address_phone">
-										<p>전화번호</p>
-									</div>
-									<div id="order_address_request">
-										<p>요청사항</p>
-									</div>
-								</div>
-								<div id="order_address_grid_rows_2">
-									<div id="order_address_name_value">
-										<p>${address.recipient}</p>
-									</div>
-									<div id="order_address_address_value">
-										<p>${address.address}${address.detail_address}</p>
-									</div>
-									<div id="order_address_phone_value">
-										<p>${address.phone_num}</p>
-									</div>
-									<div id="order_address_request_value">
-										<select>
-											<option value="default">---요청사항을 선택해주세요. ---</option>
-											<option value="direct">--- 직접 받겠습니다. ---</option>
-											<option value="security">--- 경비실에 보관해주세요. ---</option>
-											<option value="box">--- 택배함에 보관해주세요. ---</option>
-											<option value="door">--- 문 앞으로 배송해주세요. ---</option>
-											<option value="user">--- ${address.request} ---</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="order_payment">
-						<div id="order_payment_title">
-							<div>
-								<h3>결제</h3>
-							</div>
-						</div>
-						<div id="order_payment_box">
-							<div id="order_payment_grid">
-								<div id="order_payment_grid_rows_1">
-									<div id="order_payment_price">
-										<p>전체 상품가격</p>
-									</div>
-									<div id="order_payment_coupon">
-										<p>쿠폰</p>
-									</div>
-									<div id="order_payment_point">
-										<p>포인트</p>
-									</div>
-									<div id="order_payment_delivery">
-										<p>배송비</p>
-									</div>
-									<div id="order_payment_actual_price">
-										<p>전체 결제 금액</p>
-									</div>
-									<div id="order_payment_method">
-										<p>결제 방식</p>
-									</div>
-								</div>
-								<div id="order_payment_grid_rows_2">
-									<div id="order_payment_price_value">
-										<p>19,000원</p>
-									</div>
-									<div id="order_payment_coupon_value">
-										<select>
-											<option value="default">--- 적용할 수 있는 쿠폰이 없습니다. ---</option>
-											<option value="coupon1">--- 쿠폰1 ---</option>
-											<option value="coupon2">--- 쿠폰2 ---</option>
-											<option value="coupon3">--- 쿠폰3 ---</option>
-											<option value="coupon4">--- 쿠폰4 ---</option>
-										</select>
-									</div>
-									<div id="order_payment_point_value">
-										<div id="order_payment_div_css">
-											<input type="number" name="point"
-												id="order_payment_point_box" readonly />
-										</div>
-										<div id="order_payment_label_css">
-											<label>포인트</label>
-										</div>
-										<div id="order_payment_label_css">
-											<label>보유 : </label>
-										</div>					
-										<div id="order_payment_label_css">
-											<label><c:out value="${productOrder[0].user_point}"/>포인트</label>
-										</div>
-										<div id="order_payment_div_css">
-											<button type="button" class="btn btn-dark"
-												id="order_payment_point_button">포인트 사용하기</button>
-										</div>
-									</div>
-									<div id="order_payment_delivery_value">
-										<p>0원</p>
-									</div>
-									<div id="order_payment_actual_price_value">
-										<p>19,000원</p>
-									</div>
-									<div id="order_payment_method_value">
-										<div>
-											<input type="radio" id="credit_card" name="payment"
-												value="credit_card"><label>신용카드/체크카드</label>
-										</div>
-										<div>
-											<input type="radio" id="deposit_without_passbook"
-												name="payment" value="deposit_without_passbook"><label>무통장입금</label>
-										</div>
-										<div>
-											<input type="radio" id="transfer" name="payment"
-												value="transfer"><label>계좌이체</label>
-										</div>
-										<div>
-											<input type="radio" id="kakaopay" name="payment"
-												value="kakaopay"><label>카카오페이</label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="order_buttons">
-						<div id="order_buttons_div1">
+						<div>
 							<button type="button" class="btn btn-dark"
-								id="return_home_button"
-								onclick="location.href='orderListAdmin.jsp';">홈으로 돌아가기</button>
-						</div>
-						<div id="order_buttons_div2">
-							<button type="submit" class="btn btn-dark" id="order_buy_button">구매하기</button>
+								id="order_address_button">배송지 주소 변경</button>
 						</div>
 					</div>
-				</form>
+					<div id="order_address_box">
+						<div id="order_address_grid">
+							<div id="order_address_grid_rows_1">
+								<div id="order_address_name">
+									<p>이름</p>
+								</div>
+								<div id="order_address_address">
+									<p>주소</p>
+								</div>
+								<div id="order_address_phone">
+									<p>전화번호</p>
+								</div>
+								<div id="order_address_request">
+									<p>요청사항</p>
+								</div>
+							</div>
+							<div id="order_address_grid_rows_2">
+								<div id="order_address_name_value">
+									<p>${address.recipient}</p>
+								</div>
+								<div id="order_address_address_value">
+									<p>${address.address}${address.detail_address}</p>
+								</div>
+								<div id="order_address_phone_value">
+									<p>${address.phone_num}</p>
+								</div>
+								<div id="order_address_request_value">
+									<select>
+										<option value="default">---요청사항을 선택해주세요. ---</option>
+										<option value="direct">--- 직접 받겠습니다. ---</option>
+										<option value="security">--- 경비실에 보관해주세요. ---</option>
+										<option value="box">--- 택배함에 보관해주세요. ---</option>
+										<option value="door">--- 문 앞으로 배송해주세요. ---</option>
+										<option value="user">--- ${address.request} ---</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="order_payment">
+					<div id="order_payment_title">
+						<div>
+							<h3>결제</h3>
+						</div>
+					</div>
+					<div id="order_payment_box">
+						<div id="order_payment_grid">
+							<div id="order_payment_grid_rows_1">
+								<div id="order_payment_price">
+									<p>전체 상품가격</p>
+								</div>
+								<div id="order_payment_coupon">
+									<p>쿠폰</p>
+								</div>
+								<div id="order_payment_point">
+									<p>포인트</p>
+								</div>
+								<div id="order_payment_delivery">
+									<p>배송비</p>
+								</div>
+								<div id="order_payment_actual_price">
+									<p>전체 결제 금액</p>
+								</div>
+								<div id="order_payment_method">
+									<p>결제 방식</p>
+								</div>
+							</div>
+							<div id="order_payment_grid_rows_2">
+								<div id="order_payment_price_value">
+									<p>19,000원</p>
+								</div>
+								<div id="order_payment_coupon_value">
+									<select>
+										<option value="default">--- 적용할 수 있는 쿠폰이 없습니다. ---</option>
+										<option value="coupon1">--- 쿠폰1 ---</option>
+										<option value="coupon2">--- 쿠폰2 ---</option>
+										<option value="coupon3">--- 쿠폰3 ---</option>
+										<option value="coupon4">--- 쿠폰4 ---</option>
+									</select>
+								</div>
+								<div id="order_payment_point_value">
+									<div id="order_payment_div_css">
+										<input type="number" name="point" id="order_payment_point_box"
+											readonly />
+									</div>
+									<div id="order_payment_label_css">
+										<label>포인트</label>
+									</div>
+									<div id="order_payment_label_css">
+										<label>보유 : </label>
+									</div>
+									<div id="order_payment_label_css">
+										<label><c:out value="${productOrder[0].user_point}" />포인트</label>
+									</div>
+									<div id="order_payment_div_css">
+										<button type="button" class="btn btn-dark"
+											id="order_payment_point_button">포인트 사용하기</button>
+									</div>
+								</div>
+								<div id="order_payment_delivery_value">
+									<p>0원</p>
+								</div>
+								<div id="order_payment_actual_price_value">
+									<p>19,000원</p>
+								</div>
+								<div id="order_payment_method_value">
+									<div>
+										<input type="radio" id="credit_card" name="payment"
+											value="credit_card"><label>신용카드/체크카드</label>
+									</div>
+									<div>
+										<input type="radio" id="deposit_without_passbook"
+											name="payment" value="deposit_without_passbook"><label>무통장입금</label>
+									</div>
+									<div>
+										<input type="radio" id="transfer" name="payment"
+											value="transfer"><label>계좌이체</label>
+									</div>
+									<div>
+										<input type="radio" id="kakaopay" name="payment"
+											value="kakaopay"><label>카카오페이</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="order_buttons">
+					<div id="order_buttons_div1">
+						<button type="button" class="btn btn-dark" id="return_home_button"
+							onclick="location.href='/main.do'">홈으로 돌아가기</button>
+					</div>
+					<div id="order_buttons_div2">
+						<button type="submit" class="btn btn-dark" id="order_buy_button">구매하기</button>
+					</div>
+				</div>
 			</div>
 		</form>
 	</main>

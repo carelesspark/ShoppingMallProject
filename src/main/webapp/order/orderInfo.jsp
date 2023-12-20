@@ -241,7 +241,7 @@
 					</div>
 					<div id="buttons">
 						<div>
-							<button type="button" class="btn btn-dark" id="button_1" onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
+							<button type="button" class="btn btn-dark" id="button_1" onclick="location.href='/productChange.do'">교환
 								요청</button>
 						</div>
 						<div>
@@ -249,7 +249,7 @@
 								취소/환불 요청</button>
 						</div>
 						<div>
-							<button type="button" class="btn btn-dark" id="button_3" onclick="location.href='/orderList.do'">목록으로
+							<button type="button" class="btn btn-dark" id="button_3" onclick="location.href='/returnOrderList.do?user_num=${orderInfo.user_num}'">목록으로
 								돌아가기</button>
 						</div>
 					</div>

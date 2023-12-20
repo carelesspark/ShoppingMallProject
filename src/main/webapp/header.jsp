@@ -37,10 +37,10 @@
 				</ul>
 
 				<ul class="navbar-nav gap-2">
-					<li class="nav-item"><a class="nav-link" href="#">CART</a></li>
+					<li class="nav-item"><a class="nav-link" href="/cart.do">CART</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">MY PAGE</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">JOIN</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">LOGIN</a></li>
+					<li class="nav-item"><a class="nav-link" href="">LOGIN</a></li>
 				</ul>
 
 				<form class="d-flex mt-3">
