@@ -17,7 +17,7 @@
 	product1.setColor_name("Black");
 	product1.setSize_name("L");
 	product1.setTotal_price(50000);
-	product1.setCount(3);	
+	product1.setAmount(3);	
 	product1.setMain_img("image1.jpg");
 	productList.add(product1);
 	
@@ -28,7 +28,7 @@
 		additionalproduct.setColor_name("Black");
 		additionalproduct.setSize_name("L");
 		additionalproduct.setTotal_price(10000*i);
-		additionalproduct.setCount(i);	
+		additionalproduct.setAmount(i);	
 		additionalproduct.setMain_img("image1.jpg");
 		productList.add(additionalproduct);
     }
@@ -36,7 +36,7 @@
 	
 	int totalOrderAmount = 0;
     for (OrderedProductVO product : productList) {
-        totalOrderAmount += product.getTotal_price() * product.getCount();
+        totalOrderAmount += product.getTotal_price() * product.getAmount();
     }
     
     OrderVO order = new OrderVO();
@@ -66,12 +66,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="../resources/css/product/productOrderSucc.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/resources/css/order/productOrderSucc.css" rel="stylesheet" />
     <title>Document</title>
 
   </head>
   <body>
-    <header>임시 헤더</header>
+    <%@ include file="../header.jsp"%>
         <main>
           <div id="order-info">
         <div id="order-success">
@@ -127,11 +127,11 @@
 		                </div>
                         <div class="sales-volume">
                             <div class="column">구매수량</div>
-                            <div><%= product.getCount() %> 개</div>
+                            <div><%= product.getAmount() %> 개</div>
                         </div>
                         <div class="sum">
                             <div class="column">합계</div>
-                            <div><%= numberFormat.format(product.getTotal_price() * product.getCount()) %> 원</div>
+                            <div><%= numberFormat.format(product.getTotal_price() * product.getAmount()) %> 원</div>
                         </div>
                     </div>
                 </div>
@@ -199,7 +199,7 @@
         
     </div>
         </main>
-    <footer>임시 푸터</footer>
+    <%@ include file="../footer.jsp"%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="user_menu.js"></script>
   </body>

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dazzle.shop.model.order.OrderVO;
+import com.dazzle.shop.model.address.AddressService;
+import com.dazzle.shop.model.address.AddressVO;
 import com.dazzle.shop.model.order.OrderService;
 import com.dazzle.shop.model.order.impl.OrderDAO;
 
@@ -23,6 +25,8 @@ public class OrderController {
 	
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private AddressService addressService;
 
 
 	@RequestMapping(value = "/orderList.do")
@@ -60,9 +64,9 @@ public class OrderController {
 		System.out.println("상품 주문 페이지 이동(상품 상세페이지로 부터)");
 		
 		List<OrderVO> productOrder = orderService.getProductOrder(userNum, productCode, amount, vo);
-		
+		AddressVO address = addressService.getBaseAddress(userNum);
 		model.addAttribute("productOrder", productOrder);
-
+		model.addAttribute("address", address);
 		System.out.println(productOrder);
 
 		return "/order/productOrder.jsp";

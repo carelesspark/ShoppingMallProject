@@ -18,6 +18,7 @@ public class AddressDAO {
 
 	private final String ADDRESS_GET_LIST = "select * from address where user_num = ?";
 	private final String ADDRESS_GET = "select * from address where addr_num = ?";
+	private final String BASE_ADDRESS_GET = "SELECT * FROM address WHERE user_num = ? ORDER BY base DESC LIMIT 1";
 	private final String ADDRESS_UPDATE = "update address set address = ?, detail_address = ?, "
 			+ "postal_num = ?, request = ?, base = ?, recipient = ?, phone_num = ? where addr_num = ?";
 	private final String BASE_UPDATE = "update address set base = 0 where base = 1 and user_num = ?";
@@ -33,11 +34,17 @@ public class AddressDAO {
 	}
 	
 	//주소 조회
-		public AddressVO getAddress(AddressVO vo){
-			System.out.println("===> getAddress() 기능 처리");
-			Object[] args = {vo.getAddr_num()};
-			return jdbcTemplate.queryForObject(ADDRESS_GET,args, new AddressRowMapper());
-		}
+	public AddressVO getAddress(AddressVO vo){
+		System.out.println("===> getAddress() 기능 처리");
+		Object[] args = {vo.getAddr_num()};
+		return jdbcTemplate.queryForObject(ADDRESS_GET,args, new AddressRowMapper());
+	}
+	
+		
+	public AddressVO getBaseAddress(int user_num) {
+		Object[] args = {user_num};
+		return jdbcTemplate.queryForObject(BASE_ADDRESS_GET, args, new AddressRowMapper());
+	}
 	
 	//주소 수정
 	public void updateAddress(AddressVO vo) {

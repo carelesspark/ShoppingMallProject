@@ -29,18 +29,33 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="#">HOME</a></li>
-					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=top">TOP</a></li>
-					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=bottom">BOTTOM</a></li>
-					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=outer">OUTER</a></li>
-					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=shoes">SHOES</a></li>
-					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=etc">ETC</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/getProductList.do?category=top">TOP</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/getProductList.do?category=bottom">BOTTOM</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/getProductList.do?category=outer">OUTER</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/getProductList.do?category=shoes">SHOES</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/getProductList.do?category=etc">ETC</a></li>
 				</ul>
 
 				<ul class="navbar-nav gap-2">
+<<<<<<< HEAD
 					<li class="nav-item"><a class="nav-link" href="/cart.do">CART</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">MY PAGE</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">JOIN</a></li>
 					<li class="nav-item"><a class="nav-link" href="">LOGIN</a></li>
+=======
+					<li class="nav-item"><a class="nav-link" href="#">CART</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/practice/user/user_order_tracking.jsp">MY PAGE</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/practice/sign/sign_up.jsp">JOIN</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/practice/sign/sign_in.jsp">LOGIN</a></li>
+>>>>>>> 680bba8f03ec9b9617ce8b1cecef116bc772952f
 				</ul>
 
 				<form class="d-flex mt-3">

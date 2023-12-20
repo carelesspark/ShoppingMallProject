@@ -400,3 +400,8 @@ footer {
 #order_buttons_div2 {
 	padding-right: 230px;
 }
+
+.readonly {
+    border: none;
+    outline: none;
+  }
