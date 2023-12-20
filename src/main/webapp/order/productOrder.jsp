@@ -6,9 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>주문/결제 페이지</title>
-<link href="../resources/css/order/productOrder.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/resources/css/order/productOrder.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script>
+	function openAddressPopup() {
+	    window.open('address.do?user_num=${address.user_num}', '주소 변경', 'width=650, height=1000');
+    }
+</script>
+
 </head>
 <body>
 	<header>임시 헤더</header>
@@ -53,7 +59,8 @@
 							</div>
 							<div>
 								<button type="button" class="btn btn-dark"
-									id="order_address_button">배송지 주소 변경</button>
+									id="order_address_button"
+									onclick="openAddressPopup()">배송지 주소 변경</button>
 							</div>
 						</div>
 						<div id="order_address_box">
@@ -74,22 +81,30 @@
 								</div>
 								<div id="order_address_grid_rows_2">
 									<div id="order_address_name_value">
-										<p>${address.recipient}</p>
+										<input class="readonly" readonly="readonly" name="recipient" value="${address.recipient}"/>
 									</div>
 									<div id="order_address_address_value">
-										<p>${address.address}${address.detail_address}</p>
+										<input class="readonly" readonly="readonly" name="postal_num" value="${address.postal_num}"/>
+										<input class="readonly" readonly="readonly" name="address" value="${address.address}"/>
+										<input class="readonly" readonly="readonly" name="detail_address" value="${address.detail_address}"/>
 									</div>
 									<div id="order_address_phone_value">
-										<p>${address.phone_num}</p>
+										<input class="readonly" readonly="readonly" name="phone_num" value="${address.phone_num}"/>
 									</div>
 									<div id="order_address_request_value">
-										<select>
-											<option value="default">---요청사항을 선택해주세요. ---</option>
-											<option value="direct">--- 직접 받겠습니다. ---</option>
-											<option value="security">--- 경비실에 보관해주세요. ---</option>
-											<option value="box">--- 택배함에 보관해주세요. ---</option>
-											<option value="door">--- 문 앞으로 배송해주세요. ---</option>
-											<option value="user">--- ${address.request} ---</option>
+										<select name="request">
+											<c:choose>
+												<c:when test="${address.request == null}">
+											    	<option id="default" value="요청사항 없음">---요청사항을 선택해주세요.---</option>
+											    </c:when>
+											    <c:otherwise>
+											        <option id="default" value="${address.request}">${address.request}</option>
+											    </c:otherwise>
+										    </c:choose>
+											<option value="직접 받겠습니다.">직접 받겠습니다.</option>
+											<option value="경비실에 보관해주세요.">경비실에 보관해주세요.</option>
+											<option value="택배함에 보관해주세요.">택배함에 보관해주세요.</option>
+											<option value="문 앞으로 배송해주세요.">문 앞으로 배송해주세요.</option>
 										</select>
 									</div>
 								</div>

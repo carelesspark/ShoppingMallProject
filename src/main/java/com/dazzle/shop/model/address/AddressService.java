@@ -12,6 +12,8 @@ public interface AddressService {
 	//주소 조회
 	public AddressVO getAddress(AddressVO vo);
 	
+	public AddressVO getBaseAddress(int user_num);
+	
 	//주소 수정
 	void updateAddress(AddressVO vo);
 	
