@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,20 +12,21 @@
 	<div class="wrapper">
 		<div class="title">
 			<h1>공지사항</h1>
+			<a href="deleteNotice.do?pno=${notice.pno }"><button>삭제</button></a>
 		</div>
 		
 		<hr style="height: 3px; background-color: black;">
 		
 		<div class="content">
-			<p class="date">작성 날짜 들어갈 자리</p>
-			<p>제목 들어갈 자리</p>
+			<p class="date">${notice.posttime }</p>
+			<p>${notice.title }</p>
 			
 			<div class="main">
-				<p>공지 내용 들어갈 자리</p>
+				<p>${notice.content }</p>
 			</div>
 			
 			<div class="button">
-				<input type="button" value="목록보기" onclick="location.href='./notice.jsp'">
+				<input type="button" value="목록보기" onclick="location.href='noticeMain.do'">
 			</div>
 		</div>
 	</div>

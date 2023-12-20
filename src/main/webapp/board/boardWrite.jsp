@@ -12,10 +12,10 @@
 		<h1>게시물 작성</h1>
 		<hr style="height: 3px; background-color: black;">
 		
-		<form action="/board/boardWrite.jsp" method="post">
+		<form action="boardWrite.do" method="post">
 			<div class="title">
 				<label>제목</label>
-				<input type="text" name="writer">
+				<input type="text" name="title">
 			</div>
 			
 			<div class="uploadImg">
@@ -49,14 +49,14 @@
 			
 			<div class="category">
 				<select name="cate">
-					<option>카테고리를 골라주세요</option>
-					<option>없음</option>
-					<option>오오티디</option>
-					<option>트렌드</option>
-					<option>스트릿</option>
-					<option>캐주얼</option>
-					<option>클래식</option>
-					<option>빈티지</option>
+					<option value="">카테고리를 골라주세요</option>
+					<option value="">없음</option>
+					<option value="ootd">오오티디</option>
+					<option value="trend">트렌드</option>
+					<option value="street">스트릿</option>
+					<option value="casual">캐주얼</option>
+					<option value="classic">클래식</option>
+					<option value="vintage">빈티지</option>
 				</select>
 			</div>
 			
@@ -83,7 +83,7 @@
 			
 			<div class="buttonBox">
 				<input type="button" value="미리보기">
-				<input type="button" value="취소">
+				<input type="button" value="취소" onclick="location.href='/boardMain.do'">
 				<input type="submit" value="등록">
 			</div>
 		</form>
