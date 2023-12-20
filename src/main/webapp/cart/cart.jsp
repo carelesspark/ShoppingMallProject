@@ -11,7 +11,7 @@
 <script src="../resources/js/cart/cart.js"></script>
 </head>
 <body>
-	<header>임시 헤더</header>
+	<%@ include file="../header.jsp"%>
 	<main>
 		<div id="main_container">
 			<div id="cart">
@@ -123,13 +123,13 @@
 								id="return_home_button" onclick="location.href='../main/main.jsp'">홈으로 돌아가기</button>
 						</div>
 						<div id="cart_buttons_div2">
-							<button type="submit" class="btn btn-dark" id="cart_buy_button" onclick="location.href='/productOrderFromCart.do'">구매하기</button>
+							<button type="submit" class="btn btn-dark" id="cart_buy_button" onclick="location.href='/productOrderFromCart.do?user_num=1'">구매하기</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</main>
-	<footer>임시 푸터</footer>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>

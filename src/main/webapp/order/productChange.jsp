@@ -10,7 +10,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<header>임시 헤더</header>
+	<%@ include file="../header.jsp"%>
 	<div id="main-container">
 		<div id="user-explanation">
 			<div id="user-explanation-grid">
@@ -159,6 +159,6 @@
 			</main>
 		</div>
 	</div>
-	<footer>임시 푸터</footer>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>

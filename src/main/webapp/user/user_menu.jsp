@@ -7,12 +7,9 @@
 <div id="ms">
 	<div>
 		<p>나의 쇼핑</p>
-<<<<<<< HEAD
-		<a href="/orderList.do?user_num=${1}">주문/배송조회</a>
-=======
-		<a href="user/user_order_tracking.jsp">주문/배송조회</a> <a
+
+		<a href="/orderList.do?user_num=${1}">주문/배송조회</a> <a
 			href="user/user_order_tracking.jsp">장바구니</a>
->>>>>>> 680bba8f03ec9b9617ce8b1cecef116bc772952f
 	</div>
 	<div>
 		<p>나의 혜택</p>

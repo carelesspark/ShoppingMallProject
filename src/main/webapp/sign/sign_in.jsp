@@ -27,9 +27,9 @@
 			<input type="submit" value="로그인" />
 		</form>
 		<div id="mcl">
-			<a href="/practice/sign/find_id.jsp">아이디 찾기</a> <a
-				href="/practice/sign/find_pwd.jsp">비밀번호 찾기</a> <a
-				href="/practice/sign/sign_up.jsp">회원가입</a>
+			<a href="/sign/find_id.jsp">아이디 찾기</a> <a
+				href="/sign/find_pwd.jsp">비밀번호 찾기</a> <a
+				href="/sign/sign_up.jsp">회원가입</a>
 		</div>
 	</div>
 
