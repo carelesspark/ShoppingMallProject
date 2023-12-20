@@ -46,6 +46,13 @@ body {
 	margin-bottom: 20px;
 }
 
+#em {
+	display: none;
+	color: #e31100;
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+
 #mcf-cb {
 	height: 22px;
 	display: grid;

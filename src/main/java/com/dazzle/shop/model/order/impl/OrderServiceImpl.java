@@ -10,39 +10,63 @@ import com.dazzle.shop.model.order.OrderService;
 
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
-	
+
 	@Autowired
 	private OrderDAO orderDAO;
 
-	
-	
 	@Override
-	public List<OrderVO> insertProductOrder(OrderVO vo) {
-		
-		return orderDAO.insertProductOrder(vo);
+	public List<OrderVO> getProductOrderFromCart(OrderVO vo) {
+
+		return orderDAO.getProductOrderFromCart(vo);
 	}
 
-
-
 	@Override
-	public List<OrderVO> insertBuyOrder(OrderVO vo) {
+	public List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
 
-		return orderDAO.insertBuyOrder(vo);
+		return orderDAO.getProductOrder(userNum, productCode, amount, vo);
 	}
 
+	@Override
+	public void insertBuyOrder(OrderVO vo) {
+		orderDAO.insertBuyOrder(vo);
+	}
 
+	@Override
+	public void insertBuyOrderDetail(OrderVO vo) {
+		orderDAO.insertBuyOrderDetail(vo);
+	}
+
+	@Override
+	public void insertOrderRefund(OrderVO vo) {
+		orderDAO.insertOrderRefund(vo);
+	}
+
+	@Override
+	public void updateProduct_state(OrderVO vo) {
+		orderDAO.updateProduct_state(vo);
+	}
+
+	@Override
+	public List<OrderVO> getProductOrderWhenSuccess(OrderVO vo) {
+
+		return orderDAO.getProductOrderWhenSuccess(vo);
+	}
+
+	@Override
+	public OrderVO getOrderRefund(OrderVO vo) {
+
+		return orderDAO.getOrderRefund(vo);
+	}
 
 	@Override
 	public OrderVO getOrderInfo(OrderVO vo) {
-		
+
 		return orderDAO.getOrderInfo(vo);
 	}
 
-
-
 	@Override
-	public List<OrderVO> getOrderList() {
+	public List<OrderVO> getOrderList(OrderVO vo) {
 
-		return orderDAO.getOrderList();
+		return orderDAO.getOrderList(vo);
 	}
 }

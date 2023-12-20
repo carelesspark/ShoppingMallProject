@@ -15,6 +15,7 @@ public class UserVO {
 	private int id_num;
 	private String id;
 	private String pwd;
+	private String user_email;
 	// auth_kakao
 	private int kakao_num;
 	private String kakao_email;
@@ -22,7 +23,6 @@ public class UserVO {
 	//user_info
 	private int user_info_num;
 	private String user_phone;
-	private String user_email;
 	private String user_rank;
 	private int user_point;
 	private Date user_join_date;

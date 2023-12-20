@@ -19,22 +19,4 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userService;
 
-	// 회원가입, 로그인 ...
-
-	// 로그인
-	@PostMapping("/signInId.do")
-	public String signInId(UserVO vo, Model model, HttpSession session) {
-		System.out.println("===> UserController: sign in id");
-
-		int userNum = userService.signInUser(vo);
-
-		if (userNum == 0) {
-			return "sign/sign_in.jsp";
-		} else {
-			model.addAttribute("user_num", userNum);
-			session.setAttribute("savedId", vo.getId());
-			return "redirect:/user/user_order_tracking.jsp";
-		}
-	}
-
 }

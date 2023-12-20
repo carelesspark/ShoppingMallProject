@@ -1,5 +1,7 @@
 package com.dazzle.shop.model.faq;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -7,6 +9,5 @@ import lombok.Data;
 public class FaqCtgrVO {
 	private int ctgr_num;
 	private String ctgr_name;
-	
 	
 }

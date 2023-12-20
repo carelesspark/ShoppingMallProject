@@ -1,34 +1,13 @@
 @charset "UTF-8";
-
 html {
 	height: 100%;
 }
 
 body {
-	height: 100%;
+	height: 1400px;
 	display: flex;
 	flex-direction: column;
 	margin: 0;
-}
-
-header {
-	width: 100%;
-	height: 50px;
-	background-color: black;
-	margin-bottom: 50px;
-	color: white;
-}
-
-main {
-	flex: 1;
-}
-
-footer {
-	width: 100%;
-	height: 50px;
-	background-color: black;
-	margin-top: 50px;
-	color: white;
 }
 
 #main-container {
@@ -366,51 +345,10 @@ main {
  	box-shadow: none;
 }
 
-#accordion {
-	margin-top: 10px;
-}
-
-
-
-.submit-button {
-	width: 30px;
-	height: 30px;
-	border: none;
-	background: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 132 136" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="45" stroke="black" stroke-width="10"/><path d="M123.43 134.5C125.363 136.472 128.528 136.504 130.5 134.57C132.472 132.637 132.504 129.472 130.57 127.5L123.43 134.5ZM130.57 127.5L80.5704 76.4996L73.4296 83.5004L123.43 134.5L130.57 127.5Z" fill="black"/></svg>') no-repeat;
-	cursor: pointer;
-}
-
-
 #page{
 	text-align: center;
 }
 
-#search{
-	background-color: #e2e2e2;
-	height: 60px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	border-bottom: 1px solid #C3C3C3;
-	border-top: 1px solid #C3C3C3;
-}
-
-#search_tab{
-	width: 80%;
-	height: 70%;
-	background-color: white;
-	border-bottom: 1px solid #C3C3C3;
-	border-top: 1px solid #C3C3C3;
-}
-
- #input_tab{
- 	width:90%;
- 	height:100%;
- 	border: none;
- 	font-size: 18px;
- }
- 
  .center{
  	display: flex;
  	justify-content: center;
@@ -429,50 +367,18 @@ hr {
 	margin-bottom: 10px;
 }
 
-#category {
-	width: 800px;
-	display: grid;
-	grid-template-columns: repeat(5, 150px);
-	grid-template-rows: repeat(2, 50px);
-	gap: 5px;
-}
-
-.category_outer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: #e2e2e2;
-	border-color: black;
-	cursor: pointer;
-	border-radius: 20px;
-	border: 1px solid #C3C3C3;
-}
-
-.category_inner {
-	width: 80%;
-	height: 80%;
-	background-color: white;
-	border-radius: 30px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	font-size: 18px;
-	font-weight: bold;
-	border-bottom: 1px solid #C3C3C3;
-}
-
-#sub_category {
-	display: flex;
-	justify-content: flex-start;
-}
-
-#sub_category > div {
-	margin-right: 50px;
-	font-size: 18px;
-	font-weight: bold;
-}
-
 .section {
 	margin-bottom: 30px;
+}
+li{
+	margin : 0 5px;
+}
+
+.nav nav-tabs{
+	
+	weight : 150px;
+}
+
+a{
+	text-decoration: none;
 }

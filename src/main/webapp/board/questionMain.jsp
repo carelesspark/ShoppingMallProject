@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,26 +12,19 @@
 	<div class="wrapper">
 		<div class="title">
 			<h1>문의사항</h1>
+			<a href="/board/questionWrite.jsp"><button>작성</button></a>
 		</div>
 		
 		<hr style="height: 3px; background-color: black;">
 		
 		<div>
 			<table>
+			<c:forEach items="${questList }" var="quest">
 				<tr>
-					<a href="getnotice.jsp">비밀글입니다.</a>
+					<a href="questionGet.do?pno=${quest.pno }">비밀글입니다.</a>
 					<hr>
 				</tr>
-				
-				<tr>
-					<a href="">비밀글입니다.</a>
-					<hr>
-				</tr>
-				
-				<tr>
-					<a href="">비밀글입니다.</a>
-					<hr>
-				</tr>
+			</c:forEach>
 			</table>
 		</div>
 	</div>

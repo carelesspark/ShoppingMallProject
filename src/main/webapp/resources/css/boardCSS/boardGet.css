@@ -27,6 +27,20 @@
 	margin: 0;
 }
 
+.title_content .id {
+	display: inline;
+}
+
+.title_content a {
+	float: right;
+}
+
+.title_content button {
+	background-color: white;
+	width: 50px;
+	border: 0;
+}
+
 .content {
 	width: 100%;
 }
@@ -53,9 +67,17 @@
 	margin: 0;
 }
 
+.reply_content button {
+	float: right;
+	margin: 0 15px;
+	background-color: white;
+	border: none;
+}
+
 .reply_box .input {
 	display: flex;
 	justify-content: flex-end;
+	margin-top: 10px;
 }
 
 .reply_input {

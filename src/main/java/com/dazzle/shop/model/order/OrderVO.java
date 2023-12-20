@@ -25,5 +25,16 @@ public class OrderVO {
 	private String payment;
 	private String color_name;
 	private String size_name;
+	private int cart_num;
 	private int amount;
+	private int user_num;
+	private String product_code;
+	private int user_point;
+	private String main_img;
+	private int amountMultiPrice;
+	private int order_detail_num;
+	private String refund_or_change_reason;
+	private String reason_detail;
+	private String bank;
+	private String account_num;
 }
