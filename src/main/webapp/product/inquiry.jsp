@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css"
-	href="../resources/css/product/inquiry.css">
+	href="${pageContext.request.contextPath}/resources/css/product/inquiry.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>

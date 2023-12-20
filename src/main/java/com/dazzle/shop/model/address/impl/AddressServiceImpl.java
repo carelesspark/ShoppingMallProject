@@ -18,6 +18,10 @@ public class AddressServiceImpl implements AddressService {
     public List<AddressVO> getAddressList(AddressVO vo) {
         return addressDAO.getAddressList(vo);
     }
+    @Override
+    public AddressVO getBaseAddress(int user_num) {
+    	return addressDAO.getBaseAddress(user_num);
+    }
 
     @Override
     public void updateAddress(AddressVO vo) {
