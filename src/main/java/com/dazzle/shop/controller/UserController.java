@@ -18,5 +18,11 @@ public class UserController {
 
 	@Autowired
 	private UserServiceImpl userService;
+	
+	@RequestMapping(value = "/user.do")
+	private String user() {
+		
+		return "/user/user.jsp";
+	}
 
 }

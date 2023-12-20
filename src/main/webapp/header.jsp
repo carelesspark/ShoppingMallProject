@@ -18,7 +18,7 @@
 <header>
 	<nav class="navbar navbar-expand-lg">
 		<div class="container">
-			<a class="navbar-brand" href="#">DAZZLE</a>
+			<a class="navbar-brand" href="/main.do">DAZZLE</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
 				aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -42,20 +42,11 @@
 				</ul>
 
 				<ul class="navbar-nav gap-2">
-<<<<<<< HEAD
+
 					<li class="nav-item"><a class="nav-link" href="/cart.do">CART</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">MY PAGE</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">JOIN</a></li>
-					<li class="nav-item"><a class="nav-link" href="">LOGIN</a></li>
-=======
-					<li class="nav-item"><a class="nav-link" href="#">CART</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/practice/user/user_order_tracking.jsp">MY PAGE</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/practice/sign/sign_up.jsp">JOIN</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/practice/sign/sign_in.jsp">LOGIN</a></li>
->>>>>>> 680bba8f03ec9b9617ce8b1cecef116bc772952f
+					<li class="nav-item"><a class="nav-link" href="/user.do">MY PAGE</a></li>
+					<li class="nav-item"><a class="nav-link" href="/sign/sign_up.jsp">JOIN</a></li>
+					<li class="nav-item"><a class="nav-link" href="/sign/sign_in.jsp">LOGIN</a></li>
 				</ul>
 
 				<form class="d-flex mt-3">
