@@ -27,7 +27,8 @@ public class OrderDAO {
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
-			+ " JOIN product p ON p.product_num = pco.product_num";
+			+ " JOIN product p ON p.product_num = pco.product_num"
+			+ " WHERE o.user_num = ?";
 
 	private final String ORDER_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request"
 			+ " FROM orders o" + " JOIN order_detail od ON o.order_num = od.order_num"
@@ -57,17 +58,30 @@ public class OrderDAO {
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE c.user_num = ?";
 
 	private final String BUY_ORDER = "INSERT INTO orders VALUES (DEFAULT, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private final String BUY_ORDER_DETAIL = "INSERT INTO order_detail VALUES(DEFAULT, '상품 준비 중', ?, ?, ?, ?)";
+	
+	private final String SUCCESS_ORDER = "SELECT pimg.main_img, (p.product_price * ? ) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, o.order_num, o.order_date, o.delivery_price" + 
+			" FROM orders o" + 
+			" JOIN users u ON u.user_num = o.user_num" + 
+			" JOIN order_detail od ON od.order_num = o.order_num" + 
+			" JOIN product_code pc ON pc.product_code = od.product_code" + 
+			" JOIN product_size ps ON ps.size_num = pc.size_num" + 
+			" JOIN product_color pco ON pco.color_num = ps.color_num" + 
+			" JOIN product p ON p.product_num = pco.product_num" + 
+			" JOIN product_img pimg ON pimg.product_num = p.product_num" + 
+			" WHERE u.user_num = ?";
 
 	public OrderVO getOrderInfo(OrderVO vo) {
 		System.out.println("getOrderInfo()");
-		Object[] args = { vo.getOrder_num() };
+		Object[] args = { vo.getUser_num() };
 		return jdbcTemplate.queryForObject(ORDER_INFO, args, new OrderInfoRowMapper());
 	}
 
-	public List<OrderVO> getOrderList() {
+	public List<OrderVO> getOrderList(OrderVO vo) {
 		System.out.println("getOrderList()");
+		Object[] args = { vo.getOrder_num() };
 
-		return jdbcTemplate.query(ORDER_LIST, new OrderListRowMapper());
+		return jdbcTemplate.query(ORDER_LIST, args, new OrderListRowMapper());
 	}
 
 	public List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
@@ -92,16 +106,30 @@ public class OrderDAO {
 		}
 	}
 
-	public OrderVO insertBuyOrder(OrderVO vo) {
+	public void insertBuyOrder(OrderVO vo) {
 		System.out.println("insertBuyOrder()");
+		jdbcTemplate.update(BUY_ORDER, vo.getAddress(), vo.getDetail_address(), vo.getPostal_num(), vo.getDelivery_price(), vo.getRecipient(), vo.getRequest(), vo.getPayment(), vo.getUser_num(), vo.getPhone_num());
 
-		
-		return jdbcTemplate.update(BUY_ORDER, VO);
+		return;
 	}
 	
-	public List<OrderVO> insertBuyOrderDetail(OrderVO vo) {
+	public void insertBuyOrderDetail(OrderVO vo) {
 		System.out.println("insertBuyOrderDetail()");
+		jdbcTemplate.update(BUY_ORDER_DETAIL, vo.getAmount(), vo.getAmountMultiPrice(), vo.getOrder_num(), vo.getProduct_code());
 
-		return null;
+		
+		return;
 	}
+	
+	public List<OrderVO> getProductOrderWhenSuccess(OrderVO vo) {
+		try {
+			System.out.println("getProductOrderWhenSuccess()");
+			Object[] args = { vo.getAmount(), vo.getAmount(), vo.getUser_num() };
+
+			return jdbcTemplate.query(SUCCESS_ORDER, args, new SuccessPageRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
 }
