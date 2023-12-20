@@ -241,11 +241,11 @@
 					</div>
 					<div id="buttons">
 						<div>
-							<button type="button" class="btn btn-dark" id="button_1" onclick="location.href='/orderRefund.do?order_num=${orderInfo.order_num}'">교환
+							<button type="button" class="btn btn-dark" id="button_1" onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
 								요청</button>
 						</div>
 						<div>
-							<button type="button" class="btn btn-dark" id="button_2" onclick="location.href='/productChange.do?order_num=${orderInfo.order_num}'">
+							<button type="button" class="btn btn-dark" id="button_2" onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
 								취소/환불 요청</button>
 						</div>
 						<div>

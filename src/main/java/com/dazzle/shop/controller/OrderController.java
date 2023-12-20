@@ -87,4 +87,28 @@ public class OrderController {
 		
 		return "/product/productOrderSucc.jsp";
 	}
+	
+	@RequestMapping(value="/orderRefund.do")
+	public String getOrderRefund(OrderVO vo, Model model) throws Exception {
+		System.out.println("주문 취소/환불 요청 페이지 이동");
+		
+		OrderVO orderRefund = orderService.getOrderRefund(vo);
+		model.addAttribute("orderRefund", orderRefund);
+		
+		System.out.println(orderRefund);
+		
+		return "/order/orderRefund.jsp";
+	}
+	
+	@RequestMapping(value="/insertOrderRefund.do")
+	public String insertOrderRefund(OrderVO vo, Model model) throws Exception {
+		System.out.println("주문 취소/환불 요청");
+		
+		orderService.insertOrderRefund(vo);
+		orderService.updateProduct_state(vo);
+		model.addAttribute("order_num", vo.getOrder_num());
+		
+		return "redirect:orderInfo.do";
+	}
+	
 }
