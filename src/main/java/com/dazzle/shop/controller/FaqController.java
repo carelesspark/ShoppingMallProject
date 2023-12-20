@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dazzle.shop.model.faq.*;
@@ -31,7 +33,7 @@ public class FaqController {
 		if(sub_ctgr_num == null) {
 			faqCount = faqService.getFaqCount();
 			remain = faqCount - (pageSize * (curr_page - 1));
-			faq = faqService.getFaq(Math.min(remain, pageSize), (curr_page-1)*pageSize);
+			faq = faqService.getFaqList(Math.min(remain, pageSize), (curr_page-1)*pageSize);
 		}else {
 			faqCount = faqService.getFaqSubCtgrCount(sub_ctgr_num);
 			remain = faqCount - (pageSize * (curr_page - 1));
@@ -51,5 +53,45 @@ public class FaqController {
 		return "/faq/faq.jsp";
 	}
 	
+	@GetMapping(value="/faqWrite.do")
+	public String getFaqWrite(Model model){
+		List<FaqTotalCtgrVO> detailCtgr = faqService.getDetailCtgr();
+		model.addAttribute("detailCtgr", detailCtgr);
+		
+		
+		return "/faq/faqWrite.jsp";
+	}
 	
+	@PostMapping(value="/faqWrite.do")
+	public String postFaqWrite(FaqVO vo){
+		faqService.insertFaq(vo);
+		
+		return "redirect:faq.do";
+	}
+	
+	@GetMapping(value="/faqEdit.do")
+	public String getFaqEdit(FaqVO vo, Model model){
+		List<FaqTotalCtgrVO> detailCtgr = faqService.getDetailCtgr();
+		model.addAttribute("detailCtgr", detailCtgr);
+		
+		FaqVO faq = faqService.getFaq(vo);
+		model.addAttribute("faq", faq);
+		
+		return "/faq/faqEdit.jsp";
+	}
+	
+	@PostMapping(value="/faqEdit.do")
+	public String postFaqEdit(FaqVO vo){
+		System.out.println(vo);
+		faqService.updateFaq(vo);
+		
+		return "redirect:faq.do";
+	}
+	
+	@RequestMapping(value="/faqDelete.do")
+	public String deleteFaq(FaqVO vo){
+		faqService.deleteFaq(vo);
+		
+		return "redirect:faq.do";
+	}
 }

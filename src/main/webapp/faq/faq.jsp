@@ -3,7 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="com.dazzle.shop.model.faq.*" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -160,13 +160,22 @@
 			                        <c:out value="${faq.answer}" />
 			                        <div id="buttons">
 			                            <div>
-			                                <button type="button" class="btn btn-dark">수정하기</button>
+			                                <button type="button" class="btn btn-dark"
+			                                onclick="location.href='faqEdit.do?faq_num=${faq.faq_num}'">
+			                                	수정하기
+			                                </button>
 			                            </div>
 			                            <div>
-			                                <button type="button" class="btn btn-dark">삭제하기</button>
+			                                <button type="button" class="btn btn-dark"
+			                                 onclick="location.href='faqDelete.do?faq_num=${faq.faq_num}'">
+			                                 	삭제하기
+			                                 </button>
 			                            </div>
 			                            <div>
-			                                <button type="button" class="btn btn-dark">문의 게시판 가기</button>
+			                                <button type="button" class="btn btn-dark"
+			                                onclick="location.href='#'">
+			                                	문의 게시판 가기
+			                                </button>
 			                            </div>
 			                        </div>
 			                    </div>
@@ -178,7 +187,7 @@
 			   
 			   
 			    <div id="buttons">
-			    	<button type="button" class="btn btn-dark">작성하기</button>
+			    	<button type="button" class="btn btn-dark" onclick="location.href='faqWrite.do'">작성하기</button>
 			    </div>
 			    
 			    <div id="pageButtons" class="text-center mt-3">
