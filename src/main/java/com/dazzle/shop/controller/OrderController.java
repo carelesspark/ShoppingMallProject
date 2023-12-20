@@ -29,7 +29,7 @@ public class OrderController {
 	public String getOrderList(OrderVO vo, Model model) throws Exception {
 
 		System.out.println("글 목록 검색 처리");
-		List<OrderVO> orderList = orderService.getOrderList();
+		List<OrderVO> orderList = orderService.getOrderList(vo);
 		model.addAttribute("orderList", orderList);
 
 		
@@ -75,11 +75,15 @@ public class OrderController {
 	
 	
 	
-	@RequestMapping(value="/buyOrder.do")
+	@RequestMapping(value="/orderSuccess.do")
 	public String insertBuyOrder(OrderVO vo, Model model) throws Exception{
 		System.out.println("주문 목록 입력 처리");
 		
-		List<OrderVO> buyOrder = orderService.insertBuyOrder(vo);
+		orderService.insertBuyOrder(vo);
+		orderService.insertBuyOrderDetail(vo);
+		
+		List<OrderVO> orderSuccess = orderService.getProductOrderWhenSuccess(vo);
+		model.addAttribute("orderSuccess", orderSuccess);
 		
 		return "/product/productOrderSucc.jsp";
 	}
