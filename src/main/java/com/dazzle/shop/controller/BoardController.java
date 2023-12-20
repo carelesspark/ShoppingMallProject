@@ -143,4 +143,52 @@ public class BoardController {
 		
 		return "redirect:/questionMain.do";
 	}
+	
+	@RequestMapping(value="/board/boardEdit.do")
+	public String editBoard(BoardVO vo, Model model) {	// 수정 내용 미리 들어가있게
+		BoardVO board = boardService.getBoard(vo);
+		
+		model.addAttribute("board", board);
+		
+		return "/board/boardEdit.jsp";
+	}
+	
+	@RequestMapping(value="/board/editBoard.do")
+	public String editBoard(BoardVO vo) {
+		boardService.editBoard(vo);
+		
+		return "redirect:/boardGet.do?pno=" + vo.getPno();
+	}
+	
+	@RequestMapping(value="/board/noticeEdit.do")
+	public String editNotice(BoardVO vo, Model model) {	// 수정 내용 미리 들어가있게
+		BoardVO notice = boardService.getNotice(vo);
+		
+		model.addAttribute("notice", notice);
+		
+		return "/board/noticeEdit.jsp";
+	}
+	
+	@RequestMapping(value="/board/editNotice.do")
+	public String editNotice(BoardVO vo) {
+		boardService.editNotice(vo);
+		
+		return "redirect:/noticeGet.do?pno=" + vo.getPno();
+	}
+	
+	@RequestMapping(value="/board/questionEdit.do")
+	public String editQuest(BoardVO vo, Model model) {	// 수정 내용 미리 들어가있게
+		BoardVO quest = boardService.getQuest(vo);
+		
+		model.addAttribute("quest", quest);
+		
+		return "/board/questionEdit.jsp";
+	}
+	
+	@RequestMapping(value="/board/editQuest.do")
+	public String editQuest(BoardVO vo) {
+		boardService.editQuest(vo);
+		
+		return "redirect:/questionGet.do?pno=" + vo.getPno();
+	}
 }

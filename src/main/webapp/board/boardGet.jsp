@@ -17,7 +17,10 @@
 			<div class="title_content">
 				<p>${board.title }</p>
 				<p class="id">${board.userNum }</p>
+				</div>
+			<div class="title_btn">
 				<a href="deleteBoard.do?pno=${board.pno }"><button>삭제</button></a>
+				<a href="/board/boardEdit.do?pno=${board.pno }"><button>수정</button></a>
 			</div>
 		</div>
 		

@@ -110,4 +110,22 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.deleteQuest(vo);
 	}
 	
+	@Override
+	public void editBoard(BoardVO vo) {
+		// TODO Auto-generated method stub
+		boardDAO.editBoard(vo);
+	}
+
+	@Override
+	public void editNotice(BoardVO vo) {
+		// TODO Auto-generated method stub
+		boardDAO.editNotice(vo);
+	}
+
+	@Override
+	public void editQuest(BoardVO vo) {
+		// TODO Auto-generated method stub
+		boardDAO.editQuest(vo);
+	}
+	
 }

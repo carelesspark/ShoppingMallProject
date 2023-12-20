@@ -12,10 +12,10 @@
 		<h1>게시물 작성</h1>
 		<hr style="height: 3px; background-color: black;">
 		
-		<form action="boardWrite.do" method="post">
+		<form action="editBoard.do?pno=${board.pno }" method="post">
 			<div class="title">
 				<label>제목</label>
-				<input type="text" name="title" placeholder="${board.title }">
+				<input type="text" name="title" value="${board.title }">
 			</div>
 			
 			<div class="uploadImg">
@@ -83,8 +83,8 @@
 			
 			<div class="buttonBox">
 				<input type="button" value="미리보기">
-				<input type="button" value="취소" onclick="location.href='/boardMain.do'">
-				<input type="submit" value="등록">
+				<input type="button" value="취소" onclick="location.href='/boardGet.do?pno=${board.pno}'">
+				<input type="submit" value="수정">
 			</div>
 		</form>
 	</div>
