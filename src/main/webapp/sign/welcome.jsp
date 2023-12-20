@@ -13,7 +13,7 @@
 
 	<div id="mc">
 		<div id="mch">회원가입을 축하드립니다.</div>
-		<a id="mcl" href="/goLogin.do">로그인</a>
+		<a id="mcl" href="/sign/goLogin.do">로그인</a>
 	</div>
 
 	<%@ include file="../footer.jsp"%>

@@ -3,13 +3,13 @@ function validateForm(form, event) {
 	document.querySelector('#mcf input[type="password"]').style.marginBottom = '5px';
 	document.getElementById('em').style.display = 'block';
 
-	if (form.id.value.trim() === "") {
+	if (form.id.value === "") {
 		errorMsg.innerHTML = "아이디를 입력해 주세요.";
 		event.preventDefault();
 
 		return false;
 	}
-	if (form.pwd.value.trim() === "") {
+	if (form.pwd.value === "") {
 		errorMsg.innerHTML = "비밀번호를 입력해 주세요.";
 		event.preventDefault();
 
@@ -20,7 +20,7 @@ function validateForm(form, event) {
 }
 
 function setSavedId() {
-	var savedIdCookie = getCookie('savedId');
+	var savedIdCookie = getCookie('user_id');
 
 	if (savedIdCookie !== null && savedIdCookie !== '') {
 		document.querySelector('#mcf input[name="id"]').value = savedIdCookie;

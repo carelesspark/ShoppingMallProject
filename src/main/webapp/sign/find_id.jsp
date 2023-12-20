@@ -28,7 +28,7 @@
 			<p>아래의 정보를 입력해 주세요.</p>
 		</div>
 
-		<form id="mcf" action="/findId.do" method="post"
+		<form id="mcf" action="/sign/findId.do" method="post"
 			onsubmit="validateForm(this, event)">
 			<input type="text" name="user_name" placeholder="이름을 입력해 주세요." /> <input
 				type="email" name="user_email" placeholder="이메일을 입력해 주세요." /> <input

@@ -15,10 +15,10 @@
 		<div id="mch">계정 찾기</div>
 		<div id="mcs">
 			<div id="mcs-">
-				<a href="/goFindId.do">아이디 찾기</a>
+				<a href="/sign/goFindId.do">아이디 찾기</a>
 			</div>
 			<div>
-				<a href="/goFindPwd.do">비밀번호 찾기</a>
+				<a href="/sign/goFindPwd.do">비밀번호 찾기</a>
 			</div>
 		</div>
 		<div id="mcp">
@@ -26,7 +26,7 @@
 			<p id="mcp-uid">${id}</p>
 			<p>입니다.</p>
 		</div>
-		<a id="mcl" href="/goLogin.do">로그인</a>
+		<a id="mcl" href="/sign/goLogin.do">로그인</a>
 	</div>
 
 	<%@ include file="../footer.jsp"%>

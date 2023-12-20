@@ -4,32 +4,40 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/user/user_card.css" />
 
-<div id="uc">
-	<div id="ucc">
-		<div id="ucc-r">
-			<div id="ucc-rb">$S</div>
+<div id="c">
+	<div id="cc">
+		<div id="cc-r">
+			<div id="cc-rb">$S</div>
 		</div>
-		<div id="ucc-u">
-			<div id="ucc-un">$김태윤님</div>
-			<div id="ucc-ur">$Silver</div>
+		<div id="cc-u">
+			<div id="cc-un"></div>
+			<div id="cc-ur">$Silver</div>
 		</div>
-		<div id="ucc-c">
-			<div id="ucc-cn">쿠폰</div>
-			<div id="ucc-cc">
+		<div id="cc-c">
+			<div id="cc-cn">쿠폰</div>
+			<div id="cc-cc">
 				<a href="">$2</a>장
 			</div>
 		</div>
-		<div id="ucc-d">
-			<div id="ucc-dn">배송중</div>
-			<div id="ucc-dc">
+		<div id="cc-d">
+			<div id="cc-dn">배송중</div>
+			<div id="cc-dc">
 				<a href="">$0</a>건
 			</div>
 		</div>
-		<div id="ucc-p">
-			<div id="ucc-pn">포인트</div>
-			<div id="ucc-pc">
+		<div id="cc-p">
+			<div id="cc-pn">포인트</div>
+			<div id="cc-pc">
 				<a href="">$5000</a>원
 			</div>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+<!--
+세션에 저장되어 있는 정보들로 빈칸 채우기
+//-->
+document.getElementById('cc-un').textContent = '${sessionScope.user_name}님';
+
+</script>

@@ -14,7 +14,7 @@
 	<div id="mc">
 		<div id="mch">회원가입</div>
 		<div id="mcp">회원정보를 입력해 주세요.</div>
-		<form id="mcf" action="/register.do" method="post"
+		<form id="mcf" action="/sign/register.do" method="post"
 			onsubmit="validateForm(this, event)">
 			<input type="text" name="id" id="mcf-id" placeholder="아이디를 입력해 주세요." />
 			<div id="id-dupl">

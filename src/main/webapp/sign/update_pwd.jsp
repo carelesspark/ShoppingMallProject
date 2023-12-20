@@ -16,7 +16,7 @@
 
 	<div id="mc">
 		<div id="mch">비밀번호 재설정</div>
-		<form id="mcf" action="/updatePwd.do" method="post"
+		<form id="mcf" action="/sign/updatePwd.do" method="post"
 			onsubmit="validateForm(this, event)">
 			<input type="password" name="pwd" id="mcf-p1"
 				placeholder="새 비밀번호를 입력해 주세요." /> <input type="password"

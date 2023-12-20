@@ -14,7 +14,7 @@
 
 	<div id="mc">
 		<div id="mch">로그인</div>
-		<form id="mcf" action="/login.do" method="post"
+		<form id="mcf" action="/sign/login.do" method="post"
 			onsubmit="validateForm(this, event)">
 			<input type="text" name="id" placeholder="아이디를 입력해 주세요." /> <input
 				type="password" name="pwd" placeholder="비밀번호를 입력해 주세요." />
@@ -26,8 +26,8 @@
 			<input type="submit" value="로그인" />
 		</form>
 		<div id="mcl">
-			<a href="/goFindId.do">아이디 찾기</a> <a href="/goFindPwd.do">비밀번호 찾기</a>
-			<a href="/goRegister.do">회원가입</a>
+			<a href="/sign/goFindId.do">아이디 찾기</a> <a href="/sign/goFindPwd.do">비밀번호 찾기</a>
+			<a href="/sign/goRegister.do">회원가입</a>
 		</div>
 	</div>
 

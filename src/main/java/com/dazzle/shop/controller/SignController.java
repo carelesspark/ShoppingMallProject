@@ -21,6 +21,7 @@ import com.dazzle.shop.model.sign.domain.SignVO;
 import com.dazzle.shop.model.sign.service.SignService;
 
 @Controller
+@RequestMapping("/sign")
 public class SignController {
 
 	@Autowired
@@ -60,17 +61,21 @@ public class SignController {
 
 		if (user == null) { // fail to login
 			model.addAttribute("error", "failed");
-			return "sign/sign_in.jsp";
+			return "sign_in.jsp";
 		}
 
 		// success to login
 		int user_num = user.getUser_num();
-		// 서버 session에 user_num 저장
-		request.getSession().setAttribute("user_num", String.valueOf(user_num));
-		// 사용자 cookie에 user_num 저장
-		Cookie userNumCookie = new Cookie("user_num", String.valueOf(user_num));
-		userNumCookie.setMaxAge(7 * 24 * 60 * 60);
-		response.addCookie(userNumCookie);
+		// 서버 session 저장
+		// key: "user_num", value: user_num
+		request.getSession().setAttribute("user_num", user_num);
+		// key: "user_type", value: "user"
+		request.getSession().setAttribute("user_type", "user");
+
+//		// 사용자 cookie에 "user_num":user_num 저장
+//		Cookie userNumCookie = new Cookie("user_num", String.valueOf(user_num));
+//		userNumCookie.setMaxAge(7 * 24 * 60 * 60);
+//		response.addCookie(userNumCookie);
 
 		// 아이디 저장에 체크되어 있을 경우 cookie에 savedId 저장
 		String cbox = request.getParameter("saveId");
@@ -94,12 +99,12 @@ public class SignController {
 
 		if (user == null) { // fail
 			model.addAttribute("error", "failed");
-			return "sign/find_id.jsp";
+			return "find_id.jsp";
 		}
 
 		// success
 		model.addAttribute("id", user.getId());
-		return "sign/found_id.jsp";
+		return "found_id.jsp";
 	}
 
 	/*
@@ -113,7 +118,7 @@ public class SignController {
 
 		if (user == null) { // fail
 			model.addAttribute("error", "failed");
-			return "sign/find_pwd.jsp";
+			return "find_pwd.jsp";
 		}
 
 		// success
@@ -149,7 +154,7 @@ public class SignController {
 
 		if (!authStrSession.equals(authStrUser)) { // fail
 			model.addAttribute("error", "failed");
-			return "sign/find_pwd.jsp";
+			return "find_pwd.jsp";
 		}
 
 		return "redirect:/sign/update_pwd.jsp";

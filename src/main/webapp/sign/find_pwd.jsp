@@ -17,10 +17,10 @@
 		<div id="mch">계정 찾기</div>
 		<div id="mcs">
 			<div>
-				<a href="/goFindId.do">아이디 찾기</a>
+				<a href="/sign/goFindId.do">아이디 찾기</a>
 			</div>
 			<div id="mcs-">
-				<a href="/goFindPwd.do">비밀번호 찾기</a>
+				<a href="/sign/goFindPwd.do">비밀번호 찾기</a>
 			</div>
 		</div>
 		<div id="mcp">
@@ -28,7 +28,7 @@
 			<p>아래의 정보를 입력해 주세요.</p>
 		</div>
 
-		<form id="mcf" action="/findPwd.do" method="post"
+		<form id="mcf" action="/sign/findPwd.do" method="post"
 			onsubmit="validateForm(this, event)">
 			<input type="text" name="id" placeholder="아이디를 입력해 주세요." /> <input
 				type="email" name="user_email" placeholder="이메일을 입력해 주세요." /> <input
