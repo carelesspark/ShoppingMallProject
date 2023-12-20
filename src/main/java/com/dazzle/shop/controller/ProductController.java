@@ -35,4 +35,18 @@ public class ProductController {
 		
 		return "/product/productList.jsp";
 	}
+	
+	@RequestMapping(value = "/product.do")
+	public String getProduct() {
+		return "/product/product.jsp";
+	}
+	@RequestMapping(value = "/review.do")
+	public String getReview() {
+		return "/product/review.jsp";
+	}
+	
+	@RequestMapping(value = "/inquiry.do")
+	public String getInquiry() {
+		return "/product/inquiry.jsp";
+	}
 }

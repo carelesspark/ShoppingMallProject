@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../resources/css/product/product.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/product/product.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -63,10 +63,10 @@
 				<a href="">상품상세</a>
 			</div>
 			<div class="product-tab fs-4">
-				<a href="">상품리뷰</a>
+				<a href="review.do">상품리뷰</a>
 			</div>
 			<div class="product-tab fs-4">
-				<a href="">상품문의</a>
+				<a href="inquiry.do">상품문의</a>
 			</div>
 		</div>
 		<div class="email-icon" id="product-detail">

@@ -50,7 +50,7 @@
 	        <br>
 	        <div id="button">
 	            <button type="submit" id="add">추가하기</button>
-	            <button id="return" onclick="location.href='address.do?user_num=${user_num}'">돌아가기</button>
+	            <button type="button" id="return" onclick="location.href='address.do?user_num=${user_num}'">돌아가기</button>
 	        </div>
     	 </form>    
     </div>

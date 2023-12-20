@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dazzle.shop.model.order.OrderVO;
+import com.dazzle.shop.model.address.AddressService;
+import com.dazzle.shop.model.address.AddressVO;
 import com.dazzle.shop.model.order.OrderService;
 import com.dazzle.shop.model.order.impl.OrderDAO;
 
@@ -23,6 +25,8 @@ public class OrderController {
 	
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private AddressService addressService;
 
 
 	@RequestMapping(value = "/orderList.do")
@@ -45,6 +49,14 @@ public class OrderController {
 	
 		return "/order/orderInfo.jsp";
 	}
+	
+	@RequestMapping(value="/returnOrderList.do")
+	public String returnOrderList(OrderVO vo, Model model) throws Exception {
+		
+		model.addAttribute("user_num", vo.getUser_num());
+	
+		return "redirect:orderList.do";
+	}
 		
 	// 주문 상세 페이지에서 바로 구매할 때,
 	@RequestMapping(value="/productOrder.do")
@@ -52,9 +64,9 @@ public class OrderController {
 		System.out.println("상품 주문 페이지 이동(상품 상세페이지로 부터)");
 		
 		List<OrderVO> productOrder = orderService.getProductOrder(userNum, productCode, amount, vo);
-		
+		AddressVO address = addressService.getBaseAddress(userNum);
 		model.addAttribute("productOrder", productOrder);
-
+		model.addAttribute("address", address);
 		System.out.println(productOrder);
 
 		return "/order/productOrder.jsp";
@@ -79,13 +91,16 @@ public class OrderController {
 	public String insertBuyOrder(OrderVO vo, Model model) throws Exception{
 		System.out.println("주문 목록 입력 처리");
 		
-		orderService.insertBuyOrder(vo);
-		orderService.insertBuyOrderDetail(vo);
+		/*
+		 * orderService.insertBuyOrder(vo); orderService.insertBuyOrderDetail(vo);
+		 */
 		
-		List<OrderVO> orderSuccess = orderService.getProductOrderWhenSuccess(vo);
-		model.addAttribute("orderSuccess", orderSuccess);
+		/*
+		 * List<OrderVO> orderSuccess = orderService.getProductOrderWhenSuccess(vo);
+		 * model.addAttribute("orderSuccess", orderSuccess);
+		 */
 		
-		return "/product/productOrderSucc.jsp";
+		return "/order/productOrderSucc.jsp";
 	}
 	
 	@RequestMapping(value="/orderRefund.do")
@@ -109,6 +124,18 @@ public class OrderController {
 		model.addAttribute("order_num", vo.getOrder_num());
 		
 		return "redirect:orderInfo.do";
+	}
+	
+	@RequestMapping(value="/productChange.do")
+	public String getOrderChange(OrderVO vo, Model model) throws Exception {
+		System.out.println("주문 취소/환불 요청 페이지 이동");
+		
+		OrderVO orderRefund = orderService.getOrderRefund(vo);
+		model.addAttribute("orderRefund", orderRefund);
+		
+		System.out.println(orderRefund);
+		
+		return "/order/productChange.jsp";
 	}
 	
 }

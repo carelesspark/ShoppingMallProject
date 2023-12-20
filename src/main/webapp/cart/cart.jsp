@@ -120,10 +120,10 @@
 					<div id="cart_bottom_buttons_grid">
 						<div id="cart_buttons_div1">
 							<button type="button" class="btn btn-dark"
-								id="return_home_button">홈으로 돌아가기</button>
+								id="return_home_button" onclick="location.href='../main/main.jsp'">홈으로 돌아가기</button>
 						</div>
 						<div id="cart_buttons_div2">
-							<button type="submit" class="btn btn-dark" id="cart_buy_button">구매하기</button>
+							<button type="submit" class="btn btn-dark" id="cart_buy_button" onclick="location.href='/productOrderFromCart.do'">구매하기</button>
 						</div>
 					</div>
 				</div>

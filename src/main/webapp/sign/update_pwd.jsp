@@ -30,8 +30,8 @@
 
 	<script type="text/javascript">
 		function validateForm(form, event) {
-			var pwd1 = form.pwd.value.trim();
-			var pwd2 = form.pwd2.value.trim();
+			var pwd1 = form.pwd.value;
+			var pwd2 = form.pwd2.value;
 			var notice = document.querySelector("#mcf p");
 
 			var letterRegex = /[a-zA-Z]/;
@@ -46,7 +46,7 @@
 				return false;
 			}
 
-			if (form.pwd.value.trim() !== form.pwd2.value.trim()) {
+			if (pwd1 !== pwd2) {
 				notice.style.color = "#e31100";
 				notice.innerHTML = "같은 비밀번호를 입력해주세요.";
 				event.preventDefault();

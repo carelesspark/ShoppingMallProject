@@ -16,6 +16,14 @@ public interface SignService {
 	// update_pwd
 	void updatePwd(SignVO vo);
 
+	///////////////////////// sign_up.jsp에서 사용되는 service
+
+	boolean isIdDupl(String id);
+
+	boolean isEmailDupl(String user_email);
+
+	void signUp(SignVO vo);
+
 	////////////////////////////// DB에 없는 Service
 
 	// send_email

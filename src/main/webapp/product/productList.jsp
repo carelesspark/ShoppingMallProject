@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css"
-	href="../resources/css/product/productList.css">
+	href="${pageContext.request.contextPath}/resources/css/product/productList.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -34,7 +34,7 @@
 					<!-- 상품 -->
 					<c:forEach var="product" items="${product_list}">
 						<div class="col-md-3">
-							<a href="#">
+							<a href="product.do">
 								<div class="card">
 									<img alt="Placeholder image of a real estate property"
 										class="card-img-top" height="200"

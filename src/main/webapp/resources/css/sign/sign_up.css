@@ -20,7 +20,7 @@ body {
 	display: grid;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 70px;
+	margin-bottom: 40px;
 	font-size: 36px;
 	font-weight: bold;
 }
@@ -30,6 +30,7 @@ body {
 	font-size: 18px;
 }
 
+/*여기서부터 폼*/
 #mcf {
 	display: grid;
 	grid-template-columns: auto;
@@ -44,31 +45,75 @@ body {
 	border-bottom: 1px solid #d4d4d4;
 	font-size: 18px;
 	color: #888888;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
+#mcf button {
+	box-sizing: border-box;
+	height: 22px;
+	border: 1px solid #d4d4d4;
+	background-color: #f8f8f8;
+	font-size: 14px;
+}
+
+/*아이디*/
+#mcf #mcf-id {
+	margin-bottom: 5px;
+}
+
+/*아이디 밑*/
 #mcf #id-dupl {
-	display: none;
-	margin-bottom: 40px;
+	display: grid;
+	grid-template-columns: auto 30px 80px;
+	row-gap: 10px;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+#mcf #id-dupl-p {
+	font-size: 14px;
+	margin: 0;
+}
+
+/*패스워드*/
+#mcf #mcf-p1 {
+	margin-bottom: 5px;
 }
 
 #mcf #pwd-check {
-	display: none;
-	margin-bottom: 40px;
+	font-size: 14px;
+	margin-bottom: 5px;
 }
 
 #mcf #pwd-dupl {
 	display: none;
-	margin-bottom: 40px;
+	font-size: 14px;
+	margin-bottom: 5px;
 }
 
+/*이메일*/
+#mcf #mcf-e {
+	margin-bottom: 5px;
+}
+
+#mcf #email-dupl {
+	display: grid;
+	grid-template-columns: 30px 80px;
+	row-gap: 10px;
+	justify-content: right;
+	align-items: center;
+	margin-bottom: 10px;
+	align-items: center;
+}
+
+/*약관*/
 #mcf-cb {
 	display: grid;
 	grid-template-columns: 30px auto;
 	row-gap: 10px;
 	justify-content: left;
 	align-items: center;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 }
 
 #mcf input[type="checkbox"] {
@@ -89,8 +134,9 @@ body {
 }
 
 #mcf #mcf-cb-check {
-	display: none;
-	margin-bottom: 40px;
+	font-size: 14px;
+	color: #e31100;
+	margin-bottom: 15px;
 }
 
 #mcf input[type="submit"] {

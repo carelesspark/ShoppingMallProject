@@ -29,6 +29,7 @@ public class OrderInfoRowMapper implements RowMapper<OrderVO>{
 		orderInfo.setPhone_num(rs.getString("phone_num"));
 		orderInfo.setRequest(rs.getString("request"));
 		orderInfo.setOrder_detail_num(rs.getInt("order_detail_num"));
+		orderInfo.setUser_num(rs.getInt("user_num"));
 		
 		
 		return orderInfo;

@@ -1,5 +1,11 @@
 package com.dazzle.shop.model.cart.impl;
 
-public class CartDAO {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+@Repository
+public class CartDAO {
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 }

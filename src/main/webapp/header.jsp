@@ -29,14 +29,20 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="#">HOME</a></li>
-					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=top">TOP</a></li>
-					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=bottom">BOTTOM</a></li>
-					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=outer">OUTER</a></li>
-					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=shoes">SHOES</a></li>
-					<li class="nav-item"><a class="nav-link" href="/getProductList.do?category=etc">ETC</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/getProductList.do?category=top">TOP</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/getProductList.do?category=bottom">BOTTOM</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/getProductList.do?category=outer">OUTER</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/getProductList.do?category=shoes">SHOES</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/getProductList.do?category=etc">ETC</a></li>
 				</ul>
 
 				<ul class="navbar-nav gap-2">
+
 					<li class="nav-item"><a class="nav-link" href="/cart.do">CART</a></li>
 					<li class="nav-item"><a class="nav-link" href="/user.do">MY PAGE</a></li>
 					<li class="nav-item"><a class="nav-link" href="/sign/sign_up.jsp">JOIN</a></li>
