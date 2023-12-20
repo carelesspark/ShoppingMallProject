@@ -126,11 +126,11 @@
 									<td id="refund_table_left">취소/환불 사유</td>
 									<td id="refund_table_right"><select id="select"
 										name="refund_or_change_reason"><option
-												value="damaged">상품 불량</option>
-											<option value="simple_change">단순 변심</option>
-											<option value="late_deliever">배송 지연</option>
-											<option value="different_info">상품정보와 상이</option>
-											<option value="etc">기타</option></select></td>
+												value="상품 불량">상품 불량</option>
+											<option value="단순 변심">단순 변심</option>
+											<option value="배송 지연">배송 지연</option>
+											<option value="상품정보와 상이">상품정보와 상이</option>
+											<option value="기타">기타</option></select></td>
 								</tr>
 								<tr>
 									<td id="refund_table_left_textarea">사유 설명</td>
