@@ -75,8 +75,8 @@
 				</div>
 				<div id="menu-order-container" class="menu-section">
 					<p class="menu-section-name">주문 관리</p>
-					<a href="" class="menu-section-anchor"><p
-							class="menu-section-name-detail">주문 목록</p></a> <a href=""
+					<a href="/order/orderListAdmin.jsp" class="menu-section-anchor"><p
+							class="menu-section-name-detail">주문 목록</p></a> <a href="/order/orderRefundOrChange.jsp"
 						class="menu-section-anchor"><p
 							class="menu-section-name-detail">반품 및 환불 목록</p></a> <a href=""
 						class="menu-section-anchor"><p
@@ -194,11 +194,11 @@
 									<td><div id="table_button">
 											<div>
 												<button type="button" class="btn btn-outline-secondary"
-													id="button2">주문 정보</button>
+													id="button2" onclick="location.href='/order/orderInfoAdmin.jsp'">주문 정보</button>
 											</div>
 											<div>
 												<button type="button" class="btn btn-outline-secondary"
-													id="button2">상태 수정</button>
+													id="button2" onclick="location.href='/order/orderInfoEdit.jsp'">상태 수정</button>
 											</div>
 										</div></td>
 								</tr>

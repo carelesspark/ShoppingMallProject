@@ -43,9 +43,10 @@
 
 				<ul class="navbar-nav gap-2">
 					<li class="nav-item"><a class="nav-link" href="/cart.do">CART</a></li>
-					<li class="nav-item"><a class="nav-link" href="/user.do">MY PAGE</a></li>
+					<li class="nav-item"><a class="nav-link" href="/user/user_order_tracking.jsp">MY PAGE</a></li>
 					<li class="nav-item"><a class="nav-link" href="/sign/sign_up.jsp">JOIN</a></li>
 					<li class="nav-item"><a class="nav-link" href="/sign/sign_in.jsp">LOGIN</a></li>
+					<li class="nav-item"><a class="nav-link" href="/order/orderListAdmin.jsp">ADMIN</a></li>
 				</ul>
 
 				<form class="d-flex mt-3">
