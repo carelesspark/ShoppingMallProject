@@ -2,12 +2,7 @@
 <%@page import="com.dazzle.shop.model.board.impl.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	BoardDAO dao = new BoardDAO();
-	int pno = Integer.parseInt(request.getParameter("pno"));
-
-	BoardVO board = dao.getBoard(pno);
-%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +15,9 @@
 	<div class="wrapper">
 		<div class="title">
 			<div class="title_content">
-				<p><%=board.getTitle() %></p>
-				<p><%=board.getUserNum() %></p>
+				<p>${board.title }</p>
+				<p class="id">${board.userNum }</p>
+				<a href="deleteBoard.do?pno=${board.pno }"><button>삭제</button></a>
 			</div>
 		</div>
 		
@@ -36,141 +32,18 @@
 			<div class="reply_box">
 				<div class="reply">
 					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
-					</div>
-					
-					<div class="reply_content">
-						<p>아이디 댓글 내용 길게 쓰면 어떻게 변할까</p>
+						<c:forEach items="${replyList }" var="reply">
+							<p>${reply.rcontent }<button onclick="location.href='deleteReply.do?rno=${reply.rno}&pno=${reply.pno }'">x</button></p>
+						</c:forEach>
 					</div>
 				</div>
+				<form action="writeReply.do">
 				<div class="input">
-					<input type="text" class="reply_input" placeholder="댓글 달기...">
+					<input type="text" style="visibility: hidden; width: 0" name="pno" value="${board.pno }">
+					<input type="text" class="reply_input" placeholder="댓글 달기..." name="rcontent">
 					<input type="submit" class="reply_submit" value="게시">
 				</div>
+				</form>
 			</div>
 		</div>
 		
@@ -179,9 +52,7 @@
 		<div class="product">
 			<div class="product_info">
 				<p><a href="board.jsp">
-					<%if(board.getCate() != null) { %>
-					<%=board.getCate() %>
-					<%} %>
+					${board.cate }
 					</a>
 				</p>
 				<span>상품 태그</span>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,23 +22,25 @@
 					<div>
 						<h3>주문 내역</h3>
 					</div>
+					<c:forEach items="${productOrder}" var="order">
 					<div id="order_list_box">
 						<div id="order_list_grid">
 							<div id="order_list_pic">
-								<a href=""><img src="../resources/image/order/shirt.png"
+								<a href="${order.main_img }"><img src="${order.main_img }"
 									id="order_list_pic1" /></a>
 							</div>
 							<div id="order_list_price">
-								<p>19,000</p>
+								<p>${order.amountMultiPrice}</p>
 							</div>
 							<div id="order_list_amount">
-								<p>수량/1개</p>
+								<p>수량/${order.amount }개</p>
 							</div>
 							<div id="order_list_name">
-								<p>000000셔츠</p>
+								<p>${order.product_name}(색상 : ${order.color_name}, 사이즈 : ${order.size_name})</p>
 							</div>
 						</div>
 					</div>
+					</c:forEach>
 					<div id="order_list_total_price">
 						<p>전체 가격 : 19,000원</p>
 					</div>
@@ -144,9 +147,9 @@
 										</div>
 										<div id="order_payment_label_css">
 											<label>보유 : </label>
-										</div>
+										</div>					
 										<div id="order_payment_label_css">
-											<label>10,000포인트</label>
+											<label><c:out value="${productOrder[0].user_point}"/>포인트</label>
 										</div>
 										<div id="order_payment_div_css">
 											<button type="button" class="btn btn-dark"

@@ -9,6 +9,7 @@
 </head>
 <body>
 	<div class="wrapper">
+	<form action="noticeWrite.do">
 		<div class="title">
 			<p>공지작성</p>
 		</div>
@@ -16,20 +17,21 @@
 		<div class="content">
 			<div class="content_title">
 				<label>제목</label>
-				<input type="text">
+				<input type="text" name="title">
 			</div>
 			
 			<div class="content_content">
 				<label>내용</label>
 				<br>
-				<textarea></textarea>
+				<textarea name="content"></textarea>
 			</div>
 		</div>
 		
 		<div class="button_box">		
-			<input type="button" value="취소">
+			<input type="button" value="취소" onclick="location.href='/noticeMain.do'">
 			<input type="submit" value="등록">
 		</div>
+		</form>
 	</div>
 </body>
 </html>

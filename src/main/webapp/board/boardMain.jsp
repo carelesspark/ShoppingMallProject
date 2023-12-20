@@ -16,18 +16,16 @@
 	<div class="wrapper">
 		<div class="board">
 			게시판
-			<button onclick="location.href='boardWrite.jsp'">작성</button>
+			<button onclick="location.href='/board/boardWrite.jsp'">작성</button>
 		</div>
 		<hr>
 		<div class="tag_container">
 			<nav class="tag_btn_container">
 				<ul class="tag">
-					<a href="./boardMain/all">
 					<li class="tag_tab">
 						<img alt="전체 보기" src="../resources/image/boardIMG/all.png">
 						<p>전체 보기</p>
 					</li>
-					</a>
 					
 					<li class="tag_tab" onclick="">
 						<img alt="오오티디" src="../resources/image/boardIMG/ootd.jpg">
@@ -68,13 +66,13 @@
 				<div class="feed_post">
 					<div class="feed_card">
 						<c:forEach items="${boardList }" var="board">
-						<a href='boardGet.jsp?pno=${board.pno }'>
+						<a href='boardGet.do?pno=${board.pno }'>
 							<div class="card_img">
 								<img alt="게시물" src="../resources/image/boardIMG/all.png">
 							</div>
 							
 							<div class="card_id">
-								<p>${board.usernum }</p>
+								<p>${board.userNum }</p>
 							</div>
 							
 							<div class="card_title">
