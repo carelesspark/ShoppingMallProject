@@ -13,7 +13,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<header>임시 헤더</header>
+	<%@ include file="../header.jsp"%>
 	<div id="main-container">
 		<div id="user-explanation">
 			<div id="user-explanation-grid">
@@ -300,6 +300,6 @@
 			</main>
 		</div>
 	</div>
-	<footer>임시 푸터</footer>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>

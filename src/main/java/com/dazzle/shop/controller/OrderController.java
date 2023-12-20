@@ -74,9 +74,11 @@ public class OrderController {
 	
 	// 장바구니 페이지에서 구매할 때,
 	@RequestMapping(value="/productOrderFromCart.do")
-	public String getProductOrderFromCart(OrderVO vo, Model model) throws Exception {
+	public String getProductOrderFromCart(int user_num, OrderVO vo, Model model) throws Exception {
 		System.out.println("상품 주문 페이지 이동(장바구니로 부터)");
 		List<OrderVO> productOrder = orderService.getProductOrderFromCart(vo);
+		AddressVO address = addressService.getBaseAddress(user_num);
+		model.addAttribute("address", address);
 		
 		model.addAttribute("productOrder", productOrder);
 		
