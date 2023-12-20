@@ -15,7 +15,7 @@
 		<form action="boardWrite.do" method="post">
 			<div class="title">
 				<label>제목</label>
-				<input type="text" name="title" placeholder="${board.title }">
+				<input type="text" name="title">
 			</div>
 			
 			<div class="uploadImg">

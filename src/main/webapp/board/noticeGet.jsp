@@ -13,7 +13,6 @@
 		<div class="title">
 			<h1>공지사항</h1>
 			<a href="deleteNotice.do?pno=${notice.pno }"><button>삭제</button></a>
-			<a href="/board/noticeEdit.do?pno=${notice.pno }"><button>수정</button></a>
 		</div>
 		
 		<hr style="height: 3px; background-color: black;">

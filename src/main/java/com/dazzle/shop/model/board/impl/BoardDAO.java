@@ -155,22 +155,4 @@ public class BoardDAO {
 		
 		template.update(sql, vo.getPno());		
 	}
-	
-	public void editBoard(BoardVO vo) {	// 게시글 수정
-		String sql = "update board set title = ?, posttime = now(), product_code = ? where pno = ?";
-		
-		template.update(sql, vo.getTitle(), vo.getProductCode(), vo.getPno());
-	}
-	
-	public void editNotice(BoardVO vo) {	// 공지사항 수정
-		String sql = "update board set title = ?, posttime = now(), content = ? where pno = ?";
-		
-		template.update(sql, vo.getTitle(), vo.getContent(), vo.getPno());
-	}
-	
-	public void editQuest(BoardVO vo) {	// 문의사항 수정
-		String sql = "update board set title = ?, posttime = now(), content = ? where pno = ?";
-		
-		template.update(sql, vo.getTitle(), vo.getContent(), vo.getPno());
-	}
 }

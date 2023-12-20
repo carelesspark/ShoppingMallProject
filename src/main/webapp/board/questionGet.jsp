@@ -12,7 +12,6 @@
 		<div class="title">
 			<h1>문의사항</h1>
 			<a href="deleteQuest.do?pno=${quest.pno }"><button>삭제</button></a>
-			<a href="/board/questionEdit.do?pno=${quest.pno }"><button>수정</button></a>
 		</div>
 		
 		<hr style="height: 3px; background-color: black;">
@@ -22,8 +21,8 @@
 			<p>${quest.title }</p>
 			
 			<div class="main">
-				<p class="main_quest">${quest.content }</p>
-				<textarea>${reply.rcontent }</textarea>
+				<p class="main_quest">${quest.rcontent }</p>
+				<textarea>${reply.content }</textarea>
 				<input type="submit" value="답변 등록">
 			</div>
 			
