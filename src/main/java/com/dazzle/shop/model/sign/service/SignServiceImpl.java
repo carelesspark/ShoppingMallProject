@@ -42,6 +42,22 @@ public class SignServiceImpl implements SignService {
 		signDAO.updatePwd(vo);
 	}
 
+	////////////////////////// sign up에서 사용하는 service
+	@Override
+	public boolean isIdDupl(String id) {
+		return signDAO.checkIdExist(id);
+	}
+
+	@Override
+	public boolean isEmailDupl(String user_email) {
+		return signDAO.checkEmailExist(user_email);
+	}
+
+	@Override
+	public void signUp(SignVO vo) {
+		signDAO.signUp(vo);
+	}
+
 	////////////////////////////// DB에 없는 Service
 
 	// send_email

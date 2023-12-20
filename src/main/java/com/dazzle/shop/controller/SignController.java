@@ -8,10 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dazzle.shop.model.sign.domain.SignVO;
@@ -143,4 +146,53 @@ public class SignController {
 
 		return "redirect:/sign/sign_in.jsp";
 	}
+
+	/////////////////
+	// sign_up id 중복 체크
+	@PostMapping("/checkIdSignUp.do")
+	@ResponseBody
+	public ResponseEntity<String> checkIdSignUp(@RequestParam String id) {
+		System.out.println("===> SignController: check id dupl - sign up");
+
+		boolean isIdDupl = signService.isIdDupl(id);
+
+		if (isIdDupl) {
+			System.out.println("아이디 중복");
+			return ResponseEntity.ok("Duplicate id");
+		} else {
+			System.out.println("아이디 사용 가능");
+			return ResponseEntity.ok("None duplicate id");
+		}
+	}
+
+	@PostMapping("/checkEmailSignUp.do")
+	@ResponseBody
+	public ResponseEntity<String> checkEmailSignUp(@RequestParam String user_email) {
+		System.out.println("===> SignController: check email dupl - sign up");
+
+		if (user_email == "") {
+			return ResponseEntity.ok("Empty input");
+		}
+
+		boolean isEmailDupl = signService.isEmailDupl(user_email);
+
+		if (isEmailDupl) {
+			System.out.println("이메일 중복");
+			return ResponseEntity.ok("Duplicate email");
+		} else {
+			System.out.println("이메일 사용 가능");
+			return ResponseEntity.ok("None duplicate email");
+		}
+	}
+	
+	@PostMapping("/signUp.do")
+	public String signUp(SignVO vo) {
+		System.out.println("===> SignController: sign up");
+
+		signService.signUp(vo);
+
+		return "redirect:/sign/success_sign_up.jsp";
+	}
+
+
 }
