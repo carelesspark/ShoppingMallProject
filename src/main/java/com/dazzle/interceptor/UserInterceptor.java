@@ -7,9 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dazzle.shop.model.user.domain.UserVO;
-import com.dazzle.shop.model.user.persistence.UserDAO;
-
 public class UserInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -23,17 +20,6 @@ public class UserInterceptor implements HandlerInterceptor {
 			response.sendRedirect("/sign/login.jsp");
 
 			return false; // 컨트롤러 메소드 실행을 막음
-		}
-
-		// user_num 존재시, db에서 user_num으로 users와 user_info 내 data 가져옴
-		UserVO vo = new UserVO();
-		vo.setUser_num((int) user_num);
-		UserDAO userDAO = new UserDAO();
-		UserVO user = userDAO.getUserInfo(vo);
-
-		Object user_name = session.getAttribute("user_name");
-		if (user_name == null) {
-			session.setAttribute("user_name", "");
 		}
 
 		return true; // 컨트롤러 메소드 실행을 허용

@@ -31,11 +31,36 @@ public class OrderController {
 
 	@RequestMapping(value = "/orderList.do")
 	public String getOrderList(OrderVO vo, Model model) throws Exception {
-
 		System.out.println("글 목록 검색 처리");
-		List<OrderVO> orderList = orderService.getOrderList(vo);
-		model.addAttribute("orderList", orderList);
+		
+			List<OrderVO> orderList = orderService.getOrderList(vo);
+			model.addAttribute("orderList", orderList);
+			System.out.println(orderList);
 
+		return "/order/orderList.jsp";
+	}
+	
+	@RequestMapping(value = "/orderListDate.do")
+	public String getOrderList2(OrderVO vo, @RequestParam(name = "date") Integer date, Model model) throws Exception {
+		System.out.println("글 목록 검색 처리");
+		if(date == null) {
+			List<OrderVO> orderList = orderService.getOrderList(vo);
+			model.addAttribute("orderList", orderList);
+			System.out.println(orderList);
+		}
+		else if(date == 3) {
+			List<OrderVO> orderList = orderService.getOrderList2(vo, (int)date);
+			model.addAttribute("orderList", orderList);
+			System.out.println(orderList);
+		} else if(date == 6) {
+			List<OrderVO> orderList = orderService.getOrderList2(vo, (int)date);
+			model.addAttribute("orderList", orderList);
+			System.out.println(orderList);
+		} else if(date == 12) {
+			List<OrderVO> orderList = orderService.getOrderList2(vo, (int)date);
+			model.addAttribute("orderList", orderList);
+			System.out.println(orderList);
+		} 
 		
 		return "/order/orderList.jsp";
 	}
@@ -148,15 +173,26 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value="/productChange.do")
-	public String getOrderChange(OrderVO vo, Model model) throws Exception {
-		System.out.println("주문 취소/환불 요청 페이지 이동");
+	public String getproductChange(OrderVO vo, Model model) throws Exception {
+		System.out.println("상품 교환 요청 페이지 이동");
 		
-		OrderVO orderRefund = orderService.getOrderRefund(vo);
-		model.addAttribute("orderRefund", orderRefund);
-		
-		System.out.println(orderRefund);
+		OrderVO productChange = orderService.getProductChange(vo);
+		model.addAttribute("productChange", productChange);
+		System.out.println(productChange);
 		
 		return "/order/productChange.jsp";
+	}
+	
+	@RequestMapping(value="/insertProductChange.do")
+	public String insertProductChange(OrderVO vo, Model model) throws Exception {
+		System.out.println("상품 교환 요청");
+		
+		orderService.insertProductChange(vo);
+		orderService.updateProduct_state2(vo);
+		model.addAttribute("order_num", vo.getOrder_num());
+		
+		
+		return "redirect:orderInfo.do";
 	}
 	
 }

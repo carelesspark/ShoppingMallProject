@@ -48,6 +48,25 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public OrderVO getProductChange(OrderVO vo) {
+		
+		return orderDAO.getProductChange(vo);
+	}
+
+	@Override
+	public void insertProductChange(OrderVO vo) {
+		
+		orderDAO.insertProductChange(vo);	
+	}
+
+	@Override
+	public void updateProduct_state2(OrderVO vo) {
+		
+		orderDAO.updateProduct_state2(vo);
+		
+	}
+
+	@Override
 	public void updateProduct_state(OrderVO vo) {
 		orderDAO.updateProduct_state(vo);
 	}
@@ -76,4 +95,9 @@ public class OrderServiceImpl implements OrderService {
 		return orderDAO.getOrderList(vo);
 	}
 
+	@Override
+	public List<OrderVO> getOrderList2(OrderVO vo, int date) {
+		
+		return orderDAO.getOrderList2(vo, date);
+	}
 }

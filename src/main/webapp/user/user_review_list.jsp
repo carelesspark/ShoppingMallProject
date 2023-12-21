@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_order_list.css" />
-<title>user order list</title>
+	href="${pageContext.request.contextPath}/resources/css/user/user_review_list.css" />
+<title>user review list</title>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -81,7 +79,7 @@
 						<div>가격</div>
 						<div>상품 상태</div>
 					</div>
-					<c:forEach var="list" items="${orderList}">
+					<c:forEach var="list" items="${reviewList}">
 						<div id="ml">
 							<div>${list.order_date}</div>
 							<div>${list.delivery_date}</div>

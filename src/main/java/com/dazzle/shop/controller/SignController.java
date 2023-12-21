@@ -61,16 +61,20 @@ public class SignController {
 
 		if (user == null) { // fail to login
 			model.addAttribute("error", "failed");
-			return "sign_in.jsp";
+			return "login.jsp";
 		}
 
 		// success to login
 		int user_num = user.getUser_num();
+		String user_name = user.getUser_name();
+		String login_type = user.getLogin_type();
+		int is_admin = user.getIs_admin();
 		// 서버 session 저장
 		// key: "user_num", value: user_num
 		request.getSession().setAttribute("user_num", user_num);
-		// key: "user_type", value: "user"
-		request.getSession().setAttribute("user_type", "user");
+		request.getSession().setAttribute("user_name", user_name);
+		request.getSession().setAttribute("login_type", login_type);
+		request.getSession().setAttribute("is_admin", is_admin);
 
 //		// 사용자 cookie에 "user_num":user_num 저장
 //		Cookie userNumCookie = new Cookie("user_num", String.valueOf(user_num));

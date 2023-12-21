@@ -104,6 +104,12 @@
 							<c:when test="${orderInfo.product_state eq '배송 중'}">
 								<h1>상품이 배송되고 있습니다!</h1>
 							</c:when>
+							<c:when test="${orderInfo.product_state eq '취소/환불 요청 중'}">
+								<h1>상품 취소/환불 요청이 진행 중 입니다.</h1>
+							</c:when>
+							<c:when test="${orderInfo.product_state eq '교환 요청 중'}">
+								<h1>상품 교환 요청이 진행 중 입니다.</h1>
+							</c:when>
 							<c:otherwise>
 								<h1>상품 배송이 완료되었습니다!</h1>
 							</c:otherwise>
@@ -241,15 +247,73 @@
 					</div>
 					<div id="buttons">
 						<div>
-							<button type="button" class="btn btn-dark" id="button_1" onclick="location.href='/productChange.do'">교환
-								요청</button>
+							<c:choose>
+								<c:when test="${orderInfo.product_state eq '상품 준비 중'}">
+									<button type="button" class="btn btn-dark" id="button_1"
+										disabled='disabled'
+										onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
+										요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '배송 중'}">
+									<button type="button" class="btn btn-dark" id="button_1"
+										disabled='disabled'
+										onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
+										요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '취소/환불 요청 중'}">
+									<button type="button" class="btn btn-dark" id="button_1"
+										disabled='disabled'
+										onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
+										요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '교환 요청 중'}">
+									<button type="button" class="btn btn-dark" id="button_1"
+										disabled='disabled'
+										onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
+										요청</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" class="btn btn-dark" id="button_1"
+										disabled='disabled'
+										onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
+										요청</button>
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<div>
-							<button type="button" class="btn btn-dark" id="button_2" onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
-								취소/환불 요청</button>
+							<c:choose>
+								<c:when test="${orderInfo.product_state eq '상품 준비 중'}">
+									<button type="button" class="btn btn-dark" id="button_2"
+										onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
+										취소/환불 요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '배송 중'}">
+									<button type="button" class="btn btn-dark" id="button_2"
+										onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
+										취소/환불 요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '취소/환불 요청 중'}">
+									<button type="button" class="btn btn-dark" id="button_2"
+										disabled='disabled'
+										onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
+										취소/환불 요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '교환 요청 중'}">
+									<button type="button" class="btn btn-dark" id="button_2"
+										disabled='disabled'
+										onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
+										취소/환불 요청</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" class="btn btn-dark" id="button_2"
+										onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
+										취소/환불 요청</button>
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<div>
-							<button type="button" class="btn btn-dark" id="button_3" onclick="location.href='/returnOrderList.do?user_num=${orderInfo.user_num}'">목록으로
+							<button type="button" class="btn btn-dark" id="button_3"
+								onclick="location.href='/returnOrderList.do?user_num=${orderInfo.user_num}'">목록으로
 								돌아가기</button>
 						</div>
 					</div>
