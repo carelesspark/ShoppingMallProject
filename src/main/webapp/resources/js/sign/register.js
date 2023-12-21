@@ -38,7 +38,7 @@ ID_B.addEventListener("click", function(event) {
 	} else {
 		$.ajax({
 			type : "POST",
-			url : "/practice/checkIdSignUp.do",
+			url : "/sign/checkIdDupl.do",
 			data : {
 				id : id,
 			},
@@ -97,7 +97,7 @@ EM_B.addEventListener("click", function(event) {
 	} else {
 		$.ajax({
 			type : "POST",
-			url : "/practice/checkEmailSignUp.do",
+			url : "/sign/checkEmailDupl.do",
 			data : {
 				user_email : user_email,
 			},

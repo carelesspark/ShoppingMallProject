@@ -1,4 +1,4 @@
-package com.dazzle.shop.model.user;
+package com.dazzle.shop.model.user.domain;
 
 import java.sql.Date;
 
@@ -20,7 +20,7 @@ public class UserVO {
 	private int kakao_num;
 	private String kakao_email;
 	private String refresh_token;
-	//user_info
+	// user_info
 	private int user_info_num;
 	private String user_phone;
 	private String user_rank;
