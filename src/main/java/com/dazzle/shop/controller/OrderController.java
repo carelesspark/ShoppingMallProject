@@ -1,5 +1,6 @@
 package com.dazzle.shop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -7,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -85,11 +88,15 @@ public class OrderController {
 		
 	// 주문 상세 페이지에서 바로 구매할 때,
 	@RequestMapping(value="/productOrder.do")
-	public String getProductOrder(@RequestParam(name = "user_num") int userNum, @RequestParam(name = "product_code") String productCode, @RequestParam(name = "amount") int count, @RequestParam(name = "amount") int amount, OrderVO vo, Model model) throws Exception {
+	public String getProductOrder(int user_num,String product_code,int amount,Model model) throws Exception {
 		System.out.println("상품 주문 페이지 이동(상품 상세페이지로 부터)");
 		
-		List<OrderVO> productOrder = orderService.getProductOrder(userNum, productCode, amount, vo);
-		AddressVO address = addressService.getBaseAddress(userNum);
+		List<OrderVO> productOrder = orderService.getProductOrder(product_code, amount);
+		OrderVO userPoint = orderService.getPoint(user_num);
+		AddressVO address = addressService.getBaseAddress(user_num);
+		
+		model.addAttribute("user_num", user_num);
+		model.addAttribute("userPoint", userPoint);
 		model.addAttribute("productOrder", productOrder);
 		model.addAttribute("address", address);
 		System.out.println(productOrder);
@@ -106,7 +113,7 @@ public class OrderController {
 		model.addAttribute("address", address);
 		
 		model.addAttribute("productOrder", productOrder);
-		
+		model.addAttribute("user_num", user_num);
 		System.out.println(productOrder);
 			
 		return "/order/productOrder.jsp";
@@ -114,18 +121,41 @@ public class OrderController {
 	
 	
 	
-	@RequestMapping(value="/orderSuccess.do")
-	public String insertBuyOrder(OrderVO vo, Model model) throws Exception{
+	@RequestMapping(value="/order.do")
+	public String insertBuyOrder(OrderVO vo,Model model) throws Exception{
 		System.out.println("주문 목록 입력 처리");
 		
-		/*
-		 * orderService.insertBuyOrder(vo); orderService.insertBuyOrderDetail(vo);
-		 */
+		orderService.insertBuyOrder(vo);
+		int order_num = orderService.getBuyOrder(vo).getOrder_num();
+		if(vo.getProduct_code_list().size() == 1) {
+			vo.setProduct_code(vo.getProduct_code_list().get(0));
+			vo.setAmount((int)vo.getAmount_list().get(0));
+			vo.setAmountMultiPrice(vo.getAmountMultiPrice_list().get(0));
+			vo.setOrder_num(order_num);
+			orderService.insertBuyOrderDetail(vo);
+		}else {
+			for (int i = 0; i < vo.getProduct_code_list().size(); i++) {
+		        OrderVO product = new OrderVO();
+		        product.setProduct_code(vo.getProduct_code_list().get(i));
+		        product.setAmount((int) vo.getAmount_list().get(i));
+		        product.setAmountMultiPrice(vo.getAmountMultiPrice_list().get(i));
+		        product.setOrder_num(order_num);
+		        orderService.insertBuyOrderDetail(product);
+		    }
+		}
+				
+		model.addAttribute("order_num", order_num);
+		return "redirect:orderSuccess.do";
+	}
+	
+	@RequestMapping(value="/orderSuccess.do")
+	public String getOrderSucc(OrderVO vo, Model model) throws Exception{
+		System.out.println("주문 완료 정보");
+		//order_num과 일치하는 orders 값들 다 가져옴
 		
-		/*
-		 * List<OrderVO> orderSuccess = orderService.getProductOrderWhenSuccess(vo);
-		 * model.addAttribute("orderSuccess", orderSuccess);
-		 */
+		
+		//orders와 order_detail을 join한 list형 값 가져옴
+		
 		
 		return "/order/productOrderSucc.jsp";
 	}

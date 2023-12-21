@@ -21,9 +21,15 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
+	public List<OrderVO> getProductOrder(String productCode, int amount) {
 
-		return orderDAO.getProductOrder(userNum, productCode, amount, vo);
+		return orderDAO.getProductOrder(productCode, amount);
+	}
+	
+	@Override
+	public OrderVO getPoint(int user_num) {
+	
+		return orderDAO.getPoint(user_num);
 	}
 
 	@Override
@@ -31,6 +37,12 @@ public class OrderServiceImpl implements OrderService {
 		orderDAO.insertBuyOrder(vo);
 	}
 
+	@Override
+	public OrderVO getBuyOrder(OrderVO vo) {
+		return orderDAO.getBuyOrder(vo);
+	}
+	
+	
 	@Override
 	public void insertBuyOrderDetail(OrderVO vo) {
 		orderDAO.insertBuyOrderDetail(vo);

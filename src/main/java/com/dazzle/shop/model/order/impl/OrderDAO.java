@@ -46,15 +46,15 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE o.order_num = ?";
 
-	private final String PRODUCT_ORDER = "SELECT pimg.main_img, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, ui.user_point"
-			+ " FROM cart c\r\n" + " JOIN users u ON u.user_num = c.user_num"
-			+ " JOIN user_info ui ON ui.user_num = u.user_num"
-			+ " JOIN product_code pc ON pc.product_code = c.product_code"
+	private final String PRODUCT_ORDER = "SELECT pimg.main_img, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, pc.product_code"
+			+ " FROM product_code pc"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
-			+ " WHERE pc.product_code = ? AND u.user_num = ?";
+			+ " WHERE pc.product_code = ?";
+	
+	private final String USER_POINT = "SELECT user_point FROM user_info where user_num = ?";
 
 	private final String PRODUCT_ORDER_CART = "SELECT pimg.main_img, (p.product_price * c.amount) AS total_price, c.amount, p.product_name, pco.color_name, ps.size_name, ui.user_point"
 			+ " FROM cart c" + " JOIN users u ON u.user_num = c.user_num"
@@ -66,6 +66,12 @@ public class OrderDAO {
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE c.user_num = ?";
 
 	private final String BUY_ORDER = "INSERT INTO orders VALUES (DEFAULT, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+	private final String GET_ORDER = "SELECT order_num FROM orders "
+			+ "where address = ? and detail_address=? and postal_num = ? and delivery_price = ? and "
+			+ "recipient = ? and request = ? and payment = ? and user_num = ? and phone_num = ? "
+			+ "order by order_num desc limit 1";
+	
 	private final String BUY_ORDER_DETAIL = "INSERT INTO order_detail VALUES(DEFAULT, '상품 준비 중', ?, ?, ?, ?)";
 
 	private final String SUCCESS_ORDER = "SELECT pimg.main_img, (p.product_price * ? ) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, o.order_num, o.order_date, o.delivery_price"
@@ -128,12 +134,23 @@ public class OrderDAO {
 		}
 	}
 
-	public List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
+	public List<OrderVO> getProductOrder(String productCode, int amount) {
 		try {
 			System.out.println("getProductOrder()");
-			Object[] args = { amount, amount, productCode, userNum };
+			Object[] args = { amount, amount, productCode };
 
 			return jdbcTemplate.query(PRODUCT_ORDER, args, new ProductOrderRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public OrderVO getPoint(int user_num) {
+		try {
+			System.out.println("getPoint()");
+			Object[] args = { user_num };
+
+			return jdbcTemplate.queryForObject(USER_POINT, args, new UserPointRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
@@ -157,6 +174,15 @@ public class OrderDAO {
 				vo.getPhone_num());
 
 		return;
+	}
+	
+	public OrderVO getBuyOrder(OrderVO vo) {
+		System.out.println("getBuyOrder()");
+		Object[] args = {vo.getAddress(), vo.getDetail_address(), vo.getPostal_num(),
+				vo.getDelivery_price(), vo.getRecipient(), vo.getRequest(), vo.getPayment(), vo.getUser_num(),
+				vo.getPhone_num()};
+		return jdbcTemplate.queryForObject(GET_ORDER, args, new OrderNumRowMapper());
+
 	}
 
 	public void insertBuyOrderDetail(OrderVO vo) {
