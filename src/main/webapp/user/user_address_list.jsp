@@ -7,8 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_order_list.css" />
-<title>user order list</title>
+	href="${pageContext.request.contextPath}/resources/css/user/user_address_list.css" />
+
+<title>user address list</title>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -70,25 +71,17 @@
 
 			<main>
 				<div id="md">
+				주소지 내용
 					<div id="mh">
-						<div>주문일</div>
-						<div>배송일</div>
-						<div>수취인</div>
-						<div>삼품명</div>
-						<div>개수</div>
-						<div>가격</div>
-						<div>상품 상태</div>
+						
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
 					</div>
-					<c:forEach var="list" items="${orderList}">
-						<div id="ml">
-							<div>${list.order_date}</div>
-							<div>${list.delivery_date}</div>
-							<div>${list.recipient}</div>
-							<div>${list.product_name}</div>
-							<div>${list.amount}</div>
-							<div>${list.total_price}</div>
-							<div>${list.product_state}</div>
-						</div>
+					<c:forEach var="list" items="${boardList}">
+						<div id="ml"></div>
 					</c:forEach>
 				</div>
 			</main>

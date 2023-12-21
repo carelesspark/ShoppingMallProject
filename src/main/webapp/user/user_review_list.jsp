@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,30 +70,16 @@
 
 			<main>
 				<div id="md">
+					후기 내역
 					<div id="mh">
-						<div>주문일</div>
-						<div>배송일</div>
-						<div>수취인</div>
-						<div>삼품명</div>
-						<div>색깔</div>
-						<div>사이즈</div>
-						<div>개수</div>
-						<div>가격</div>
-						<div>상품 상태</div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
 					</div>
 					<c:forEach var="list" items="${reviewList}">
-						<div id="ml">
-							<div>${list.order_date}</div>
-							<div>${list.delivery_date}</div>
-							<div>${list.recipient}</div>
-							<div>${list.product_name}</div>
-							<div>${list.color_name}</div>
-							<div>${list.size_name}</div>
-							<div>${list.product_name}</div>
-							<div>${list.amount}</div>
-							<div>${list.total_price}</div>
-							<div>${list.product_state}</div>
-						</div>
+						<div id="ml"></div>
 					</c:forEach>
 				</div>
 			</main>
@@ -109,14 +97,19 @@
 			rankBadge.style.color = '#B87333';
 		} else if (rank === 'SILVER') {
 			rankBadge.innerText = 'S';
+			rankBadge.style.color = '#CCCCCC';
 		} else if (rank === 'GOLD') {
 			rankBadge.innerText = 'G';
+			rankBadge.style.color = '#FFD700';
 		} else if (rank === 'DIAMOND') {
 			rankBadge.innerText = 'D';
+			rankBadge.style.color = '#EEEEEE';
 		} else if (rank === 'VIP') {
 			rankBadge.innerText = 'V';
-		} else if (rank === 'Admin') {
+			rankBadge.style.color = '#8A2BE2';
+		} else if (rank === 'ADMIN') {
 			rankBadge.innerText = 'A';
+			rankBadge.style.color = '#DD2476';
 		}
 	</script>
 </body>
