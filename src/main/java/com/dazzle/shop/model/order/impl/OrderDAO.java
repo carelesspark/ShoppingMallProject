@@ -46,7 +46,7 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE o.order_num = ?";
 
-	private final String PRODUCT_ORDER = "SELECT pimg.main_img, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name"
+	private final String PRODUCT_ORDER = "SELECT pimg.main_img, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, pc.product_code"
 			+ " FROM product_code pc"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
@@ -66,6 +66,11 @@ public class OrderDAO {
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE c.user_num = ?";
 
 	private final String BUY_ORDER = "INSERT INTO orders VALUES (DEFAULT, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+	private final String GET_ORDER = "SELECT order_num FROM orders "
+			+ "where address = ? and detail_address=? and postal_num = ? and delivery_price = ? and "
+			+ "recipient = ? and request = ? and payment = ? and user_num = ? and phone_num = ?";
+	
 	private final String BUY_ORDER_DETAIL = "INSERT INTO order_detail VALUES(DEFAULT, '상품 준비 중', ?, ?, ?, ?)";
 
 	private final String SUCCESS_ORDER = "SELECT pimg.main_img, (p.product_price * ? ) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, o.order_num, o.order_date, o.delivery_price"
@@ -168,6 +173,15 @@ public class OrderDAO {
 				vo.getPhone_num());
 
 		return;
+	}
+	
+	public OrderVO getBuyOrder(OrderVO vo) {
+		System.out.println("getBuyOrder()");
+		Object[] args = {vo.getAddress(), vo.getDetail_address(), vo.getPostal_num(),
+				vo.getDelivery_price(), vo.getRecipient(), vo.getRequest(), vo.getPayment(), vo.getUser_num(),
+				vo.getPhone_num()};
+		return jdbcTemplate.queryForObject(GET_ORDER, args, new OrderNumRowMapper());
+
 	}
 
 	public void insertBuyOrderDetail(OrderVO vo) {

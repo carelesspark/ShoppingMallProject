@@ -1,5 +1,6 @@
 package com.dazzle.shop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -7,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -92,6 +95,7 @@ public class OrderController {
 		OrderVO userPoint = orderService.getPoint(user_num);
 		AddressVO address = addressService.getBaseAddress(user_num);
 		
+		model.addAttribute("user_num", user_num);
 		model.addAttribute("userPoint", userPoint);
 		model.addAttribute("productOrder", productOrder);
 		model.addAttribute("address", address);
@@ -109,7 +113,7 @@ public class OrderController {
 		model.addAttribute("address", address);
 		
 		model.addAttribute("productOrder", productOrder);
-		
+		model.addAttribute("user_num", user_num);
 		System.out.println(productOrder);
 			
 		return "/order/productOrder.jsp";
@@ -118,23 +122,29 @@ public class OrderController {
 	
 	
 	@RequestMapping(value="/order.do")
-	public String insertBuyOrder(List<OrderVO> orderList, Model model) throws Exception{
+	public String insertBuyOrder(OrderVO vo,Model model) throws Exception{
 		System.out.println("주문 목록 입력 처리");
 		
-	
-//		orderService.insertBuyOrder(vo);
-//		orderService.insertBuyOrderDetail(vo);
-		
-		
-		
-		/*
-		 * List<OrderVO> orderSuccess = orderService.getProductOrderWhenSuccess(vo);
-		 * model.addAttribute("orderSuccess", orderSuccess);
-		 */
-		
-		
-		//orderSuccess부분을 List가 아니라 vo에 대한 insertBuyOrder에 대한 동작을 마치고 난 후 vo의 값과 일치하는 orders에 존재하는 order_num을 반환하여 보내줘야함 
-		//model.addAttribute("order_num", order_num); 주문 번호 필요
+		orderService.insertBuyOrder(vo);
+		int order_num = orderService.getBuyOrder(vo).getOrder_num();
+		if(vo.getProduct_code_list().size() == 1) {
+			vo.setProduct_code(vo.getProduct_code_list().get(0));
+			vo.setAmount((int)vo.getAmount_list().get(0));
+			vo.setAmountMultiPrice(vo.getAmountMultiPrice_list().get(0));
+			vo.setOrder_num(order_num);
+			orderService.insertBuyOrderDetail(vo);
+		}else {
+			for (int i = 0; i < vo.getProduct_code_list().size(); i++) {
+		        OrderVO product = new OrderVO();
+		        product.setProduct_code(vo.getProduct_code_list().get(i));
+		        product.setAmount((int) vo.getAmount_list().get(i));
+		        product.setAmountMultiPrice(vo.getAmountMultiPrice_list().get(i));
+		        product.setOrder_num(order_num);
+		        orderService.insertBuyOrderDetail(product);
+		    }
+		}
+				
+		model.addAttribute("order_num", order_num);
 		return "redirect:orderSuccess.do";
 	}
 	
@@ -142,6 +152,7 @@ public class OrderController {
 	public String getOrderSucc(OrderVO vo, Model model) throws Exception{
 		System.out.println("주문 완료 정보");
 		//order_num과 일치하는 orders 값들 다 가져옴
+		
 		
 		//orders와 order_detail을 join한 list형 값 가져옴
 		

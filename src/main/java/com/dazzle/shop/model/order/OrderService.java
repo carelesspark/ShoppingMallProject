@@ -12,6 +12,8 @@ public interface OrderService {
 	
 	void insertBuyOrder(OrderVO vo);
 	
+	OrderVO getBuyOrder(OrderVO vo);
+	
 	void insertBuyOrderDetail(OrderVO vo);
 	
 	void insertOrderRefund(OrderVO vo);

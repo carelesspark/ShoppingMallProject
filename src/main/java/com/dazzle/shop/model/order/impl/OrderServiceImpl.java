@@ -38,6 +38,12 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public OrderVO getBuyOrder(OrderVO vo) {
+		return orderDAO.getBuyOrder(vo);
+	}
+	
+	
+	@Override
 	public void insertBuyOrderDetail(OrderVO vo) {
 		orderDAO.insertBuyOrderDetail(vo);
 	}

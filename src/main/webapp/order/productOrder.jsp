@@ -22,7 +22,9 @@
 <body>
 	<%@ include file="../header.jsp"%>
 	<main>
-		<form action="/orderSuccess.do" method="post">
+		<form action="order.do" method="post">
+			<input type="hidden" value="${user_num}" name="user_num"/>
+			
 			<div id="main_container">
 				<div id="order_list">
 					<div id="order_list_title">
@@ -31,18 +33,23 @@
 					<div>
 						<h3>주문 내역</h3>
 					</div>
+					<c:set var="totalPrice" value="0" />
 					<c:forEach items="${productOrder}" var="order">
 						<div id="order_list_box">
 							<div id="order_list_grid">
+								<input type="hidden" value="${order.product_code }" name="product_code_list"/>
 								<div id="order_list_pic">
 									<a href="${order.main_img }"><img src="${order.main_img }"
 										id="order_list_pic1" /></a>
 								</div>
 								<div id="order_list_price">
-									<p>${order.amountMultiPrice}</p>
+									<p>${order.amountMultiPrice} 원</p>
+									<input type="hidden" value="${order.amountMultiPrice }" name="amountMultiPrice_list"/>
+									 <c:set var="totalPrice" value="${totalPrice + order.amountMultiPrice}" />
 								</div>
 								<div id="order_list_amount">
-									<p>수량/${order.amount }개</p>
+									<p>수량 / ${order.amount }개</p>
+									<input type="hidden" value="${order.amount }" name="amount_list"/>
 								</div>
 								<div id="order_list_name">
 									<p>${order.product_name}(색상:${order.color_name},사이즈 :
@@ -50,9 +57,10 @@
 								</div>
 							</div>
 						</div>
+						
 					</c:forEach>
 					<div id="order_list_total_price">
-						<p>전체 가격 : 19,000원</p>
+						<p>전체 가격 : ${totalPrice} 원</p>
 					</div>
 				</div>
 
@@ -151,7 +159,7 @@
 								</div>
 								<div id="order_payment_grid_rows_2">
 									<div id="order_payment_price_value">
-										<p>19,000원</p>
+										<p>${totalPrice} 원</p>
 									</div>
 									<div id="order_payment_coupon_value">
 										<select>
@@ -182,27 +190,34 @@
 										</div>
 									</div>
 									<div id="order_payment_delivery_value">
-										<p>0원</p>
+										<c:set var="delivery_price" value="3000" />
+										<c:if test="${totalPrice >= 30000}">
+											<c:set var="delivery_price" value="0" />
+										</c:if>
+										<p>${delivery_price } 원</p>
+										<input type="hidden" value="${delivery_price}" name="delivery_price"/>
+										
 									</div>
 									<div id="order_payment_actual_price_value">
-										<p>19,000원</p>
+										<c:set var="totalPrice" value="${totalPrice + delivery_price}" />
+										<p>${totalPrice} 원</p>
 									</div>
 									<div id="order_payment_method_value">
 										<div>
 											<input type="radio" id="credit_card" name="payment"
-												value="credit_card"><label>신용카드/체크카드</label>
+												value="신용카드/체크카드"><label>신용카드/체크카드</label>
 										</div>
 										<div>
 											<input type="radio" id="deposit_without_passbook"
-												name="payment" value="deposit_without_passbook"><label>무통장입금</label>
+												name="payment" value="무통장입금"><label>무통장입금</label>
 										</div>
 										<div>
 											<input type="radio" id="transfer" name="payment"
-												value="transfer"><label>계좌이체</label>
+												value="계좌이체"><label>계좌이체</label>
 										</div>
 										<div>
 											<input type="radio" id="kakaopay" name="payment"
-												value="kakaopay"><label>카카오페이</label>
+												value="카카오페이"><label>카카오페이</label>
 										</div>
 									</div>
 								</div>
