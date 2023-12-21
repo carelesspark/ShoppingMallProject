@@ -5,10 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import com.dazzle.shop.model.faq.FaqCtgrVO;
-import com.dazzle.shop.model.faq.FaqSubCtgrVO;
-import com.dazzle.shop.model.faq.FaqTotalCtgrVO;
 import com.dazzle.shop.model.faq.FaqVO;
 
 @Repository
@@ -30,12 +26,12 @@ public class FaqDAO {
 	private final String GET_FAQ = "select * from faq where faq_num = ?";
 	private final String UPDATE_FAQ = "update faq set question = ?, answer = ?, sub_ctgr_num = ? where faq_num = ?";
 	 
-	public List<FaqCtgrVO> getCtgr() {
+	public List<FaqVO> getCtgr() {
 		return jdbcTemplate.query(GET_FAQ_CTGR,new FaqCtgrRowMapper());
 	}
 		
 	//faq 세부카테고리 목록
-	public List<FaqSubCtgrVO> getSubCtgr() {
+	public List<FaqVO> getSubCtgr() {
 		return jdbcTemplate.query(GET_FAQ_SUB_CTGR,new FaqSubCtgrRowMapper());
 	}
 	
@@ -62,11 +58,11 @@ public class FaqDAO {
 		return jdbcTemplate.query(GET_FAQ_LIST, args, new FaqRowMapper());
 	}
 	
-	public List<FaqTotalCtgrVO> getDetailCtgr() {
+	public List<FaqVO> getDetailCtgr() {
 		return jdbcTemplate.query(GET_ALL_DETAIL_CTGR,new FaqTotalCtgrRowMapper());
 	}
 	
-	public FaqTotalCtgrVO getCurrCtgr(Integer sub_ctgr_num ) {
+	public FaqVO getCurrCtgr(Integer sub_ctgr_num ) {
 		Object[] args = {sub_ctgr_num};
 		return jdbcTemplate.queryForObject(GET_CURR_CTGR, args,new FaqTotalCtgrRowMapper());
 	
