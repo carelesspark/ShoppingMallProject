@@ -12,6 +12,8 @@ public interface OrderService {
 	
 	void insertBuyOrder(OrderVO vo);
 	
+	OrderVO getBuyOrder(OrderVO vo);
+	
 	void insertBuyOrderDetail(OrderVO vo);
 	
 	void insertOrderRefund(OrderVO vo);
@@ -24,10 +26,11 @@ public interface OrderService {
 
 	List<OrderVO> getOrderList(OrderVO vo);
 	
+	List<OrderVO> getProductOrder(String productCode, int amount);
+	
+	OrderVO getPoint(int user_num);
 
 	List<OrderVO> getOrderList2(OrderVO vo, int date);
-	
-	List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo);
 	
 	List<OrderVO> getProductOrderFromCart(OrderVO vo);
 	

@@ -1,6 +1,7 @@
 package com.dazzle.shop.model.order;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -27,11 +28,14 @@ public class OrderVO {
 	private String size_name;
 	private int cart_num;
 	private int amount;
+	private List<Integer> amount_list;
 	private int user_num;
 	private String product_code;
+	private List<String> product_code_list;
 	private int user_point;
 	private String main_img;
 	private int amountMultiPrice;
+	private List<Integer> amountMultiPrice_list;
 	private int order_detail_num;
 	private String refund_or_change_reason;
 	private String reason_detail;
