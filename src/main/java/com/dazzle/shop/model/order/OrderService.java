@@ -30,8 +30,6 @@ public interface OrderService {
 
 	List<OrderVO> getOrderList2(OrderVO vo, int date);
 	
-	List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo);
-	
 	List<OrderVO> getProductOrderFromCart(OrderVO vo);
 	
 	List<OrderVO> getProductOrderWhenSuccess(OrderVO vo);
