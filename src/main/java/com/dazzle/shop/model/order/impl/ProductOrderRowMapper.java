@@ -19,8 +19,6 @@ public class ProductOrderRowMapper implements RowMapper<OrderVO>{
 		productOrderList.setProduct_name(rs.getString("product_name"));
 		productOrderList.setColor_name(rs.getString("color_name"));
 		productOrderList.setSize_name(rs.getString("size_name"));
-		productOrderList.setUser_point(rs.getInt("user_point"));
-		
 		
 		
 		return productOrderList;

@@ -174,7 +174,7 @@
 											<label>보유 : </label>
 										</div>
 										<div id="order_payment_label_css">
-											<label><c:out value="${productOrder[0].user_point}" />포인트</label>
+											<label><c:out value="${userPoint.user_point}" />포인트</label>
 										</div>
 										<div id="order_payment_div_css">
 											<button type="button" class="btn btn-dark"

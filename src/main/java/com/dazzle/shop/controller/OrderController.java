@@ -60,11 +60,14 @@ public class OrderController {
 		
 	// 주문 상세 페이지에서 바로 구매할 때,
 	@RequestMapping(value="/productOrder.do")
-	public String getProductOrder(@RequestParam(name = "user_num") int userNum, @RequestParam(name = "product_code") String productCode, @RequestParam(name = "amount") int count, @RequestParam(name = "amount") int amount, OrderVO vo, Model model) throws Exception {
+	public String getProductOrder(int user_num,String product_code,int amount,Model model) throws Exception {
 		System.out.println("상품 주문 페이지 이동(상품 상세페이지로 부터)");
 		
-		List<OrderVO> productOrder = orderService.getProductOrder(userNum, productCode, amount, vo);
-		AddressVO address = addressService.getBaseAddress(userNum);
+		List<OrderVO> productOrder = orderService.getProductOrder(product_code, amount);
+		OrderVO userPoint = orderService.getPoint(user_num);
+		AddressVO address = addressService.getBaseAddress(user_num);
+		
+		model.addAttribute("userPoint", userPoint);
 		model.addAttribute("productOrder", productOrder);
 		model.addAttribute("address", address);
 		System.out.println(productOrder);
@@ -89,18 +92,34 @@ public class OrderController {
 	
 	
 	
-	@RequestMapping(value="/orderSuccess.do")
-	public String insertBuyOrder(OrderVO vo, Model model) throws Exception{
+	@RequestMapping(value="/order.do")
+	public String insertBuyOrder(List<OrderVO> orderList, Model model) throws Exception{
 		System.out.println("주문 목록 입력 처리");
 		
-		/*
-		 * orderService.insertBuyOrder(vo); orderService.insertBuyOrderDetail(vo);
-		 */
+	
+//		orderService.insertBuyOrder(vo);
+//		orderService.insertBuyOrderDetail(vo);
+		
+		
 		
 		/*
 		 * List<OrderVO> orderSuccess = orderService.getProductOrderWhenSuccess(vo);
 		 * model.addAttribute("orderSuccess", orderSuccess);
 		 */
+		
+		
+		//orderSuccess부분을 List가 아니라 vo에 대한 insertBuyOrder에 대한 동작을 마치고 난 후 vo의 값과 일치하는 orders에 존재하는 order_num을 반환하여 보내줘야함 
+		//model.addAttribute("order_num", order_num); 주문 번호 필요
+		return "redirect:orderSuccess.do";
+	}
+	
+	@RequestMapping(value="/orderSuccess.do")
+	public String getOrderSucc(OrderVO vo, Model model) throws Exception{
+		System.out.println("주문 완료 정보");
+		//order_num과 일치하는 orders 값들 다 가져옴
+		
+		//orders와 order_detail을 join한 list형 값 가져옴
+		
 		
 		return "/order/productOrderSucc.jsp";
 	}

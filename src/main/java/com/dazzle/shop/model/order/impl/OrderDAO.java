@@ -37,15 +37,15 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE o.order_num = ?";
 
-	private final String PRODUCT_ORDER = "SELECT pimg.main_img, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, ui.user_point"
-			+ " FROM cart c\r\n" + " JOIN users u ON u.user_num = c.user_num"
-			+ " JOIN user_info ui ON ui.user_num = u.user_num"
-			+ " JOIN product_code pc ON pc.product_code = c.product_code"
+	private final String PRODUCT_ORDER = "SELECT pimg.main_img, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name"
+			+ " FROM product_code pc"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
-			+ " WHERE pc.product_code = ? AND u.user_num = ?";
+			+ " WHERE pc.product_code = ?";
+	
+	private final String USER_POINT = "SELECT user_point FROM user_info where user_num = ?";
 
 	private final String PRODUCT_ORDER_CART = "SELECT pimg.main_img, (p.product_price * c.amount) AS total_price, c.amount, p.product_name, pco.color_name, ps.size_name, ui.user_point"
 			+ " FROM cart c" + " JOIN users u ON u.user_num = c.user_num"
@@ -95,12 +95,23 @@ public class OrderDAO {
 		return jdbcTemplate.query(ORDER_LIST, args, new OrderListRowMapper());
 	}
 
-	public List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
+	public List<OrderVO> getProductOrder(String productCode, int amount) {
 		try {
 			System.out.println("getProductOrder()");
-			Object[] args = { amount, amount, productCode, userNum };
+			Object[] args = { amount, amount, productCode };
 
 			return jdbcTemplate.query(PRODUCT_ORDER, args, new ProductOrderRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public OrderVO getPoint(int user_num) {
+		try {
+			System.out.println("getPoint()");
+			Object[] args = { user_num };
+
+			return jdbcTemplate.queryForObject(USER_POINT, args, new UserPointRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
