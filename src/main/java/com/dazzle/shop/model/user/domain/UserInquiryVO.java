@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class UserVO {
+public class UserInquiryVO {
 	// users
 	// pk: user_num
 	private int user_num;
@@ -33,4 +33,11 @@ public class UserVO {
 	private Date user_update_date;
 	private Date user_delete_date;
 	private int is_black_list;
+	// inquiry
+	// pk: inquiry_num
+	private int inquiry_num;
+	private String inquiry_content;
+	private Integer public_set; // Use Integer to represent nullable TINYINT in the database
+	private Date inquiry_date;
+	private String product_code;
 }

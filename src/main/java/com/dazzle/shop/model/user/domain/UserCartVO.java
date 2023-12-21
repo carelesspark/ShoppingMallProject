@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class UserVO {
+public class UserCartVO {
 	// users
 	// pk: user_num
 	private int user_num;
@@ -33,4 +33,9 @@ public class UserVO {
 	private Date user_update_date;
 	private Date user_delete_date;
 	private int is_black_list;
+	// cart
+	// pk: cart_num
+	private int cart_num;
+	private int amount; // Use Integer to represent nullable INT in the database
+	private String product_code;
 }
