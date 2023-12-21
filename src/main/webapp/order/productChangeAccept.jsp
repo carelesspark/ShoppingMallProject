@@ -130,11 +130,11 @@
 					<div id="bottom_buttons">
 						<div id="bottom_button_div1">
 							<button type="button" class="btn btn-outline-secondary"
-								id="button3">저장하기</button>
+								id="button3" onclick="location.href='/order/orderRefundOrChange.jsp'">저장하기</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-outline-secondary"
-								id="button4">목록</button>
+								id="button4" onclick="location.href='/order/orderRefundOrChange.jsp'">목록</button>
 						</div>
 					</div>
 				</div>

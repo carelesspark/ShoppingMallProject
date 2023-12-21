@@ -14,17 +14,13 @@ public class OrderRefundRowMapper implements RowMapper<OrderVO>{
 		
 		OrderVO orderRefund = new OrderVO();
 		orderRefund.setOrder_num(rs.getInt("order_num"));
-		orderRefund.setProduct_price(rs.getInt("product_price"));
+		orderRefund.setRecipient(rs.getString("recipient"));
 		orderRefund.setAmount(rs.getInt("amount"));
 		orderRefund.setAmountMultiPrice(rs.getInt("total_price"));
-		orderRefund.setRecipient(rs.getString("recipient"));
+		orderRefund.setProduct_price(rs.getInt("product_price"));
 		orderRefund.setOrder_detail_num(rs.getInt("order_detail_num"));
 		
-		
-		
-		
-		
-		
+
 		return orderRefund;
 	}
 

@@ -129,7 +129,7 @@
 					<div id="bottom_buttons">
 						<div id="bottom_button_div1">
 							<button type="button" class="btn btn-outline-secondary"
-								id="button3">주문 수정</button>
+								id="button3" onclick="location.href='/order/orderInfoEdit.jsp'">주문 수정</button>
 						</div>
 						<div id="bottom_button_div2">
 							<button type="button" class="btn btn-outline-secondary"
@@ -137,7 +137,7 @@
 						</div>
 						<div>
 							<button type="button" class="btn btn-outline-secondary"
-								id="button5">목록</button>
+								id="button5" onclick="location.href='/order/orderListAdmin.jsp'">목록</button>
 						</div>
 					</div>
 				</div>

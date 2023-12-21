@@ -21,13 +21,22 @@ public class OrderDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	private final String ORDER_LIST = "SELECT o.order_num, od.product_state, o.order_date, p.product_name, p.product_price"
+	private final String ORDER_LIST = "SELECT o.order_num, od.product_state, o.order_date, p.product_name, p.product_price, o.user_num"
 			+ " FROM orders o" + " JOIN order_detail od ON o.order_num = od.order_num"
 			+ " JOIN delivery d ON d.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE o.user_num = ?";
+
+	private final String ORDER_LIST2 = "SELECT o.order_num, od.product_state, o.user_num, o.order_date, p.product_name, p.product_price"
+			+ " FROM orders o" + " JOIN order_detail od ON o.order_num = od.order_num"
+			+ " JOIN delivery d ON d.order_num = o.order_num"
+			+ " JOIN product_code pc ON pc.product_code = od.product_code"
+			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
+			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
+			+ " JOIN product p ON p.product_num = pco.product_num"
+			+ " WHERE o.user_num = ? AND o.order_date >= DATE_SUB(NOW(), INTERVAL ? MONTH)";
 
 	private final String ORDER_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num"
 			+ " FROM orders o" + " JOIN order_detail od ON o.order_num = od.order_num"
@@ -78,6 +87,16 @@ public class OrderDAO {
 	private final String ORDER_REFUND_REQ = "INSERT INTO product_refund_or_change VALUES(DEFAULT, NOW(), '취소/환불 요청 중', ?, ?, ?, ?, ?, ?)";
 	private final String CHANGE_PRODUCT_STATE = "UPDATE order_detail SET product_state = '취소/환불 요청 중' WHERE order_detail_num = ?";
 
+	private final String PRODUCT_CHANGE = "SELECT o.order_num, p.product_name, o.recipient, o.phone_num, o.address, o.detail_address, od.amount, od.order_detail_num"
+			+ " FROM orders o" + " JOIN order_detail od ON od.order_num = o.order_num"
+			+ " JOIN product_code pc ON pc.product_code = od.product_code"
+			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
+			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
+			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE od.order_detail_num = ?";
+
+	private final String PRODUCT_CHANGE_REQ = "INSERT INTO product_refund_or_change VALUES(DEFAULT, NOW(), '교환 요청 중', ?, ?, ?, ?, ?, ?)";
+	private final String CHANGE_PRODUCT_STATE2 = "UPDATE order_detail SET product_state = '상품 교환 중' WHERE order_detail_num = ?";
+
 	public OrderVO getOrderInfo(OrderVO vo) {
 		try {
 			System.out.println("getOrderInfo()");
@@ -89,10 +108,24 @@ public class OrderDAO {
 	}
 
 	public List<OrderVO> getOrderList(OrderVO vo) {
-		System.out.println("getOrderList()");
-		Object[] args = { vo.getUser_num() };
+		try {
+			System.out.println("getOrderList()");
+			Object[] args = { vo.getUser_num() };
+			return jdbcTemplate.query(ORDER_LIST, args, new OrderListRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 
-		return jdbcTemplate.query(ORDER_LIST, args, new OrderListRowMapper());
+	public List<OrderVO> getOrderList2(OrderVO vo, int date) {
+		try {
+			System.out.println("getOrderList2()");
+			Object[] args = { vo.getUser_num(), date };
+			return jdbcTemplate.query(ORDER_LIST2, args, new OrderListRowMapper());
+
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 	public List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
@@ -167,6 +200,31 @@ public class OrderDAO {
 	public void updateProduct_state(OrderVO vo) {
 		System.out.println("updateProduct_state()");
 		jdbcTemplate.update(CHANGE_PRODUCT_STATE, vo.getOrder_detail_num());
+		return;
+	}
+
+	public OrderVO getProductChange(OrderVO vo) {
+		try {
+			System.out.println("getProductChange()");
+			Object[] args = { vo.getOrder_detail_num() };
+			return jdbcTemplate.queryForObject(PRODUCT_CHANGE, args, new ProductChangeRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
+	public void insertProductChange(OrderVO vo) {
+
+		System.out.println("insertProductChange()");
+
+		jdbcTemplate.update(PRODUCT_CHANGE_REQ, vo.getRefund_or_change_reason(), vo.getReason_detail(), vo.getAmount(),
+				vo.getBank(), vo.getAccount_num(), vo.getOrder_detail_num());
+		return;
+	}
+
+	public void updateProduct_state2(OrderVO vo) {
+		System.out.println("updateProduct_state2()");
+		jdbcTemplate.update(CHANGE_PRODUCT_STATE2, vo.getOrder_detail_num());
 		return;
 	}
 
