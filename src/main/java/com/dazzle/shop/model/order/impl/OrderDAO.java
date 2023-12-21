@@ -69,7 +69,8 @@ public class OrderDAO {
 	
 	private final String GET_ORDER = "SELECT order_num FROM orders "
 			+ "where address = ? and detail_address=? and postal_num = ? and delivery_price = ? and "
-			+ "recipient = ? and request = ? and payment = ? and user_num = ? and phone_num = ?";
+			+ "recipient = ? and request = ? and payment = ? and user_num = ? and phone_num = ? "
+			+ "order by order_num desc limit 1";
 	
 	private final String BUY_ORDER_DETAIL = "INSERT INTO order_detail VALUES(DEFAULT, '상품 준비 중', ?, ?, ?, ?)";
 
