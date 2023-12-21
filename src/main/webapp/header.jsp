@@ -30,15 +30,15 @@
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/main.do">HOME</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/getProductList.do?category=top">TOP</a></li>
+						href="/category_products.do?category=1">TOP</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/getProductList.do?category=bottom">BOTTOM</a></li>
+						href="/category_products.do?category=2">BOTTOM</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/getProductList.do?category=outer">OUTER</a></li>
+						href="/category_products.do?category=3">OUTER</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/getProductList.do?category=shoes">SHOES</a></li>
+						href="/category_products.do?category=4">SHOES</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/getProductList.do?category=etc">ETC</a></li>
+						href="/category_products.do?category=5">ETC</a></li>
 				</ul>
 
 				<ul class="navbar-nav gap-2">
