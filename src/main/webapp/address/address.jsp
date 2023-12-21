@@ -26,35 +26,36 @@
         	 window.close();
         }
         
-        function selectAddress() {
+        function selectAddress(recipient, postal_num, address, detail_address,phone_num,request) {
             var parentDocument = window.opener.document;
-
+			console.log(recipient, postal_num, address, detail_address,phone_num,request);
+			
             // 이름 변경
             var nameInput = parentDocument.getElementById('order_address_name_value').querySelector('input[name="recipient"]');
-            nameInput.value = "11111111";
+            nameInput.value = recipient;
 
             // 우편번호 변경
             var postalNumInput = parentDocument.getElementById('order_address_address_value').querySelector('input[name="postal_num"]');
-            postalNumInput.value = "11111111";
+            postalNumInput.value = postal_num;
 
             // 주소 변경
             var addressInput = parentDocument.getElementById('order_address_address_value').querySelector('input[name="address"]');
-            addressInput.value = "11111111";
+            addressInput.value = address;
 
             // 상세 주소 변경
             var detailAddressInput = parentDocument.getElementById('order_address_address_value').querySelector('input[name="detail_address"]');
-            detailAddressInput.value = "11111111";
+            detailAddressInput.value = detail_address;
 
             // 전화번호 변경
             var phoneNumInput = parentDocument.getElementById('order_address_phone_value').querySelector('input[name="phone_num"]');
-            phoneNumInput.value = "11111111";
+            phoneNumInput.value = phone_num;
 
             var requestSelect = parentDocument.getElementById('order_address_request_value').querySelector('select[name="request"]');
             var defaultOption = requestSelect.querySelector('#default');
 
             // 새로운 값으로 변경
-            defaultOption.value = "11111111"; // 변경할 값
-            defaultOption.innerText = "새로운 텍스트"; // 변경할 텍스트
+            defaultOption.value = request;
+            defaultOption.innerText = request;
 
             // 창 닫기
             window.close();
@@ -86,7 +87,10 @@
 		             <div class="button">
                         <button class="edit" onclick="editAddress(${address.addr_num})">수정하기</button>
                         <button class="delete" onclick="deleteAddress(${address.addr_num},${address.user_num})">삭제하기</button>
-                     	<button class="choice" onclick="selectAddress()">선택하기</button>
+                     	<button class="choice" onclick="selectAddress('${address.recipient}', '${address.postal_num}',
+                     	'${address.address}', '${address.detail_address}', '${address.phone_num}', '${address.request}')">
+                     		선택하기
+						</button>
                      </div>
 		        </div>
 		        <hr>
@@ -110,7 +114,10 @@
 		             <div class="button">
                         <button class="edit" onclick="editAddress(${address.addr_num})">수정하기</button>
                         <button class="delete" onclick="deleteAddress(${address.addr_num},${address.user_num})">삭제하기</button>
-                     	<button class="choice" onclick="selectAddress()">선택하기</button>
+                     	<button class="choice" onclick="selectAddress('${address.recipient}', '${address.postal_num}',
+                     	'${address.address}', '${address.detail_address}', '${address.phone_num}', '${address.request}')">
+                     		선택하기
+						</button>
                      </div>
 		        </div>
 		        <hr>

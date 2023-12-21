@@ -17,13 +17,13 @@ public class FaqServiceImpl implements FaqService {
     
 	//faq 카테고리 목록
     @Override
-	public List<FaqCtgrVO> getCtgr() {
+	public List<FaqVO> getCtgr() {
 		return faqDAO.getCtgr();
 	}
 		
 	//faq 세부카테고리 목록
     @Override
-	public List<FaqSubCtgrVO> getSubCtgr() {
+	public List<FaqVO> getSubCtgr() {
 		return faqDAO.getSubCtgr();
 	}
     
@@ -50,11 +50,11 @@ public class FaqServiceImpl implements FaqService {
   		return faqDAO.getFaqSubCtgr(start, end,sub_ctgr_num);
   	}
   	@Override
-  	public FaqTotalCtgrVO getCurrCtgr(Integer sub_ctgr_num ) {
+  	public FaqVO getCurrCtgr(Integer sub_ctgr_num ) {
   		return faqDAO.getCurrCtgr(sub_ctgr_num);
   	}
   	@Override
-  	public List<FaqTotalCtgrVO> getDetailCtgr(){
+  	public List<FaqVO> getDetailCtgr(){
   		return faqDAO.getDetailCtgr();
   	}
 	//faq 추가하기
