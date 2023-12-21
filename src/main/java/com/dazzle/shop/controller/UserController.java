@@ -148,7 +148,7 @@ public class UserController {
 	}
 
 	/*
-	 * 회원정보 변경 - 첫번째 단계
+	 * 회원정보 변경 - 첫번째 단계 - 비밀번호 입력
 	 */
 	@RequestMapping("/checkInfo.do")
 	public String userCheckInfo(HttpServletRequest request, Model model) {
@@ -165,7 +165,7 @@ public class UserController {
 	}
 
 	/*
-	 * 회원정보 변경 - 두번째 단계
+	 * 회원정보 변경 - 두번째 단계 - 정보 입력 및 수정
 	 */
 	@RequestMapping("/changeInfo.do")
 	public String userChangeInfo(HttpServletRequest request, Model model) {

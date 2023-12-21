@@ -10,7 +10,6 @@
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user_point_list.css" />
-
 <title>user point list</title>
 </head>
 <body>
