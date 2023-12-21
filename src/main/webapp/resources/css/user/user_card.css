@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#uc {
+#c {
 	box-sizing: border-box;
 	width: 1080px;
 	height: 160px;
@@ -11,14 +11,14 @@
 	color: #191919;
 }
 
-#ucc {
+#cc {
 	height: 100px;
 	margin: 30px 20px 30px 20px;
 	display: grid;
 	grid-template-columns: 70px 1fr 1fr 1fr 1fr;
 }
 
-#ucc-rb {
+#cc-rb {
 	box-sizing: border-box;
 	width: 70px;
 	height: 70px;
@@ -34,24 +34,24 @@
 	margin: 15px 0 15px 0;
 }
 
-#ucc-u {
+#cc-u {
 	margin-left: 20px;
 	display: grid;
 	grid-template-rows: auto auto;
 }
 
-#ucc-un {
+#cc-un {
 	display: grid;
 	align-items: center;
 }
 
-#ucc-ur {
+#cc-ur {
 	display: grid;
 	align-items: center;
 	font-size: 28px;
 }
 
-#ucc-c, #ucc-d, #ucc-p {
+#cc-c, #cc-d, #cc-p {
 	box-sizing: border-box;
 	display: grid;
 	grid-template-rows: auto auto;
@@ -61,18 +61,18 @@
 	padding: 0 20px;
 }
 
-#ucc-p {
+#cc-p {
 	border-right: 0;
 }
 
-#ucc-cn, #ucc-dn, #ucc-pn {
+#cc-cn, #cc-dn, #cc-pn {
 	justify-self: right;
 }
 
-#ucc-cc, #ucc-dc, #ucc-pc {
+#cc-cc, #cc-dc, #cc-pc {
 	font-size: 14px;
 }
 
-#ucc a {
+#cc a {
 	font-size: 28px;
 }

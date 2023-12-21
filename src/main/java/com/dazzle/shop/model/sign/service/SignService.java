@@ -4,28 +4,43 @@ import com.dazzle.shop.model.sign.domain.SignVO;
 
 public interface SignService {
 
-	// find_id
+	/*
+	 * 로그인
+	 */
+	SignVO login(SignVO vo);
+
+	/*
+	 * 아이디 찾기
+	 */
 	SignVO findId(SignVO vo);
 
-	// find_pwd
+	/*
+	 * 비밀번호 재설정 - 첫번째 단계
+	 */
 	SignVO findPwd(SignVO vo);
 
-	// sign_in
-	SignVO signIn(SignVO vo);
+	/*
+	 * 비밀번호 재설정 - 두번째 단계
+	 */
+	void sendEmail(String user_email, String authStr);
 
-	// update_pwd
+	/*
+	 * 비밀번호 재설정 - 세번째 단계
+	 */
 	void updatePwd(SignVO vo);
 
-	///////////////////////// sign_up.jsp에서 사용되는 service
-
+	/*
+	 * 회원가입 - 아이디 중복 확인(비동기)
+	 */
 	boolean isIdDupl(String id);
 
+	/*
+	 * 회원가입 - 이메일 중복 확인(비동기)
+	 */
 	boolean isEmailDupl(String user_email);
 
-	void signUp(SignVO vo);
-
-	////////////////////////////// DB에 없는 Service
-
-	// send_email
-	void sendEmail(String user_email, String authStr);
+	/*
+	 * 회원가입
+	 */
+	void register(SignVO vo);
 }

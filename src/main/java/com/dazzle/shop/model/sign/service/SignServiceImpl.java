@@ -18,49 +18,33 @@ public class SignServiceImpl implements SignService {
 	@Autowired
 	private SignDAO signDAO;
 
-	// find_id
+	/*
+	 * 로그인
+	 */
+	@Override
+	public SignVO login(SignVO vo) {
+		return signDAO.login(vo);
+	}
+
+	/*
+	 * 아이디 찾기
+	 */
 	@Override
 	public SignVO findId(SignVO vo) {
 		return signDAO.findId(vo);
 	}
 
-	// find_pwd
+	/*
+	 * 비밀번호 재설정 - 첫번째 단계
+	 */
 	@Override
 	public SignVO findPwd(SignVO vo) {
 		return signDAO.findPwd(vo);
 	}
 
-	// sign_in
-	@Override
-	public SignVO signIn(SignVO vo) {
-		return signDAO.signIn(vo);
-	}
-
-	// update_pwd
-	@Override
-	public void updatePwd(SignVO vo) {
-		signDAO.updatePwd(vo);
-	}
-
-	////////////////////////// sign up에서 사용하는 service
-	@Override
-	public boolean isIdDupl(String id) {
-		return signDAO.checkIdExist(id);
-	}
-
-	@Override
-	public boolean isEmailDupl(String user_email) {
-		return signDAO.checkEmailExist(user_email);
-	}
-
-	@Override
-	public void signUp(SignVO vo) {
-		signDAO.signUp(vo);
-	}
-
-	////////////////////////////// DB에 없는 Service
-
-	// send_email
+	/*
+	 * 비밀번호 재설정 - 두번째 단계
+	 */
 	@Override
 	public void sendEmail(String user_email, String authStr) {
 		System.out.println("===> SignService sendEmail()");
@@ -98,4 +82,35 @@ public class SignServiceImpl implements SignService {
 		}
 	}
 
+	/*
+	 * 비밀번호 재설정 - 세번째 단계
+	 */
+	@Override
+	public void updatePwd(SignVO vo) {
+		signDAO.updatePwd(vo);
+	}
+
+	/*
+	 * 회원가입 - 아이디 중복 확인(비동기)
+	 */
+	@Override
+	public boolean isIdDupl(String id) {
+		return signDAO.checkIdExist(id);
+	}
+
+	/*
+	 * 회원가입 - 이메일 중복 확인(비동기)
+	 */
+	@Override
+	public boolean isEmailDupl(String user_email) {
+		return signDAO.checkEmailExist(user_email);
+	}
+
+	/*
+	 * 회원가입
+	 */
+	@Override
+	public void register(SignVO vo) {
+		signDAO.register(vo);
+	}
 }

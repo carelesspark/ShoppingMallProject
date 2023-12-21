@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	font-size: 18px;
+	color: #191919;
+}
+
+#mc {
+	width: 480px;
+	margin: 0 auto 300px auto;
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: center;
+}
+
+#mch {
+	width: 480px;
+	height: 60px;
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 60px;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+#mcl {
+	box-sizing: border-box;
+	width: 480px;
+	height: 60px;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	background-color: #191919;
+	font-size: 18px;
+	color: #f8f8f8;
+	text-decoration: none;
+}
