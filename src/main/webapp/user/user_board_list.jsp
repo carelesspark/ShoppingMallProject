@@ -7,19 +7,22 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_review_list.css" />
-<title>user review list</title>
+	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/user/user_board_list.css" />
+
+<title>user board list</title>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
-
 	<div id="m">
 		<%@ include file="./user_card.jsp"%>
+
 		<div id="mc">
 			<%@ include file="./user_side.jsp"%>
 			<main>
 				<div id="md">
-					후기 내역
+					작성 글 내역
 					<div id="mh">
 						<div></div>
 						<div></div>
@@ -27,7 +30,7 @@
 						<div></div>
 						<div></div>
 					</div>
-					<c:forEach var="list" items="${reviewList}">
+					<c:forEach var="list" items="${boardList}">
 						<div id="ml"></div>
 					</c:forEach>
 				</div>

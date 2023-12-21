@@ -28,7 +28,7 @@ body {
 	height: 100px;
 	margin: 30px 20px 30px 20px;
 	display: grid;
-	grid-template-columns: 70px 1fr 1fr 1fr 1fr;
+	grid-template-columns: 70px 1fr 1fr 1fr;
 }
 
 #cc-rb {
@@ -120,20 +120,4 @@ body {
 	font-size: 14px;
 	color: #191919;
 	margin-bottom: 20px;
-}
-
-/* main div */
-#md {
-	display: grid;
-	grid-template-rows: auto auto;
-}
-
-#mh {
-	display: grid;
-	grid-template-columns: auto;
-}
-
-#ml {
-	display: grid;
-	grid-template-columns: auto;
 }
