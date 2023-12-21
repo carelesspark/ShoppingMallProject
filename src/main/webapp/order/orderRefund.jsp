@@ -8,6 +8,7 @@
 <link href="../resources/css/order/orderRefund.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="../resources/js/order/checkAgreement2.js"></script>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -89,7 +90,7 @@
 				</div>
 			</section>
 			<main>
-				<form action="insertOrderRefund.do" method="post">
+				<form action="insertOrderRefund.do" method="post" name="form">
 					<div id="main_refund">
 						<div id="refund_title">
 							<h1>주문 취소/환불 요청</h1>
@@ -97,8 +98,9 @@
 						<div id="refund_content">
 
 							<input type="hidden" name="amount" value="${orderRefund.amount}" />
-							<input type="hidden" name="order_detail_num" value="${orderRefund.order_detail_num}" />
-							<input type="hidden" name="order_num" value="${orderRefund.order_num}"/>
+							<input type="hidden" name="order_detail_num"
+								value="${orderRefund.order_detail_num}" /> <input type="hidden"
+								name="order_num" value="${orderRefund.order_num}" />
 							<table id="refund_table">
 								<tr>
 									<td id="refund_table_left">주문 번호</td>
@@ -115,18 +117,18 @@
 								<tr>
 									<td id="refund_table_left">은행명</td>
 									<td id="refund_table_right"><input type="text" name="bank"
-										id="input1" /></td>
+										id="input" /></td>
 								</tr>
 								<tr>
 									<td id="refund_table_left">계좌번호</td>
 									<td id="refund_table_right"><input type="text"
-										name="account_num" id="input2" /></td>
+										name="account_num" id=input /></td>
 								</tr>
 								<tr>
 									<td id="refund_table_left">취소/환불 사유</td>
 									<td id="refund_table_right"><select id="select"
-										name="refund_or_change_reason"><option
-												value="상품 불량">상품 불량</option>
+										name="refund_or_change_reason"><option value="상품 불량">상품
+												불량</option>
 											<option value="단순 변심">단순 변심</option>
 											<option value="배송 지연">배송 지연</option>
 											<option value="상품정보와 상이">상품정보와 상이</option>
@@ -159,11 +161,12 @@
 						</div>
 						<div id="buttons">
 							<div id="button1">
-								<button type="button" class="btn btn-outline-secondary">돌아가기</button>
+								<button type="button" class="btn btn-outline-secondary"
+									onclick="location.href='/orderInfo.do?order_num=${orderRefund.order_num}'">돌아가기</button>
 							</div>
 							<div id="button2">
-								<button type="submit" class="btn btn-outline-secondary">취소/환불
-									등록</button>
+								<button type="button" class="btn btn-outline-secondary"
+									onclick="checkAgreement2()">취소/환불 등록</button>
 							</div>
 						</div>
 					</div>

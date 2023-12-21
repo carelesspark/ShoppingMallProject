@@ -8,6 +8,8 @@ public interface OrderService {
 	
 	OrderVO getOrderRefund(OrderVO vo);
 	
+	OrderVO getProductChange(OrderVO vo);
+	
 	void insertBuyOrder(OrderVO vo);
 	
 	void insertBuyOrderDetail(OrderVO vo);
@@ -15,8 +17,15 @@ public interface OrderService {
 	void insertOrderRefund(OrderVO vo);
 	
 	void updateProduct_state(OrderVO vo);
+	
+	void insertProductChange(OrderVO vo);
+	
+	void updateProduct_state2(OrderVO vo);
 
 	List<OrderVO> getOrderList(OrderVO vo);
+	
+
+	List<OrderVO> getOrderList2(OrderVO vo, int date);
 	
 	List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo);
 	

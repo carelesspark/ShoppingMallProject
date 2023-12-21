@@ -312,12 +312,7 @@ span {
 	text-align: right;
 }
 
-#input1 {
-	width: 70px;
-	height: 30px;
-}
-
-#input2 {
+#input {
 	width: 100px;
 	height: 30px;
 }

@@ -9,7 +9,7 @@
 		<p>나의 쇼핑</p>
 
 		<a href="/orderList.do?user_num=${1}">주문/배송조회</a> <a
-			href="user/user_order_tracking.jsp">장바구니</a>
+			href="/cart.do">장바구니</a>
 	</div>
 	<div>
 		<p>나의 혜택</p>
