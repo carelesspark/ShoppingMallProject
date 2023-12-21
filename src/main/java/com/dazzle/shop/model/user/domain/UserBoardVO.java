@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class UserVO {
+public class UserBoardVO {
 	// users
 	// pk: user_num
 	private int user_num;
@@ -33,4 +33,12 @@ public class UserVO {
 	private Date user_update_date;
 	private Date user_delete_date;
 	private int is_black_list;
+	// board
+	// pk: pno
+    private int pno;
+    private String title;
+    private String cate;
+    private Date posttime;
+    private String product_code;
+    private String content;
 }

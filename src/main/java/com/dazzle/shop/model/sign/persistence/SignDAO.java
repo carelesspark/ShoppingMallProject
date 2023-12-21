@@ -26,7 +26,9 @@ public class SignDAO {
 			+ "join users on auth_id.user_num = users.user_num "
 			+ "where users.user_name = ? and auth_id.user_email = ?";
 	private final String FIND_PWD = "select user_num from auth_id where id = ? and user_email = ?";
-	private final String SIGN_IN = "SELECT user_num FROM auth_id WHERE id = ? AND pwd = ?";
+	private final String LOGIN = "SELECT u.user_num, u.user_name, u.login_type, u.is_admin "
+			+ "FROM users u join auth_id a on u.user_num = a.user_num WHERE a.id = ? AND a.pwd = ?";
+
 	private final String UPDATE_PWD = "update auth_id set pwd = ? where user_num = ?";
 
 	private final String CHECK_ID_EXIST = "select user_num from auth_id where id = ?";
@@ -43,11 +45,15 @@ public class SignDAO {
 		RowMapper<SignVO> rowMapper = (rs, rowNum) -> {
 			SignVO user = new SignVO();
 			user.setUser_num(rs.getInt("user_num"));
+			user.setUser_name(rs.getString("user_name"));
+			user.setLogin_type(rs.getString("login_type"));
+			user.setIs_admin(rs.getInt("is_admin"));
+
 			return user;
 		};
 
 		try {
-			return template.queryForObject(SIGN_IN, rowMapper, vo.getId(), vo.getPwd());
+			return template.queryForObject(LOGIN, rowMapper, vo.getId(), vo.getPwd());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}

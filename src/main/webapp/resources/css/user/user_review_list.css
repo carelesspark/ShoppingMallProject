@@ -1,5 +1,18 @@
 @charset "UTF-8";
 
+body {
+	margin: 0;
+	font-size: 18px;
+	color: #191919;
+}
+
+#m {
+	width: 1080px;
+	margin: 0 auto 80px auto;
+	display: grid;
+}
+
+/* card */
 #c {
 	box-sizing: border-box;
 	width: 1080px;
@@ -75,4 +88,52 @@
 
 #cc a {
 	font-size: 28px;
+}
+
+#mc {
+	width: 1080px;
+	display: grid;
+	grid-template-columns: 240px auto;
+}
+
+/* main side */
+#ms {
+	width: 200px;
+	margin-right: 40px;
+}
+
+#ms div {
+	display: grid;
+	grid-template-columns: auto;
+	border-bottom: 1px solid #f1f1f1;
+	margin-bottom: 20px;
+}
+
+#ms p {
+	margin-top: 0;
+	margin-bottom: 20px;
+	font-size: 20px;
+}
+
+#ms a {
+	text-decoration: none;
+	font-size: 14px;
+	color: #191919;
+	margin-bottom: 20px;
+}
+
+/* main div */
+#md {
+	display: grid;
+	grid-template-rows: auto auto;
+}
+
+#mh {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto;
+}
+
+#ml {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto;
 }

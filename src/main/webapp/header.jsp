@@ -43,7 +43,7 @@
 
 				<ul class="navbar-nav gap-2">
 					<li class="nav-item"><a class="nav-link" href="/cart.do">CART</a></li>
-					<li class="nav-item"><a class="nav-link" href="/user/userOrderList.do">MY PAGE</a></li>
+					<li class="nav-item"><a class="nav-link" href="/user/orderList.do">MY PAGE</a></li>
 					<li class="nav-item"><a class="nav-link" href="/sign/goRegister.do">JOIN</a></li>
 					<li class="nav-item"><a class="nav-link" href="/sign/goLogin.do">LOGIN</a></li>
 				</ul>
