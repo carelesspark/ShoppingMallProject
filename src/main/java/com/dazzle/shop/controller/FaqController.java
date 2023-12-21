@@ -25,8 +25,8 @@ public class FaqController {
 			curr_page = 1;
 		}
 		Integer faqCount = 0;
-		List<FaqCtgrVO> faqCtgr = faqService.getCtgr();
-		List<FaqSubCtgrVO> faqSubCtgr = faqService.getSubCtgr();
+		List<FaqVO> faqCtgr = faqService.getCtgr();
+		List<FaqVO> faqSubCtgr = faqService.getSubCtgr();
 		int total_pages = 0;
 		Integer remain = 0 ;
 		List<FaqVO> faq = new ArrayList();
@@ -39,7 +39,7 @@ public class FaqController {
 			remain = faqCount - (pageSize * (curr_page - 1));
 			faq = faqService.getFaqSubCtgr(Math.min(remain, pageSize), (curr_page-1)*pageSize,sub_ctgr_num);
 			model.addAttribute("sub_ctgr_num", sub_ctgr_num);
-			FaqTotalCtgrVO currCtgr = faqService.getCurrCtgr(sub_ctgr_num);
+			FaqVO currCtgr = faqService.getCurrCtgr(sub_ctgr_num);
 			model.addAttribute("currCtgr", currCtgr);
 		}
 		total_pages = (int)Math.ceil((double) faqCount / pageSize);
@@ -55,7 +55,7 @@ public class FaqController {
 	
 	@GetMapping(value="/faqWrite.do")
 	public String getFaqWrite(Model model){
-		List<FaqTotalCtgrVO> detailCtgr = faqService.getDetailCtgr();
+		List<FaqVO> detailCtgr = faqService.getDetailCtgr();
 		model.addAttribute("detailCtgr", detailCtgr);
 		
 		
@@ -71,7 +71,7 @@ public class FaqController {
 	
 	@GetMapping(value="/faqEdit.do")
 	public String getFaqEdit(FaqVO vo, Model model){
-		List<FaqTotalCtgrVO> detailCtgr = faqService.getDetailCtgr();
+		List<FaqVO> detailCtgr = faqService.getDetailCtgr();
 		model.addAttribute("detailCtgr", detailCtgr);
 		
 		FaqVO faq = faqService.getFaq(vo);

@@ -8,11 +8,11 @@ import org.springframework.jdbc.core.RowMapper;
 import com.dazzle.shop.model.faq.*;
 
 
-public class FaqCtgrRowMapper implements RowMapper<FaqCtgrVO>{
+public class FaqCtgrRowMapper implements RowMapper<FaqVO>{
 
 	@Override
-	public FaqCtgrVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-		FaqCtgrVO faqCtgr = new FaqCtgrVO();
+	public FaqVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+		FaqVO faqCtgr = new FaqVO();
 		faqCtgr.setCtgr_num(rs.getInt("ctgr_num"));
 		faqCtgr.setCtgr_name(rs.getString("ctgr_name"));
 		
