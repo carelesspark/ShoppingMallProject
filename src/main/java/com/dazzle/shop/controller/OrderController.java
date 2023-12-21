@@ -65,7 +65,7 @@ public class OrderController {
 			System.out.println(orderList);
 		} 
 		
-		return "/order/orderList.jsp";
+		return "redirect:orderList.do";
 	}
 	
 	@RequestMapping(value="/orderInfo.do")

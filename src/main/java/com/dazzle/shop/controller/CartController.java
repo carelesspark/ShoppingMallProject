@@ -45,7 +45,8 @@ public class CartController {
 		System.out.println("장바구니 삭제");
 		
 		cartService.deleteCart(cart_num);
-		model.addAttribute("user_num", vo.getUser_num());
+		
+		model.addAttribute("user_num", user_num);
 		
 		return "redirect:cart.do";
 	}

@@ -30,7 +30,6 @@
 					</div>
 				</div>
 				<div id="cart_middle">
-				<input type="hidden" name="user_num" value="${sessionScope.user_num}" />
 					<table id="cart_table">
 						<tr id="cart_table_first_tr">
 							<td id="cart_table_first_td"><input type="checkbox"
@@ -51,7 +50,7 @@
 							<td><input type="number" id="cart_product_count1" value="${cart.amount }"></td>
 							<td>${cart.total_price }</td>
 							<td><button type="submit" class="btn btn-dark"
-									id="cart_delete" onclick="location.href='/deleteCart.do?cart_num=${cart.cart_num}'">삭제</button></td>
+									id="cart_delete" onclick="location.href='/deleteCart.do?cart_num=${cart.cart_num}&user_num=${cart.user_num }'">삭제</button></td>
 						</tr>
 						</c:forEach>
 					</table>
