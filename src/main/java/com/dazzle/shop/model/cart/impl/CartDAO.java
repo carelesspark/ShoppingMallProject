@@ -24,6 +24,8 @@ public class CartDAO {
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE c.user_num = ?";
 
 	private final String CART_DELETE = "delete from cart where cart_num = ?";
+	
+	private final String CART_DELETE_ALL = "delete from cart where user_num = ?";
 
 	public List<CartVO> getCartList(int user_num) {
 		try {
@@ -41,6 +43,16 @@ public class CartDAO {
 		System.out.println("deleteCart()");
 
 		jdbcTemplate.update(CART_DELETE, cart_num);
+
+		return;
+
+	}
+	
+	public void deleteCartAll(int user_num) {
+
+		System.out.println("deleteCartAll()");
+
+		jdbcTemplate.update(CART_DELETE_ALL, user_num);
 
 		return;
 

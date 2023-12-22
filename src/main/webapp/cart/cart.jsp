@@ -11,6 +11,9 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="../resources/js/cart/cart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	
+</script>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -27,24 +30,24 @@
 								<img src="../resources/image/cart/cart.png" id="order_cart_img" />
 							</div>
 							<div id="cart_all_delete">
-								<a href="#" id="cart_all_delete_a">장바구니 모두 삭제</a>
+								<a href="/deleteCartAll.do?user_num=${cart.user_num }"
+									id="cart_all_delete_a">장바구니 모두 삭제</a>
 							</div>
 						</div>
 					</div>
 					<div id="cart_middle">
 						<table id="cart_table">
 							<tr id="cart_table_first_tr">
-								<td id="cart_table_first_td">
-									<!-- <input type="checkbox"
-									id="cart_check_all" name="checkAll" value="check_value" />선택 -->
-								</td>
+								<td id="cart_table_first_td"><input type="checkbox"
+									id="cart_check_all" name="checkAll" value="check_value" />선택</td>
 								<td id="cart_table_product_img"></td>
 								<td id="cart_table_product_name">제품명</td>
 								<td>수량</td>
 								<td>가격</td>
 								<td>삭제</td>
 							</tr>
-							<c:forEach items="${cartList}" var="cart">
+							<c:set var="total" value="0" />
+							<c:forEach items="${cartList}" var="cart" varStatus="status">
 								<input type="hidden" name="product_code_list" id="input1"
 									value="${cart.product_code}" />
 								<tr id="cart_table_other_tr">
@@ -55,12 +58,16 @@
 										src="${cart.main_img }" /></td>
 									<td id="cart_table_product_name">${cart.product_name }</td>
 									<td><input type="number" id="cart_product_count1"
-										name="amount_list" value="${cart.amount }"></td>
-									<td>${cart.total_price }</td>
-									<td><button type="submit" class="btn btn-dark"
+										name="amount_list" class="product_amount" value="${cart.amount }" min="0" max="10"></td>
+									<td id="cart_product_price">${cart.total_price }원<input
+										type="hidden" id="cart_product_price2"
+										value="${cart.product_price}" />
+									</td>
+									<td><button type="button" class="btn btn-dark"
 											id="cart_delete"
 											onclick="location.href='/deleteCart.do?cart_num=${cart.cart_num}&user_num=${cart.user_num }'">삭제</button></td>
 								</tr>
+								<c:set var="total" value="${total + cart.total_price}" />
 							</c:forEach>
 						</table>
 					</div>
@@ -72,7 +79,10 @@
 									<p>총 상품 가격</p>
 								</div>
 								<div id="total_price_right">
-									<p>95,000원</p>
+									<p>
+										<c:out value="${total}" />
+										원
+									</p>
 								</div>
 							</div>
 							<div id="total_delivery">
@@ -80,10 +90,21 @@
 									<p>총 배송비</p>
 								</div>
 								<div id="total_delivery_right">
-									<p>0원</p>
+									<c:set var="delivery" value="${3000}" />
+									<c:choose>
+										<c:when test="${total >= 30000}">
+											<p>0원</p>
+										</c:when>
+										<c:otherwise>
+											<p>${delivery}원</p>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
-							<p id="total_price_value">95,000원</p>
+							<p id="total_price_value">
+								<c:out value="${total}" />
+								원
+							</p>
 						</div>
 						<div id="cart_bottom_buttons_grid">
 							<div id="cart_buttons_div1">
@@ -102,9 +123,42 @@
 	</main>
 	<%@ include file="../footer.jsp"%>
 	<script>
-		$(".cart_product_checkbox").on("change", function(){
+		$(".cart_product_checkbox").on("change", function() {
 			$(this).next("#checkbox").val(this.checked ? 1 : 0);
+
+			const row = $(this).closest('tr');
+			const countInput = row.find('input[type="number"]');
+
+			countInput.prop("readonly", this.checked);
+			updateTotalPrice();
 		})
+
+		const updateTotalPrice = function() {
+			let totalPrice = 0;
+
+			// 각 행을 순회하며 체크된 항목의 가격을 더함
+			$(".cart_product_checkbox:checked").each(function() {
+				const row = $(this).closest('tr');
+				const count = row.find('input[type="number"]').val();
+				const price = row.find('#cart_product_price2').val();
+				totalPrice += count * price;
+			});
+
+			// 업데이트된 총 상품 가격을 화면에 출력
+			$("#total_price_right p").text(totalPrice + "원");
+		};
+
+		const applyCount = document.querySelector('.product_amount');
+
+		applyCount.addEventListener('change', function() {
+			const count = parseInt(document
+					.querySelector('.product_amount').value, 10);
+
+			if (count > 10 || count < 0) {
+				alert("수량은 1~10까지 가능합니다.");
+				document.querySelector('.product_amount').value = 1;
+			}
+		});
 	</script>
 </body>
 </html>
