@@ -41,4 +41,5 @@ public class OrderVO {
 	private String reason_detail;
 	private String bank;
 	private String account_num;
+	private List<Integer> checkbox;
 }

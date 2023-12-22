@@ -126,7 +126,7 @@
 								</div>
 								<div id="order_list_section_div2">
 									<h2>3 건</h2>
-								</div>
+								</div>	
 							</div>
 						</div>
 					</div>
