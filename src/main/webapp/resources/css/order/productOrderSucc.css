@@ -74,6 +74,11 @@
 		    justify-content: space-between; 
 		    margin : 30px;
 	    }
+	    
+	    #img{
+	    	width: 200px;
+	    	height: 200px;
+	    }
 
 		.addr-info {
 		    margin-left: 30px;

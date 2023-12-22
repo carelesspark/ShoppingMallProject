@@ -51,6 +51,8 @@ footer {
 	border: 1px solid #C3C3C3;
 	margin: 0 auto;
 	border-radius: 10px;
+	overflow: scroll;
+	overflow-x: hidden;
 }
 
 #order_list_grid {
@@ -58,6 +60,7 @@ footer {
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	place-items: center;
 	height: 100px;
+
 }
 
 #order_list_pic {
