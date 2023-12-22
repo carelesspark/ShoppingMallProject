@@ -102,7 +102,22 @@ public class OrderDAO {
 
 	private final String PRODUCT_CHANGE_REQ = "INSERT INTO product_refund_or_change VALUES(DEFAULT, NOW(), '교환 요청 중', ?, ?, ?, ?, ?, ?)";
 	private final String CHANGE_PRODUCT_STATE2 = "UPDATE order_detail SET product_state = '상품 교환 중' WHERE order_detail_num = ?";
-
+	
+	private final String ORDER_SUCC_INFO = "SELECT order_num, order_date, address, detail_address, postal_num, delivery_price, "
+			+ "recipient, request, payment, phone_num FROM orders WHERE order_num = ?";
+	
+	private final String ORDER_SUCC_PRODUCT = 
+			"SELECT od.total_price, pc.product_code, ps.size_name, pco.color_name, p.product_price, p.product_name, od.amount" + 
+			" FROM orders o" + 
+			" JOIN order_detail od ON od.order_num = o.order_num" + 
+			" JOIN product_code pc ON pc.product_code = od.product_code" + 
+			" JOIN product_size ps ON ps.size_num = pc.size_num" + 
+			" JOIN product_color pco ON pco.color_num = ps.color_num" + 
+			" JOIN product p ON p.product_num = pco.product_num" + 
+			" JOIN product_img pimg ON pimg.product_num = p.product_num" + 
+			" WHERE o.order_num = ?";
+	
+	
 	public OrderVO getOrderInfo(OrderVO vo) {
 		try {
 			System.out.println("getOrderInfo()");
@@ -193,16 +208,6 @@ public class OrderDAO {
 		return;
 	}
 
-	public List<OrderVO> getProductOrderWhenSuccess(OrderVO vo) {
-		try {
-			System.out.println("getProductOrderWhenSuccess()");
-			Object[] args = { vo.getAmount(), vo.getAmount(), vo.getUser_num() };
-
-			return jdbcTemplate.query(SUCCESS_ORDER, args, new SuccessPageRowMapper());
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
 
 	public OrderVO getOrderRefund(OrderVO vo) {
 		try {
@@ -254,4 +259,23 @@ public class OrderDAO {
 		return;
 	}
 
+	public OrderVO getOrderSuccInfo(OrderVO vo) {
+		try {
+			System.out.println("getOrderSuccInfo()");
+			Object[] args = { vo.getOrder_num() };
+			return jdbcTemplate.queryForObject(ORDER_SUCC_INFO, args, new OrderSuccInfoRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<OrderVO> getProductOrderWhenSuccess(OrderVO vo) {
+		try {
+			System.out.println("getProductOrderWhenSuccess()");
+			Object[] args = { vo.getOrder_num()};
+			return jdbcTemplate.query(ORDER_SUCC_PRODUCT, args, new OrderSuccProductRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 }

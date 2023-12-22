@@ -104,6 +104,7 @@ public class OrderController {
 		System.out.println(productOrder);
 
 		return "/order/productOrder.jsp";
+		
 	}
 	
 	// 장바구니 페이지에서 구매할 때,
@@ -158,12 +159,11 @@ public class OrderController {
 	@RequestMapping(value="/orderSuccess.do")
 	public String getOrderSucc(OrderVO vo, Model model) throws Exception{
 		System.out.println("주문 완료 정보");
-		//order_num과 일치하는 orders 값들 다 가져옴
+		OrderVO order = orderService.getOrderSuccInfo(vo);
+		List<OrderVO> productList = orderService.getProductOrderWhenSuccess(vo);
 		
-		
-		//orders와 order_detail을 join한 list형 값 가져옴
-		
-		
+		model.addAttribute("order", order);
+		model.addAttribute("productList", productList);
 		return "/order/productOrderSucc.jsp";
 	}
 	
