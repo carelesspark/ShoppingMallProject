@@ -19,85 +19,6 @@
   <body>
 	<%@ include file="../header.jsp"%>
     <div id="main-container">
-      <div id="user-explanation">
-        <div id="user-explanation-grid">
-          <div>
-            <div id="user-explanation-rank-container">
-              <p>M</p>
-            </div>
-          </div>
-          <div id="user-explanation-1-container">
-            <div id="user-explanation-name-container">
-              <p>주인장</p>
-            </div>
-            <div id="user-explanation-name-rank-container">
-              <p>Manager</p>
-            </div>
-          </div>
-          <div id="user-explanation-2-container">
-            <div><p>월매출</p></div>
-            <div><p>1일~현재 매출 합}원</p></div>
-          </div>
-          <div id="user-explanation-3-container">
-            <div><p>주문 현황</p></div>
-            <div>
-              <a href=""><p>클릭</p></a>
-            </div>
-          </div>
-          <div id="user-explanation-4-container">
-            <div><p>상품 현황</p></div>
-            <div>
-              <a href=""><p>클릭</p></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="menu-container">
-        <section>
-          <div id="menu-user-container" class="menu-section">
-            <p class="menu-section-name">회원 관리</p>
-            <a href="" class="menu-section-anchor"
-              ><p class="menu-section-name-detail">회원 목록</p></a
-            >
-            <a href="" class="menu-section-anchor"
-              ><p class="menu-section-name-detail">블랙리스트 목록</p></a
-            >
-          </div>
-          <div id="menu-product-container" class="menu-section">
-            <p class="menu-section-name">상품 관리</p>
-            <a href="" class="menu-section-anchor"
-              ><p class="menu-section-name-detail">상품 목록</p></a
-            >
-            <a href="" class="menu-section-anchor"
-              ><p class="menu-section-name-detail">상품 추가</p></a
-            >
-            <a href="" class="menu-section-anchor"
-              ><p class="menu-section-name-detail">상품 수정</p></a
-            >
-            <a href="" class="menu-section-anchor"
-              ><p class="menu-section-name-detail">상품 삭제</p></a
-            >
-          </div>
-          <div id="menu-order-container" class="menu-section">
-            <p class="menu-section-name">주문 관리</p>
-            <a href="" class="menu-section-anchor"
-              ><p class="menu-section-name-detail">주문 목록</p></a
-            >
-            <a href="" class="menu-section-anchor"
-              ><p class="menu-section-name-detail">반품 및 환불 목록</p></a
-            >
-            <a href="" class="menu-section-anchor"
-              ><p class="menu-section-name-detail">Q&A 목록</p></a
-            >
-          </div>
-          <div id="menu-myinfo-container" class="menu-section">
-            <p class="menu-section-name">나의 정보</p>
-            <a href="" class="menu-section-anchor"
-              ><p class="menu-section-name-detail">정보 변경</p></a
-            >
-          </div>
-        </section>
-        <main>
 			<div id ="faq">			   	   
 			    <div class="section">
 			   
@@ -205,9 +126,6 @@
 			    </div>
 			    
 			</div>
-        </main>
-      </div>
-    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   	<%@ include file="../footer.jsp"%>
   </body>

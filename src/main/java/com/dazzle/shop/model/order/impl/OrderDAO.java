@@ -107,7 +107,7 @@ public class OrderDAO {
 			+ "recipient, request, payment, phone_num FROM orders WHERE order_num = ?";
 	
 	private final String ORDER_SUCC_PRODUCT = 
-			"SELECT od.total_price, pc.product_code, ps.size_name, pco.color_name, p.product_price, p.product_name, od.amount" + 
+			"SELECT pimg.main_img, od.total_price, pc.product_code, ps.size_name, pco.color_name, p.product_price, p.product_name, od.amount" + 
 			" FROM orders o" + 
 			" JOIN order_detail od ON od.order_num = o.order_num" + 
 			" JOIN product_code pc ON pc.product_code = od.product_code" + 
