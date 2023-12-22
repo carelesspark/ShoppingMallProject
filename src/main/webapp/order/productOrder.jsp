@@ -13,7 +13,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script>
 	function openAddressPopup() {
-		window.open('address.do?user_num=${address.user_num}', '주소 변경',
+		window.open('address.do', '주소 변경',
 				'width=650, height=1000');
 	}
 </script>

@@ -14,14 +14,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function editAddress(addrNum) {
-            location.href = 'addressEdit.do?addr_num=' + addrNum;
-        }
-
-        function deleteAddress(addrNum, userNum) {
-            location.href = 'addressDelete.do?addr_num=' + addrNum + '&user_num=' + userNum;
-        }
-
         function closePage() {
         	 window.close();
         }
@@ -85,8 +77,8 @@
 		                <div class="request">${address.request}</div>
 		            </div>
 		             <div class="button">
-                        <button class="edit" onclick="editAddress(${address.addr_num})">수정하기</button>
-                        <button class="delete" onclick="deleteAddress(${address.addr_num},${address.user_num})">삭제하기</button>
+                        <button class="edit" onclick="location.href='addressEdit.do?addr_num=${address.addr_num}'">수정하기</button>
+                        <button class="delete"onclick="location.href='addressDelete.do?addr_num=${address.addr_num}'">삭제하기</button>
                      	<button class="choice" onclick="selectAddress('${address.recipient}', '${address.postal_num}',
                      	'${address.address}', '${address.detail_address}', '${address.phone_num}', '${address.request}')">
                      		선택하기
@@ -112,8 +104,8 @@
 		                <div class="request">${address.request}</div>
 		            </div>
 		             <div class="button">
-                        <button class="edit" onclick="editAddress(${address.addr_num})">수정하기</button>
-                        <button class="delete" onclick="deleteAddress(${address.addr_num},${address.user_num})">삭제하기</button>
+                        <button class="edit" onclick="location.href='addressEdit.do?addr_num=${address.addr_num}'">수정하기</button>
+                        <button class="delete"onclick="location.href='addressDelete.do?addr_num=${address.addr_num}'">삭제하기</button>
                      	<button class="choice" onclick="selectAddress('${address.recipient}', '${address.postal_num}',
                      	'${address.address}', '${address.detail_address}', '${address.phone_num}', '${address.request}')">
                      		선택하기
@@ -132,7 +124,7 @@
         </div>
         <br>
 		<div id="buttons">
-            <button id="add" onclick="location.href='addressAdd.do?user_num=${addressList[0].user_num}'">새 배송지 추가하기</button>
+            <button id="add" onclick="location.href='addressAdd.do'">새 배송지 추가하기</button>
             <button id="close" onclick="closePage()">확인</button>
         </div>
     </div>

@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
+<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user_order_list.css" />
 <title>user order list</title>
 </head>

@@ -60,6 +60,29 @@ public class SignDAO {
 	}
 
 	/*
+	 * 관리자 로그인
+	 */
+	public SignVO loginAdmin(SignVO vo) {
+		System.out.println("SignDAO loginAdmin");
+
+		RowMapper<SignVO> rowMapper = (rs, rowNum) -> {
+			SignVO user = new SignVO();
+			user.setUser_num(rs.getInt("user_num"));
+			user.setUser_name(rs.getString("user_name"));
+			user.setLogin_type(rs.getString("login_type"));
+			user.setIs_admin(rs.getInt("is_admin"));
+
+			return user;
+		};
+
+		try {
+			return template.queryForObject(LOGIN, rowMapper, vo.getId(), vo.getPwd());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
+	/*
 	 * 아이디 찾기
 	 */
 	public SignVO findId(SignVO vo) {

@@ -15,7 +15,6 @@
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
-
 	<div id="m">
 		<%@ include file="./user_card.jsp"%>
 		<div id="mc">

@@ -3,6 +3,9 @@ package com.dazzle.shop.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -20,7 +23,10 @@ public class AddressController {
 	private AddressService addressService;
 	
 	@RequestMapping(value="/address.do")
-	public String getAddressList(AddressVO vo, Model model){
+	public String getAddressList(HttpServletRequest request, Model model){
+		AddressVO vo = new AddressVO();
+		HttpSession session = request.getSession();
+	    vo.setUser_num((int)session.getAttribute("user_num"));
 		List<AddressVO> addressList = addressService.getAddressList(vo);
 		
 		model.addAttribute("addressList", addressList);
@@ -36,28 +42,35 @@ public class AddressController {
 	}
 	
 	@PostMapping(value = "/addressEdit.do")
-	public String updateAddress(AddressVO vo, Model model){
+	public String updateAddress(HttpServletRequest request, AddressVO vo, Model model){
+		HttpSession session = request.getSession();
+	    vo.setUser_num((int)session.getAttribute("user_num"));
 		addressService.updateAddress(vo);
 		model.addAttribute("user_num", vo.getUser_num());
 		return "redirect:address.do";
 	}
 	
 	@RequestMapping(value = "/addressDelete.do")
-	public String deleteAddress(AddressVO vo, Model model){
+	public String deleteAddress(HttpServletRequest request, AddressVO vo, Model model){
 		addressService.deleteAddress(vo);
-		model.addAttribute("user_num", vo.getUser_num());
+		HttpSession session = request.getSession();
+	    int user_num = (int)session.getAttribute("user_num");
+		model.addAttribute("user_num", user_num);
 		return "redirect:address.do";
 	}
 	
 	@GetMapping(value = "/addressAdd.do")
-	public String addPagination(AddressVO vo, Model model){
-		model.addAttribute("user_num", vo.getUser_num());
+	public String addPagination(HttpServletRequest request, Model model){
+		HttpSession session = request.getSession();
+	    int user_num = (int)session.getAttribute("user_num");
+		model.addAttribute("user_num", user_num);
 		return "/address/addressAdd.jsp";
 	}
 	
 	@PostMapping(value = "/addressAdd.do")
-	public String insertAddress(AddressVO vo, Model model){
-		System.out.println(vo);
+	public String insertAddress(HttpServletRequest request, AddressVO vo, Model model){
+		HttpSession session = request.getSession();
+	    vo.setUser_num((int)session.getAttribute("user_num"));
 		addressService.insertAddress(vo);
 		model.addAttribute("user_num", vo.getUser_num());
 		return "redirect:address.do";

@@ -106,4 +106,8 @@ public class OrderServiceImpl implements OrderService {
 		
 		return orderDAO.getOrderList2(vo, date);
 	}
+	@Override
+	public OrderVO getOrderSuccInfo(OrderVO vo) {
+		return orderDAO.getOrderSuccInfo(vo);
+	}
 }

@@ -159,18 +159,20 @@
 			                    <div class="card-body" id="answer">
 			                        <c:out value="${faq.answer}" />
 			                        <div id="buttons">
-			                            <div>
-			                                <button type="button" class="btn btn-dark"
-			                                onclick="location.href='faqEdit.do?faq_num=${faq.faq_num}'">
-			                                	수정하기
-			                                </button>
-			                            </div>
-			                            <div>
-			                                <button type="button" class="btn btn-dark"
-			                                 onclick="location.href='faqDelete.do?faq_num=${faq.faq_num}'">
-			                                 	삭제하기
-			                                 </button>
-			                            </div>
+			                            <c:if test="${sessionScope.is_admin eq '1'}">
+				                        <div>
+				                            <button type="button" class="btn btn-dark"
+				                                onclick="location.href='faqEdit.do?faq_num=${faq.faq_num}'">
+				                                	수정하기
+				                            </button>
+				                        </div>
+				                        <div>
+				                            <button type="button" class="btn btn-dark"
+				                                onclick="location.href='faqDelete.do?faq_num=${faq.faq_num}'">
+				                                	삭제하기
+				                            </button>
+				                        </div>
+				                    </c:if>
 			                            <div>
 			                                <button type="button" class="btn btn-dark"
 			                                onclick="location.href='#'">
@@ -185,11 +187,11 @@
 			    </div>
 
 			   
-			   
+			   <c:if test="${sessionScope.is_admin eq '1'}">
 			    <div id="buttons">
 			    	<button type="button" class="btn btn-dark" onclick="location.href='faqWrite.do'">작성하기</button>
 			    </div>
-			    
+			    </c:if>
 			    <div id="pageButtons" class="text-center mt-3">
 			        <c:forEach begin="1" end="${totalPages}" varStatus="loop">
 			            <c:url value="" var="url">
