@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+/* main div */
+#md {
+	display: grid;
+	grid-template-rows: auto auto;
+}
+/* 카테고리!  */
+#cate {
+	display: grid;
+	grid-template-columns: auto;
+}
+/* 메인 카테고리 */
+#mainC {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto;
+}
+/* 서브 카테고리 */
+#subC {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto;
+}
+
+/* 리스트 헤더 */
+#mh {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto;
+}
+/* 리스트 바디 */
+#ml {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto;
+}

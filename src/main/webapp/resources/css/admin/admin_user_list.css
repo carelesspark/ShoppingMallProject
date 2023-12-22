@@ -8,10 +8,10 @@
 
 #mh {
 	display: grid;
-	grid-template-columns: auto auto auto auto auto auto;
+	grid-template-columns: auto auto auto auto auto auto auto;
 }
 
 #ml {
 	display: grid;
-	grid-template-columns: auto auto auto auto auto auto;
+	grid-template-columns: auto auto auto auto auto auto auto;
 }

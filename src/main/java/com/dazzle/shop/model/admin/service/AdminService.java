@@ -6,6 +6,11 @@ import com.dazzle.shop.model.admin.domain.*;
 
 public interface AdminService {
 
+	// 테이블 행 개수 출력
+	int countTableRecord(String tableName);
+
+	// 서브카테고리 번호, 이름 출력
+	List<SubCategoryVO> getSubCategoryList();
 	/*
 	 * 매출 관리
 	 */
@@ -27,12 +32,11 @@ public interface AdminService {
 	 * 블랙리스트 목록
 	 */
 
-	/*
-	 * 상품 관리
-	 */
+	// 상품 관리
 	/*
 	 * 상품 목록
 	 */
+	List<AdminProductVO> getProductList(int subCategoryNum, int pageSize, int pageNum);
 	/*
 	 * 상품 추가
 	 */

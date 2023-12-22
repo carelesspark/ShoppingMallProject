@@ -12,7 +12,7 @@
 	</div>
 	<div>
 		<p>상품 관리</p>
-		<a href="/admin/">상품 목록</a> <a href="/admin/">상품 추가</a> <a
+		<a href="/admin/productList.do">상품 목록</a> <a href="/admin/">상품 추가</a> <a
 			href="/admin/">상품 수정</a> <a href="/admin/">상품 삭제</a>
 	</div>
 	<div>
