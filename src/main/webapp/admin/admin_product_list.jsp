@@ -23,40 +23,53 @@
 					<div id="cate">
 						<div id="mainC">
 							<div>
-								<button>top</button>
+								<button type="button" onclick="showProductList(1)">top</button>
 							</div>
 							<div>
-								<button>bottom</button>
+								<button type="button" onclick="showProductList(6)">bottom</button>
 							</div>
 							<div>
-								<button>outer</button>
+								<button type="button" onclick="showProductList(11)">outer</button>
 							</div>
 							<div>
-								<button>shoes</button>
+								<button type="button" onclick="showProductList(16)">shoes</button>
 							</div>
 							<div>
-								<button>etc</button>
+								<button type="button" onclick="showProductList(21)">etc</button>
 							</div>
 						</div>
 						<div id="subC">
 							<div>
-								<button>${subCategory[categoryNum]. sub_category_name}</button>
+								<button type="button"
+									onclick="showProductList(${subCategoryStartNum})">${subCategory[subCategoryStartNum].sub_category_name}</button>
 							</div>
 							<div>
-								<button>${subCategory[categoryNum + 1]. sub_category_name}</button>
+								<button type="button"
+									onclick="showProductList(${subCategoryStartNum + 1})">${subCategory[subCategoryStartNum + 1].sub_category_name}</button>
 							</div>
 							<div>
-								<button>${subCategory[categoryNum + 2]. sub_category_name}</button>
+								<button type="button"
+									onclick="showProductList(${subCategoryStartNum + 2})">${subCategory[subCategoryStartNum + 2].sub_category_name}</button>
 							</div>
 							<div>
-								<button>${subCategory[categoryNum + 3]. sub_category_name}</button>
+								<button type="button"
+									onclick="showProductList(${subCategoryStartNum3})">${subCategory[subCategoryStartNum + 3].sub_category_name}</button>
 							</div>
 							<div>
-								<button>${subCategory[categoryNum + 4]. sub_category_name}</button>
+								<button type="button"
+									onclick="showProductList(${subCategoryStartNum + 4})">${subCategory[subCategoryStartNum + 4].sub_category_name}</button>
 							</div>
 						</div>
 					</div>
-					<div>현재 표시 개수: ${pageSize}</div>
+
+					<div id="rowNum">
+						<div>현재 페이지 표시 개수: ${pageSize}</div>
+						<div id="rNumChange">
+							<div>변경:</div>
+							<a href="">10</a><a href="">50</a><a href="">100</a>
+						</div>
+
+					</div>
 					<div id="mh">
 						<div>번호</div>
 						<div>제품 번호</div>
@@ -65,33 +78,59 @@
 						<div>재고</div>
 						<div>상세정보</div>
 					</div>
-					<c:forEach var="list" items="${productList}">
-						<div id="ml">
+					<div id="ml">
+						<c:forEach var="list" items="${productList}">
 							<div>${list.list_num}</div>
 							<div>${list.product_num}</div>
 							<div>${list.product_name}</div>
 							<div>${list.product_price}</div>
 							<div>${list.total_stock}</div>
 							<div>
-								<button>✔️</button>
+								<button onclick="goProductDetail()">✔️</button>
 							</div>
-						</div>
-					</c:forEach>
-					<div>
-						<button id="prevPageBtn"
-							<c:if test="${pageNum} > 1">onclick="goToPage(${pageNum - 1})"</c:if>>&lt;</button>
-						<div>${pageNum}/${totalPage}페이지</div>
-						<button id="nextPageBtn"
-							<c:if test="${pageNum < totalPage}">onclick="goToPage(${pageNum + 1})"</c:if>>&gt;</button>
+						</c:forEach>
 					</div>
-					<div>
-						페이지당 표시 개수:&nbsp;<a href="">10</a>&nbsp;<a href="">50</a>&nbsp;<a
-							href="">100</a>
+					<div id="pageBtn">
+						<div>
+							<button id="prevPageBtn"
+								<c:if test="${pageNum} > 1">onclick="goToPage(${pageNum - 1})"</c:if>>&lt;</button>
+						</div>
+						<div>${pageNum}/${totalPage}페이지</div>
+						<div>
+							<button id="nextPageBtn"
+								<c:if test="${pageNum < totalPage}">onclick="goToPage(${pageNum + 1})"</c:if>>&gt;</button>
+						</div>
 					</div>
 				</div>
 			</main>
 		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
+
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script type="text/javascript">
+		function showProductList(subCategoryNum) {
+			var pageSize = ${pageSize} ;
+			var pageNum = ${pageNum} ;
+			var data = {subCategoryNum: subCategoryNum,
+		            pageSize: pageSize,
+		            pageNum: pageNum};
+	        $.ajax({
+	            type: 'GET',
+	            url: '/admin/changeProductList.do', // Replace with your actual controller endpoint
+	            data: data,
+	            success: function(response) {
+	                // Update the content on the page with the received data
+	                // For example, assuming you have a <div> with id="product-list"
+	                // $('#product-list').html(response);
+	                $('#cate').html(response);
+	                $('#ml').html(response);
+	            },
+	            error: function(error) {
+	          		console.error('Error:', error);
+	            }
+	        });
+		}
+	</script>
 </body>
 </html>

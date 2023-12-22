@@ -17,6 +17,7 @@ public class AdminInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		Object user_num = session.getAttribute("user_num");
 		Object is_admin = session.getAttribute("is_admin");
+		System.out.println("un: " + user_num + " A: " + is_admin);
 
 		// user_num이 없으면 로그인 페이지로 리다이렉트
 		if (user_num == null) {

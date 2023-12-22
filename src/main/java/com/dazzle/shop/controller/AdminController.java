@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dazzle.shop.model.admin.domain.*;
@@ -56,16 +57,14 @@ public class AdminController {
 	 */
 
 	// 상품 관리
-	/*
-	 * 상품 목록
-	 */
+	// 상품 목록
 	@GetMapping("/productList.do")
 	public String adminProductList(Model model) {
 		System.out.println("AdminController: adminProductList");
 
 		List<SubCategoryVO> subCategory = adminService.getSubCategoryList();
 		model.addAttribute("subCategory", subCategory);
-		model.addAttribute("categoryNum", 1);
+		model.addAttribute("subCategoryStartNum", 1);
 
 		int totalRecordNum = adminService.countTableRecord("user_info");
 		int pageSize = 10;
@@ -75,6 +74,20 @@ public class AdminController {
 		model.addAttribute("totalPage", totalRecordNum / pageSize + 1);
 
 		int subCategoryNum = 1;
+		List<AdminProductVO> list = adminService.getProductList(subCategoryNum, pageSize, pageNum);
+		model.addAttribute("productList", list);
+
+		return "admin_product_list.jsp";
+	}
+
+	// 상품 목록(ajax)
+	// 카테고리 버튼 누르면 그에 맞는 상품 리스트 보여줌
+	@GetMapping("/changeProductList.do")
+	public String changeProductList(@RequestParam("subCategoryNum") int subCategoryNum,
+			@RequestParam("pageSize") int pageSize, @RequestParam("pageNum") int pageNum, Model model) {
+		System.out.println("AdminController: changeProductList");
+
+		model.addAttribute("subCategoryStartNum", subCategoryNum);
 		List<AdminProductVO> list = adminService.getProductList(subCategoryNum, pageSize, pageNum);
 		model.addAttribute("productList", list);
 
