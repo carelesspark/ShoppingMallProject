@@ -28,11 +28,11 @@ public class UserOrdersVO {
 	private int user_info_num;
 	private String user_phone;
 	private String user_rank;
-	private int user_point; // Use Integer to represent nullable INT in the database
+	private int user_point; 
 	private Date user_join_date;
 	private Date user_update_date;
 	private Date user_delete_date;
-	private int is_black_list; // Use Integer to represent nullable TINYINT in the database
+	private int is_black_list; 
 	// orders
 	// pk: order_num
 	private int order_num;

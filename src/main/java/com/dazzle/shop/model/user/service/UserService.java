@@ -2,9 +2,7 @@ package com.dazzle.shop.model.user.service;
 
 import java.util.List;
 
-import com.dazzle.shop.model.user.domain.UserOrdersVO;
-import com.dazzle.shop.model.user.domain.UserReviewVO;
-import com.dazzle.shop.model.user.domain.UserVO;
+import com.dazzle.shop.model.user.domain.*;
 
 public interface UserService {
 
