@@ -126,7 +126,7 @@
 								</div>
 								<div id="order_list_section_div2">
 									<h2>3 건</h2>
-								</div>
+								</div>	
 							</div>
 						</div>
 					</div>
@@ -136,7 +136,7 @@
 					
 					<div id="order_list_date_buttons">
 						<div>
-							<button type="button" class="btn btn-dark" id="button_0" onclick="location.href='/orderListDate.do?user_num=${orderList[0].user_num}'">전체</button>
+							<button type="button" class="btn btn-dark" id="button_0" onclick="location.href='/orderListDate.do?user_num=${orderList.user_num}'">전체</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-dark" id="button_3" onclick="location.href='/orderListDate.do?user_num=${1}&date=${3}'">최근 3개월</button>
