@@ -1,7 +1,5 @@
 function validateForm(form, event) {
 	var errorMsg = document.getElementById('em');
-	document.querySelector('#mcf input[type="password"]').style.marginBottom = '5px';
-	document.getElementById('em').style.display = 'block';
 
 	if (form.id.value === "") {
 		errorMsg.innerHTML = "아이디를 입력해 주세요.";

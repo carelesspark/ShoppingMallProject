@@ -8,6 +8,11 @@ public interface SignService {
 	 * 로그인
 	 */
 	SignVO login(SignVO vo);
+	
+	/*
+	 * 관리자 로그인
+	 */
+	SignVO loginAdmin(SignVO vo);
 
 	/*
 	 * 아이디 찾기
