@@ -149,12 +149,12 @@ public class OrderDAO {
 		}
 	}
 
-	public List<OrderVO> getProductOrder(String productCode, int amount) {
+	public OrderVO getProductOrder(String productCode, int amount) {
 		try {
 			System.out.println("getProductOrder()");
 			Object[] args = { amount, amount, productCode };
 
-			return jdbcTemplate.query(PRODUCT_ORDER, args, new ProductOrderRowMapper());
+			return jdbcTemplate.queryForObject(PRODUCT_ORDER, args, new ProductOrderRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}

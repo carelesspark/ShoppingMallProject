@@ -127,13 +127,3 @@ body {
 	display: grid;
 	grid-template-rows: auto auto;
 }
-
-#mh {
-	display: grid;
-	grid-template-columns: auto;
-}
-
-#ml {
-	display: grid;
-	grid-template-columns: auto;
-}

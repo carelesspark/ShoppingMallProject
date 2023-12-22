@@ -26,7 +26,7 @@ public interface OrderService {
 
 	List<OrderVO> getOrderList(OrderVO vo);
 	
-	List<OrderVO> getProductOrder(String productCode, int amount);
+	OrderVO getProductOrder(String productCode, int amount);
 	
 	OrderVO getPoint(int user_num);
 

@@ -90,8 +90,10 @@ public class OrderController {
 	@RequestMapping(value="/productOrder.do")
 	public String getProductOrder(int user_num,String product_code,int amount,Model model) throws Exception {
 		System.out.println("상품 주문 페이지 이동(상품 상세페이지로 부터)");
+		List<OrderVO> productOrder = new ArrayList();
+		OrderVO product = orderService.getProductOrder(product_code, amount);
+		productOrder.add(product);
 		
-		List<OrderVO> productOrder = orderService.getProductOrder(product_code, amount);
 		OrderVO userPoint = orderService.getPoint(user_num);
 		AddressVO address = addressService.getBaseAddress(user_num);
 		
@@ -107,16 +109,21 @@ public class OrderController {
 	
 	// 장바구니 페이지에서 구매할 때,
 	@RequestMapping(value="/productOrderFromCart.do")
-	public String getProductOrderFromCart(int user_num, OrderVO vo, Model model) throws Exception {
-		System.out.println("상품 주문 페이지 이동(장바구니로 부터)");
-		List<OrderVO> productOrder = orderService.getProductOrderFromCart(vo);
+	public String getProductOrderFromCart(int user_num,List<String> product_code,List<Integer> amount, Model model) throws Exception {
+		List<OrderVO> productOrder = new ArrayList();
+		for(int i = 0; i < product_code.size(); i++) {
+			OrderVO product = orderService.getProductOrder(product_code.get(i), amount.get(i));
+			productOrder.add(product);
+		}
+		OrderVO userPoint = orderService.getPoint(user_num);
 		AddressVO address = addressService.getBaseAddress(user_num);
-		model.addAttribute("address", address);
 		
-		model.addAttribute("productOrder", productOrder);
 		model.addAttribute("user_num", user_num);
+		model.addAttribute("userPoint", userPoint);
+		model.addAttribute("productOrder", productOrder);
+		model.addAttribute("address", address);
 		System.out.println(productOrder);
-			
+
 		return "/order/productOrder.jsp";
 	}
 	

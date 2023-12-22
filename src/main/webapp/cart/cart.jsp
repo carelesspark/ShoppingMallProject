@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +30,7 @@
 					</div>
 				</div>
 				<div id="cart_middle">
+				<input type="hidden" name="user_num" value="${sessionScope.user_num}" />
 					<table id="cart_table">
 						<tr id="cart_table_first_tr">
 							<td id="cart_table_first_td"><input type="checkbox"
@@ -39,61 +41,19 @@
 							<td>가격</td>
 							<td>삭제</td>
 						</tr>
+						<c:forEach items="${cartList}" var="cart">
 						<tr id="cart_table_other_tr">
 							<td id="cart_table_first_td"><input type="checkbox"
 								id="cart_check_1" name="checkbox" value="check_value2"
 								class="cart_product_checkbox" /></td>
-							<td id="cart_table_product_img"></td>
-							<td id="cart_table_product_name">제품 이름1</td>
-							<td><input type="number" id="cart_product_count1"></td>
-							<td>19,000원</td>
+							<td id="cart_table_product_img"><img src="${cart.main_img }" /></td>
+							<td id="cart_table_product_name">${cart.product_name }</td>
+							<td><input type="number" id="cart_product_count1" value="${cart.amount }"></td>
+							<td>${cart.total_price }</td>
 							<td><button type="submit" class="btn btn-dark"
-									id="cart_delete">삭제</button></td>
+									id="cart_delete" onclick="location.href='/deleteCart.do?cart_num=${cart.cart_num}'">삭제</button></td>
 						</tr>
-						<tr id="cart_table_other_tr">
-							<td id="cart_table_first_td"><input type="checkbox"
-								id="cart_check_2" name="checkbox" value="check_value3"
-								class="cart_product_checkbox" /></td>
-							<td id="cart_table_product_img"></td>
-							<td id="cart_table_product_name">제품 이름2</td>
-							<td><input type="number" id="cart_product_count2"></td>
-							<td>19,000원</td>
-							<td><button type="submit" class="btn btn-dark"
-									id="cart_delete">삭제</button></td>
-						</tr>
-						<tr id="cart_table_other_tr">
-							<td id="cart_table_first_td"><input type="checkbox"
-								id="cart_check_3" name="checkbox" value="check_value4"
-								class="cart_product_checkbox" /></td>
-							<td id="cart_table_product_img"></td>
-							<td id="cart_table_product_name">제품 이름3</td>
-							<td><input type="number" id="cart_product_count3"></td>
-							<td>19,000원</td>
-							<td><button type="submit" class="btn btn-dark"
-									id="cart_delete">삭제</button></td>
-						</tr>
-						<tr id="cart_table_other_tr">
-							<td id="cart_table_first_td"><input type="checkbox"
-								id="cart_check_4" name="checkbox" value="check_value5"
-								class="cart_product_checkbox" /></td>
-							<td id="cart_table_product_img"></td>
-							<td id="cart_table_product_name">제품 이름4</td>
-							<td><input type="number" id="cart_product_count4"></td>
-							<td>19,000원</td>
-							<td><button type="submit" class="btn btn-dark"
-									id="cart_delete">삭제</button></td>
-						</tr>
-						<tr id="cart_table_other_tr">
-							<td id="cart_table_first_td"><input type="checkbox"
-								id="cart_check_5" name="checkbox" value="check_value6"
-								class="cart_product_checkbox" /></td>
-							<td id="cart_table_product_img"></td>
-							<td id="cart_table_product_name">제품 이름5</td>
-							<td><input type="number" id="cart_product_count5"></td>
-							<td>19,000원</td>
-							<td><button type="submit" class="btn btn-dark"
-									id="cart_delete">삭제</button></td>
-						</tr>
+						</c:forEach>
 					</table>
 				</div>
 				<div id="cart_bottom">

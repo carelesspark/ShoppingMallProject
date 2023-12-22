@@ -7,19 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_review_list.css" />
-<title>user review list</title>
+	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/user/user_address_list.css" />
+<title>user address list</title>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
-
 	<div id="m">
 		<%@ include file="./user_card.jsp"%>
 		<div id="mc">
 			<%@ include file="./user_side.jsp"%>
 			<main>
 				<div id="md">
-					후기 내역
+					주소지 내용
 					<div id="mh">
 						<div></div>
 						<div></div>
@@ -27,14 +28,13 @@
 						<div></div>
 						<div></div>
 					</div>
-					<c:forEach var="list" items="${reviewList}">
+					<c:forEach var="list" items="${addressList}">
 						<div id="ml"></div>
 					</c:forEach>
 				</div>
 			</main>
 		</div>
 	</div>
-
 	<%@ include file="../footer.jsp"%>
 
 	<script type="text/javascript">
