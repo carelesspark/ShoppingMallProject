@@ -36,6 +36,6 @@ public interface OrderService {
 	
 	List<OrderVO> getProductOrderWhenSuccess(OrderVO vo);
 	
-	
+	OrderVO getOrderSuccInfo(OrderVO vo);
 	
 }
