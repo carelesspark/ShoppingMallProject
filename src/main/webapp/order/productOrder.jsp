@@ -13,8 +13,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script>
 	function openAddressPopup() {
-		window.open('address.do', '주소 변경',
-				'width=650, height=1000');
+		window.open('address.do', '주소 변경', 'width=650, height=1000');
 	}
 </script>
 
@@ -23,8 +22,8 @@
 	<%@ include file="../header.jsp"%>
 	<main>
 		<form action="order.do" method="post">
-			<input type="hidden" value="${user_num}" name="user_num"/>
-			
+			<input type="hidden" value="${user_num}" name="user_num" />
+
 			<div id="main_container">
 				<div id="order_list">
 					<div id="order_list_title">
@@ -34,37 +33,42 @@
 						<h3>주문 내역</h3>
 					</div>
 					<c:set var="totalPrice" value="0" />
-					<c:forEach items="${productOrder}" var="order">
-						<div id="order_list_box">
-							<div id="order_list_grid">
-								<input type="hidden" value="${order.product_code }" name="product_code_list"/>
+
+					<div id="order_list_box">
+						<div id="order_list_grid">
+							<c:forEach items="${productOrder}" var="order">
+								<input type="hidden" value="${order.product_code }"
+									name="product_code_list" />
 								<div id="order_list_pic">
 									<a href="${order.main_img }"><img src="${order.main_img }"
 										id="order_list_pic1" /></a>
 								</div>
 								<div id="order_list_price">
-									<p>${order.amountMultiPrice} 원</p>
-									<input type="hidden" value="${order.amountMultiPrice }" name="amountMultiPrice_list"/>
-									 <c:set var="totalPrice" value="${totalPrice + order.amountMultiPrice}" />
+									<p>${order.amountMultiPrice}원</p>
+									<input type="hidden" value="${order.amountMultiPrice }"
+										name="amountMultiPrice_list" />
+									<c:set var="totalPrice"
+										value="${totalPrice + order.amountMultiPrice}" />
 								</div>
 								<div id="order_list_amount">
 									<p>수량 / ${order.amount }개</p>
-									<input type="hidden" value="${order.amount }" name="amount_list"/>
+									<input type="hidden" value="${order.amount }"
+										name="amount_list" />
 								</div>
 								<div id="order_list_name">
-									<p>${order.product_name}(색상:${order.color_name},사이즈 :
+									<p>${order.product_name}(색상:${order.color_name},사이즈:
 										${order.size_name})</p>
 								</div>
-							</div>
+							</c:forEach>
+							<hr style="border-bottom: 1px solid #C3C3C3;"/>
 						</div>
-						
-					</c:forEach>
+					</div>
+
+
 					<div id="order_list_total_price">
 						<p>전체 가격 : ${totalPrice} 원</p>
 					</div>
 				</div>
-
-				<form>
 					<div id="order_address">
 						<div id="order_address_title">
 							<div>
@@ -159,7 +163,7 @@
 								</div>
 								<div id="order_payment_grid_rows_2">
 									<div id="order_payment_price_value">
-										<p>${totalPrice} 원</p>
+										<p>${totalPrice}원</p>
 									</div>
 									<div id="order_payment_coupon_value">
 										<select>
@@ -194,13 +198,14 @@
 										<c:if test="${totalPrice >= 30000}">
 											<c:set var="delivery_price" value="0" />
 										</c:if>
-										<p>${delivery_price } 원</p>
-										<input type="hidden" value="${delivery_price}" name="delivery_price"/>
-										
+										<p>${delivery_price }원</p>
+										<input type="hidden" value="${delivery_price}"
+											name="delivery_price" />
+
 									</div>
 									<div id="order_payment_actual_price_value">
 										<c:set var="totalPrice" value="${totalPrice + delivery_price}" />
-										<p>${totalPrice} 원</p>
+										<p>${totalPrice}원</p>
 									</div>
 									<div id="order_payment_method_value">
 										<div>
@@ -212,8 +217,7 @@
 												name="payment" value="무통장입금"><label>무통장입금</label>
 										</div>
 										<div>
-											<input type="radio" id="transfer" name="payment"
-												value="계좌이체"><label>계좌이체</label>
+											<input type="radio" id="transfer" name="payment" value="계좌이체"><label>계좌이체</label>
 										</div>
 										<div>
 											<input type="radio" id="kakaopay" name="payment"

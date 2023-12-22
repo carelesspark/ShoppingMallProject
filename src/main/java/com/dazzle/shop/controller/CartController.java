@@ -1,9 +1,11 @@
 package com.dazzle.shop.controller;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +41,37 @@ public class CartController {
 	}
 	
 	@RequestMapping(value="/deleteCart.do")
-	public String deleteCart(int cart_num, int user_num, CartVO vo, Model model) throws Exception {
+	public String deleteCart(int cart_num, int user_num, HttpServletResponse response, CartVO vo, Model model) throws Exception {
 		
 		System.out.println(cart_num);
 		System.out.println("장바구니 삭제");
 		
 		cartService.deleteCart(cart_num);
+		PrintWriter out = response.getWriter();
+		out.print("<script>alert('삭제되었습니다');</script>");
+		
 		
 		model.addAttribute("user_num", user_num);
+		
+		
+		
+		return "redirect:cart.do";
+	}
+	
+	@RequestMapping(value="/deleteCartAll.do")
+	public String deleteCart(int user_num, HttpServletResponse response, CartVO vo, Model model) throws Exception {
+		
+		System.out.println(user_num);
+		System.out.println("장바구니 전체 삭제");
+		
+		cartService.deleteCartAll(user_num);
+		PrintWriter out = response.getWriter();
+		out.print("<script>alert('모든 장바구니 내역이 삭제되었습니다');</script>");
+		
+		
+		model.addAttribute("user_num", user_num);
+		
+		
 		
 		return "redirect:cart.do";
 	}
