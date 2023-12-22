@@ -33,10 +33,15 @@ public interface AdminService {
 	 */
 
 	// 상품 관리
-	/*
-	 * 상품 목록
-	 */
+	// 상품 목록
 	List<AdminProductVO> getProductList(int subCategoryNum, int pageSize, int pageNum);
+
+	// 상품 상세 - 세부 정보
+	AdminProductVO getProductDetail(int product_num);
+
+	// 상품 상세 - 색상, 사이즈, 재고
+	List<AdminProductVO> getProductStock(int product_num);
+
 	/*
 	 * 상품 추가
 	 */

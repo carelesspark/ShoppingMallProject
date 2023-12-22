@@ -1,6 +1,8 @@
 package com.dazzle.shop.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,7 +66,7 @@ public class AdminController {
 
 		List<SubCategoryVO> subCategory = adminService.getSubCategoryList();
 		model.addAttribute("subCategory", subCategory);
-		model.addAttribute("subCategoryStartNum", 1);
+		model.addAttribute("subCategoryStartNum", 0);
 
 		int totalRecordNum = adminService.countTableRecord("user_info");
 		int pageSize = 10;
@@ -80,20 +82,38 @@ public class AdminController {
 		return "admin_product_list.jsp";
 	}
 
-	// 상품 목록(ajax)
 	// 카테고리 버튼 누르면 그에 맞는 상품 리스트 보여줌
 	@GetMapping("/changeProductList.do")
 	public String changeProductList(@RequestParam("subCategoryNum") int subCategoryNum,
 			@RequestParam("pageSize") int pageSize, @RequestParam("pageNum") int pageNum, Model model) {
 		System.out.println("AdminController: changeProductList");
 
-		model.addAttribute("subCategoryStartNum", subCategoryNum);
-		List<AdminProductVO> list = adminService.getProductList(subCategoryNum, pageSize, pageNum);
+		List<SubCategoryVO> subCategory = adminService.getSubCategoryList();
+		model.addAttribute("subCategory", subCategory);
+		model.addAttribute("subCategoryStartNum", (subCategoryNum / 5) * 5);
+
+		int totalRecordNum = adminService.countTableRecord("user_info");
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("totalPage", totalRecordNum / pageSize + 1);
+
+		List<AdminProductVO> list = adminService.getProductList(subCategoryNum + 1, pageSize, pageNum);
 		model.addAttribute("productList", list);
 
 		return "admin_product_list.jsp";
 	}
 
+	@GetMapping("/productDetail.do")
+	public String adminProductDetail(@RequestParam("product_num") int product_num, Model model) {
+		System.out.println("AdminController: adminProductDetail");
+
+		AdminProductVO productInfo = adminService.getProductDetail(product_num);
+		List<AdminProductVO> stockList = adminService.getProductStock(product_num);
+		model.addAttribute("productInfo", productInfo);
+		model.addAttribute("stockList", stockList);
+
+		return "admin_product_detail.jsp";
+	}
 	/*
 	 * 상품 추가
 	 */

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+/* main div */
+#md {
+	display: grid;
+	grid-template-rows: auto auto;
+}
+
+/* 제품 상세 정보 */
+#pi {
+	display: grid;
+	grid-template-columns: auto;
+}
+
+#pim {
+	display: grid;
+	grid-template-columns: auto;
+}
+
+#pim div {
+	display: grid;
+	grid-template-columns: auto auto;
+}
+
+#mh {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
+
+#ml {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}

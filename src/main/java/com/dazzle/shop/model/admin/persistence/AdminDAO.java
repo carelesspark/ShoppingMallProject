@@ -30,12 +30,23 @@ public class AdminDAO {
 			+ "SELECT list_num, product_num, product_name, product_price, total_stock, "
 			+ "CEIL(list_num / ?) AS page_num FROM productlist WHERE CEIL(list_num / ?) = ? ORDER BY list_num";
 
+	public final String PRODUCT_DETAIL = "SELECT p.product_num, p.product_name, p.product_info, "
+			+ "p.product_date, p.product_sell, p.product_price, p.modify_date, p.delete_date, "
+			+ "p.registration_status, s.sub_category_num, s.sub_category_name, c.category_num, c.category_name "
+			+ "FROM product p JOIN sub_category s ON p.sub_category_num = s.sub_category_num "
+			+ "JOIN category c ON s.category_num = c.category_num WHERE p.product_num = ?";
+
+	public final String PRODUCT_STOCK = "SELECT pc.color_name, ps.size_name, ps.product_stock FROM product_color pc "
+			+ "JOIN product_size ps ON pc.color_num = ps.color_num WHERE pc.product_num = ?";
+
+	// 테이블 레코드 총 개수 반환
 	public int getTotalCount(String tableName) {
 		String sql = "select count(*) from " + tableName;
 
 		return template.queryForObject(sql, Integer.class);
 	}
 
+	// 서브 카테고리 이름과 번호 반환
 	public List<SubCategoryVO> getSubCategoryList() {
 		String sql = "select sub_category_num, sub_category_name from sub_category";
 
@@ -49,6 +60,7 @@ public class AdminDAO {
 		return template.query(sql, rowMapper);
 	}
 
+	// 유저 리스트 반환
 	public List<AdminUserVO> getUserList(int pageSize, int pageNum) {
 
 		try {
@@ -58,6 +70,7 @@ public class AdminDAO {
 		}
 	}
 
+	// 제품 리스트 반환
 	public List<AdminProductVO> getProductList(int subCategoryNum, int pageSize, int pageNum) {
 
 		try {
@@ -66,6 +79,36 @@ public class AdminDAO {
 		} catch (EmptyResultDataAccessException e) {
 			return Collections.emptyList();
 		}
-
 	}
+
+	// 제품 상세정보 반환 - 제품, 세부 카테고리, 카테고리 관련
+	public AdminProductVO getProductDetail(int product_num) {
+
+		try {
+			return template.queryForObject(PRODUCT_DETAIL, new ProductDetailRowMapper(), product_num);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
+	// 제품 상세정보 반환 - 이미지
+	// 제품 상세정보 반환 - 색상, 사이즈 밑 재고
+	public List<AdminProductVO> getProductStock(int product_num) {
+
+		RowMapper<AdminProductVO> rowMapper = (rs, rowNum) -> {
+			AdminProductVO vo = new AdminProductVO();
+			vo.setColor_name(rs.getString("color_name"));
+			vo.setSize_name(rs.getString("size_name"));
+			vo.setProduct_stock(rs.getInt("product_stock"));
+
+			return vo;
+		};
+
+		try {
+			return template.query(PRODUCT_STOCK, new Object[] { product_num }, rowMapper);
+		} catch (EmptyResultDataAccessException e) {
+			return Collections.emptyList();
+		}
+	}
+
 }

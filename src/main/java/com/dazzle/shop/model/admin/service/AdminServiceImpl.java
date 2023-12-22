@@ -66,6 +66,20 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.getProductList(subCategoryNum, pageSize, pageNum);
 	}
 
+	// 상품 상세 - 세부 정보
+	@Override
+	public AdminProductVO getProductDetail(int product_num) {
+
+		return adminDAO.getProductDetail(product_num);
+	}
+
+	// 상품 상세 - 색상, 사이즈, 재고
+	@Override
+	public List<AdminProductVO> getProductStock(int product_num) {
+
+		return adminDAO.getProductStock(product_num);
+	}
+
 	/*
 	 * 상품 추가
 	 */
