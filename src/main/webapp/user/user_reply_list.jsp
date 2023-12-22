@@ -10,7 +10,6 @@
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user_reply_list.css" />
-
 <title>user reply list</title>
 </head>
 <body>

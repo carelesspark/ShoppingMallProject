@@ -25,6 +25,14 @@ public class SignServiceImpl implements SignService {
 	public SignVO login(SignVO vo) {
 		return signDAO.login(vo);
 	}
+	
+	/*
+	 * 관리자 로그인
+	 */
+	@Override
+	public SignVO loginAdmin(SignVO vo) {
+		return signDAO.loginAdmin(vo);
+	}
 
 	/*
 	 * 아이디 찾기

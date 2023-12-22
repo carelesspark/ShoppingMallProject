@@ -10,12 +10,6 @@
 			<div id="cc-un">${sessionScope.user_name}님</div>
 			<div id="cc-ur">${user_rank }</div>
 		</div>
-		<div id="cc-c">
-			<div id="cc-cn"></div>
-			<div id="cc-cc">
-				<a href=""></a>
-			</div>
-		</div>
 		<div id="cc-d">
 			<div id="cc-dn">배송중</div>
 			<div id="cc-dc">

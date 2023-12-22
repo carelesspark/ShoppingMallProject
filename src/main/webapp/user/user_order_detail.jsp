@@ -9,9 +9,8 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_inquiry_list.css" />
-
-<title>user inquiry list</title>
+	href="${pageContext.request.contextPath}/resources/css/user/user_order_detail.css" />
+<title>user order detail</title>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -21,22 +20,30 @@
 			<%@ include file="./user_side.jsp"%>
 			<main>
 				<div id="md">
-					1대1 문의 내역
 					<div id="mh">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
+						<div>주문일</div>
+						<div>배송일</div>
+						<div>수취인</div>
+						<div>삼품명</div>
+						<div>개수</div>
+						<div>가격</div>
+						<div>상품 상태</div>
 					</div>
-					<c:forEach var="list" items="${inquiryList}">
-						<div id="ml"></div>
+					<c:forEach var="list" items="${orderList}">
+						<div id="ml">
+							<div>${list.order_date}</div>
+							<div>${list.delivery_date}</div>
+							<div>${list.recipient}</div>
+							<div>${list.product_name}</div>
+							<div>${list.amount}</div>
+							<div>${list.total_price}</div>
+							<div>${list.product_state}</div>
+						</div>
 					</c:forEach>
 				</div>
 			</main>
 		</div>
 	</div>
-
 	<%@ include file="../footer.jsp"%>
 
 	<script type="text/javascript">
