@@ -124,7 +124,7 @@ public class SignController {
 		request.getSession().setAttribute("login_type", login_type);
 		request.getSession().setAttribute("is_admin", is_admin);
 
-		return "redirect:/main/main.jsp";
+		return "redirect:/admin/userList.do";
 	}
 
 	/*
