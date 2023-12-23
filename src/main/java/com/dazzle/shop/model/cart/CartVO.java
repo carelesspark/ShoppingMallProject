@@ -7,7 +7,7 @@ public class CartVO {
 	private int cart_num;
 	private int amount;
 	private int user_num;
-	private String product_code;
+	private int product_code;
 	private String main_img;
 	private int product_price;
 	private int total_price;

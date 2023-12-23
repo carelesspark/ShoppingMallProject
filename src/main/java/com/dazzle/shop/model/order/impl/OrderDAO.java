@@ -149,7 +149,7 @@ public class OrderDAO {
 		}
 	}
 
-	public OrderVO getProductOrder(String productCode, int amount) {
+	public OrderVO getProductOrder(int productCode, int amount) {
 		try {
 			System.out.println("getProductOrder()");
 			Object[] args = { amount, amount, productCode };
