@@ -9,6 +9,9 @@ public interface AdminService {
 	// 테이블 행 개수 출력
 	int countTableRecord(String tableName);
 
+	// 블랙리스트인 유저 수 반환
+	int countBlacklist();
+
 	// 서브카테고리 번호, 이름 출력
 	List<SubCategoryVO> getSubCategoryList();
 	/*
@@ -21,16 +24,12 @@ public interface AdminService {
 	 * 가계부
 	 */
 
-	/*
-	 * 회원 관리
-	 */
-	/*
-	 * 회원 목록
-	 */
+	// 회원 관리
+	// 회원 목록
 	List<AdminUserVO> getUserList(int pageSize, int pageNum);
-	/*
-	 * 블랙리스트 목록
-	 */
+
+	// 블랙리스트 목록
+	List<AdminUserVO> getBlackist(int pageSize, int pageNum);
 
 	// 상품 관리
 	// 상품 목록

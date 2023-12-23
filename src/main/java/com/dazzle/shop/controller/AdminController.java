@@ -32,9 +32,7 @@ public class AdminController {
 	 */
 
 	// 회원 관리
-	/*
-	 * 회원 목록
-	 */
+	// 회원 목록
 	@GetMapping("/userList.do")
 	public String adminUserList(Model model) {
 		System.out.println("AdminController: adminUserList");
@@ -51,13 +49,44 @@ public class AdminController {
 
 		return "admin_user_list.jsp";
 	}
-	// 회원 목록 - 페이지 당 행 개수(비동기)
-	// 회원 목록 - 페이지 이동(비동기)
 
-	/*
-	 * 블랙리스트 목록
-	 */
+	// 회원 목록 - 페이지 당 행 개수
+	// 회원 목록 - 페이지 이동
+	@GetMapping("/changeUserList.do")
+	public String changeUserList(@RequestParam("pageSize") int pageSize, @RequestParam("pageNum") int pageNum,
+			Model model) {
+		System.out.println("AdminController: changeUserList");
 
+		int totalRecordNum = adminService.countTableRecord("user_info") - 1;
+		System.out.println("pageSize: " + pageSize + ", pageNum: " + pageNum + ", totalRecordNum: " + totalRecordNum);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("totalPage", totalRecordNum / pageSize + 1);
+
+		List<AdminUserVO> list = adminService.getUserList(pageSize, pageNum);
+		model.addAttribute("userList", list);
+
+		return "admin_user_list.jsp";
+	}
+
+	// 블랙리스트 목록
+	@GetMapping("/userBlacklist.do")
+	public String userBlacklist(Model model) {
+		System.out.println("AdminController: userBlacklist");
+
+		int totalRecordNum = adminService.countBlacklist();
+		int pageSize = 10;
+		int pageNum = 1;
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("totalPage", totalRecordNum / pageSize + 1);
+
+		List<AdminUserVO> list = adminService.getBlackist(pageSize, pageNum);
+		model.addAttribute("userList", list);
+
+		return "admin_user_list.jsp";
+	}
+	
 	// 상품 관리
 	// 상품 목록
 	@GetMapping("/productList.do")
@@ -66,6 +95,7 @@ public class AdminController {
 
 		List<SubCategoryVO> subCategory = adminService.getSubCategoryList();
 		model.addAttribute("subCategory", subCategory);
+		model.addAttribute("subCategoryNum", 0);
 		model.addAttribute("subCategoryStartNum", 0);
 
 		int totalRecordNum = adminService.countTableRecord("user_info");
@@ -90,6 +120,7 @@ public class AdminController {
 
 		List<SubCategoryVO> subCategory = adminService.getSubCategoryList();
 		model.addAttribute("subCategory", subCategory);
+		model.addAttribute("subCategoryNum", subCategoryNum);
 		model.addAttribute("subCategoryStartNum", (subCategoryNum / 5) * 5);
 
 		int totalRecordNum = adminService.countTableRecord("user_info");

@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/admin/admin.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/admin/admin_user_list.css?v=1.0" />
+	href="${pageContext.request.contextPath}/resources/css/admin/admin_user_list.css?ver=1.0" />
 <title>admin user list</title>
 </head>
 <body>
@@ -20,7 +20,24 @@
 			<%@ include file="./admin_side.jsp"%>
 			<main>
 				<div id="md">
-					<div>현재 표시 개수: ${pageSize}</div>
+					<div id="rowNum">
+						<div>현재 페이지 표시 개수: ${pageSize}</div>
+						<div id="rNumChange">
+							<div>변경:</div>
+							<div>
+								<button type="button"
+									onclick="window.location.href='/admin/changeUserList.do?pageSize=10&pageNum=1'">10</button>
+							</div>
+							<div>
+								<button type="button"
+									onclick="window.location.href='/admin/changeUserList.do?pageSize=50&pageNum=1'">50</button>
+							</div>
+							<div>
+								<button type="button"
+									onclick="window.location.href='/admin/changeUserList.do?pageSize=100&pageNum=1'">100</button>
+							</div>
+						</div>
+					</div>
 					<div id="mh">
 						<div>번호</div>
 						<div>이름</div>
@@ -30,8 +47,8 @@
 						<div>가입일</div>
 						<div>탈퇴일</div>
 					</div>
-					<c:forEach var="list" items="${userList}">
-						<div id="ml">
+					<div id="ml">
+						<c:forEach var="list" items="${userList}">
 							<div>${list.list_num}</div>
 							<div>${list.user_name}</div>
 							<div>${list.user_rank}</div>
@@ -53,30 +70,23 @@
 									<div>${list.user_delete_date}</div>
 								</c:otherwise>
 							</c:choose>
-						</div>
-					</c:forEach>
-					<div>
-						<button id="prevPageBtn"
-							<c:if test="${pageNum} > 1">onclick="goToPage(${pageNum - 1})"</c:if>>&lt;</button>
-						<div>${pageNum}/${totalPage}페이지</div>
-						<button id="nextPageBtn"
-							<c:if test="${pageNum < totalPage}">onclick="goToPage(${pageNum + 1})"</c:if>>&gt;</button>
+						</c:forEach>
 					</div>
-					<div>
-						페이지당 표시 개수:&nbsp;<a href="">10</a>&nbsp;<a href="">50</a>&nbsp;<a
-							href="">100</a>
+					<div id="pageBtn">
+						<div>
+							<button type="button" id="prevPageBtn"
+								<c:if test="${pageNum > 1}">onclick="window.location.href='/admin/changeUserList.do?pageSize=${pageSize}&pageNum=${pageNum - 1}'"</c:if>>&lt;</button>
+						</div>
+						<div>${pageNum}/${totalPage}페이지</div>
+						<div>
+							<button type="button" id="nextPageBtn"
+								<c:if test="${pageNum < totalPage}">onclick="window.location.href='/admin/changeUserList.do?pageSize=${pageSize}&pageNum=${pageNum + 1}'"</c:if>>&gt;</button>
+						</div>
 					</div>
 				</div>
 			</main>
 		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
-
-	<script>
-		function goToPage(pageNum) {
-
-		}
-	</script>
-
 </body>
 </html>

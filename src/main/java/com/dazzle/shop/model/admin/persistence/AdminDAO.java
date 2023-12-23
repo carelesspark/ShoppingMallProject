@@ -17,10 +17,16 @@ public class AdminDAO {
 	@Autowired
 	private JdbcTemplate template;
 
-	public final String USER_LIST = "WITH userlist AS ( SELECT ROW_NUMBER() OVER (ORDER BY ui.user_join_date DESC) AS list_num, "
+	public final String USER_LIST = "WITH blacklist AS ( SELECT ROW_NUMBER() OVER (ORDER BY ui.user_join_date DESC) AS list_num, "
 			+ "u.user_name, u.login_type, ui.user_rank, ui.is_black_list, ui.user_join_date, ui.user_delete_date "
 			+ "FROM users u JOIN user_info ui ON u.user_num = ui.user_num WHERE u.is_admin != 1) "
 			+ "SELECT list_num, user_name, login_type, user_rank, is_black_list, user_join_date, user_delete_date, "
+			+ "CEIL(list_num / ?) AS page_num FROM blacklist WHERE CEIL(list_num / ?) = ? ORDER BY list_num";
+
+	public final String BLACKLIST = "WITH userlist AS ( SELECT ROW_NUMBER() OVER (ORDER BY ui.user_join_date DESC) AS list_num, "
+			+ "u.user_name, u.login_type, ui.user_rank, ui.user_join_date, ui.user_delete_date "
+			+ "FROM users u JOIN user_info ui ON u.user_num = ui.user_num WHERE ui.is_black_list = 1) "
+			+ "SELECT list_num, user_name, login_type, user_rank, user_join_date, user_delete_date, "
 			+ "CEIL(list_num / ?) AS page_num FROM userlist WHERE CEIL(list_num / ?) = ? ORDER BY list_num";
 
 	public final String PRODUCT_LIST = "WITH productlist AS (SELECT ROW_NUMBER() OVER (ORDER BY p.product_date DESC) AS list_num, "
@@ -46,6 +52,13 @@ public class AdminDAO {
 		return template.queryForObject(sql, Integer.class);
 	}
 
+	// 블랙리스트인 유저 수 반환
+	public int countBlacklist() {
+		String sql = "select count(*) from user_info where is_black_list = 1";
+
+		return template.queryForObject(sql, Integer.class);
+	}
+
 	// 서브 카테고리 이름과 번호 반환
 	public List<SubCategoryVO> getSubCategoryList() {
 		String sql = "select sub_category_num, sub_category_name from sub_category";
@@ -65,6 +78,16 @@ public class AdminDAO {
 
 		try {
 			return template.query(USER_LIST, new Object[] { pageSize, pageSize, pageNum }, new AdminUserRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return Collections.emptyList();
+		}
+	}
+
+	// 유저 블랙리스트 반환
+	public List<AdminUserVO> getBlackist(int pageSize, int pageNum) {
+
+		try {
+			return template.query(BLACKLIST, new Object[] { pageSize, pageSize, pageNum }, new AdminBlacklistRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return Collections.emptyList();
 		}

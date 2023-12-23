@@ -85,6 +85,7 @@
 					</div>
 					<div>
 						<button type="button" onclick="">상품 수정</button>
+						<button type="button" onclick="">상품 비활성화</button>
 						<button type="button" onclick="">상품 삭제</button>
 					</div>
 				</div>

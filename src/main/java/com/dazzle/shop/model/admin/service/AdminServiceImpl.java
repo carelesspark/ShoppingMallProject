@@ -23,6 +23,14 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.getTotalCount(tableName);
 	}
 
+	// 블랙리스트인 유저 수 반환
+	@Override
+	public int countBlacklist() {
+
+		return adminDAO.countBlacklist();
+	}
+
+	// 서브카테고리 번호, 이름 출력
 	@Override
 	public List<SubCategoryVO> getSubCategoryList() {
 
@@ -50,9 +58,11 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.getUserList(pageSize, pageNum);
 	}
 
-	/*
-	 * 블랙리스트 목록
-	 */
+	// 블랙리스트 목록
+	@Override
+	public List<AdminUserVO> getBlackist(int pageSize, int pageNum) {
+		return adminDAO.getBlackist(pageSize, pageNum);
+	}
 
 	/*
 	 * 상품 관리

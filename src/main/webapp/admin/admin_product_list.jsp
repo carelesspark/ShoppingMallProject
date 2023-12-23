@@ -23,45 +23,45 @@
 					<div id="cate">
 						<div id="mainC">
 							<div>
-								<button type="button"
+								<button type="button" id="cBtn1"
 									onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=0&pageSize=${pageSize}&pageNum=${pageNum}'">top</button>
 							</div>
 							<div>
-								<button type="button"
+								<button type="button" id="cBtn2"
 									onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=5&pageSize=${pageSize}&pageNum=${pageNum}'">bottom</button>
 							</div>
 							<div>
-								<button type="button"
+								<button type="button" id="cBtn3"
 									onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=10&pageSize=${pageSize}&pageNum=${pageNum}'">outer</button>
 							</div>
 							<div>
-								<button type="button"
+								<button type="button" id="cBtn4"
 									onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=15&pageSize=${pageSize}&pageNum=${pageNum}'">shoes</button>
 							</div>
 							<div>
-								<button type="button"
+								<button type="button" id="cBtn5"
 									onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=20&pageSize=${pageSize}&pageNum=${pageNum}'">etc</button>
 							</div>
 						</div>
 						<div id="subC">
 							<div>
-								<button type="button"
+								<button type="button" id="subCBtn1"
 									onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=${subCategoryStartNum}&pageSize=${pageSize}&pageNum=${pageNum}'">${subCategory[subCategoryStartNum].sub_category_name}</button>
 							</div>
 							<div>
-								<button type="button"
+								<button type="button" id="subCBtn2"
 									onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=${subCategoryStartNum + 1}&pageSize=${pageSize}&pageNum=${pageNum}'">${subCategory[subCategoryStartNum + 1].sub_category_name}</button>
 							</div>
 							<div>
-								<button type="button"
+								<button type="button" id="subCBtn3"
 									onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=${subCategoryStartNum + 2}&pageSize=${pageSize}&pageNum=${pageNum}'">${subCategory[subCategoryStartNum + 2].sub_category_name}</button>
 							</div>
 							<div>
-								<button type="button"
+								<button type="button" id="subCBtn4"
 									onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=${subCategoryStartNum + 3}&pageSize=${pageSize}&pageNum=${pageNum}'">${subCategory[subCategoryStartNum + 3].sub_category_name}</button>
 							</div>
 							<div>
-								<button type="button"
+								<button type="button" id="subCBtn5"
 									onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=${subCategoryStartNum + 4}&pageSize=${pageSize}&pageNum=${pageNum}'">${subCategory[subCategoryStartNum + 4].sub_category_name}</button>
 							</div>
 						</div>
@@ -107,12 +107,12 @@
 					</div>
 					<div id="pageBtn">
 						<div>
-							<button id="prevPageBtn"
+							<button type="button" id="prevPageBtn"
 								<c:if test="${pageNum} > 1">onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=${subCategoryStartNum}&pageSize=${pageSize}&pageNum=${pageNum - 1}'"</c:if>>&lt;</button>
 						</div>
 						<div>${pageNum}/${totalPage}페이지</div>
 						<div>
-							<button id="nextPageBtn"
+							<button type="button" id="nextPageBtn"
 								<c:if test="${pageNum < totalPage}">onclick="window.location.href='/admin/changeProductList.do?subCategoryNum=${subCategoryStartNum}&pageSize=${pageSize}&pageNum=${pageNum + 1}'"</c:if>>&gt;</button>
 						</div>
 					</div>
@@ -121,5 +121,13 @@
 		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
+
+	<script type="text/javascript">
+		var subCategoryNum = "${subCategoryNum}";
+		var categoryBtnColor = "#F6BB43";
+
+		document.getElementById('cBtn' + (Math.floor(subCategoryNum / 5) + 1)).style.backgroundColor = categoryBtnColor;
+		document.getElementById(('subCBtn') + (subCategoryNum % 5 + 1)).style.backgroundColor = categoryBtnColor;
+	</script>
 </body>
 </html>
