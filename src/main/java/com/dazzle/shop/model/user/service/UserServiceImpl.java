@@ -16,6 +16,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
 
+	
 	/*
 	 * 유저 카드 내용 저장
 	 */
@@ -28,13 +29,26 @@ public class UserServiceImpl implements UserService {
 	 * 주문/배송 조회
 	 */
 	@Override
-	public List<UserOrdersVO> getUserOrderList(int user_num) {
-		return userDAO.getUserOrderList(user_num);
+	public List<UserOrdersVO> getUserOrderList(int user_num, UserOrdersVO vo) {
+		return userDAO.getUserOrderList(user_num, vo);
 	}
 
+	@Override
+	public List<UserOrdersVO> getOrderList2(int user_num, int date) {
+		
+		return userDAO.getOrderList2(user_num, date);
+	}
+
+	
 	/*
 	 * 포인트
 	 */
+
+	@Override
+	public UserOrdersVO orderCheck(int user_num) {
+		
+		return userDAO.orderCheck(user_num);
+	}
 
 	/*
 	 * 상품 후기

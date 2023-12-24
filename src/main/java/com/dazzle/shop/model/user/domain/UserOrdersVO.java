@@ -84,4 +84,11 @@ public class UserOrdersVO {
 	private int registration_status;
 	private String product_class_code;
 	private int sub_category_num;
+	// 수정
+	private String main_img;
+	private int total_orders;
+	private int orders_in_preparation;
+	private int orders_in_delivery;
+	private int orders_delivered;
+	private String search_order;
 }

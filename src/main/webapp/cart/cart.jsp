@@ -38,8 +38,8 @@
 					<div id="cart_middle">
 						<table id="cart_table">
 							<tr id="cart_table_first_tr">
-								<td id="cart_table_first_td"><input type="checkbox"
-									id="cart_check_all" name="checkAll" value="check_value" />선택</td>
+								<td id="cart_table_first_td"><!-- <input type="checkbox"
+									id="cart_check_all" name="checkAll" value="check_value" /> -->선택</td>
 								<td id="cart_table_product_img"></td>
 								<td id="cart_table_product_name">제품명</td>
 								<td>수량</td>

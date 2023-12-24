@@ -22,7 +22,9 @@ public class UserOrderRowMapper implements RowMapper<UserOrdersVO> {
 		userOrdersVO.setSize_name(rs.getString("size_name"));
 		userOrdersVO.setColor_name(rs.getString("color_name"));
 		userOrdersVO.setProduct_name(rs.getString("product_name"));
-
+		userOrdersVO.setMain_img(rs.getString("main_img"));
+		userOrdersVO.setProduct_price(rs.getInt("product_price"));
+		userOrdersVO.setOrder_num(rs.getInt("order_num"));
 		return userOrdersVO;
 	}
 

@@ -19,27 +19,127 @@
 		<div id="mc">
 			<%@ include file="./user_side.jsp"%>
 			<main>
-				<div id="md">
-					<div id="mh">
-						<div>주문일</div>
-						<div>배송일</div>
-						<div>수취인</div>
-						<div>삼품명</div>
-						<div>개수</div>
-						<div>가격</div>
-						<div>상품 상태</div>
+				<div id="main_order_list">
+					<div id="main-order-container">
+						<p id="order_list_title">주문 목록 조회</p>
 					</div>
-					<c:forEach var="list" items="${orderList}">
-						<div id="ml">
-							<div>${list.order_date}</div>
-							<div>${list.delivery_date}</div>
-							<div>${list.recipient}</div>
-							<div>${list.product_name}</div>
-							<div>${list.amount}</div>
-							<div>${list.total_price}</div>
-							<div>${list.product_state}</div>
+					<div id="order_list_section">
+						<div id="order_list_section_grid">
+							<div id="order_list_section1">
+								<div id="order_list_section_div1">
+									<p>주문 완료</p>
+								</div>
+								<div id="order_list_section_div2">
+									<h2>${orderCount.total_orders}건</h2>
+								</div>
+							</div>
+							<div id="order_list_section2">
+								<div id="order_list_section_div1">
+									<p>상품 준비 중</p>
+								</div>
+								<div id="order_list_section_div2">
+									<h2>${orderCount.orders_in_preparation}건</h2>
+								</div>
+							</div>
+							<div id="order_list_section3">
+								<div id="order_list_section_div1">
+									<p>배송 중</p>
+								</div>
+								<div id="order_list_section_div2">
+									<h2>${orderCount.orders_in_delivery}건</h2>
+								</div>
+							</div>
+							<div id="order_list_section4">
+								<div id="order_list_section_div1">
+									<p>배송 완료</p>
+								</div>
+								<div id="order_list_section_div2">
+									<h2>${orderCount.orders_delivered}건</h2>
+								</div>
+							</div>
 						</div>
-					</c:forEach>
+					</div>
+					<div id="order_list_second_title">
+						<h3>000님 주문 목록 조회</h3>
+					</div>
+
+					<div id="order_list_date_buttons">
+						<div>
+							<button type="button" class="btn btn-dark" id="button_0"
+								onclick="location.href='/user/orderList.do'">전체</button>
+						</div>
+						<div>
+							<button type="button" class="btn btn-dark" id="button_3"
+								onclick="location.href='/user/orderListDate.do?date=${3}'">최근
+								3개월</button>
+						</div>
+						<div>
+							<button type="button" class="btn btn-dark" id="button_6"
+								onclick="location.href='/user/orderListDate.do?date=${6}'">최근
+								6개월</button>
+						</div>
+						<div>
+							<button type="button" class="btn btn-dark" id="button_1"
+								onclick="location.href='/user/orderListDate.do?date=${12}'">최근
+								1년</button>
+						</div>
+						<div></div>
+						<form action="orderList.do" method="post">
+							<div id="search_box">
+								<input type="text" placeholder="주문한 상품의 이름을 검색해보세요!"
+									id="search_order_list" name="search_order" />
+								<button type="submit" >
+									<img alt="button"
+										src="../resources/image/order/search_button.png"
+										id="button_img">
+								</button>
+							</div>
+						</form>
+					</div>
+					<div id="order_list_table">
+						<table id="order_table">
+							<tr id="order_table_first_tr">
+								<td id="order_table_product_num">주문번호</td>
+								<td id="order_table_product_state">물품상태</td>
+								<td id="order_table_product_date">구매 날짜</td>
+								<td id="order_table_product_pic"></td>
+								<td id="order_table_product_name">상품명</td>
+								<td id="order_table_product_price">가격</td>
+								<td id="order_table_product_button"></td>
+							</tr>
+							<c:forEach items="${orderList}" var="order">
+
+								<tr id="order_table_other_tr">
+									<td id="order_num">${order.order_num }</td>
+									<td>${order.product_state}</td>
+									<td>${order.order_date}</td>
+									<td id="order_pic"><a href='#'><img
+											src="${order.main_img }" id="order_pic" /></a></td>
+									<td>${order.product_name }</td>
+									<td>${order.product_price}원</td>
+									<td id="order_table_buttons">
+										<div id="order_table_div_button">
+											<a href="/orderInfo.do?order_num=${order.order_num}">>
+												상세조회</a>
+										</div>
+										<div id="order_table_div_button">
+											<a href="#">> 판매자문의</a>
+										</div>
+									</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+					<div id="order_list_bottom">
+						<div id="button_div1">
+							<button type="button" class="btn btn-dark"
+								id="order_list_bottom_button1">이전</button>
+						</div>
+						<div>
+							<button type="button" class="btn btn-dark"
+								id="order_list_bottom_button2">다음</button>
+						</div>
+					</div>
 				</div>
 			</main>
 		</div>

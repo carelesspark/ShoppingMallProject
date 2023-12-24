@@ -31,40 +31,31 @@ public class OrderController {
 	@Autowired
 	private AddressService addressService;
 
-	@RequestMapping(value = "/orderList.do")
-	public String getOrderList(OrderVO vo, Model model) throws Exception {
-		System.out.println("글 목록 검색 처리");
-
-		List<OrderVO> orderList = orderService.getOrderList(vo);
-		model.addAttribute("orderList", orderList);
-		System.out.println(orderList);
-
-		return "/order/orderList.jsp";
-	}
-
-	@RequestMapping(value = "/orderListDate.do")
-	public String getOrderList2(OrderVO vo, @RequestParam(name = "date") Integer date, Model model) throws Exception {
-		System.out.println("글 목록 검색 처리");
-		if (date == null) {
-			List<OrderVO> orderList = orderService.getOrderList(vo);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		} else if (date == 3) {
-			List<OrderVO> orderList = orderService.getOrderList2(vo, (int) date);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		} else if (date == 6) {
-			List<OrderVO> orderList = orderService.getOrderList2(vo, (int) date);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		} else if (date == 12) {
-			List<OrderVO> orderList = orderService.getOrderList2(vo, (int) date);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		}
-
-		return "redirect:orderList.doZ";
-	}
+	/*
+	 * @RequestMapping(value = "/orderList.do") public String getOrderList(OrderVO
+	 * vo, Model model) throws Exception { System.out.println("글 목록 검색 처리");
+	 * 
+	 * List<OrderVO> orderList = orderService.getOrderList(vo);
+	 * model.addAttribute("orderList", orderList); System.out.println(orderList);
+	 * 
+	 * return "/user/user_order_list.jsp"; }
+	 * 
+	 * @RequestMapping(value = "/orderListDate.do") public String
+	 * getOrderList2(OrderVO vo, @RequestParam(name = "date") Integer date, Model
+	 * model) throws Exception { System.out.println("글 목록 검색 처리"); if (date == null)
+	 * { List<OrderVO> orderList = orderService.getOrderList(vo);
+	 * model.addAttribute("orderList", orderList); System.out.println(orderList); }
+	 * else if (date == 3) { List<OrderVO> orderList =
+	 * orderService.getOrderList2(vo, (int) date); model.addAttribute("orderList",
+	 * orderList); System.out.println(orderList); } else if (date == 6) {
+	 * List<OrderVO> orderList = orderService.getOrderList2(vo, (int) date);
+	 * model.addAttribute("orderList", orderList); System.out.println(orderList); }
+	 * else if (date == 12) { List<OrderVO> orderList =
+	 * orderService.getOrderList2(vo, (int) date); model.addAttribute("orderList",
+	 * orderList); System.out.println(orderList); }
+	 * 
+	 * return "redirect:orderList.do"; }
+	 */
 
 	@RequestMapping(value = "/orderInfo.do")
 	public String getOrderInfo(OrderVO vo, Model model) throws Exception {

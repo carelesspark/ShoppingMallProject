@@ -313,7 +313,7 @@
 						</div>
 						<div>
 							<button type="button" class="btn btn-dark" id="button_3"
-								onclick="location.href='/returnOrderList.do?user_num=${orderInfo.user_num}'">목록으로
+								onclick="location.href='/user/orderList.do'">목록으로
 								돌아가기</button>
 						</div>
 					</div>

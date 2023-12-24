@@ -14,7 +14,11 @@ public interface UserService {
 	/*
 	 * 주문/배송 조회
 	 */
-	List<UserOrdersVO> getUserOrderList(int user_num);
+	List<UserOrdersVO> getUserOrderList(int user_num, UserOrdersVO vo);
+	
+	UserOrdersVO orderCheck(int user_num);
+	
+	List<UserOrdersVO> getOrderList2(int user_num, int date);
 
 	/*
 	 * 포인트

@@ -13,8 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.dazzle.shop.model.order.OrderVO;
 import com.dazzle.shop.model.user.domain.UserOrdersVO;
 import com.dazzle.shop.model.user.domain.UserReviewVO;
 import com.dazzle.shop.model.user.domain.UserVO;
@@ -38,11 +40,52 @@ public class UserController {
 		int user_num = (int) session.getAttribute("user_num");
 
 		UserVO card = userService.getUserCard(user_num);
+		UserOrdersVO orderCount = userService.orderCheck(user_num);
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("user_point", card.getUser_point());
-
-		List<UserOrdersVO> list = userService.getUserOrderList(user_num);
+		model.addAttribute("orderCount", orderCount);
+		System.out.println(vo.getSearch_order());
+		if(vo.getSearch_order() == null) {
+			vo.setSearch_order("");
+		}
+		
+		List<UserOrdersVO> list = userService.getUserOrderList(user_num, vo);
 		model.addAttribute("orderList", list);
+		System.out.println(list);
+
+		return "user_order_list.jsp";
+	}
+	
+	/* 구매 날짜 별 주문 목록 조회 */
+	@RequestMapping("/orderListDate.do")
+	public String getOrderList2(HttpServletRequest request, @RequestParam(name = "date") Integer date, UserOrdersVO vo, Model model) throws Exception {
+		System.out.println("글 목록 검색 처리");
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+		
+		UserVO card = userService.getUserCard(user_num);
+		UserOrdersVO orderCount = userService.orderCheck(user_num);
+		model.addAttribute("user_rank", card.getUser_rank());
+		model.addAttribute("user_point", card.getUser_point());
+		model.addAttribute("orderCount", orderCount);
+	
+		if (date == null) {
+			List<UserOrdersVO> orderList = userService.getUserOrderList(user_num, vo.getSearch_order());
+			model.addAttribute("orderList", orderList);
+			System.out.println(orderList);
+		} else if (date == 3) {
+			List<UserOrdersVO> orderList = userService.getOrderList2(user_num, (int) date);
+			model.addAttribute("orderList", orderList);
+			System.out.println(orderList);
+		} else if (date == 6) {
+			List<UserOrdersVO> orderList = userService.getOrderList2(user_num, (int) date);
+			model.addAttribute("orderList", orderList);
+			System.out.println(orderList);
+		} else if (date == 12) {
+			List<UserOrdersVO> orderList = userService.getOrderList2(user_num, (int) date);
+			model.addAttribute("orderList", orderList);
+			System.out.println(orderList);
+		}
 
 		return "user_order_list.jsp";
 	}
