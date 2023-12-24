@@ -21,6 +21,9 @@ import com.dazzle.shop.model.address.AddressService;
 import com.dazzle.shop.model.address.AddressVO;
 import com.dazzle.shop.model.order.OrderService;
 import com.dazzle.shop.model.order.impl.OrderDAO;
+import com.dazzle.shop.model.user.domain.UserOrdersVO;
+import com.dazzle.shop.model.user.domain.UserVO;
+import com.dazzle.shop.model.user.service.UserService;
 
 @Controller
 @SessionAttributes("order")
@@ -30,6 +33,8 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private AddressService addressService;
+	@Autowired
+	private UserService userService;
 
 	/*
 	 * @RequestMapping(value = "/orderList.do") public String getOrderList(OrderVO
@@ -58,9 +63,15 @@ public class OrderController {
 	 */
 
 	@RequestMapping(value = "/orderInfo.do")
-	public String getOrderInfo(OrderVO vo, Model model) throws Exception {
+	public String getOrderInfo(HttpServletRequest request, OrderVO vo, Model model) throws Exception {
 
 		System.out.println("글 상세 조회 처리");
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+
+		UserVO card = userService.getUserCard(user_num);
+		model.addAttribute("user_rank", card.getUser_rank());
+		model.addAttribute("user_point", card.getUser_point());
 		OrderVO orderInfo = orderService.getOrderInfo(vo);
 		model.addAttribute("orderInfo", orderInfo);
 
@@ -77,8 +88,12 @@ public class OrderController {
 
 	// 주문 상세 페이지에서 바로 구매할 때,
 	@RequestMapping(value = "/productOrder.do")
-	public String getProductOrder(int user_num, int product_code, int amount, Model model) throws Exception {
+	public String getProductOrder(HttpServletRequest request, int product_code, int amount, Model model) throws Exception {
 		System.out.println("상품 주문 페이지 이동(상품 상세페이지로 부터)");
+		
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+		
 		List<OrderVO> productOrder = new ArrayList();
 		OrderVO product = orderService.getProductOrder(product_code, amount);
 		productOrder.add(product);
@@ -159,9 +174,16 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/orderRefund.do")
-	public String getOrderRefund(OrderVO vo, Model model) throws Exception {
+	public String getOrderRefund(HttpServletRequest request, OrderVO vo, Model model) throws Exception {
 		System.out.println("주문 취소/환불 요청 페이지 이동");
 
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+
+		UserVO card = userService.getUserCard(user_num);
+		model.addAttribute("user_rank", card.getUser_rank());
+		model.addAttribute("user_point", card.getUser_point());
+		
 		OrderVO orderRefund = orderService.getOrderRefund(vo);
 		model.addAttribute("orderRefund", orderRefund);
 
@@ -182,8 +204,15 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/productChange.do")
-	public String getproductChange(OrderVO vo, Model model) throws Exception {
+	public String getproductChange(HttpServletRequest request, OrderVO vo, Model model) throws Exception {
 		System.out.println("상품 교환 요청 페이지 이동");
+		
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+
+		UserVO card = userService.getUserCard(user_num);
+		model.addAttribute("user_rank", card.getUser_rank());
+		model.addAttribute("user_point", card.getUser_point());
 
 		OrderVO productChange = orderService.getProductChange(vo);
 		model.addAttribute("productChange", productChange);

@@ -60,7 +60,7 @@
 						</div>
 					</div>
 					<div id="order_list_second_title">
-						<h3>000님 주문 목록 조회</h3>
+						<h3>${sessionScope.user_name}님 주문 목록 조회</h3>
 					</div>
 
 					<div id="order_list_date_buttons">
@@ -133,11 +133,11 @@
 					<div id="order_list_bottom">
 						<div id="button_div1">
 							<button type="button" class="btn btn-dark"
-								id="order_list_bottom_button1">이전</button>
+								id="order_list_bottom_button1" disabled>이전</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-dark"
-								id="order_list_bottom_button2">다음</button>
+								id="order_list_bottom_button2" disabled>다음</button>
 						</div>
 					</div>
 				</div>

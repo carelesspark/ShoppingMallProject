@@ -11,24 +11,10 @@ body {
 	margin: 0;
 }
 
-header {
-	width: 100%;
-	height: 50px;
-	background-color: black;
-	margin-bottom: 50px;
-	color: white;
-}
-
 main {
 	flex: 1;
-}
-
-footer {
-	width: 100%;
-	height: 50px;
-	background-color: black;
-	margin-top: 50px;
-	color: white;
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
 
 #main_container {
