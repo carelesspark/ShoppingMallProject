@@ -44,14 +44,12 @@ public class UserController {
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("user_point", card.getUser_point());
 		model.addAttribute("orderCount", orderCount);
-		System.out.println(vo.getSearch_order());
 		if(vo.getSearch_order() == null) {
 			vo.setSearch_order("");
 		}
 		
 		List<UserOrdersVO> list = userService.getUserOrderList(user_num, vo);
 		model.addAttribute("orderList", list);
-		System.out.println(list);
 
 		return "user_order_list.jsp";
 	}
@@ -70,7 +68,7 @@ public class UserController {
 		model.addAttribute("orderCount", orderCount);
 	
 		if (date == null) {
-			List<UserOrdersVO> orderList = userService.getUserOrderList(user_num, vo.getSearch_order());
+			List<UserOrdersVO> orderList = userService.getUserOrderList(user_num, vo);
 			model.addAttribute("orderList", orderList);
 			System.out.println(orderList);
 		} else if (date == 3) {

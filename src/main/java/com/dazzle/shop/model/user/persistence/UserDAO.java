@@ -30,7 +30,8 @@ public class UserDAO {
 			+ " INNER JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " INNER JOIN product_color pcolor ON ps.color_num = pcolor.color_num "
 			+ " INNER JOIN product p ON pcolor.product_num = p.product_num "
-			+ " INNER JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE o.user_num = ?";
+			+ " INNER JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE o.user_num = ?"
+			+ " ORDER BY o.order_date DESC";
 
 	private final String ORDER_LIST_SEARCH = "SELECT d.delivery_date, o.order_date, o.recipient, o.order_num, pimg.main_img, p.product_price," + 
 			" od.product_state, od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name" + 
@@ -41,7 +42,8 @@ public class UserDAO {
 			" INNER JOIN product_color pcolor ON ps.color_num = pcolor.color_num" + 
 			" INNER JOIN product p ON pcolor.product_num = p.product_num" + 
 			" INNER JOIN product_img pimg ON pimg.product_num = p.product_num" + 
-			" WHERE o.user_num = ? AND p.product_name LIKE '%||?||%'";
+			" WHERE o.user_num = ? AND p.product_name LIKE ? " + 
+			" ORDER BY o.order_date";
 
 	private final String ORDER_CHECK = "SELECT" + " (SELECT COUNT(*) FROM orders WHERE user_num = ?) AS total_orders,"
 			+ " (SELECT COUNT(*) FROM orders o INNER JOIN order_detail od ON o.order_num = od.order_num WHERE user_num = ? AND od.product_state = '상품 준비 중') AS orders_in_preparation,"
@@ -57,11 +59,12 @@ public class UserDAO {
 			+ " INNER JOIN product_color pcolor ON ps.color_num = pcolor.color_num "
 			+ " INNER JOIN product p ON pcolor.product_num = p.product_num "
 			+ " INNER JOIN product_img pimg ON pimg.product_num = p.product_num"
-			+ " WHERE o.user_num = ? AND o.order_date >= DATE_SUB(NOW(), INTERVAL ? MONTH)";
+			+ " WHERE o.user_num = ? AND o.order_date >= DATE_SUB(NOW(), INTERVAL ? MONTH)"
+			+ " ORDER BY o.order_date DESC";
 
 	private final String REVIEW_LIST = "SELECT r.review_ratings, r.review_date, r.review_clicks, p.product_name, p.product_num "
 			+ "FROM review r INNER JOIN product_code pc ON r.product_code = pc.product_code "
-			+ "INNER JOIN product_size ps ON pc.size_num = ps.size_num "
+			+ "INNER JOIN product_size ps ON pxc.size_num = ps.size_num "
 			+ "INNER JOIN product_color pcolor ON ps.color_num = pcolor.color_num "
 			+ "INNER JOIN product p ON pcolor.product_num = p.product_num WHERE r.user_num = ?";
 
@@ -99,7 +102,8 @@ public class UserDAO {
 			if (vo.getSearch_order().equals("")) {
 				return template.query(ORDER_LIST, new Object[] { user_num }, new UserOrderRowMapper());
 			} else {
-				return template.query(ORDER_LIST_SEARCH, new Object[] { user_num, vo.getSearch_order() }, new UserOrderRowMapper());
+				String search_name = "%" + vo.getSearch_order() + "%";
+				return template.query(ORDER_LIST_SEARCH, new Object[] { user_num, search_name }, new UserOrderRowMapper());
 			}
 		} catch (EmptyResultDataAccessException e) {
 

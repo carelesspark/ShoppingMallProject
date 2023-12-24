@@ -148,6 +148,9 @@ main {
 #order_list_table {
 	border-bottom: 1px solid #C3C3C3;
 	margin-bottom: 40px;
+	overflow: scroll;
+	overflow-x: hidden;
+	height: 330px;
 }
 
 #order_table {
@@ -156,6 +159,8 @@ main {
 	border-bottom: 1px solid #C3C3C3;
 	border-collapse: collapse;
 	text-align: center;
+	
+	
 }
 
 #order_table_first_tr {
@@ -181,7 +186,7 @@ main {
 	width: 110px;
 }
 #order_table_product_date {
-	width: 130px;
+	width: 110px;
 }
 
 #order_table_product_pic {
@@ -197,7 +202,7 @@ main {
 }
 
 #order_table_product_button {
-	width: 100px;
+	width: 120px;
 	border-left: 1px solid #C3C3C3;
 }
 

@@ -38,14 +38,16 @@
 					<div id="cart_middle">
 						<table id="cart_table">
 							<tr id="cart_table_first_tr">
-								<td id="cart_table_first_td"><!-- <input type="checkbox"
-									id="cart_check_all" name="checkAll" value="check_value" /> -->선택</td>
+								<td id="cart_table_first_td">
+									<!-- <input type="checkbox"
+									id="cart_check_all" name="checkAll" value="check_value" /> -->선택
+								</td>
 								<td id="cart_table_product_img"></td>
 								<td id="cart_table_product_name">제품명</td>
 								<td>수량</td>
 								<td>개당 가격</td>
 								<td>삭제</td>
-							</tr>
+							</tr>	
 							<c:forEach items="${cartList}" var="cart" varStatus="status">
 								<input type="hidden" name="product_code_list" id="input1"
 									value="${cart.product_code}" />
@@ -58,11 +60,12 @@
 									<td id="cart_table_product_name">${cart.product_name }</td>
 									<td><input type="number" id="cart_product_count"
 										name="amount_list" class="cart_product_amount"
-										value="${cart.amount }" min="1" max="10"/><input
-										type="hidden" id="amount" class="reset_product_amount" value="${cart.amount }" /></td>
+										value="${cart.amount }" min="1" max="10" /><input
+										type="hidden" id="amount" class="reset_product_amount"
+										value="${cart.amount }" /></td>
 									<td id="cart_product_price">${cart.product_price }원<input
-										type="hidden" id="cart_product_price2" class="cart_product_price"
-										value="${cart.product_price}" />
+										type="hidden" id="cart_product_price2"
+										class="cart_product_price" value="${cart.product_price}" />
 									</td>
 									<td><button type="button" class="btn btn-dark"
 											id="cart_delete"
@@ -99,7 +102,7 @@
 									onclick="location.href='../main/main.jsp'">홈으로 돌아가기</button>
 							</div>
 							<div id="cart_buttons_div2">
-								<button type="submit" class="btn btn-dark" id="cart_buy_button">구매하기</button>
+								<button type="submit" class="btn btn-dark" id="cart_buy_button" disabled>구매하기</button>
 							</div>
 						</div>
 					</div>
@@ -147,7 +150,6 @@
 	            const count = row.find('.cart_product_amount').val();
 	            const price = row.find('.cart_product_price').val();
 	            totalPrice += count * price;
-	            console.log(totalPrice);
 	        });
 
  
@@ -163,6 +165,15 @@
 	            $("#total_price_value").text(totalPrice + 3000 + "원");
 	        }
 	    }
+	    
+	    $(".cart_product_checkbox").change(function () {
+            var allUnchecked = $(".cart_product_checkbox:not(:checked)").length === $(".cart_product_checkbox").length;
+            if (!allUnchecked) {
+                $("#cart_buy_button").prop("disabled", false);
+            } else {
+                $("#cart_buy_button").prop("disabled", true);
+            }
+        });
 	});
 	</script>
 </body>
