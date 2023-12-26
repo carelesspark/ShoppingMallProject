@@ -14,7 +14,6 @@ public class UserCardRowMapper implements RowMapper<UserVO> {
 		UserVO user = new UserVO();
 		
 		user.setUser_rank(rs.getString("user_rank"));
-		user.setUser_point(rs.getInt("user_point"));
 
 		return user;
 	}

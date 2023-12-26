@@ -1,8 +1,14 @@
 package com.dazzle.shop.controller;
 
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,10 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.dazzle.shop.model.order.OrderVO;
-import com.dazzle.shop.model.user.domain.UserOrdersVO;
-import com.dazzle.shop.model.user.domain.UserReviewVO;
-import com.dazzle.shop.model.user.domain.UserVO;
+import com.dazzle.shop.model.user.domain.*;
 import com.dazzle.shop.model.user.service.UserService;
 
 @Controller
@@ -29,64 +32,87 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	/*
-	 * 주문/배송 조회
-	 */
+	// 나의 쇼핑
+	// 주문/배송 조회
 	@RequestMapping("/orderList.do")
-	public String userOrderList(HttpServletRequest request, Model model, UserOrdersVO vo) {
+	public String userOrderList(HttpServletRequest request, Model model) {
 		System.out.println("UserController: userOrderList");
 
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserVO card = userService.getUserCard(user_num);
+		UserOrdersVO vo = new UserOrdersVO();
+		
+		UserCardVO card = userService.getUserCard(user_num);
 		UserOrdersVO orderCount = userService.orderCheck(user_num);
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_point", card.getUser_point());
-		model.addAttribute("orderCount", orderCount);
-		if(vo.getSearch_order() == null) {
+		if (vo.getSearch_order() == null) {
 			vo.setSearch_order("");
 		}
-		
-		List<UserOrdersVO> list = userService.getUserOrderList(user_num, vo);
-		model.addAttribute("orderList", list);
-
-		return "user_order_list.jsp";
-	}
-	
-	/* 구매 날짜 별 주문 목록 조회 */
-	@RequestMapping("/orderListDate.do")
-	public String getOrderList2(HttpServletRequest request, @RequestParam(name = "date") Integer date, UserOrdersVO vo, Model model) throws Exception {
-		System.out.println("글 목록 검색 처리");
-		HttpSession session = request.getSession();
-		int user_num = (int) session.getAttribute("user_num");
-		
-		UserVO card = userService.getUserCard(user_num);
-		UserOrdersVO orderCount = userService.orderCheck(user_num);
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_point", card.getUser_point());
 		model.addAttribute("orderCount", orderCount);
-	
-		if (date == null) {
-			List<UserOrdersVO> orderList = userService.getUserOrderList(user_num, vo);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		} else if (date == 3) {
-			List<UserOrdersVO> orderList = userService.getOrderList2(user_num, (int) date);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		} else if (date == 6) {
-			List<UserOrdersVO> orderList = userService.getOrderList2(user_num, (int) date);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		} else if (date == 12) {
-			List<UserOrdersVO> orderList = userService.getOrderList2(user_num, (int) date);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		}
+		model.addAttribute("rank_letter", card.getRank_letter());
+		model.addAttribute("user_rank", card.getUser_rank());
+		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("delivering_items", card.getDelivering_items());
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		LocalDate currentDate = LocalDate.now();
+		LocalDate oneMonthAgo = currentDate.minusMonths(1);
+		oneMonthAgo = oneMonthAgo.plusDays(1);
+		Date startDate = Date.from(oneMonthAgo.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date endDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		model.addAttribute("startDate", sdf.format(startDate));
+		model.addAttribute("endDate", sdf.format(endDate));
+
+		
+		vo.setUser_num(user_num);
+		vo.setStartDate(new java.sql.Date(startDate.getTime()));
+		vo.setEndDate(new java.sql.Date(endDate.getTime()));
+
+		List<UserOrdersVO> list = userService.getUserOrderList(vo);
+		Map<Integer, List<UserOrdersVO>> map = list.stream().collect(Collectors.groupingBy(UserOrdersVO::getOrder_num));
+		// order_num을 기준으로 내림차순으로 정렬된 TreeMap 생성
+		Map<Integer, List<UserOrdersVO>> sortedMap = new TreeMap<>(Comparator.reverseOrder());
+		sortedMap.putAll(map);
+		model.addAttribute("orderMap", sortedMap); // sortedMap을 추가해야 함
 
 		return "user_order_list.jsp";
 	}
+
+	// 주문/배송 조회 검색
+		@RequestMapping("/changeOrderList.do")
+		public String changeOrderList(@RequestParam String sDate, @RequestParam String eDate, HttpServletRequest request,
+				Model model) {
+			System.out.println("UserController: changeOrderList");
+
+			HttpSession session = request.getSession();
+			int user_num = (int) session.getAttribute("user_num");
+
+			UserCardVO card = userService.getUserCard(user_num);
+			model.addAttribute("rank_letter", card.getRank_letter());
+			model.addAttribute("user_rank", card.getUser_rank());
+			model.addAttribute("user_total_point", card.getUser_total_point());
+			model.addAttribute("delivering_items", card.getDelivering_items());
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			java.sql.Date startDate = java.sql.Date.valueOf(sDate);
+			java.sql.Date endDate = java.sql.Date.valueOf(eDate);
+			model.addAttribute("startDate", sdf.format(startDate));
+			model.addAttribute("endDate", sdf.format(endDate));
+
+			UserOrdersVO vo = new UserOrdersVO();
+			vo.setUser_num(user_num);
+			vo.setStartDate(startDate);
+			vo.setEndDate(endDate);
+
+			List<UserOrdersVO> list = userService.getUserOrderList(vo);
+			Map<Integer, List<UserOrdersVO>> map = list.stream().collect(Collectors.groupingBy(UserOrdersVO::getOrder_num));
+			// order_num을 기준으로 내림차순으로 정렬된 TreeMap 생성
+			Map<Integer, List<UserOrdersVO>> sortedMap = new TreeMap<>(Comparator.reverseOrder());
+			sortedMap.putAll(map);
+			model.addAttribute("orderMap", sortedMap); // sortedMap을 추가해야 함
+
+			return "user_order_list.jsp";
+		}
 
 	/*
 	 * 포인트

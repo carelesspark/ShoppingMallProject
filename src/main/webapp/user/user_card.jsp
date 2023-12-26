@@ -19,7 +19,7 @@
 		<div id="cc-p">
 			<div id="cc-pn">포인트</div>
 			<div id="cc-pc">
-				<a href="/user/pointList.do">${user_point }</a>원
+				<a href="/user/pointList.do"></a>원
 			</div>
 		</div>
 	</div>

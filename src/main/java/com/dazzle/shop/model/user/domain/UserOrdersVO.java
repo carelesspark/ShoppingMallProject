@@ -28,11 +28,11 @@ public class UserOrdersVO {
 	private int user_info_num;
 	private String user_phone;
 	private String user_rank;
-	private int user_point; 
+	private int user_point;
 	private Date user_join_date;
 	private Date user_update_date;
 	private Date user_delete_date;
-	private int is_black_list; 
+	private int is_black_list;
 	// orders
 	// pk: order_num
 	private int order_num;
@@ -91,4 +91,21 @@ public class UserOrdersVO {
 	private int orders_in_delivery;
 	private int orders_delivered;
 	private String search_order;
+
+	// product_refund_or_change
+	private int refund_change_num;
+	private Date request_date;
+	private String refund_or_change_reason;
+	private String reason_detail;
+	private int proc_amount;
+	private String bank;
+	private String account_num;
+	private int cancel;
+	private int change;
+
+	// 1차 추가
+	private int itemsPerPage;
+	private int currentPage;
+	private Date startDate;
+	private Date endDate;
 }

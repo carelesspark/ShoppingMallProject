@@ -54,9 +54,9 @@ public class OrderDAO {
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
 			+ " WHERE pc.product_code = ?";
 	
-	private final String USER_POINT = "SELECT user_point FROM user_info where user_num = ?";
+	private final String USER_POINT = "SELECT points FROM point where user_num = ?";
 
-	private final String PRODUCT_ORDER_CART = "SELECT pimg.main_img, (p.product_price * c.amount) AS total_price, c.amount, p.product_name, pco.color_name, ps.size_name, ui.user_point"
+	private final String PRODUCT_ORDER_CART = "SELECT pimg.main_img, (p.product_price * c.amount) AS total_price, c.amount, p.product_name, pco.color_name, ps.size_name"
 			+ " FROM cart c" + " JOIN users u ON u.user_num = c.user_num"
 			+ " JOIN user_info ui ON ui.user_num = u.user_num"
 			+ " JOIN product_code pc ON pc.product_code = c.product_code"
