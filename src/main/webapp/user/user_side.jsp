@@ -4,7 +4,7 @@
 <div id="ms">
 	<div>
 		<p>나의 쇼핑</p>
-		<a href="/user/orderList.do">주문/배송 조회</a> <a href="/cart.do?user_num=${sessionScope.user_num}">장바구니</a>
+		<a href="/user/orderList.do">주문/배송 조회</a> <a href="">취소/환불 신청</a><a href="">교환 신청</a><a href="/cart.do?user_num=${sessionScope.user_num}">장바구니</a>
 	</div>
 	<div>
 		<p>나의 혜택</p>

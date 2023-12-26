@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class UserReviewVO {
+public class UserPointVO {
 	// users
 	private int user_num;
 	private String user_name;
@@ -20,23 +20,39 @@ public class UserReviewVO {
 	private Date user_update_date;
 	private Date user_delete_date;
 	private int is_black_list;
-	// review
-	private int review_num;
-	private String review_content;
-	private int review_ratings;
-	private Date review_date;
-	private int review_clicks;
+	// point
+	private int point_num;
+	private int points;
+	private int point_type;
+	// order_detail
+	private int order_detail_num;
+	private String product_state;
+	private int amount;
+	private int total_price;
+	private int is_canceled;
+	private int is_changed;
+	// orders
+	private int order_num;
+	private Date order_date;
+	private String address;
+	private String detail_address;
+	private String postal_num;
+	private int delivery_price;
+	private String recipient;
+	private String request;
+	private String payment;
+	private String phone_num;
+	private Date arrival_date;
+	private int order_type;
 	// product_code
 	private String product_code;
 	// product_size
 	private int size_num;
 	private String size_name;
 	private Integer product_stock;
-	private String size_code;
 	// product_color
 	private int color_num;
 	private String color_name;
-	private String color_code;
 	// product
 	private int product_num;
 	private String product_name;
@@ -47,7 +63,6 @@ public class UserReviewVO {
 	private Date modify_date;
 	private Date delete_date;
 	private int registration_status;
-	private String product_class_code;
 	private int sub_category_num;
 
 	// 1차 추가
@@ -55,4 +70,5 @@ public class UserReviewVO {
 	private Date endDate;
 	private int currentPage;
 	private int itemsPerPage;
+
 }

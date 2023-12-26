@@ -20,13 +20,13 @@
 /* 리스트 헤더 */
 #mh {
 	display: grid;
-	grid-template-columns: auto auto auto auto auto auto auto;
+	grid-template-columns: auto auto auto auto auto auto;
 }
 
 /* 리스트 바디 */
 #ml {
 	display: grid;
-	grid-template-columns: auto auto auto auto auto auto auto;
+	grid-template-columns: auto auto auto auto auto auto;
 }
 
 /* 페이지 이동 */
