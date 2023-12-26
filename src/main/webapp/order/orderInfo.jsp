@@ -116,7 +116,7 @@
 							<div id="info_box_left1">
 								<div></div>
 								<div id="info_box_left1_div">
-									<p>주문 번호</p>
+									<p>주문 상세 번호</p>
 								</div>
 								<div id="info_box_left1_div">
 									<p>물품 상태</p>
@@ -135,7 +135,7 @@
 							<div id="info_box_right1">
 								<div></div>
 								<div id="info_box_right1_div">
-									<p>${orderInfo.order_num }</p>
+									<p>${orderInfo.order_detail_num }</p>
 								</div>
 								<div id="info_box_right1_div">
 									<p>${orderInfo.product_state }</p>
@@ -301,33 +301,35 @@
 						</div>
 						<div>
 							<button type="button" class="btn btn-dark" id="button_3"
-								onclick="location.href='/user/orderList.do'">목록으로
-								돌아가기</button>
+								onclick="location.href='/user/orderList.do'">목록으로 돌아가기</button>
 						</div>
 					</div>
-					<div id="refund_change_result">
-						<div id="refund_change_result_title">
-							<c:choose>
-								<c:when test="${orderInfo.product_state eq '환불 승인'}">
-									<h3>환불 승인 사유</h3>
-								</c:when>
-								<c:when test="${orderInfo.product_state eq '환불 거절'}">
-									<h3>환불 승인 사유</h3>
-								</c:when>
-								<c:when test="${orderInfo.product_state eq '교환 승인'}">
-									<h3>환불 승인 사유</h3>
-								</c:when>
-								<c:when test="${orderInfo.product_state eq '교환 거절'}">
-									<h3>환불 승인 사유</h3>
-								</c:when>
-							</c:choose>
-						</div>
-						<div id="refund_change_result_reason">
-							<textarea rows="840px" cols="260px" readonly>
-								
+					<c:if
+						test="${orderInfo.product_state eq '환불 승인' || orderInfo.product_state eq '환불 거절' || orderInfo.product_state eq '교환 승인' || orderInfo.product_state eq '교환 거절'}">
+						<div id="refund_change_result">
+							<div id="refund_change_result_title">
+								<c:choose>
+									<c:when test="${orderInfo.product_state eq '환불 승인'}">
+										<h3>환불 승인 사유</h3>
+									</c:when>
+									<c:when test="${orderInfo.product_state eq '환불 거절'}">
+										<h3>환불 거절 사유</h3>
+									</c:when>
+									<c:when test="${orderInfo.product_state eq '교환 승인'}">
+										<h3>교환 승인 사유</h3>
+									</c:when>
+									<c:when test="${orderInfo.product_state eq '교환 거절'}">
+										<h3>교환 거절 사유</h3>
+									</c:when>
+								</c:choose>
+							</div>
+							<div id="refund_change_result_reason">
+								<textarea id="result_reason_textarea" readonly>
+								${orderResult.response_detail}
 							</textarea>
+							</div>
 						</div>
-					</div>
+					</c:if>
 					<div id="question">
 						<p>배송 관련 자주 생기는 궁금한 점!</p>
 					</div>

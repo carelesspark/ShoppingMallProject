@@ -230,3 +230,22 @@ main {
 #accordion {
 	margin-top: 10px;
 }
+
+#refund_change_result{
+	width: 840px;
+	height: 300px;
+	margin-top: 20px;
+}
+
+#refund_change_result_title {
+	width: 840px;
+	height: 40px;
+}
+
+#result_reason_textarea {
+	width: 840px;
+	height: 260px;
+	resize: none;
+	border-radius: 5px;
+	text-align: left;
+}

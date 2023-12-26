@@ -61,4 +61,6 @@ public interface OrderService {
 	List<OrderVO> getRefundListApprove(OrderVO vo);
 
 	List<OrderVO> getProductState();
+	
+	OrderVO getOrderResponseDetail(int orderDetailNum);
 }

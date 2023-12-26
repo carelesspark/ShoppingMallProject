@@ -11,9 +11,17 @@ import com.dazzle.shop.model.order.OrderService;
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
 
+	
 	@Autowired
 	private OrderDAO orderDAO;
 
+	
+	
+	@Override
+	public OrderVO getOrderResponseDetail(int orderDetailNum) {
+		return orderDAO.getOrderResponseDetail(orderDetailNum);
+	}
+	
 	@Override
 	public List<OrderVO> getProductOrderFromCart(OrderVO vo) {
 
