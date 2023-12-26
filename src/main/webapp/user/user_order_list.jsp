@@ -124,15 +124,11 @@
 														<div class="cbb">
 															<div class="cbb1">
 																<button
-																	onclick="window.location.href='/.do?list_order_num=${list.order_num}'">배송조회</button>
+																	onclick="window.location.href='/orderInfo.do?order_num=${list.order_num}'">상세 조회</button>
 															</div>
 															<div class="cbb2">
 																<button
-																	onclick="window.location.href='/.do?list_orde_detailr_num=${list.order_detail_num}'">취소/환불신청</button>
-															</div>
-															<div class="cbb3">
-																<button
-																	onclick="window.location.href='/.do?list_order_detail_num=${list.order_detail_num}'">교환신청</button>
+																	onclick="window.location.href='#'">상품 문의하기</button>
 															</div>
 														</div>
 													</div>
