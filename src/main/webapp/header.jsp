@@ -53,8 +53,8 @@
 
 				<form class="d-flex mt-3">
 					<input class="form-control me-1" type="search" placeholder="Search"
-						aria-label="Search" />
-					<button class="btn btn-outline-success" type="submit">
+						aria-label="Search" readonly />
+					<button class="btn btn-outline-success" type="submit" disabled>
 						<i class="fas fa-search"></i>
 					</button>
 				</form>

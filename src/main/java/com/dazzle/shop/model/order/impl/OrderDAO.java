@@ -155,7 +155,7 @@ public class OrderDAO {
 			+ " JOIN product p ON p.product_num = pco.product_num"
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE c.user_num = ?";
 
-	private final String BUY_ORDER = "INSERT INTO orders VALUES (DEFAULT, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private final String BUY_ORDER = "INSERT INTO orders VALUES (DEFAULT, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	private final String GET_ORDER = "SELECT order_num FROM orders "
 			+ "where address = ? and detail_address=? and postal_num = ? and delivery_price = ? and "
@@ -205,6 +205,8 @@ public class OrderDAO {
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE o.order_num = ?";
 
 	private final String GET_ORDER_RESPONSE_DETAIL = "select * from product_refund_or_change where order_detail_num = ?";
+	
+	private final String MINUS_POINTS = "UPDATE POINTS SET points 0 WHERE user_num = ?";
 
 	public OrderVO getOrderInfo(OrderVO vo) {
 		try {
@@ -352,7 +354,7 @@ public class OrderDAO {
 		System.out.println("insertBuyOrder()");
 		jdbcTemplate.update(BUY_ORDER, vo.getAddress(), vo.getDetail_address(), vo.getPostal_num(),
 				vo.getDelivery_price(), vo.getRecipient(), vo.getRequest(), vo.getPayment(), vo.getUser_num(),
-				vo.getPhone_num());
+				vo.getPhone_num(), vo.getPoints());
 
 		return;
 	}
@@ -485,5 +487,10 @@ public class OrderDAO {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
+	}
+	
+	public void updatePoints(OrderVO vo) {
+		System.out.println("updatePoints()");
+		jdbcTemplate.update(MINUS_POINTS, vo.getUser_num());
 	}
 }
