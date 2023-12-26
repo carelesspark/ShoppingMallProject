@@ -52,6 +52,11 @@ public class OrderServiceImpl implements OrderService {
 	
 	
 	@Override
+	public void updatePoints(OrderVO vo) {
+		orderDAO.updatePoints(vo);
+	}
+
+	@Override
 	public void insertBuyOrderDetail(OrderVO vo) {
 		orderDAO.insertBuyOrderDetail(vo);
 	}

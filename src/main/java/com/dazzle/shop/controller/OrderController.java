@@ -285,6 +285,11 @@ public class OrderController {
 		}
 
 		model.addAttribute("order_num", order_num);
+		
+		if(!(vo.getPoints() == 0)) {
+			orderService.updatePoints(vo);
+		}
+		
 		return "redirect:orderSuccess.do";
 	}
 

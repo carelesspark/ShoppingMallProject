@@ -44,6 +44,8 @@ public interface OrderService {
 	
 	void updateOrderDelv(OrderVO vo);
 	
+	void updatePoints(OrderVO vo);
+	
 	OrderVO getRefundInfo(OrderVO vo);
 	
 	void approveRequest(OrderVO vo);
