@@ -39,6 +39,18 @@
 							<c:when test="${orderInfo.product_state eq '교환 요청 중'}">
 								<h1>상품 교환 요청이 진행 중 입니다.</h1>
 							</c:when>
+							<c:when test="${orderInfo.product_state eq '환불 승인'}">
+								<h1>상품 환불이 승인되었습니다.</h1>
+							</c:when>
+							<c:when test="${orderInfo.product_state eq '환불 거절'}">
+								<h1>상품 환불이 거절되었습니다.</h1>
+							</c:when>
+							<c:when test="${orderInfo.product_state eq '교환 승인'}">
+								<h1>상품 교환이 승인되었습니다.</h1>
+							</c:when>
+							<c:when test="${orderInfo.product_state eq '교환 거절'}">
+								<h1>상품 교환이 거절되었습니다.</h1>
+							</c:when>
 							<c:otherwise>
 								<h1>상품 배송이 완료되었습니다!</h1>
 							</c:otherwise>
@@ -50,7 +62,7 @@
 					<div id="product_info_box">
 						<div id="prdocut_info_box_grid">
 							<div>
-								<img src="../resources/image/order/shirt.png" id="shirt" />
+								<img src="${orderInfo.main_img }" id="product_img" />
 							</div>
 							<div id="product_info_left">
 								<div>
@@ -201,6 +213,30 @@
 										onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
 										요청</button>
 								</c:when>
+								<c:when test="${orderInfo.product_state eq '환불 승인'}">
+									<button type="button" class="btn btn-dark" id="button_1"
+										disabled='disabled'
+										onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
+										요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '환불 거절'}">
+									<button type="button" class="btn btn-dark" id="button_1"
+										disabled='disabled'
+										onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
+										요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '교환 승인'}">
+									<button type="button" class="btn btn-dark" id="button_1"
+										disabled='disabled'
+										onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
+										요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '교환 거절'}">
+									<button type="button" class="btn btn-dark" id="button_1"
+										disabled='disabled'
+										onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
+										요청</button>
+								</c:when>
 								<c:otherwise>
 									<button type="button" class="btn btn-dark" id="button_1"
 										onclick="location.href='/productChange.do?order_detail_num=${orderInfo.order_detail_num}'">교환
@@ -232,6 +268,30 @@
 										onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
 										취소/환불 요청</button>
 								</c:when>
+								<c:when test="${orderInfo.product_state eq '환불 승인'}">
+									<button type="button" class="btn btn-dark" id="button_2"
+										disabled='disabled'
+										onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
+										취소/환불 요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '환불 거절'}">
+									<button type="button" class="btn btn-dark" id="button_2"
+										disabled='disabled'
+										onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
+										취소/환불 요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '교환 승인'}">
+									<button type="button" class="btn btn-dark" id="button_2"
+										disabled='disabled'
+										onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
+										취소/환불 요청</button>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '교환 거절'}">
+									<button type="button" class="btn btn-dark" id="button_2"
+										disabled='disabled'
+										onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
+										취소/환불 요청</button>
+								</c:when>
 								<c:otherwise>
 									<button type="button" class="btn btn-dark" id="button_2"
 										onclick="location.href='/orderRefund.do?order_detail_num=${orderInfo.order_detail_num}'">
@@ -243,6 +303,29 @@
 							<button type="button" class="btn btn-dark" id="button_3"
 								onclick="location.href='/user/orderList.do'">목록으로
 								돌아가기</button>
+						</div>
+					</div>
+					<div id="refund_change_result">
+						<div id="refund_change_result_title">
+							<c:choose>
+								<c:when test="${orderInfo.product_state eq '환불 승인'}">
+									<h3>환불 승인 사유</h3>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '환불 거절'}">
+									<h3>환불 승인 사유</h3>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '교환 승인'}">
+									<h3>환불 승인 사유</h3>
+								</c:when>
+								<c:when test="${orderInfo.product_state eq '교환 거절'}">
+									<h3>환불 승인 사유</h3>
+								</c:when>
+							</c:choose>
+						</div>
+						<div id="refund_change_result_reason">
+							<textarea rows="840px" cols="260px" readonly>
+								
+							</textarea>
 						</div>
 					</div>
 					<div id="question">
