@@ -5,25 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문 목록 상세 조회</title>
-<link href="../resources/css/order/orderInfoAdmin.css" rel="stylesheet" />
+<title>환불/교환 요청 조회</title>
+<link href="../resources/css/admin/orderRefundInfo.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
+	href="${pageContext.request.contextPath}/resources/css/admin/admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/admin/admin_user_list.css?ver=1.0" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<%@ include file="../header.jsp"%>
+<%@ include file="../header.jsp"%>
 	<div id="m">
-		<%@ include file="../user/user_card.jsp"%>
+		<%@ include file="./admin_card.jsp"%>
 		<div id="mc">
-			<%@ include file="../user/user_side.jsp"%>
+			<%@ include file="./admin_side.jsp"%>
 			<main>
 				<div id="main_order_info">
 					<div id="main-order-container">
-						<p id="order_info_title">주문 상세 조회(관리자)</p>
+						<p id="order_info_title">환불/교환 요청 조회</p>
 					</div>
 					
 					<div id="product_info_title">
@@ -70,12 +72,9 @@
 							</div>
 						</div>
 					</div>
-					<div id="order_info_box_title">
+					<div id="product_info_title">
 						<div>
-							<p>배송 정보</p>
-						</div>
-						<div>
-							<p>배송지 정보</p>
+							<p>환불 정보</p>
 						</div>
 					</div>
 					<div id="order_info_box">
@@ -84,88 +83,105 @@
 								<img src="../resources/image/order/truck.png" id="truck" />
 							</div>
 							<div id="info_box_left1">
-								<div></div>
 								<div id="info_box_left1_div">
-									<p>주문 번호</p>
+									<p>요청 번호</p>
 								</div>
 								<div id="info_box_left1_div">
-									<p>물품 상태</p>
+									<p>요청 시간</p>
 								</div>
 								<div id="info_box_left1_div">
-									<p>배송 도착일</p>
+									<p>상태</p>
 								</div>
 								<div id="info_box_left1_div">
-									<p>택배사</p>
+									<p>요청 이유</p>
 								</div>
 								<div id="info_box_left1_div">
-									<p>송장 번호</p>
+									<p>요청 상세 이유</p>
 								</div>
-								<div></div>
+								<div id="info_box_left1_div">
+									<p>취소/환불 수량</p>
+								</div>
+								<div id="info_box_left1_div">
+									<p>은행</p>
+								</div>
+								<div id="info_box_left1_div">
+									<p>계좌 번호</p>
+								</div>
+								<div id="info_box_left1_div">
+									<p>환불 / 교환</p>
+								</div>
+								<div id="info_box_left1_div">
+									<p>승인 / 거절</p>
+								</div>
+								<div id="info_box_left1_div">
+									<p>승인/거절 사유</p>
+								</div>
 							</div>
 							<div id="info_box_right1">
-								<div></div>
 								<div id="info_box_right1_div">
-									<p>${orderInfo.order_num }</p>
+									<p>${orderInfo.refund_change_num }</p>
+								</div>
+								<div id="info_box_right1_div">
+									<p>${orderInfo.request_date }</p>
 								</div>
 								<div id="info_box_right1_div">
 									<p>${orderInfo.product_state }</p>
 								</div>
 								<div id="info_box_right1_div">
-									<p>${orderInfo.delivery_date }예정</p>
+									<p>${orderInfo.refund_or_change_reason}</p>
 								</div>
 								<div id="info_box_right1_div">
-									<p>${orderInfo.delivery_company }</p>
+									<p>${orderInfo.reason_detail }</p>
 								</div>
 								<div id="info_box_right1_div">
-									<p>${orderInfo.invoice_num }</p>
+									<p>${orderInfo.amount }</p>
 								</div>
-								<div></div>
+								<div id="info_box_right1_div">
+									<p>${orderInfo.bank }</p>
+								</div>
+								<div id="info_box_right1_div">
+									<p>${orderInfo.account_num }</p>
+								</div>
+								<div id="info_box_right1_div">
+									<c:if test="${orderInfo.change == 1}">
+									    <p>교환</p>
+									</c:if>
+									<c:if test="${orderInfo.cancel == 1}">
+									    <p>환불</p>
+									</c:if>
+
+								</div>
+								<div id="info_box_right1_div">
+									<c:choose>
+									    <c:when test="${orderInfo.approve == 1}">
+									        <p>승인</p>
+									    </c:when>
+									    <c:when test="${orderInfo.approve == -1}">
+									        <p>거절</p>
+									    </c:when>
+									    <c:otherwise>
+									        <p>승인 대기 중</p>
+									    </c:otherwise>
+									</c:choose>
+								</div>
+								<div id="info_box_right1_div">
+									<p>${orderInfo.response_detail }</p>
+								</div>
 							</div>
 							<div></div>
-							<div id="info_box_left2">
-								<div></div>
-								<div id="info_box_left2_div">
-									<p>이름</p>
-								</div>
-								<div id="info_box_left2_div">
-									<p>주소</p>
-								</div>
-								<div id="info_box_left2_div">
-									<p>전화번호</p>
-								</div>
-								<div id="info_box_left2_div">
-									<p>요청사항</p>
-								</div>
-								<div></div>
-							</div>
-							<div id="info_box_right2">
-								<div></div>
-								<div id="info_box_right2_div">
-									<p>${orderInfo.recipient }</p>
-								</div>
-								<div id="info_box_right2_div">
-									<p>${orderInfo.address}${orderInfo.detail_address}</p>
-								</div>
-								<div id="info_box_right2_div">
-									<p>${orderInfo.phone_num }</p>
-								</div>
-								<div id="info_box_right2_div">
-									<p>${orderInfo.request}</p>
-								</div>
-								<div></div>
-							</div>
+							
 						</div>
 					</div>
 					<div id="buttons">
 						<div>
 							<button type="button" class="btn btn-dark" id="button_1"
-										onclick="location.href='/orderInfoEdit.do?order_detail_num=${orderInfo.order_detail_num}'">
-										주문 수정
+										onclick="location.href='orderRefundAccept.do?refund_change_num=${orderInfo.refund_change_num}'">
+										요청 승인/거절
 							</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-dark" id="button_3"
-								onclick="location.href='/orderListAdmin.do'">목록으로
+								onclick="location.href='orderRefundOrChange.do'">목록으로
 								돌아가기</button>
 						</div>
 					</div>

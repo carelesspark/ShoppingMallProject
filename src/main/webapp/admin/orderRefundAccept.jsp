@@ -5,25 +5,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>환불/교환 요청 조회</title>
-<link href="../resources/css/order/orderRefundInfo.css" rel="stylesheet" />
+<title>환불/교환 요청 승인</title>
+<link href="../resources/css/admin/orderRefundAccept.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
+	href="${pageContext.request.contextPath}/resources/css/admin/admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/admin/admin_user_list.css?ver=1.0" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<%@ include file="../header.jsp"%>
+<%@ include file="../header.jsp"%>
 	<div id="m">
-		<%@ include file="../user/user_card.jsp"%>
+		<%@ include file="./admin_card.jsp"%>
 		<div id="mc">
-			<%@ include file="../user/user_side.jsp"%>
+			<%@ include file="./admin_side.jsp"%>
 			<main>
+				<form method="post" action="orderRefundAccept.do">
 				<div id="main_order_info">
 					<div id="main-order-container">
-						<p id="order_info_title">환불/교환 요청 조회</p>
+						<p id="order_info_title">환불/교환 요청 승인</p>
 					</div>
 					
 					<div id="product_info_title">
@@ -93,6 +96,7 @@
 								<div id="info_box_left1_div">
 									<p>요청 이유</p>
 								</div>
+								
 								<div id="info_box_left1_div">
 									<p>요청 상세 이유</p>
 								</div>
@@ -118,6 +122,8 @@
 							<div id="info_box_right1">
 								<div id="info_box_right1_div">
 									<p>${orderInfo.refund_change_num }</p>
+									<input type="hidden" value="${orderInfo.order_detail_num }" name="order_detail_num">
+									<input type="hidden" value="${orderInfo.refund_change_num }" name="refund_change_num">
 								</div>
 								<div id="info_box_right1_div">
 									<p>${orderInfo.request_date }</p>
@@ -147,23 +153,18 @@
 									<c:if test="${orderInfo.cancel == 1}">
 									    <p>환불</p>
 									</c:if>
-
+									<input type="hidden" value="${orderInfo.change}" name="change">
+									<input type="hidden" value="${orderInfo.cancel}" name="cancel">
 								</div>
 								<div id="info_box_right1_div">
-									<c:choose>
-									    <c:when test="${orderInfo.approve == 1}">
-									        <p>승인</p>
-									    </c:when>
-									    <c:when test="${orderInfo.approve == -1}">
-									        <p>거절</p>
-									    </c:when>
-									    <c:otherwise>
-									        <p>승인 대기 중</p>
-									    </c:otherwise>
-									</c:choose>
+									<select name="approve">
+									    <option value="-1" ${orderInfo.approve == -1 ? 'selected' : ''}>거절</option>
+									    <option value="1" ${orderInfo.approve == 1 ? 'selected' : ''}>승인</option>
+									    <option ${orderInfo.approve == null ? 'selected disabled' : 'disabled'}>승인 여부 선택</option>
+									</select>
 								</div>
 								<div id="info_box_right1_div">
-									<p>${orderInfo.response_detail }</p>
+								    <textarea cols="60" rows="5" style="resize: none;" name="response_detail">${orderInfo.response_detail}</textarea>
 								</div>
 							</div>
 							<div></div>
@@ -172,20 +173,19 @@
 					</div>
 					<div id="buttons">
 						<div>
-							<button type="button" class="btn btn-dark" id="button_1"
-										onclick="location.href='/orderRefundAccept.do?refund_change_num=${orderInfo.refund_change_num}'">
+							<button type="submit" class="btn btn-dark" id="button_1">
 										요청 승인/거절
 							</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-dark" id="button_3"
-								onclick="location.href='/orderRefundOrChange.do'">목록으로
+								onclick="location.href='orderRefundInfo.do?refund_change_num=${orderInfo.refund_change_num}'">
 								돌아가기</button>
 						</div>
 					</div>
-					<div>
-					</div>
+					
 				</div>
+				</form>
 			</main>
 		</div>
 	</div>
