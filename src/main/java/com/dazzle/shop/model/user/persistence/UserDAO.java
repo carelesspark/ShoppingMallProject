@@ -20,8 +20,8 @@ public class UserDAO {
 	private final String USER_CARD = "SELECT SUBSTR(ui.user_rank, 1,1) rank_letter, ui.user_rank, "
 			+ "COUNT(case when d.delivery_date IS NULL then 1 ELSE NULL END) delivering_items, "
 			+ "IFNULL(SUM(p.points), 0) user_total_point FROM user_info ui "
-			+ "LEFT OUTER JOIN point p ON ui.user_num = p.user_num LEFT OUTER JOIN orders o "
-			+ "ON ui.user_num = o.user_num LEFT OUTER JOIN delivery d ON o.order_num = d.order_num "
+			+ "JOIN point p ON ui.user_num = p.user_num JOIN orders o "
+			+ "ON ui.user_num = o.user_num JOIN delivery d ON o.order_num = d.order_num "
 			+ "WHERE ui.user_num = ? GROUP BY ui.user_num";
 
 	// 나의 쇼핑

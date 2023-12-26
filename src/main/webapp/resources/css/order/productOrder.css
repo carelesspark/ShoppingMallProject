@@ -172,18 +172,21 @@ main {
 	width: 900px;
 	height: 37.5px;
 	padding-left: 20px;
+	padding-top: 10px;
 }
 
 #order_address_address_value {
 	width: 900px;
 	height: 37.5px;
 	padding-left: 20px;
+	padding-top: 10px;
 }
 
 #order_address_phone_value {
 	width: 900px;
 	height: 37.5px;
 	padding-left: 20px;
+	padding-top: 10px;
 }
 
 #order_address_request_value {
@@ -347,7 +350,12 @@ main {
 	width: 100px;
 }
 
-#order_payment_point_button {
+#order_payment_point_button1 {
+	height: 25px;
+	font-size: 8pt;
+}
+
+#order_payment_point_button2 {
 	height: 25px;
 	font-size: 8pt;
 }
@@ -362,6 +370,8 @@ main {
 }
 
 #order_payment_div_css {
+	display: grid;
+	grid-template-columns: 120px 460px;
 	padding-top: 20px;
 }
 
