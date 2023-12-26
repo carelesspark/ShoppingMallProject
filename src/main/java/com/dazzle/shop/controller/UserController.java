@@ -45,9 +45,6 @@ public class UserController {
 
 		UserCardVO card = userService.getUserCard(user_num);
 		UserOrdersVO orderCount = userService.orderCheck(user_num);
-		if (vo.getSearch_order() == null) {
-			vo.setSearch_order("");
-		}
 		model.addAttribute("orderCount", orderCount);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
@@ -73,7 +70,7 @@ public class UserController {
 		Map<Integer, List<UserOrdersVO>> sortedMap = new TreeMap<>(Comparator.reverseOrder());
 		sortedMap.putAll(map);
 		model.addAttribute("orderMap", sortedMap); // sortedMap을 추가해야 함
-
+		
 		return "user_order_list.jsp";
 	}
 
@@ -87,6 +84,8 @@ public class UserController {
 		int user_num = (int) session.getAttribute("user_num");
 
 		UserCardVO card = userService.getUserCard(user_num);
+		UserOrdersVO orderCount = userService.orderCheck(user_num);
+		model.addAttribute("orderCount", orderCount);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("user_total_point", card.getUser_total_point());
@@ -102,6 +101,7 @@ public class UserController {
 		vo.setUser_num(user_num);
 		vo.setStartDate(startDate);
 		vo.setEndDate(endDate);
+		
 
 		List<UserOrdersVO> list = userService.getUserOrderList(vo);
 		Map<Integer, List<UserOrdersVO>> map = list.stream().collect(Collectors.groupingBy(UserOrdersVO::getOrder_num));
@@ -109,7 +109,7 @@ public class UserController {
 		Map<Integer, List<UserOrdersVO>> sortedMap = new TreeMap<>(Comparator.reverseOrder());
 		sortedMap.putAll(map);
 		model.addAttribute("orderMap", sortedMap); // sortedMap을 추가해야 함
-
+		
 		return "user_order_list.jsp";
 	}
 

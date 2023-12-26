@@ -37,8 +37,6 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
 			+ " WHERE o.user_num = ? AND o.order_date >= DATE_SUB(NOW(), INTERVAL ? MONTH)";
-
-	
 	
 	private final String ORDER_LIST_ADMIN = "SELECT od.order_detail_num, od.product_state, od.amount, o.order_date, p.product_name, p.product_price, u.user_name" + 
 			" FROM order_detail od"+
@@ -219,18 +217,16 @@ public class OrderDAO {
 			" SET response_detail = ?, "
 			+ " approve = ? " + 
 			" WHERE refund_change_num = ?";
-	
-	
-	
-	
-	
-	private final String ORDER_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num"
+  
+		private final String ORDER_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.main_img"
 			+ " FROM orders o" + " JOIN order_detail od ON o.order_num = od.order_num"
 			+ " JOIN delivery d ON d.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
-			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE o.order_num = ?";
+			+ " JOIN product p ON p.product_num = pco.product_num"
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
+			+ " WHERE o.order_num = ?";
 
 	private final String PRODUCT_ORDER = "SELECT pimg.main_img, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, pc.product_code"
 			+ " FROM product_code pc"

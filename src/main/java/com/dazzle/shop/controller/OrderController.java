@@ -122,6 +122,7 @@ public class OrderController {
 		model.addAttribute("user_total_point", card.getUser_total_point());
 		model.addAttribute("delivering_items", card.getDelivering_items());
 		OrderVO orderInfo = orderService.getOrderInfo(vo);
+		
 		model.addAttribute("orderInfo", orderInfo);
 
 		return "/order/orderInfo.jsp";

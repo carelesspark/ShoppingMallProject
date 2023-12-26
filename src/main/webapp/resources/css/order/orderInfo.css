@@ -78,8 +78,8 @@ main {
 	height: 180px;
 	place-items: center;
 }
-
-#shirt {
+	
+#product_img {
 	width: 100px;
 	height: 100px;
 }
