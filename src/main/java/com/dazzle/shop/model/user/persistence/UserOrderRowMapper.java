@@ -25,6 +25,16 @@ public class UserOrderRowMapper implements RowMapper<UserOrdersVO> {
 		userOrdersVO.setMain_img(rs.getString("main_img"));
 		userOrdersVO.setProduct_price(rs.getInt("product_price"));
 		userOrdersVO.setOrder_num(rs.getInt("order_num"));
+		userOrdersVO.setOrder_date(rs.getDate("order_date"));
+		userOrdersVO.setDelivery_date(rs.getDate("delivery_date"));
+		userOrdersVO.setProduct_state(rs.getString("product_state"));
+		userOrdersVO.setAmount(rs.getInt("amount"));
+		userOrdersVO.setTotal_price(rs.getInt("total_price"));
+		userOrdersVO.setSize_name(rs.getString("size_name"));
+		userOrdersVO.setColor_name(rs.getString("color_name"));
+		userOrdersVO.setProduct_name(rs.getString("product_name"));
+		userOrdersVO.setOrder_num(rs.getInt("order_num"));
+		userOrdersVO.setOrder_detail_num(rs.getInt("order_detail_num"));
 		return userOrdersVO;
 	}
 

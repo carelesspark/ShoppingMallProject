@@ -5,17 +5,19 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.dazzle.shop.model.user.domain.UserVO;
+import com.dazzle.shop.model.user.domain.*;
 
-public class UserCardRowMapper implements RowMapper<UserVO> {
+public class UserCardRowMapper implements RowMapper<UserCardVO> {
 
 	@Override
-	public UserVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-		UserVO user = new UserVO();
-		
-		user.setUser_rank(rs.getString("user_rank"));
+	public UserCardVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+		UserCardVO vo = new UserCardVO();
+		vo.setRank_letter(rs.getString("rank_letter"));
+		vo.setUser_rank(rs.getString("user_rank"));
+		vo.setUser_total_point(rs.getInt("user_total_point"));
+		vo.setDelivering_items(rs.getString("delivering_items"));
 
-		return user;
+		return vo;
 	}
 
 }

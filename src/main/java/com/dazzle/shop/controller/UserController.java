@@ -117,22 +117,52 @@ public class UserController {
 	/*
 	 * 포인트
 	 */
-	@RequestMapping("/pointList.do")
-	public String userPointList(HttpServletRequest request, Model model, UserOrdersVO vo) {
-		System.out.println("UserController: userPointList");
+		@RequestMapping("/pointList.do")
+		public String userPointList(HttpServletRequest request, Model model) {
+			System.out.println("UserController: userPointList");
 
-		HttpSession session = request.getSession();
-		int user_num = (int) session.getAttribute("user_num");
+			HttpSession session = request.getSession();
+			int user_num = (int) session.getAttribute("user_num");
 
-		UserVO card = userService.getUserCard(user_num);
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_point", card.getUser_point());
+			UserCardVO card = userService.getUserCard(user_num);
+			model.addAttribute("rank_letter", card.getRank_letter());
+			model.addAttribute("user_rank", card.getUser_rank());
+			model.addAttribute("delivering_items", card.getDelivering_items());
+			model.addAttribute("user_total_point", card.getUser_total_point());
 
-//		List<UserOrdersVO> list = userService.getUserOrderList(user_num);
-//		model.addAttribute("orderList", list);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			LocalDate currentDate = LocalDate.now();
+			LocalDate oneMonthAgo = currentDate.minusMonths(1);
+			oneMonthAgo = oneMonthAgo.plusDays(1);
+			Date startDate = Date.from(oneMonthAgo.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			Date endDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			model.addAttribute("startDate", sdf.format(startDate));
+			model.addAttribute("endDate", sdf.format(endDate));
 
-		return "user_point_list.jsp";
-	}
+			int totalItems = userService.countPointBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
+					new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
+			int itemsPerPage = 10; // 페이지 당 표시할 레코드 수
+			int currentPage = 1; // 현재 페이지
+			int totalPage = totalItems / itemsPerPage; // 전체 페이지
+			if (totalItems % itemsPerPage > 0) {
+				totalPage++;
+			}
+			model.addAttribute("itemsPerPage", itemsPerPage);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("totalPage", totalPage);
+
+			UserPointVO vo = new UserPointVO();
+			vo.setUser_num(user_num);
+			vo.setStartDate(new java.sql.Date(startDate.getTime()));
+			vo.setEndDate(new java.sql.Date(endDate.getTime()));
+			vo.setCurrentPage(currentPage);
+			vo.setItemsPerPage(itemsPerPage);
+
+			List<UserPointVO> list = userService.getUserPointList(vo);
+			model.addAttribute("pointList", list);
+
+			return "user_point_list.jsp";
+		}
 
 	/*
 	 * 상품 후기
