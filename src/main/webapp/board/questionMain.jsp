@@ -25,6 +25,12 @@
 					<hr>
 				</tr>
 			</c:forEach>
+			
+			<div style="text-align: center">
+				<c:forEach var="i" begin="1" end="${page/15 + 1 }">
+					<a href="questionMain.do?pageNum=${i }">${i }</a>
+				</c:forEach>
+			</div>
 			</table>
 		</div>
 	</div>

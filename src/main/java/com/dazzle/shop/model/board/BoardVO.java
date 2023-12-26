@@ -11,6 +11,5 @@ public class BoardVO {
 	private String title;
 	private String cate;
 	private Date posttime;
-	private String productCode;
 	private String content;
 }

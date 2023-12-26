@@ -21,11 +21,14 @@
 			<p class="date">${quest.posttime }</p>
 			<p>${quest.title }</p>
 			
+			<form action="writeQuestReply.do">
 			<div class="main">
 				<p class="main_quest">${quest.content }</p>
-				<textarea>${reply.rcontent }</textarea>
+				<input type="hidden" name="pno" value="${quest.pno }">
+				<textarea name="rcontent">${reply.rcontent }</textarea>
 				<input type="submit" value="답변 등록">
 			</div>
+			</form>
 			
 			<div class="button">
 				<input type="button" value="목록보기" onclick="location.href='questionMain.do'">
