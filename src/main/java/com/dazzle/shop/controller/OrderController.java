@@ -105,10 +105,6 @@ public class OrderController {
 		return "redirect:orderList.do";
 	}
 
-
-	
-
-
 	@RequestMapping(value = "/orderInfo.do")
 	public String getOrderInfo(HttpServletRequest request, OrderVO vo, Model model) throws Exception {
 
@@ -124,6 +120,10 @@ public class OrderController {
 		OrderVO orderInfo = orderService.getOrderInfo(vo);
 		
 		model.addAttribute("orderInfo", orderInfo);
+		int orderDetailNum = orderInfo.getOrder_detail_num();
+		System.out.println(orderDetailNum);
+		OrderVO orderResult = orderService.getOrderResponseDetail(orderDetailNum);
+		model.addAttribute("orderResult", orderResult);
 
 		return "/order/orderInfo.jsp";
 	}
