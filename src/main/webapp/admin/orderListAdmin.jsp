@@ -6,18 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>주문 목록 조회 페이지(관리자)</title>
-<link href="../resources/css/order/orderListAdmin.css" rel="stylesheet" />
+<link href="../resources/css/admin/orderListAdmin.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
+	href="${pageContext.request.contextPath}/resources/css/admin/admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/admin/admin_user_list.css?ver=1.0" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
 	<div id="m">
-		<%@ include file="../user/user_card.jsp"%>
+		<%@ include file="./admin_card.jsp"%>
 		<div id="mc">
-			<%@ include file="../user/user_side.jsp"%>
+			<%@ include file="./admin_side.jsp"%>
 			<main>
 				<div id="admin_order_list">
 					<div id="order_list_title">
@@ -84,7 +86,7 @@
 											
 											<td><div id="table_button">
 												<button type="button" class="btn btn-outline-secondary"
-													id="button2" onclick="location.href='/orderInfoAdmin.do?order_detail_num=${order.order_detail_num}'">주문 정보</button>
+													id="button2" onclick="location.href='orderInfoAdmin.do?order_detail_num=${order.order_detail_num}'">주문 정보</button>
 												</div>
 										</td>
 									</tr>

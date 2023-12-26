@@ -107,8 +107,8 @@ public class OrderDAO {
 			+ " WHERE order_num IN (SELECT order_num FROM order_detail WHERE order_detail_num = ?)";
 
 	private final String ORDER_DETAIL_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num"
-			+ " FROM orders o" + " JOIN order_detail od ON o.order_num = od.order_num"
-			+ " JOIN delivery d ON d.order_num = o.order_num"
+			+ " FROM order_detail od" + " JOIN orders o ON o.order_num = od.order_num"
+			+ " LEFT JOIN delivery d ON d.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"

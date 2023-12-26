@@ -6,9 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>주문 배송 정보 수정</title>
-<link href="../resources/css/order/orderInfoAdmin.css" rel="stylesheet" />
+<link href="../resources/css/admin/orderInfoAdmin.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
+	href="${pageContext.request.contextPath}/resources/css/admin/admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/admin/admin_user_list.css?ver=1.0" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script
@@ -17,9 +19,9 @@
 <body>
 	<%@ include file="../header.jsp"%>
 	<div id="m">
-		<%@ include file="../user/user_card.jsp"%>
+		<%@ include file="./admin_card.jsp"%>
 		<div id="mc">
-			<%@ include file="../user/user_side.jsp"%>
+			<%@ include file="./admin_side.jsp"%>
 			<main>
 				<form method="post" action="orderInfoEdit.do">
 				<div id="main_order_info">
@@ -202,7 +204,7 @@
 						</div>
 						<div>
 							<button type="button" class="btn btn-dark" id="button_3"
-								onclick="location.href='/orderInfoAdmin.do?order_detail_num=${orderInfo.order_detail_num}'">돌아가기</button>
+								onclick="location.href='orderInfoAdmin.do?order_detail_num=${orderInfo.order_detail_num}'">돌아가기</button>
 						</div>
 					</div>
 					<div>
