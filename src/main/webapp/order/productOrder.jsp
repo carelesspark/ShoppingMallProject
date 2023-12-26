@@ -179,7 +179,7 @@
 									<div id="order_payment_div_css">
 										<input type="number" id="order_payment_point_box"
 											value="0" readonly />
-										<input type="hidden" id="hidden_use_points" name="points" value="${userPoint}" />
+										<input type="number" id="hidden_use_points" name="points" value="${userPoint}" />
 									</div>
 									<div id="order_payment_label_css">
 										<label>포인트</label>
