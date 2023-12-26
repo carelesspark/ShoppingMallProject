@@ -6,6 +6,8 @@ public interface OrderService {
 	
 	OrderVO getOrderInfo(OrderVO vo);
 	
+	OrderVO getOrderDetailInfo(OrderVO vo);
+	
 	OrderVO getOrderRefund(OrderVO vo);
 	
 	OrderVO getProductChange(OrderVO vo);
@@ -38,4 +40,25 @@ public interface OrderService {
 	
 	OrderVO getOrderSuccInfo(OrderVO vo);
 	
+	void updateOrderState(OrderVO vo);
+	
+	void updateOrderDelv(OrderVO vo);
+	
+	OrderVO getRefundInfo(OrderVO vo);
+	
+	void approveRequest(OrderVO vo);
+	
+	List<OrderVO> getOrderListAdmin();
+	
+	List<OrderVO> getOrderListAdminState(OrderVO vo);
+	
+	List<OrderVO> getOrderListAdminPName(OrderVO vo);
+	
+	List<OrderVO> getRefundList();
+	
+	List<OrderVO> getRefundListPName(OrderVO vo);
+	
+	List<OrderVO> getRefundListApprove(OrderVO vo);
+
+	List<OrderVO> getProductState();
 }

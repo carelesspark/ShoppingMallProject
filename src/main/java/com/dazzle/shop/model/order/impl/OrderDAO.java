@@ -37,8 +37,188 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
 			+ " WHERE o.user_num = ? AND o.order_date >= DATE_SUB(NOW(), INTERVAL ? MONTH)";
+	
+	private final String ORDER_LIST_ADMIN = "SELECT od.order_detail_num, od.product_state, od.amount, o.order_date, p.product_name, p.product_price, u.user_name" + 
+			" FROM order_detail od"+
+			" JOIN orders o ON o.order_num = od.order_num" + 
+			" JOIN users u ON u.user_num = o.user_num" + 
+			" JOIN product_code pc ON pc.product_code = od.product_code" + 
+			" JOIN product_size ps ON ps.size_num = pc.size_num" + 
+			" JOIN product_color pco ON pco.color_num = ps.color_num" + 
+			" JOIN product p ON p.product_num = pco.product_num";
+	
+	private final String ORDER_LIST_ADMIN_STATE =  "SELECT od.order_detail_num, od.product_state, od.amount, o.order_date, p.product_name, p.product_price, u.user_name" + 
+			" FROM order_detail od"+
+			" JOIN orders o ON o.order_num = od.order_num" + 
+			" JOIN users u ON u.user_num = o.user_num" + 
+			" JOIN product_code pc ON pc.product_code = od.product_code" + 
+			" JOIN product_size ps ON ps.size_num = pc.size_num" + 
+			" JOIN product_color pco ON pco.color_num = ps.color_num" + 
+			" JOIN product p ON p.product_num = pco.product_num" + 
+			" WHERE od.product_state = ?";
+	
+	private final String PRODUCT_STATE = "SELECT DISTINCT product_state" + 
+			" FROM order_detail";
+	
+	private final String ORDER_LIST_ADMIN_PNAME = "SELECT od.order_detail_num, od.product_state, od.amount, o.order_date, p.product_name, p.product_price, u.user_name" + 
+			" FROM order_detail od"+
+			" JOIN orders o ON o.order_num = od.order_num" + 
+			" JOIN users u ON u.user_num = o.user_num" + 
+			" JOIN product_code pc ON pc.product_code = od.product_code" + 
+			" JOIN product_size ps ON ps.size_num = pc.size_num" + 
+			" JOIN product_color pco ON pco.color_num = ps.color_num" + 
+			" JOIN product p ON p.product_num = pco.product_num" +
+			" WHERE p.product_name LIKE ?";
 
-	private final String ORDER_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.main_img"
+	private final String REFUND_LIST = "SELECT" + 
+			"  ps.size_name," + 
+			"  pco.color_name," + 
+			"  p.product_price," + 
+			"  p.product_name," + 
+			"  od.amount," + 
+			"  pr.refund_change_amount," + 
+			"  pr.refund_change_num," + 
+			"  od.order_detail_num," + 
+			"  od.product_state," + 
+			"  pr.request_date," + 
+			"  pr.refund_or_change_reason," + 
+			"  pr.reason_detail," + 
+			"  pr.bank," + 
+			"  pr.account_num," + 
+			"  pr.cancel," + 
+			"  pr.`change`," + 
+			"  pr.response_detail," + 
+			"  pr.approve," + 
+			"  u.user_name " + 
+			"  FROM" + 
+			"  product_refund_or_change pr " + 
+			"  JOIN order_detail od ON od.order_detail_num = pr.order_detail_num" + 
+			"  JOIN product_code pc ON od.product_code = pc.product_code" + 
+			"  JOIN product_size ps ON pc.size_num = ps.size_num" + 
+			"  JOIN product_color pco ON ps.color_num = pco.color_num" + 
+			"  JOIN product p ON pco.product_num = p.product_num" + 
+			"  JOIN orders o ON o.order_num = od.order_num" +
+			"  JOIN users u ON u.user_num = o.user_num"
+			+ "  ORDER BY CASE WHEN pr.approve = 0 THEN 0 ELSE 1 END, pr.approve";
+	
+	private final String REFUND_LIST_APPROVE = "SELECT" + 
+			"  ps.size_name," + 
+			"  pco.color_name," + 
+			"  p.product_price," + 
+			"  p.product_name," + 
+			"  od.amount," + 
+			"  pr.refund_change_amount," + 
+			"  pr.refund_change_num," + 
+			"  od.order_detail_num," + 
+			"  od.product_state," + 
+			"  pr.request_date," + 
+			"  pr.refund_or_change_reason," + 
+			"  pr.reason_detail," + 
+			"  pr.bank," + 
+			"  pr.account_num," + 
+			"  pr.cancel," + 
+			"  pr.`change`," + 
+			"  pr.response_detail," + 
+			"  pr.approve," + 
+			"  u.user_name " + 
+			"  FROM" + 
+			"  product_refund_or_change pr " + 
+			"  JOIN order_detail od ON od.order_detail_num = pr.order_detail_num" + 
+			"  JOIN product_code pc ON od.product_code = pc.product_code" + 
+			"  JOIN product_size ps ON pc.size_num = ps.size_num" + 
+			"  JOIN product_color pco ON ps.color_num = pco.color_num" + 
+			"  JOIN product p ON pco.product_num = p.product_num" + 
+			"  JOIN orders o ON o.order_num = od.order_num" +
+			"  JOIN users u ON u.user_num = o.user_num" +
+			"  WHERE pr.approve = ?";
+	
+	private final String REFUND_LIST_PNAME = "SELECT" + 
+			"  ps.size_name," + 
+			"  pco.color_name," + 
+			"  p.product_price," + 
+			"  p.product_name," + 
+			"  od.amount," + 
+			"  pr.refund_change_amount," + 
+			"  pr.refund_change_num," + 
+			"  od.order_detail_num," + 
+			"  od.product_state," + 
+			"  pr.request_date," + 
+			"  pr.refund_or_change_reason," + 
+			"  pr.reason_detail," + 
+			"  pr.bank," + 
+			"  pr.account_num," + 
+			"  pr.cancel," + 
+			"  pr.`change`," + 
+			"  pr.response_detail," + 
+			"  pr.approve," + 
+			"  u.user_name " + 
+			"  FROM" + 
+			"  product_refund_or_change pr " + 
+			"  JOIN order_detail od ON od.order_detail_num = pr.order_detail_num" + 
+			"  JOIN product_code pc ON od.product_code = pc.product_code" + 
+			"  JOIN product_size ps ON pc.size_num = ps.size_num" + 
+			"  JOIN product_color pco ON ps.color_num = pco.color_num" + 
+			"  JOIN product p ON pco.product_num = p.product_num" + 
+			"  JOIN orders o ON o.order_num = od.order_num" +
+			"  JOIN users u ON u.user_num = o.user_num" +
+			"  WHERE p.product_name LIKE ?" +
+			"  ORDER BY CASE WHEN pr.approve = 0 THEN 0 ELSE 1 END, pr.approve";
+	
+	private final String ORDER_INFO_EDIT_STATE = "UPDATE order_detail" + 
+			" SET product_state = ?" + 
+			" WHERE order_detail_num = ?";
+
+	private final String ORDER_INFO_EDIT_DELV = "UPDATE delivery" + 
+			" SET delivery_date = STR_TO_DATE(?, '%Y-%m-%d')," + 
+			" delivery_company = ?," + 
+			" invoice_num = ?" + 
+			" WHERE order_num IN (SELECT order_num FROM order_detail WHERE order_detail_num = ?)";
+	
+	private final String ORDER_DETAIL_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num"
+			+ " FROM orders o" + " JOIN order_detail od ON o.order_num = od.order_num"
+			+ " JOIN delivery d ON d.order_num = o.order_num"
+			+ " JOIN product_code pc ON pc.product_code = od.product_code"
+			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
+			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
+			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE od.order_detail_num = ?";
+	
+	private final String REFUND_INFO ="SELECT" + 
+			"  ps.size_name," + 
+			"  pco.color_name," + 
+			"  p.product_price," + 
+			"  p.product_name," + 
+			"  od.amount," + 
+			"  pr.refund_change_amount," + 
+			"  pr.refund_change_num," + 
+			"  od.order_detail_num," + 
+			"  od.product_state," + 
+			"  pr.request_date," + 
+			"  pr.refund_or_change_reason," + 
+			"  pr.reason_detail," + 
+			"  pr.bank," + 
+			"  pr.account_num," + 
+			"  pr.cancel," + 
+			"  pr.`change`," + 
+			"  pr.response_detail," + 
+			"  pr.approve," + 
+			"  u.user_name " + 
+			"  FROM" + 
+			"  product_refund_or_change pr " + 
+			"  JOIN order_detail od ON od.order_detail_num = pr.order_detail_num" + 
+			"  JOIN product_code pc ON od.product_code = pc.product_code" + 
+			"  JOIN product_size ps ON pc.size_num = ps.size_num" + 
+			"  JOIN product_color pco ON ps.color_num = pco.color_num" + 
+			"  JOIN product p ON pco.product_num = p.product_num" + 
+			"  JOIN orders o ON o.order_num = od.order_num" +
+			"  JOIN users u ON u.user_num = o.user_num" +
+			"  WHERE pr.refund_change_num = ?";
+
+	private final String REFUND_CHANGE_APPROVE = "UPDATE product_refund_or_change" + 
+			" SET response_detail = ?, "
+			+ " approve = ? " + 
+			" WHERE refund_change_num = ?";
+  
+		private final String ORDER_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.main_img"
 			+ " FROM orders o" + " JOIN order_detail od ON o.order_num = od.order_num"
 			+ " JOIN delivery d ON d.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
@@ -130,11 +310,79 @@ public class OrderDAO {
 		}
 	}
 
+	public OrderVO getOrderDetailInfo(OrderVO vo) {
+		try {
+			System.out.println("getOrderInfo()");
+			Object[] args = { vo.getOrder_detail_num() };
+			return jdbcTemplate.queryForObject(ORDER_DETAIL_INFO, args, new OrderInfoRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
 	public List<OrderVO> getOrderList(OrderVO vo) {
 		try {
 			System.out.println("getOrderList()");
 			Object[] args = { vo.getUser_num() };
 			return jdbcTemplate.query(ORDER_LIST, args, new OrderListRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<OrderVO> getOrderListAdmin() {
+		try {
+			System.out.println("getOrderListAdmin()");
+			return jdbcTemplate.query(ORDER_LIST_ADMIN, new OrderListAdminRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<OrderVO> getOrderListAdminState(OrderVO vo) {
+		try {
+			System.out.println("getOrderListAdminState()");
+			Object[] args = { vo.getProduct_state()};
+			return jdbcTemplate.query(ORDER_LIST_ADMIN_STATE, args, new OrderListAdminRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<OrderVO> getOrderListAdminPName(OrderVO vo) {
+		try {
+			System.out.println("getOrderListAdminState()");
+			Object[] args = { "%" + vo.getProduct_name() + "%" };
+			return jdbcTemplate.query(ORDER_LIST_ADMIN_PNAME, args, new OrderListAdminRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<OrderVO> getRefundList() {
+		try {
+			System.out.println("getRefundList()");
+			return jdbcTemplate.query(REFUND_LIST, new RefundListRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<OrderVO> getRefundListPName(OrderVO vo) {
+		try {
+			System.out.println("getRefundListPName()");
+			Object[] args = { "%" + vo.getProduct_name() + "%" };
+			return jdbcTemplate.query(REFUND_LIST_PNAME, args, new RefundListRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<OrderVO> getRefundListApprove(OrderVO vo) {
+		try {
+			System.out.println("getRefundListApprove()");
+			Object[] args = { vo.getApprove() };
+			return jdbcTemplate.query(REFUND_LIST_APPROVE, args, new RefundListRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
@@ -276,6 +524,49 @@ public class OrderDAO {
 			System.out.println("getProductOrderWhenSuccess()");
 			Object[] args = { vo.getOrder_num()};
 			return jdbcTemplate.query(ORDER_SUCC_PRODUCT, args, new OrderSuccProductRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public void updateOrderState(OrderVO vo) {
+
+		System.out.println("updateOrderInfo()");
+
+		jdbcTemplate.update(ORDER_INFO_EDIT_STATE, vo.getProduct_state(), vo.getOrder_detail_num());
+		return;
+	}
+	
+	public void updateOrderDelv(OrderVO vo) {
+
+		System.out.println("updateOrderInfo()");
+
+		jdbcTemplate.update(ORDER_INFO_EDIT_DELV, vo.getDelivery_date_string(), vo.getDelivery_company(), vo.getInvoice_num(), vo.getOrder_detail_num());
+		return;
+	}
+	
+	public OrderVO getRefundInfo(OrderVO vo) {
+		try {
+			System.out.println("getRefundInfo()");
+			Object[] args = { vo.getRefund_change_num() };
+			return jdbcTemplate.queryForObject(REFUND_INFO, args, new RefundInfoRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public void approveRequest(OrderVO vo) {
+
+		System.out.println("approveRequest()");
+
+		jdbcTemplate.update(REFUND_CHANGE_APPROVE, vo.getResponse_detail(), vo.getApprove(), vo.getRefund_change_num());
+		return;
+	}
+	
+	public List<OrderVO> getProductState() {
+		try {
+			System.out.println("getProductState()");
+			return jdbcTemplate.query(PRODUCT_STATE, new ProductStateRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,81 +94,37 @@
 					<div id="order_list_title">
 						<h1>주문 목록 조회</h1>
 					</div>
-					<div id="list_classification">
-						<div id="list_classification_grid">
-							<div id="category">
-								<div id="grid1">
-									<p>카테고리</p>
-								</div>
-								<div id="grid2">
-									<select><option value="default">전체</option>
-										<option value="top">상의</option>
-										<option value="bottom">하의</option>
-										<option value="outer">아우터</option>
-										<option value="shoes">신발</option>
-										<option value="etc">기타</option></select>
-								</div>
-							</div>
-							<div id="progress_status">
-								<div id="grid1">
-									<p>진행 상태</p>
-								</div>
-								<div id="grid2">
-									<select><option value="default">전체</option>
-										<option value="prepare">상품 준비 중</option>
-										<option value="start">배송 시작</option>
-										<option value="ing">배송 중</option>
-										<option value="finish">배송 완료</option>
-									</select>
-								</div>
-							</div>
-							<div id="buy_date">
-								<div id="grid1">
-									<p>구매 날짜</p>
-								</div>
-								<div>
-									<input type="date" data-placeholder="날짜 선택" required />
-								</div>
-								<div id="wave">
-									<p>~</p>
-								</div>
-								<div>
-									<input type="date" data-placeholder="날짜 선택" required />
-								</div>
-								<div>
-									<div id="button">
-										<button type="button" class="btn btn-outline-secondary"
-											id="date_button">7일</button>
-									</div>
-								</div>
-								<div>
-									<div id="button">
-										<button type="button" class="btn btn-outline-secondary"
-											id="date_button">30일</button>
-									</div>
-								</div>
-								<div>
-									<div id="button">
-										<button type="button" class="btn btn-outline-secondary"
-											id="date_button">3개월</button>
-									</div>
-								</div>
-							</div>
-							<div id="search_num">
-								<div id="grid3">
-									<p>주문 번호 검색</p>
-								</div>
-								<div id="search_box">
-									<input type="text" placeholder="주문 번호 입력"
-										id="search_order_list" />
-								</div>
-							</div>
+					
+					<div id="search">
+						<div>
+							<form method="get" action="orderListAdmin.do">
+								진행 상태 검색
+								<select name="product_state">
+								  <option value="">전체</option>
+								  <c:forEach items="${productStateList}" var="state">
+								    <c:choose>
+								      <c:when test="${state.product_state eq product_state}">
+								        <option value="${state.product_state}" selected>${state.product_state}</option>
+								      </c:when>
+								      <c:otherwise>
+								        <option value="${state.product_state}">${state.product_state}</option>
+								      </c:otherwise>
+								    </c:choose>
+								  </c:forEach>
+								</select>
+								<button type="submit">검색</button>
+							</form>
+						</div>
+						
+						<div>
+							<form method="get" action="orderListAdmin.do">
+								상품 이름 검색
+								<input name="product_name" placeholder="상품 이름을 검색하세요.">
+								<button type="submit">검색</button>
+							</form>
 						</div>
 					</div>
-					<div id="search_button">
-						<button type="button" class="btn btn-outline-secondary"
-							id="button1">선택항목 검색</button>
-					</div>
+					
 					<div id="admin_order_list_bottom">
 						<div id="order_list_title2">
 							<p>주문 목록</p>
@@ -177,76 +134,37 @@
 							<table id="order_list_table">
 								<tr id="order_list_table_first_tr">
 									<td>주문일</td>
-									<td>주문 번호</td>
+									<td>주문 상세 번호</td>
 									<td>상품 이름</td>
 									<td>가격</td>
+									<td>수량</td>
 									<td>진행 상태</td>
 									<td>고객 정보</td>
 									<td></td>
 								</tr>
-								<tr id="order_list_table_other_tr">
-									<td><div id="order_list_table_other_tr_div">2023/12/05</div></td>
-									<td><div id="order_list_table_other_tr_div">12312323</div></td>
-									<td><div id="order_list_table_other_tr_div">000000옷</div></td>
-									<td><div id="order_list_table_other_tr_div">59,000원</div></td>
-									<td><div id="order_list_table_other_tr_div">배송 중</div></td>
-									<td><div id="order_list_table_other_tr_div">박종혁</div></td>
-									<td><div id="table_button">
-											<div>
+								<c:forEach items="${orderList}" var="order">
+									<tr id="order_list_table_other_tr">
+										<td>
+											<div id="order_list_table_other_tr_div">${order.order_date }</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.order_detail_num }</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.product_name}</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.product_price }</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.amount }</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.product_state }</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.user_name }</div></td>
+											
+											<td><div id="table_button">
 												<button type="button" class="btn btn-outline-secondary"
-													id="button2" onclick="location.href='/order/orderInfoAdmin.jsp'">주문 정보</button>
-											</div>
-											<div>
-												<button type="button" class="btn btn-outline-secondary"
-													id="button2" onclick="location.href='/order/orderInfoEdit.jsp'">상태 수정</button>
-											</div>
-										</div></td>
-								</tr>
-								<tr id="order_list_table_other_tr">
-									<td><div id="order_list_table_other_tr_div">2023/11/17</div></td>
-									<td><div id="order_list_table_other_tr_div">21323142</div></td>
-									<td><div id="order_list_table_other_tr_div">000000바지</div></td>
-									<td><div id="order_list_table_other_tr_div">49,000원</div></td>
-									<td><div id="order_list_table_other_tr_div">배송 완료</div></td>
-									<td><div id="order_list_table_other_tr_div">송민수</div></td>
-									<td><div id="table_button">
-											<div>
-												<button type="button" class="btn btn-outline-secondary"
-													id="button2">주문 정보</button>
-											</div>
-											<div>
-												<button type="button" class="btn btn-outline-secondary"
-													id="button2">상태 수정</button>
-											</div>
-										</div></td>
-								</tr>
-								<tr id="order_list_table_other_tr">
-									<td><div id="order_list_table_other_tr_div">2023/10/17</div></td>
-									<td><div id="order_list_table_other_tr_div">2252222</div></td>
-									<td><div id="order_list_table_other_tr_div">000000신발</div></td>
-									<td><div id="order_list_table_other_tr_div">79,000원</div></td>
-									<td><div id="order_list_table_other_tr_div">배송 완료</div></td>
-									<td><div id="order_list_table_other_tr_div">안병현</div></td>
-									<td><div id="table_button">
-											<div>
-												<button type="button" class="btn btn-outline-secondary"
-													id="button2">주문 정보</button>
-											</div>
-											<div>
-												<button type="button" class="btn btn-outline-secondary"
-													id="button2">상태 수정</button>
-											</div>
-										</div></td>
-								</tr>
+													id="button2" onclick="location.href='/orderInfoAdmin.do?order_detail_num=${order.order_detail_num}'">주문 정보</button>
+												</div>
+										</td>
+									</tr>
+								</c:forEach>
+							
 							</table>
 						</div>
 					</div>
-					<div id="bottom_buttons">
-							<div id="bottom_button_div1"><button type="button" class="btn btn-outline-secondary"
-													id="button3">이전</button></div>
-							<div><button type="button" class="btn btn-outline-secondary"
-													id="button4">다음</button></div>
-						</div>
+					
 				</div>
 			</main>
 		</div>
