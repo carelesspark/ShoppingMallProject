@@ -162,8 +162,8 @@
 			</div>
 			<hr>
 			<div id="buttons">
-				<button id="continue">쇼핑 계속 하기</button>
-				<button id="order-list">주문 내역 조회</button>
+				<button id="continue" onclick="location.href='/main.do'">쇼핑 계속 하기</button>
+				<button id="order-list" onclick="location.href='/user/orderList.do'">주문 내역 조회</button>
 			</div>
 
 		</div>
