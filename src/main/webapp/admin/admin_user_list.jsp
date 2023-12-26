@@ -21,20 +21,20 @@
 			<main>
 				<div id="md">
 					<div id="rowNum">
-						<div>현재 페이지 표시 개수: ${pageSize}</div>
+						<div>현재 페이지 표시 개수: ${itemsPerPage}</div>
 						<div id="rNumChange">
 							<div>변경:</div>
 							<div>
 								<button type="button"
-									onclick="window.location.href='/admin/changeUserList.do?pageSize=10&pageNum=1'">10</button>
+									onclick="window.location.href='/admin/changeUserList.do?itemsPerPage=20&currentPage=1'">20</button>
 							</div>
 							<div>
 								<button type="button"
-									onclick="window.location.href='/admin/changeUserList.do?pageSize=50&pageNum=1'">50</button>
+									onclick="window.location.href='/admin/changeUserList.do?itemsPerPage=50&currentPage=1'">50</button>
 							</div>
 							<div>
 								<button type="button"
-									onclick="window.location.href='/admin/changeUserList.do?pageSize=100&pageNum=1'">100</button>
+									onclick="window.location.href='/admin/changeUserList.do?itemsPerPage=100&currentPage=1'">100</button>
 							</div>
 						</div>
 					</div>
@@ -48,8 +48,11 @@
 						<div>탈퇴일</div>
 					</div>
 					<div id="ml">
+						<c:forEach var="num" begin="${realItemsStartNum}"
+							end="${realItemsStartNum - realItemsPerPage + 1}" step="-1">
+							<div>${num }</div>
+						</c:forEach>
 						<c:forEach var="list" items="${userList}">
-							<div>${list.list_num}</div>
 							<div>${list.user_name}</div>
 							<div>${list.user_rank}</div>
 							<div>${list.login_type}</div>
@@ -75,12 +78,12 @@
 					<div id="pageBtn">
 						<div>
 							<button type="button" id="prevPageBtn"
-								<c:if test="${pageNum > 1}">onclick="window.location.href='/admin/changeUserList.do?pageSize=${pageSize}&pageNum=${pageNum - 1}'"</c:if>>&lt;</button>
+								<c:if test="${currentPage > 1}">onclick="window.location.href='/admin/changeUserList.do?itemsPerPage=${itemsPerPage}&currentPage=${currentPage - 1}'"</c:if>>&lt;</button>
 						</div>
-						<div>${pageNum}/${totalPage}페이지</div>
+						<div>${currentPage}/${totalPage}페이지</div>
 						<div>
 							<button type="button" id="nextPageBtn"
-								<c:if test="${pageNum < totalPage}">onclick="window.location.href='/admin/changeUserList.do?pageSize=${pageSize}&pageNum=${pageNum + 1}'"</c:if>>&gt;</button>
+								<c:if test="${pageNum < totalPage}">onclick="window.location.href='/admin/changeUserList.do?itemsPerPage=${itemsPerPage}&currentPage=${currentPage + 1}'"</c:if>>&gt;</button>
 						</div>
 					</div>
 				</div>

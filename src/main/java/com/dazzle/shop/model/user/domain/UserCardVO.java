@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class UserBoardVO {
+public class UserCardVO {
 	// users
 	private int user_num;
 	private String user_name;
@@ -15,27 +15,18 @@ public class UserBoardVO {
 	private int user_info_num;
 	private String user_phone;
 	private String user_rank;
-	private int user_point;
 	private Date user_join_date;
 	private Date user_update_date;
 	private Date user_delete_date;
 	private int is_black_list;
-	// board
-	private int pno;
-	private String title;
-	private String cate;
-	private Date posttime;
-	private String content;
-	// reply
-	private int rno;
-	private String rcontent;
+	// delivery
+	private int delivery_num;
+	private Date delivery_date;
+	private String delivery_company;
+	private int invoice_num;
 
-	// 1차 추가
-	private Date startDate;
-	private Date endDate;
-	private int currentPage;
-	private int itemsPerPage;
-
-	// 2차 추가
-	private int reply_count;
+	// 추가
+	private String rank_letter;
+	private String delivering_items;
+	private int user_total_point;
 }

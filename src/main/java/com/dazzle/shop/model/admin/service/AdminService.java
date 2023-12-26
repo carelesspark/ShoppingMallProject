@@ -26,7 +26,7 @@ public interface AdminService {
 
 	// 회원 관리
 	// 회원 목록
-	List<AdminUserVO> getUserList(int pageSize, int pageNum);
+	List<AdminUserVO> getUserList(int currentPage, int usersPerPage);
 
 	// 블랙리스트 목록
 	List<AdminUserVO> getBlackist(int pageSize, int pageNum);

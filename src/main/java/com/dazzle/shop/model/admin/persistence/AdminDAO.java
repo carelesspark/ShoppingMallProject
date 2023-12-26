@@ -17,11 +17,15 @@ public class AdminDAO {
 	@Autowired
 	private JdbcTemplate template;
 
-	public final String USER_LIST = "WITH blacklist AS ( SELECT ROW_NUMBER() OVER (ORDER BY ui.user_join_date DESC) AS list_num, "
+	public final String USER_LIST2 = "WITH blacklist AS ( SELECT ROW_NUMBER() OVER (ORDER BY ui.user_join_date DESC) AS list_num, "
 			+ "u.user_name, u.login_type, ui.user_rank, ui.is_black_list, ui.user_join_date, ui.user_delete_date "
 			+ "FROM users u JOIN user_info ui ON u.user_num = ui.user_num WHERE u.is_admin != 1) "
 			+ "SELECT list_num, user_name, login_type, user_rank, is_black_list, user_join_date, user_delete_date, "
 			+ "CEIL(list_num / ?) AS page_num FROM blacklist WHERE CEIL(list_num / ?) = ? ORDER BY list_num";
+
+	// 최근 가입한 유저 기준으로 (현재 페이지 - 1) * 페이지당 보여지는 유저 수, 페이지당 보여지는 유저 수
+	public final String USER_LIST = "SELECT u.user_name, u.login_type, ui.user_rank, ui.is_black_list, ui.user_join_date, ui.user_delete_date "
+			+ "FROM users u JOIN user_info ui ON u.user_num = ui.user_num WHERE u.is_admin = 0 ORDER BY ui.user_join_date DESC LIMIT ?, ?";
 
 	public final String BLACKLIST = "WITH userlist AS ( SELECT ROW_NUMBER() OVER (ORDER BY ui.user_join_date DESC) AS list_num, "
 			+ "u.user_name, u.login_type, ui.user_rank, ui.user_join_date, ui.user_delete_date "
@@ -73,8 +77,20 @@ public class AdminDAO {
 		return template.query(sql, rowMapper);
 	}
 
+	// 최근 가입한 유저 기준으로 (현재 페이지 - 1) * 페이지당 보여지는 유저 수, 페이지당 보여지는 유저 수
+	public List<AdminUserVO> getUserList(int currentPage, int usersPerPage) {
+		int offset = (currentPage - 1) * usersPerPage;
+		int limit = usersPerPage;
+
+		try {
+			return template.query(USER_LIST, new Object[] { offset, limit }, new UserListRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return Collections.emptyList();
+		}
+	}
+
 	// 유저 리스트 반환
-	public List<AdminUserVO> getUserList(int pageSize, int pageNum) {
+	public List<AdminUserVO> getUserList2(int pageSize, int pageNum) {
 
 		try {
 			return template.query(USER_LIST, new Object[] { pageSize, pageSize, pageNum }, new AdminUserRowMapper());
@@ -87,7 +103,8 @@ public class AdminDAO {
 	public List<AdminUserVO> getBlackist(int pageSize, int pageNum) {
 
 		try {
-			return template.query(BLACKLIST, new Object[] { pageSize, pageSize, pageNum }, new AdminBlacklistRowMapper());
+			return template.query(BLACKLIST, new Object[] { pageSize, pageSize, pageNum },
+					new AdminBlacklistRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return Collections.emptyList();
 		}
