@@ -10,6 +10,7 @@ body {
 	width: 1080px;
 	margin: 0 auto 80px auto;
 	display: grid;
+	margin-top: 50px;
 }
 
 /* card */
@@ -83,6 +84,9 @@ body {
 }
 
 #cc-cc, #cc-dc, #cc-pc {
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: right;
 	font-size: 14px;
 }
 

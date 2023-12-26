@@ -240,9 +240,9 @@ public class OrderDAO {
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
 			+ " WHERE pc.product_code = ?";
 	
-	private final String USER_POINT = "SELECT user_point FROM user_info where user_num = ?";
+	private final String USER_POINT = "SELECT points FROM point where user_num = ?";
 
-	private final String PRODUCT_ORDER_CART = "SELECT pimg.main_img, (p.product_price * c.amount) AS total_price, c.amount, p.product_name, pco.color_name, ps.size_name, ui.user_point"
+	private final String PRODUCT_ORDER_CART = "SELECT pimg.main_img, (p.product_price * c.amount) AS total_price, c.amount, p.product_name, pco.color_name, ps.size_name"
 			+ " FROM cart c" + " JOIN users u ON u.user_num = c.user_num"
 			+ " JOIN user_info ui ON ui.user_num = u.user_num"
 			+ " JOIN product_code pc ON pc.product_code = c.product_code"
@@ -276,7 +276,7 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE od.order_detail_num = ?";
 
-	private final String ORDER_REFUND_REQ = "INSERT INTO product_refund_or_change VALUES(DEFAULT, NOW(), '취소/환불 요청 중', ?, ?, ?, ?, ?, ?)";
+	private final String ORDER_REFUND_REQ = "INSERT INTO product_refund_or_change VALUES(DEFAULT, ?, NOW(), ?, ?, ?, ?, ?, DEFAULT, DEFAULT)";
 	private final String CHANGE_PRODUCT_STATE = "UPDATE order_detail SET product_state = '취소/환불 요청 중' WHERE order_detail_num = ?";
 
 	private final String PRODUCT_CHANGE = "SELECT o.order_num, p.product_name, o.recipient, o.phone_num, o.address, o.detail_address, od.amount, od.order_detail_num"
@@ -286,8 +286,8 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE od.order_detail_num = ?";
 
-	private final String PRODUCT_CHANGE_REQ = "INSERT INTO product_refund_or_change VALUES(DEFAULT, NOW(), '교환 요청 중', ?, ?, ?, ?, ?, ?)";
-	private final String CHANGE_PRODUCT_STATE2 = "UPDATE order_detail SET product_state = '상품 교환 중' WHERE order_detail_num = ?";
+	private final String PRODUCT_CHANGE_REQ = "INSERT INTO product_refund_or_change VALUES(DEFAULT, ?, NOW(), ?, ?, ?, ?, ?, DEFAULT, DEFAULT)";
+	private final String CHANGE_PRODUCT_STATE2 = "UPDATE order_detail SET product_state = '교환 요청 중' WHERE order_detail_num = ?";
 	
 	private final String ORDER_SUCC_INFO = "SELECT order_num, order_date, address, detail_address, postal_num, delivery_price, "
 			+ "recipient, request, payment, phone_num FROM orders WHERE order_num = ?";
@@ -403,7 +403,7 @@ public class OrderDAO {
 		}
 	}
 
-	public OrderVO getProductOrder(String productCode, int amount) {
+	public OrderVO getProductOrder(int productCode, int amount) {
 		try {
 			System.out.println("getProductOrder()");
 			Object[] args = { amount, amount, productCode };
@@ -477,8 +477,8 @@ public class OrderDAO {
 
 		System.out.println("insertOrderRefund()");
 
-		jdbcTemplate.update(ORDER_REFUND_REQ, vo.getRefund_or_change_reason(), vo.getReason_detail(), vo.getAmount(),
-				vo.getBank(), vo.getAccount_num(), vo.getOrder_detail_num());
+		jdbcTemplate.update(ORDER_REFUND_REQ, vo.getOrder_detail_num(), vo.getRefund_or_change_reason(), vo.getReason_detail(), vo.getAmount(),
+				vo.getBank(), vo.getAccount_num());
 		return;
 	}
 
@@ -502,8 +502,8 @@ public class OrderDAO {
 
 		System.out.println("insertProductChange()");
 
-		jdbcTemplate.update(PRODUCT_CHANGE_REQ, vo.getRefund_or_change_reason(), vo.getReason_detail(), vo.getAmount(),
-				vo.getBank(), vo.getAccount_num(), vo.getOrder_detail_num());
+		jdbcTemplate.update(PRODUCT_CHANGE_REQ, vo.getOrder_detail_num(), vo.getRefund_or_change_reason(), vo.getReason_detail(), vo.getAmount(),
+				vo.getBank(), vo.getAccount_num());
 		return;
 	}
 

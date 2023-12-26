@@ -13,7 +13,7 @@ public class ProductOrderRowMapper implements RowMapper<OrderVO>{
 	public OrderVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
 		OrderVO productOrderList = new OrderVO();
-		productOrderList.setProduct_code(rs.getString("product_code"));
+		productOrderList.setProduct_code(rs.getInt("product_code"));
 		productOrderList.setMain_img(rs.getString("main_img"));
 		productOrderList.setAmountMultiPrice(rs.getInt("total_price"));
 		productOrderList.setAmount(rs.getInt("amount"));

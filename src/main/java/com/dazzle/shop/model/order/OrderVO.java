@@ -32,8 +32,8 @@ public class OrderVO {
 	private int amount;
 	private List<Integer> amount_list;
 	private int user_num;
-	private String product_code;
-	private List<String> product_code_list;
+	private int product_code;
+	private List<Integer> product_code_list;
 	private int user_point;
 	private String main_img;
 	private int amountMultiPrice;
