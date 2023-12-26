@@ -7,88 +7,17 @@
 <meta charset="UTF-8">
 <title>주문 환불/교환 요청 조회 페이지(관리자)</title>
 <link href="../resources/css/order/orderRefundOrChange.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
-	<div id="main-container">
-		<div id="user-explanation">
-			<div id="user-explanation-grid">
-				<div>
-					<div id="user-explanation-rank-container">
-						<p>M</p>
-					</div>
-				</div>
-				<div id="user-explanation-1-container">
-					<div id="user-explanation-name-container">
-						<p>관리자</p>
-					</div>
-					<div id="user-explanation-name-rank-container">
-						<p>Manager</p>
-					</div>
-				</div>
-				<div id="user-explanation-2-container">
-					<div>
-						<p>월매출</p>
-					</div>
-					<div>
-						<p>(1일~현재 매출합)원</p>
-					</div>
-				</div>
-				<div id="user-explanation-3-container">
-					<div>
-						<p>주문 현황</p>
-					</div>
-					<div>
-						<a href=""><p>클릭</p></a>
-					</div>
-				</div>
-				<div id="user-explanation-4-container">
-					<div>
-						<p>상품 현황</p>
-					</div>
-					<div>
-						<a href=""><p>클릭</p></a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="menu-container">
-			<section>
-				<div id="menu-user-container" class="menu-section">
-					<p class="menu-section-name">회원 정보</p>
-					<a href="" class="menu-section-anchor"><p
-							class="menu-section-name-detail">회원 목록</p></a> <a href=""
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">블랙리스트 목록</p></a>
-				</div>
-				<div id="menu-product-container" class="menu-section">
-					<p class="menu-section-name">상품 관리</p>
-					<a href="" class="menu-section-anchor"><p
-							class="menu-section-name-detail">상품 목록</p></a> <a href=""
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">상품 추가</p></a> <a href=""
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">상품 수정</p></a> <a href=""
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">상품 삭제</p></a>
-				</div>
-				<div id="menu-order-container" class="menu-section">
-					<p class="menu-section-name">주문 관리</p>
-					<a href="/order/orderListAdmin.jsp" class="menu-section-anchor"><p
-							class="menu-section-name-detail">주문 목록</p></a> <a href="/order/orderRefundOrChange.jsp"
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">반품 및 환불 목록</p></a> <a href=""
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">Q&A 목록</p></a>
-				</div>
-				<div id="menu-myinfo-container" class="menu-section">
-					<p class="menu-section-name">나의 정보</p>
-					<a href="" class="menu-section-anchor"><p
-							class="menu-section-name-detail">정보 변경</p></a>
-				</div>
-			</section>
+	<div id="m">
+		<%@ include file="../user/user_card.jsp"%>
+		<div id="mc">
+			<%@ include file="../user/user_side.jsp"%>
 			<main>
 				<div id="admin_request_list">
 					<div id="request_list_title">

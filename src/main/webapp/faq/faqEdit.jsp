@@ -11,6 +11,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link href="${pageContext.request.contextPath}/resources/css/faq/faqAddEdit.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -26,8 +28,21 @@
     </script>
 	</head>
 <body>
-    <%@ include file="../header.jsp"%>
-       <div id="main-container">
+   <%@ include file="../header.jsp"%>
+	<div id="m">
+		<c:choose>
+		    <c:when test="${sessionScope.is_admin == 1}">
+		        <%@ include file="../admin/admin_card.jsp"%>
+				<div id="mc">
+					<%@ include file="../admin/admin_side.jsp"%>
+		    </c:when>
+		    <c:otherwise>
+		        <%@ include file="../user/user_card.jsp"%>
+		        <div id="mc">
+		            <%@ include file="../user/user_side.jsp"%>
+		    </c:otherwise>
+		</c:choose>
+	<main>
 			<div id ="faq">
 			    <div id="faq_title">
 			       	<h2>FAQ 수정하기</h2>
@@ -83,6 +98,8 @@
 				</form>
 			</div>
 			
+        </main>
+        </div>
         </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   	<%@ include file="../footer.jsp"%>
