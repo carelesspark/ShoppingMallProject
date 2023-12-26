@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	font-size: 18px;
+	color: #191919;
+}
+
+#mc {
+	width: 480px;
+	margin: 0 auto 300px auto;
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: center;
+}
+
+#mch {
+	width: 480px;
+	height: 60px;
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 40px;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+#mcp {
+	margin-bottom: 20px;
+	font-size: 18px;
+}
+
+/*여기서부터 폼*/
+#mcf {
+	display: grid;
+	grid-template-columns: auto;
+}
+
+#mcf input {
+	box-sizing: border-box;
+	width: 480px;
+	height: 60px;
+	background-color: #f8f8f8;
+	border: 0;
+	border-bottom: 1px solid #d4d4d4;
+	font-size: 18px;
+	color: #888888;
+	margin-bottom: 30px;
+}
+
+#mcf button {
+	box-sizing: border-box;
+	height: 22px;
+	border: 1px solid #d4d4d4;
+	background-color: #f8f8f8;
+	font-size: 14px;
+}
+
+/*아이디*/
+#mcf #mcf-id {
+	margin-bottom: 5px;
+}
+
+/*아이디 밑*/
+#mcf #id-dupl {
+	display: grid;
+	grid-template-columns: auto 30px 80px;
+	row-gap: 10px;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+#mcf #id-dupl-p {
+	font-size: 14px;
+	margin: 0;
+}
+
+/*패스워드*/
+#mcf #mcf-p1 {
+	margin-bottom: 5px;
+}
+
+#mcf #pwd-check {
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+#mcf #pwd-dupl {
+	display: none;
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+/*이메일*/
+#mcf #mcf-e {
+	margin-bottom: 5px;
+}
+
+#mcf #email-dupl {
+	display: grid;
+	grid-template-columns: 30px 80px;
+	row-gap: 10px;
+	justify-content: right;
+	align-items: center;
+	margin-bottom: 10px;
+	align-items: center;
+}
+
+/*약관*/
+#mcf-cb {
+	display: grid;
+	grid-template-columns: 30px auto;
+	row-gap: 10px;
+	justify-content: left;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+#mcf input[type="checkbox"] {
+	width: 22px;
+	height: 22px;
+	appearance: none;
+	border: 1px solid #191919;
+	border-radius: 50%;
+	margin: 0;
+}
+
+#mcf input[type="checkbox"]:checked {
+	background-color: #191919;
+}
+
+#mcf-cb p {
+	margin: 0;
+}
+
+#mcf #mcf-cb-check {
+	font-size: 14px;
+	color: #e31100;
+	margin-bottom: 15px;
+}
+
+#mcf input[type="submit"] {
+	background-color: #191919;
+	color: #f8f8f8;
+	margin-bottom: 20px;
+}

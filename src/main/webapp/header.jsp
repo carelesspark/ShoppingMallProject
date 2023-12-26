@@ -18,7 +18,7 @@
 <header>
 	<nav class="navbar navbar-expand-lg">
 		<div class="container">
-			<a class="navbar-brand" href="#">DAZZLE</a>
+			<a class="navbar-brand" href="/main.do">DAZZLE</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
 				aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -28,19 +28,27 @@
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">HOME</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">TOP</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">BOTTOM</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">OUTER</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">SHOES</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">ETC</a></li>
+						aria-current="page" href="/main.do">HOME</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/category_products.do?category=1">TOP</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/category_products.do?category=2">BOTTOM</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/category_products.do?category=3">OUTER</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/category_products.do?category=4">SHOES</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/category_products.do?category=5">ETC</a></li>
 				</ul>
 
 				<ul class="navbar-nav gap-2">
-					<li class="nav-item"><a class="nav-link" href="#">CART</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">MY PAGE</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">JOIN</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">LOGIN</a></li>
+					<li class="nav-item"><a class="nav-link" href="/cart.do?user_num=${sessionScope.user_num}">CART</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/user/orderList.do">MY PAGE</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/sign/goRegister.do">JOIN</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/sign/goLogin.do">LOGIN</a></li>
 				</ul>
 
 				<form class="d-flex mt-3">

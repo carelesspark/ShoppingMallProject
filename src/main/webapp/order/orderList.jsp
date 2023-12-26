@@ -11,7 +11,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<header>임시 헤더</header>
+	<%@ include file="../header.jsp"%>
 	<div id="main-container">
 		<div id="user-explanation">
 			<div id="user-explanation-grid">
@@ -126,32 +126,30 @@
 								</div>
 								<div id="order_list_section_div2">
 									<h2>3 건</h2>
-								</div>
+								</div>	
 							</div>
 						</div>
 					</div>
 					<div id="order_list_second_title">
 						<h3>000님 주문 목록 조회</h3>
 					</div>
+					
 					<div id="order_list_date_buttons">
 						<div>
-							<button type="button" class="btn btn-dark" id="button_3">최근
-								3개월</button>
+							<button type="button" class="btn btn-dark" id="button_0" onclick="location.href='/orderListDate.do?user_num=${orderList.user_num}'">전체</button>
 						</div>
 						<div>
-							<button type="button" class="btn btn-dark" id="button_6">최근
-								6개월</button>
+							<button type="button" class="btn btn-dark" id="button_3" onclick="location.href='/orderListDate.do?user_num=${1}&date=${3}'">최근 3개월</button>
 						</div>
 						<div>
-							<button type="button" class="btn btn-dark" id="button_1">최근
-								1년</button>
+							<button type="button" class="btn btn-dark" id="button_6" onclick="location.href='/orderListDate.do?user_num=${1}&date=${6}'">최근 6개월</button>
 						</div>
 						<div>
-							<button type="button" class="btn btn-dark" id="button_2022">2022년</button>
+							<button type="button" class="btn btn-dark" id="button_1" onclick="location.href='/orderListDate.do?user_num=${1}&date=${12}'">최근 1년</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-dark"
-								id="button_before_2021">~2021년</button>
+								id="button_before_2022">~2022년</button>
 						</div>
 						<div id="search_box">
 							<input type="text" placeholder="주문한 상품의 이름을 검색해보세요!"
@@ -184,10 +182,10 @@
 								<td>${order.product_price}원</td>
 								<td id="order_table_buttons">
 									<div id="order_table_div_button">
-										<a href="/orderInfo.do?order_num=${order.order_num}">> 상세 조회</a>
+										<a href="/orderInfo.do?order_num=${order.order_num}">> 상세조회</a>
 									</div>
 									<div id="order_table_div_button">
-										<a href="#">> 판매자 문의</a>
+										<a href="#">> 판매자문의</a>
 									</div>
 								</td>
 							</tr>
@@ -208,6 +206,6 @@
 			</main>
 		</div>
 	</div>
-	<footer>임시 푸터</footer>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>

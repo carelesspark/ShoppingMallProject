@@ -1,0 +1,238 @@
+@charset "UTF-8";
+
+/* main div */
+#md {
+	display: grid;
+	grid-template-rows: auto auto auto;
+}
+
+/* 메인 제목 */
+#mtd {
+	box-sizing: border-box;
+	font-size: 24px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #191919;
+	margin-bottom: 20px;
+}
+
+/* 조회기간 */
+#lr {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: 300px auto;
+	align-items: center;
+	font-size: 14px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #191919;
+	margin-bottom: 20px;
+}
+
+#lrb {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: 60px auto auto auto;
+	align-items: center;
+}
+
+#lrcf {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#lrcfc {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: auto 20px auto;
+	text-align: center;
+}
+
+/* 리스트 헤더 */
+/* #mh */
+
+/* 리스트 */
+#ml {
+	min-height: 400px;
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: auto;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #f1f1f1;
+	margin-bottom: 20px;
+}
+/* 리스트 없을 때 */
+#noList {
+	display: grid;
+	justify-content: center;
+	align-items: center;
+}
+
+/* 클래스 사용 구간 */
+/* c: custom or class */
+/* o: order */
+/* l: list */
+/* i: item */
+/* dt: date */
+/* b: box */
+/* m: main */
+/* n: name */
+/* bt: button */
+/* d: delivery */
+/* p: product */
+/* pp: product price */
+/* bb: button box */
+.cob {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: auto;
+	border: 1px solid #d4d4d4;
+	padding: 20px 20px 0 20px;
+	margin-bottom: 20px;
+}
+
+.codtb {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: auto auto;
+	justify-content: left;
+	align-items: center;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #d4d4d4;
+	margin-bottom: 10px;
+}
+
+.clb {
+	display: grid;
+	grid-template-columns: auto;
+}
+
+.clib {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+	justify-content: space-between;
+	border: 1px solid #d4d4d4;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.clm {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: auto;
+	align-items: stretch;
+	text-align: center;
+	border-right: 1px solid #d4d4d4;
+}
+
+.cld {
+	display: grid;
+	grid-template-columns: auto 20px auto;
+	justify-content: start;
+}
+
+/* 제품 정보 */
+.cpb {
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: start;
+}
+
+.cpn {
+	display: grid;
+	grid-template-columns: auto 30px auto 30px auto;
+}
+
+.cpp {
+	display: grid;
+	grid-template-columns: auto 20px auto 20px;
+	justify-content: start;
+}
+
+.cbb {
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: end;
+	align-items: center;
+}
+
+.cbb1 {
+	display: grid;
+	justify-content: end;
+}
+
+.cbb2 {
+	display: grid;
+	justify-content: end;
+	margin: 10px 0;
+}
+
+.cbb3 {
+	display: grid;
+	justify-content: end;
+}
+
+.cbb button {
+	width: 120px;
+}
+
+#order_list_section {
+	box-sizing: border-box;
+	height: 150px;
+	border-top: 1px solid #C3C3C3;
+	border-bottom: 1px solid #C3C3C3;
+	margin-bottom: 30px;
+}
+
+#order_list_section_grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	width: 840px;
+	height: 150px;
+}
+
+#order_list_section1 {
+	border-right: 1px solid #C3C3C3;
+	display: grid;
+	grid-template-columns: 100px 110px;
+	width: 210px;
+	height: 150px;
+}
+
+#order_list_section2 {
+	border-right: 1px solid #C3C3C3;
+	display: grid;
+	grid-template-columns: 100px 110px;
+	width: 210px;
+	height: 150px;
+}
+
+#order_list_section3 {
+	border-right: 1px solid #C3C3C3;
+	display: grid;
+	grid-template-columns: 80px 130px;
+	width: 210px;
+	height: 150px;
+}
+
+#order_list_section4 {
+	display: grid;
+	grid-template-columns: 80px 130px;
+	width: 210px;
+	height: 150px;
+}
+
+#order_list_section_div1 {
+	padding-left: 10px;
+	padding-top: 10px;
+	font-size: 11pt;
+	font-weight: bold;
+}
+
+#order_list_section_div2 {
+	text-align: right;
+	padding-top: 90px;
+	padding-right: 20px;
+}

@@ -18,6 +18,7 @@ public class OrderListRowMapper implements RowMapper<OrderVO>{
 		orderList.setOrder_date(rs.getTimestamp("order_date"));
 		orderList.setProduct_name(rs.getString("product_name"));
 		orderList.setProduct_price(rs.getInt("product_price"));
+		orderList.setUser_num(rs.getInt("user_num"));
 		
 		return orderList;
 	}

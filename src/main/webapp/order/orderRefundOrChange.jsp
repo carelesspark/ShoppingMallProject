@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<header>임시 헤더</header>
+	<%@ include file="../header.jsp"%>
 	<div id="main-container">
 		<div id="user-explanation">
 			<div id="user-explanation-grid">
@@ -75,8 +76,8 @@
 				</div>
 				<div id="menu-order-container" class="menu-section">
 					<p class="menu-section-name">주문 관리</p>
-					<a href="" class="menu-section-anchor"><p
-							class="menu-section-name-detail">주문 목록</p></a> <a href=""
+					<a href="/order/orderListAdmin.jsp" class="menu-section-anchor"><p
+							class="menu-section-name-detail">주문 목록</p></a> <a href="/order/orderRefundOrChange.jsp"
 						class="menu-section-anchor"><p
 							class="menu-section-name-detail">반품 및 환불 목록</p></a> <a href=""
 						class="menu-section-anchor"><p
@@ -93,82 +94,32 @@
 					<div id="request_list_title">
 						<h1>주문 환불/교환 요청 조회</h1>
 					</div>
-					<div id="list_classification">
-						<div id="list_classification_grid">
-							<div id="category">
-								<div id="grid1">
-									<p>카테고리</p>
-								</div>
-								<div id="grid2">
-									<select><option value="default">전체</option>
-										<option value="top">상의</option>
-										<option value="bottom">하의</option>
-										<option value="outer">아우터</option>
-										<option value="shoes">신발</option>
-										<option value="etc">기타</option></select>
-								</div>
-							</div>
-							<div id="request_status">
-								<div id="grid1">
-									<p>요청 상태</p>
-								</div>
-								<div id="grid2">
-									<select><option value="default">전체</option>
-										<option value="request_refund">취소/환불 요청</option>
-										<option value="change">교환 요청</option>
-										<option value="refund">취소/환불</option>
-										<option value="changing">교환 중</option>
-										<option value="change_complete">교환 완료</option>
-									</select>
-								</div>
-							</div>
-							<div id="request_date">
-								<div id="grid1">
-									<p>요청 날짜</p>
-								</div>
-								<div>
-									<input type="date" data-placeholder="날짜 선택" required />
-								</div>
-								<div id="wave">
-									<p>~</p>
-								</div>
-								<div>
-									<input type="date" data-placeholder="날짜 선택" required />
-								</div>
-								<div>
-									<div id="button">
-										<button type="button" class="btn btn-outline-secondary"
-											id="date_button">7일</button>
-									</div>
-								</div>
-								<div>
-									<div id="button">
-										<button type="button" class="btn btn-outline-secondary"
-											id="date_button">30일</button>
-									</div>
-								</div>
-								<div>
-									<div id="button">
-										<button type="button" class="btn btn-outline-secondary"
-											id="date_button">3개월</button>
-									</div>
-								</div>
-							</div>
-							<div id="search_num">
-								<div id="grid3">
-									<p>주문 번호 검색</p>
-								</div>
-								<div id="search_box">
-									<input type="text" placeholder="주문 번호 입력"
-										id="search_request_list" />
-								</div>
-							</div>
+					
+					<div id="search">
+						<div>
+							<form method="get" action="orderRefundOrChange.do">
+						    <input type="hidden" name="approve_search" value="1">
+						  	  승인 상태 검색
+						    <select name="approve">
+						        <option value="2" ${approve eq '2' ? 'selected' : ''}>전체</option>
+						        <option value="0" ${approve eq '0' ? 'selected' : ''}>승인 대기중</option>
+						        <option value="1" ${approve eq '1' ? 'selected' : ''}>승인</option>
+						        <option value="-1" ${approve eq '-1' ? 'selected' : ''}>거절</option>
+						    </select>
+						    <button type="submit">검색</button>
+						</form>
+
+						</div>
+						
+						<div>
+							<form method="get" action="orderRefundOrChange.do">
+								상품 이름 검색
+								<input name="product_name" placeholder="상품 이름을 검색하세요.">
+								<button type="submit">검색</button>
+							</form>
 						</div>
 					</div>
-					<div id="search_button">
-						<button type="button" class="btn btn-outline-secondary"
-							id="button1">선택항목 검색</button>
-					</div>
+					
 					<div id="admin_request_list_bottom">
 						<div id="request_list_title2">
 							<p>요청 목록</p>
@@ -178,73 +129,69 @@
 							<table id="request_list_table">
 								<tr id="request_list_table_first_tr">
 									<td>요청일</td>
-									<td>주문 번호</td>
-									<td>상품 이름</td>
+									<td>요청번호</td>
+									<td>주문상세번호</td>
+									<td>상품이름</td>
 									<td>가격</td>
-									<td>요청 상태</td>
-									<td>고객 정보</td>
+									<td>요청수량</td>
+									<td>요청상태</td>
+									<td>고객정보</td>
+									<td>교환/환불</td>
+									<td>승인상태</td>
 									<td></td>
 								</tr>
-								<tr id="request_list_table_other_tr">
-									<td><div id="request_list_table_other_tr_div">2023/12/05</div></td>
-									<td><div id="request_list_table_other_tr_div">12312323</div></td>
-									<td><div id="request_list_table_other_tr_div">000000옷</div></td>
-									<td><div id="request_list_table_other_tr_div">59,000원</div></td>
-									<td><div id="request_list_table_other_tr_div">취소/환불
-											요청</div></td>
-									<td><div id="request_list_table_other_tr_div">박종혁</div></td>
-									<td><div id="table_button">
-											<div>
+								
+								<c:forEach items="${orderList}" var="order">
+									<tr id="order_list_table_other_tr">
+											<td><div id="order_list_table_other_tr_div">${order.request_date }</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.refund_change_num }</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.order_detail_num }</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.product_name}</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.product_price }</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.refund_change_amount }</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.product_state }</div></td>
+											<td><div id="order_list_table_other_tr_div">${order.user_name }</div></td>
+											<td><div id="order_list_table_other_tr_div">
+													<c:if test="${order.change == 1}">
+													    교환
+													</c:if>
+													<c:if test="${order.cancel == 1}">
+													    환불
+													</c:if>
+												</div></td>
+											<td>
+												<div id="order_list_table_other_tr_div">
+													<c:choose>
+													    <c:when test="${order.approve == 1}">
+													        승인
+													    </c:when>
+													    <c:when test="${order.approve == -1}">
+													       거절
+													    </c:when>
+													    <c:when test="${order.approve == 0}">
+													       승인 대기중
+													    </c:when>
+													</c:choose>
+												</div>
+											</td>
+											<td>
+												<div id="table_button">
 												<button type="button" class="btn btn-outline-secondary"
-													id="button2">상세 확인</button>
-											</div>
-										</div></td>
-								</tr>
-								<tr id="request_list_table_other_tr">
-									<td><div id="request_list_table_other_tr_div">2023/11/17</div></td>
-									<td><div id="request_list_table_other_tr_div">21323142</div></td>
-									<td><div id="request_list_table_other_tr_div">000000바지</div></td>
-									<td><div id="request_list_table_other_tr_div">49,000원</div></td>
-									<td><div id="request_list_table_other_tr_div">교환 중</div></td>
-									<td><div id="request_list_table_other_tr_div">송민수</div></td>
-									<td><div id="table_button">
-											<div>
-												<button type="button" class="btn btn-outline-secondary"
-													id="button2">상세 확인</button>
-											</div>
-										</div></td>
-								</tr>
-								<tr id="request_list_table_other_tr">
-									<td><div id="request_list_table_other_tr_div">2023/10/17</div></td>
-									<td><div id="request_list_table_other_tr_div">2252222</div></td>
-									<td><div id="request_list_table_other_tr_div">000000신발</div></td>
-									<td><div id="request_list_table_other_tr_div">79,000원</div></td>
-									<td><div id="request_list_table_other_tr_div">교환 완료</div></td>
-									<td><div id="request_list_table_other_tr_div">안병현</div></td>
-									<td><div id="table_button">
-											<div>
-												<button type="button" class="btn btn-outline-secondary"
-													id="button2">상세 확인</button>
-											</div>
-										</div></td>
-								</tr>
+													id="button2" onclick="location.href='/orderRefundInfo.do?refund_change_num=${order.refund_change_num}'">요청 정보</button>
+												</div>
+										</td>
+									</tr>
+								</c:forEach>
+								
+							
 							</table>
 						</div>
 					</div>
-					<div id="bottom_buttons">
-						<div id="bottom_button_div1">
-							<button type="button" class="btn btn-outline-secondary"
-								id="button3">이전</button>
-						</div>
-						<div>
-							<button type="button" class="btn btn-outline-secondary"
-								id="button4">다음</button>
-						</div>
-					</div>
+					
 				</div>
 			</main>
 		</div>
 	</div>
-	<footer>임시 푸터</footer>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>

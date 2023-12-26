@@ -11,24 +11,10 @@ body {
 	margin: 0;
 }
 
-header {
-	width: 100%;
-	height: 50px;
-	background-color: black;
-	margin-bottom: 50px;
-	color: white;
-}
-
 main {
 	flex: 1;
-}
-
-footer {
-	width: 100%;
-	height: 50px;
-	background-color: black;
-	margin-top: 50px;
-	color: white;
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
 
 #main_container {
@@ -51,6 +37,8 @@ footer {
 	border: 1px solid #C3C3C3;
 	margin: 0 auto;
 	border-radius: 10px;
+	overflow: scroll;
+	overflow-x: hidden;
 }
 
 #order_list_grid {
@@ -58,6 +46,7 @@ footer {
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	place-items: center;
 	height: 100px;
+
 }
 
 #order_list_pic {
@@ -400,3 +389,8 @@ footer {
 #order_buttons_div2 {
 	padding-right: 230px;
 }
+
+.readonly {
+    border: none;
+    outline: none;
+  }
