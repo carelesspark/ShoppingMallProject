@@ -20,18 +20,39 @@
 			<%@ include file="./admin_side.jsp"%>
 			<main>
 				<div id="md">
+					<div id="rowNum">
+						<div>현재 페이지 표시 개수: ${itemsPerPage}</div>
+						<div id="rNumChange">
+							<div>변경:</div>
+							<div>
+								<button type="button"
+									onclick="window.location.href='/admin/changeUserList.do?itemsPerPage=20&currentPage=1'">20</button>
+							</div>
+							<div>
+								<button type="button"
+									onclick="window.location.href='/admin/changeUserList.do?itemsPerPage=50&currentPage=1'">50</button>
+							</div>
+							<div>
+								<button type="button"
+									onclick="window.location.href='/admin/changeUserList.do?itemsPerPage=100&currentPage=1'">100</button>
+							</div>
+						</div>
+					</div>
 					<div id="mh">
 						<div>번호</div>
 						<div>이름</div>
 						<div>랭크</div>
-						<div>로그인 타입</div>
+						<div>가입방식</div>
 						<div>블랙리스트</div>
 						<div>가입일</div>
 						<div>탈퇴일</div>
 					</div>
-					<c:forEach var="list" items="${userList}">
-						<div id="ml">
-							<div>${list.list_num}</div>
+					<div id="ml">
+						<c:forEach var="num" begin="${realItemsStartNum}"
+							end="${realItemsStartNum - realItemsPerPage + 1}" step="-1">
+							<div>${num }</div>
+						</c:forEach>
+						<c:forEach var="list" items="${userList}">
 							<div>${list.user_name}</div>
 							<div>${list.user_rank}</div>
 							<div>${list.login_type}</div>
@@ -52,9 +73,19 @@
 									<div>${list.user_delete_date}</div>
 								</c:otherwise>
 							</c:choose>
+						</c:forEach>
+					</div>
+					<div id="pageBtn">
+						<div>
+							<button type="button" id="prevPageBtn"
+								<c:if test="${currentPage > 1}">onclick="window.location.href='/admin/changeUserList.do?itemsPerPage=${itemsPerPage}&currentPage=${currentPage - 1}'"</c:if>>&lt;</button>
 						</div>
-					</c:forEach>
-					<div>${userList[0].page_num}페이지</div>
+						<div>${currentPage}/${totalPage}페이지</div>
+						<div>
+							<button type="button" id="nextPageBtn"
+								<c:if test="${pageNum < totalPage}">onclick="window.location.href='/admin/changeUserList.do?itemsPerPage=${itemsPerPage}&currentPage=${currentPage + 1}'"</c:if>>&gt;</button>
+						</div>
+					</div>
 				</div>
 			</main>
 		</div>

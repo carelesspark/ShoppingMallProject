@@ -1,14 +1,15 @@
 package com.dazzle.shop.model.user.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.dazzle.shop.model.user.domain.UserOrdersVO;
-import com.dazzle.shop.model.user.domain.UserReviewVO;
-import com.dazzle.shop.model.user.domain.UserVO;
+import com.dazzle.shop.model.user.domain.*;
 import com.dazzle.shop.model.user.persistence.UserDAO;
+import com.dazzle.shop.model.user.persistence.UserReplyListRowMapper;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -99,5 +100,5 @@ public class UserServiceImpl implements UserService {
 
 		return userDAO.countReplyBetweenDates(user_num, startDate, endDate);
 	}
-
 }
+

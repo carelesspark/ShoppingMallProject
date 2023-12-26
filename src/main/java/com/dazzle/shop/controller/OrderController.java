@@ -21,6 +21,7 @@ import com.dazzle.shop.model.address.AddressService;
 import com.dazzle.shop.model.address.AddressVO;
 import com.dazzle.shop.model.order.OrderService;
 import com.dazzle.shop.model.order.impl.OrderDAO;
+import com.dazzle.shop.model.user.domain.UserCardVO;
 import com.dazzle.shop.model.user.domain.UserOrdersVO;
 import com.dazzle.shop.model.user.domain.UserVO;
 import com.dazzle.shop.model.user.service.UserService;
@@ -69,9 +70,11 @@ public class OrderController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserVO card = userService.getUserCard(user_num);
+		UserCardVO card = userService.getUserCard(user_num);
+		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_point", card.getUser_point());
+		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("delivering_items", card.getDelivering_items());
 		OrderVO orderInfo = orderService.getOrderInfo(vo);
 		model.addAttribute("orderInfo", orderInfo);
 
@@ -98,11 +101,11 @@ public class OrderController {
 		OrderVO product = orderService.getProductOrder(product_code, amount);
 		productOrder.add(product);
 
-		OrderVO userPoint = orderService.getPoint(user_num);
+		UserCardVO card = userService.getUserCard(user_num);
 		AddressVO address = addressService.getBaseAddress(user_num);
 
 		model.addAttribute("user_num", user_num);
-		model.addAttribute("userPoint", userPoint);
+		model.addAttribute("userPoint", card.getUser_total_point());
 		model.addAttribute("productOrder", productOrder);
 		model.addAttribute("address", address);
 		System.out.println(productOrder);
@@ -125,11 +128,11 @@ public class OrderController {
 				productOrder.add(product);
 			}
 		}
-		OrderVO userPoint = orderService.getPoint(user_num);
+		UserCardVO card = userService.getUserCard(user_num);
 		AddressVO address = addressService.getBaseAddress(user_num);
 
 		model.addAttribute("user_num", user_num);
-		model.addAttribute("userPoint", userPoint);
+		model.addAttribute("userPoint", card.getUser_total_point());
 		model.addAttribute("productOrder", productOrder);
 		model.addAttribute("address", address);
 
@@ -180,9 +183,11 @@ public class OrderController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserVO card = userService.getUserCard(user_num);
+		UserCardVO card = userService.getUserCard(user_num);
+		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_point", card.getUser_point());
+		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("delivering_items", card.getDelivering_items());
 		
 		OrderVO orderRefund = orderService.getOrderRefund(vo);
 		model.addAttribute("orderRefund", orderRefund);
@@ -193,8 +198,16 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/insertOrderRefund.do")
-	public String insertOrderRefund(OrderVO vo, Model model) throws Exception {
+	public String insertOrderRefund(HttpServletRequest request, OrderVO vo, Model model) throws Exception {
 		System.out.println("주문 취소/환불 요청");
+		
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+		UserCardVO card = userService.getUserCard(user_num);
+		model.addAttribute("rank_letter", card.getRank_letter());
+		model.addAttribute("user_rank", card.getUser_rank());
+		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("delivering_items", card.getDelivering_items());
 
 		orderService.insertOrderRefund(vo);
 		orderService.updateProduct_state(vo);
@@ -209,11 +222,12 @@ public class OrderController {
 		
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
-
-		UserVO card = userService.getUserCard(user_num);
+		UserCardVO card = userService.getUserCard(user_num);
+		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_point", card.getUser_point());
-
+		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("delivering_items", card.getDelivering_items());
+		
 		OrderVO productChange = orderService.getProductChange(vo);
 		model.addAttribute("productChange", productChange);
 		System.out.println(productChange);

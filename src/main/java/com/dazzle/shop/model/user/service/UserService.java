@@ -1,8 +1,12 @@
 package com.dazzle.shop.model.user.service;
 
+import java.util.Collections;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
+
 import com.dazzle.shop.model.user.domain.*;
+import com.dazzle.shop.model.user.persistence.UserReplyListRowMapper;
 
 public interface UserService {
 

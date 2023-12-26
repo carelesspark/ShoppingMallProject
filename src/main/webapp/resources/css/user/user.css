@@ -84,6 +84,9 @@ body {
 }
 
 #cc-cc, #cc-dc, #cc-pc {
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: right;
 	font-size: 14px;
 }
 

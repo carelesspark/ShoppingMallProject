@@ -7,37 +7,42 @@ import lombok.Data;
 @Data
 public class UserInquiryVO {
 	// users
-	// pk: user_num
 	private int user_num;
 	private String user_name;
 	private String login_type;
 	private int is_admin;
-	// auth_id
-	// pk: id_num
-	private int id_num;
-	private String id;
-	private String pwd;
-	private String user_email;
-	// auth_kakao
-	// pk: id_num
-	private int kakao_num;
-	private String kakao_email;
-	private String refresh_token;
-	// user_info
-	// pk: id_num
-	private int user_info_num;
-	private String user_phone;
-	private String user_rank;
-	private int user_point;
-	private Date user_join_date;
-	private Date user_update_date;
-	private Date user_delete_date;
-	private int is_black_list;
 	// inquiry
-	// pk: inquiry_num
 	private int inquiry_num;
 	private String inquiry_content;
-	private Integer public_set; // Use Integer to represent nullable TINYINT in the database
+	private int public_set;
 	private Date inquiry_date;
+	// inquiry_answer
+	private Date answer_date;
+	private String answer;
+	// product_code
 	private String product_code;
+	// product_size
+	private int size_num;
+	private String size_name;
+	private Integer product_stock;
+	// product_color
+	private int color_num;
+	private String color_name;
+	// product
+	private int product_num;
+	private String product_name;
+	private String product_info;
+	private Date product_date;
+	private int product_sell;
+	private int product_price;
+	private Date modify_date;
+	private Date delete_date;
+	private int registration_status;
+	private int sub_category_num;
+
+	// 1차 추가
+	private Date startDate;
+	private Date endDate;
+	private int currentPage;
+	private int itemsPerPage;
 }
