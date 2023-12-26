@@ -41,7 +41,14 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
+		UserOrdersVO vo = new UserOrdersVO();
+
 		UserCardVO card = userService.getUserCard(user_num);
+		UserOrdersVO orderCount = userService.orderCheck(user_num);
+		if (vo.getSearch_order() == null) {
+			vo.setSearch_order("");
+		}
+		model.addAttribute("orderCount", orderCount);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("user_total_point", card.getUser_total_point());
@@ -56,7 +63,6 @@ public class UserController {
 		model.addAttribute("startDate", sdf.format(startDate));
 		model.addAttribute("endDate", sdf.format(endDate));
 
-		UserOrdersVO vo = new UserOrdersVO();
 		vo.setUser_num(user_num);
 		vo.setStartDate(new java.sql.Date(startDate.getTime()));
 		vo.setEndDate(new java.sql.Date(endDate.getTime()));
@@ -571,12 +577,12 @@ public class UserController {
 		return "user_reply_list.jsp";
 	}
 
-	// 회원정보 변경 - 비밀번호 검증
-	@RequestMapping("/checkInfo.do")
+	// 회원정보 변경 - 비밀번호 검증 페이지로 이동
+	@RequestMapping("/goCheckInfo.do")
 	public String userCheckInfo(HttpServletRequest request, Model model) {
 		System.out.println("UserController: userCheckInfo");
 
-		return "user_change_info.jsp";
+		return "user_check_info.jsp";
 	}
 
 	// 회원정보 변경 - 정보 수정 및 업데이트

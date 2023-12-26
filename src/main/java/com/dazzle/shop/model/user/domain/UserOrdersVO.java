@@ -62,6 +62,15 @@ public class UserOrdersVO {
 	private Date delete_date;
 	private int registration_status;
 	private int sub_category_num;
+
+	// 수정
+	private String main_img;
+	private int total_orders;
+	private int orders_in_preparation;
+	private int orders_in_delivery;
+	private int orders_delivered;
+	private String search_order;
+
 	// product_refund_or_change
 	private int refund_change_num;
 	private Date request_date;
@@ -80,4 +89,5 @@ public class UserOrdersVO {
 	private Date endDate;
 
 	// 2차 추가
+
 }

@@ -53,6 +53,13 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getUserReviewList(vo);
 	}
 
+	// 유저 주문 조회(COUNT)
+	@Override
+	public UserOrdersVO orderCheck(int user_num) {
+		
+		return userDAO.orderCheck(user_num);
+	}
+
 	// 날짜 기준 상품 후기
 	@Override
 	public int countReviewBetweenDates(int user_num, java.sql.Date startDate, java.sql.Date endDate) {
@@ -94,3 +101,4 @@ public class UserServiceImpl implements UserService {
 		return userDAO.countReplyBetweenDates(user_num, startDate, endDate);
 	}
 }
+

@@ -21,6 +21,10 @@ import com.dazzle.shop.model.address.AddressService;
 import com.dazzle.shop.model.address.AddressVO;
 import com.dazzle.shop.model.order.OrderService;
 import com.dazzle.shop.model.order.impl.OrderDAO;
+import com.dazzle.shop.model.user.domain.UserCardVO;
+import com.dazzle.shop.model.user.domain.UserOrdersVO;
+import com.dazzle.shop.model.user.domain.UserVO;
+import com.dazzle.shop.model.user.service.UserService;
 
 @Controller
 @SessionAttributes("order")
@@ -30,46 +34,47 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private AddressService addressService;
+	@Autowired
+	private UserService userService;
 
-	@RequestMapping(value = "/orderList.do")
-	public String getOrderList(OrderVO vo, Model model) throws Exception {
-		System.out.println("글 목록 검색 처리");
-
-		List<OrderVO> orderList = orderService.getOrderList(vo);
-		model.addAttribute("orderList", orderList);
-		System.out.println(orderList);
-
-		return "/order/orderList.jsp";
-	}
-
-	@RequestMapping(value = "/orderListDate.do")
-	public String getOrderList2(OrderVO vo, @RequestParam(name = "date") Integer date, Model model) throws Exception {
-		System.out.println("글 목록 검색 처리");
-		if (date == null) {
-			List<OrderVO> orderList = orderService.getOrderList(vo);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		} else if (date == 3) {
-			List<OrderVO> orderList = orderService.getOrderList2(vo, (int) date);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		} else if (date == 6) {
-			List<OrderVO> orderList = orderService.getOrderList2(vo, (int) date);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		} else if (date == 12) {
-			List<OrderVO> orderList = orderService.getOrderList2(vo, (int) date);
-			model.addAttribute("orderList", orderList);
-			System.out.println(orderList);
-		}
-
-		return "redirect:orderList.doZ";
-	}
+	/*
+	 * @RequestMapping(value = "/orderList.do") public String getOrderList(OrderVO
+	 * vo, Model model) throws Exception { System.out.println("글 목록 검색 처리");
+	 * 
+	 * List<OrderVO> orderList = orderService.getOrderList(vo);
+	 * model.addAttribute("orderList", orderList); System.out.println(orderList);
+	 * 
+	 * return "/user/user_order_list.jsp"; }
+	 * 
+	 * @RequestMapping(value = "/orderListDate.do") public String
+	 * getOrderList2(OrderVO vo, @RequestParam(name = "date") Integer date, Model
+	 * model) throws Exception { System.out.println("글 목록 검색 처리"); if (date == null)
+	 * { List<OrderVO> orderList = orderService.getOrderList(vo);
+	 * model.addAttribute("orderList", orderList); System.out.println(orderList); }
+	 * else if (date == 3) { List<OrderVO> orderList =
+	 * orderService.getOrderList2(vo, (int) date); model.addAttribute("orderList",
+	 * orderList); System.out.println(orderList); } else if (date == 6) {
+	 * List<OrderVO> orderList = orderService.getOrderList2(vo, (int) date);
+	 * model.addAttribute("orderList", orderList); System.out.println(orderList); }
+	 * else if (date == 12) { List<OrderVO> orderList =
+	 * orderService.getOrderList2(vo, (int) date); model.addAttribute("orderList",
+	 * orderList); System.out.println(orderList); }
+	 * 
+	 * return "redirect:orderList.do"; }
+	 */
 
 	@RequestMapping(value = "/orderInfo.do")
-	public String getOrderInfo(OrderVO vo, Model model) throws Exception {
+	public String getOrderInfo(HttpServletRequest request, OrderVO vo, Model model) throws Exception {
 
 		System.out.println("글 상세 조회 처리");
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+
+		UserCardVO card = userService.getUserCard(user_num);
+		model.addAttribute("rank_letter", card.getRank_letter());
+		model.addAttribute("user_rank", card.getUser_rank());
+		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("delivering_items", card.getDelivering_items());
 		OrderVO orderInfo = orderService.getOrderInfo(vo);
 		model.addAttribute("orderInfo", orderInfo);
 
@@ -86,17 +91,21 @@ public class OrderController {
 
 	// 주문 상세 페이지에서 바로 구매할 때,
 	@RequestMapping(value = "/productOrder.do")
-	public String getProductOrder(int user_num, String product_code, int amount, Model model) throws Exception {
+	public String getProductOrder(HttpServletRequest request, int product_code, int amount, Model model) throws Exception {
 		System.out.println("상품 주문 페이지 이동(상품 상세페이지로 부터)");
+		
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+		
 		List<OrderVO> productOrder = new ArrayList();
 		OrderVO product = orderService.getProductOrder(product_code, amount);
 		productOrder.add(product);
 
-		OrderVO userPoint = orderService.getPoint(user_num);
+		UserCardVO card = userService.getUserCard(user_num);
 		AddressVO address = addressService.getBaseAddress(user_num);
 
 		model.addAttribute("user_num", user_num);
-		model.addAttribute("userPoint", userPoint);
+		model.addAttribute("userPoint", card.getUser_total_point());
 		model.addAttribute("productOrder", productOrder);
 		model.addAttribute("address", address);
 		System.out.println(productOrder);
@@ -119,11 +128,11 @@ public class OrderController {
 				productOrder.add(product);
 			}
 		}
-		OrderVO userPoint = orderService.getPoint(user_num);
+		UserCardVO card = userService.getUserCard(user_num);
 		AddressVO address = addressService.getBaseAddress(user_num);
 
 		model.addAttribute("user_num", user_num);
-		model.addAttribute("userPoint", userPoint);
+		model.addAttribute("userPoint", card.getUser_total_point());
 		model.addAttribute("productOrder", productOrder);
 		model.addAttribute("address", address);
 
@@ -168,9 +177,18 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/orderRefund.do")
-	public String getOrderRefund(OrderVO vo, Model model) throws Exception {
+	public String getOrderRefund(HttpServletRequest request, OrderVO vo, Model model) throws Exception {
 		System.out.println("주문 취소/환불 요청 페이지 이동");
 
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+
+		UserCardVO card = userService.getUserCard(user_num);
+		model.addAttribute("rank_letter", card.getRank_letter());
+		model.addAttribute("user_rank", card.getUser_rank());
+		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("delivering_items", card.getDelivering_items());
+		
 		OrderVO orderRefund = orderService.getOrderRefund(vo);
 		model.addAttribute("orderRefund", orderRefund);
 
@@ -180,8 +198,16 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/insertOrderRefund.do")
-	public String insertOrderRefund(OrderVO vo, Model model) throws Exception {
+	public String insertOrderRefund(HttpServletRequest request, OrderVO vo, Model model) throws Exception {
 		System.out.println("주문 취소/환불 요청");
+		
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+		UserCardVO card = userService.getUserCard(user_num);
+		model.addAttribute("rank_letter", card.getRank_letter());
+		model.addAttribute("user_rank", card.getUser_rank());
+		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("delivering_items", card.getDelivering_items());
 
 		orderService.insertOrderRefund(vo);
 		orderService.updateProduct_state(vo);
@@ -191,9 +217,17 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/productChange.do")
-	public String getproductChange(OrderVO vo, Model model) throws Exception {
+	public String getproductChange(HttpServletRequest request, OrderVO vo, Model model) throws Exception {
 		System.out.println("상품 교환 요청 페이지 이동");
-
+		
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+		UserCardVO card = userService.getUserCard(user_num);
+		model.addAttribute("rank_letter", card.getRank_letter());
+		model.addAttribute("user_rank", card.getUser_rank());
+		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("delivering_items", card.getDelivering_items());
+		
 		OrderVO productChange = orderService.getProductChange(vo);
 		model.addAttribute("productChange", productChange);
 		System.out.println(productChange);

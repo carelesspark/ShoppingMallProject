@@ -23,6 +23,42 @@
 					<div id="mt">
 						<div id="mtd">주문/배송 조회</div>
 					</div>
+					<div id="order_list_section">
+						<div id="order_list_section_grid">
+							<div id="order_list_section1">
+								<div id="order_list_section_div1">
+									<p>주문 완료</p>
+								</div>
+								<div id="order_list_section_div2">
+									<h2>${orderCount.total_orders}건</h2>
+								</div>
+							</div>
+							<div id="order_list_section2">
+								<div id="order_list_section_div1">
+									<p>상품 준비 중</p>
+								</div>
+								<div id="order_list_section_div2">
+									<h2>${orderCount.orders_in_preparation}건</h2>
+								</div>
+							</div>
+							<div id="order_list_section3">
+								<div id="order_list_section_div1">
+									<p>배송 중</p>
+								</div>
+								<div id="order_list_section_div2">
+									<h2>${orderCount.orders_in_delivery}건</h2>
+								</div>
+							</div>
+							<div id="order_list_section4">
+								<div id="order_list_section_div1">
+									<p>배송 완료</p>
+								</div>
+								<div id="order_list_section_div2">
+									<h2>${orderCount.orders_delivered}건</h2>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div id="lr">
 						<div id="lrb">
 							<div>조회기간</div>

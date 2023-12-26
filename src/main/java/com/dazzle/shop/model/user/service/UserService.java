@@ -19,6 +19,8 @@ public interface UserService {
 	// 주문/배송 조회
 	List<UserOrdersVO> getUserOrderList(UserOrdersVO vo);
 
+	UserOrdersVO orderCheck(int user_num);
+
 	// 나의 혜택
 	// 포인트 내역
 	List<UserPointVO> getUserPointList(UserPointVO vo);

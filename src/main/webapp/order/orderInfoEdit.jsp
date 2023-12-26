@@ -172,7 +172,6 @@
 									<p>
 										<select><option value="default">진행 상태</option>
 											<option value="prepare">상품 준비 중</option>
-											<option value="start">배송 시작</option>
 											<option value="ing">배송 중</option>
 											<option value="finish">배송 완료</option></select>
 								</div>

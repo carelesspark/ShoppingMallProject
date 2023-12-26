@@ -35,6 +35,22 @@ public class UserDAO {
 			+ "JOIN product p ON pcolor.product_num = p.product_num "
 			+ "WHERE o.user_num = ? AND o.order_date BETWEEN ? AND ? ORDER BY o.order_date DESC";
 
+	private final String ORDER_LIST_SEARCH = "SELECT o.order_date, d.delivery_date, od.product_state, od.order_detail_num,"
+			+ " od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, o.order_num "
+			+ " FROM orders o INNER JOIN delivery d ON o.order_num = d.order_num"
+			+ " INNER JOIN order_detail od ON o.order_num = od.order_num"
+			+ " INNER JOIN product_code pc ON od.product_code = pc.product_code"
+			+ " INNER JOIN product_size ps ON ps.size_num = pc.size_num"
+			+ " INNER JOIN product_color pcolor ON ps.color_num = pcolor.color_num"
+			+ " INNER JOIN product p ON pcolor.product_num = p.product_num"
+			+ " INNER JOIN product_img pimg ON pimg.product_num = p.product_num"
+			+ " WHERE o.user_num = ? AND p.product_name LIKE ? " + " ORDER BY o.order_date";
+
+	private final String ORDER_CHECK = "SELECT" + " (SELECT COUNT(*) FROM orders WHERE user_num = ?) AS total_orders,"
+			+ " (SELECT COUNT(*) FROM orders o INNER JOIN order_detail od ON o.order_num = od.order_num WHERE user_num = ? AND od.product_state = '상품 준비 중') AS orders_in_preparation,"
+			+ " (SELECT COUNT(*) FROM orders o INNER JOIN order_detail od ON o.order_num = od.order_num WHERE user_num = ? AND od.product_state = '배송 중') AS orders_in_delivery,"
+			+ " (SELECT COUNT(*) FROM orders o INNER JOIN order_detail od ON o.order_num = od.order_num WHERE user_num = ? AND od.product_state = '배송 완료') AS orders_delivered";
+
 	// 포인트 내역
 	private final String POINT_LIST = "SELECT o.order_date, o.order_num, po.point_type, po.points, "
 			+ "ps.size_name, pcolor.color_name, p.product_name FROM point po "
@@ -57,6 +73,7 @@ public class UserDAO {
 			+ "JOIN product_size ps ON pc.size_num = ps.size_num JOIN product_color pcolor "
 			+ "ON ps.color_num = pcolor.color_num JOIN product p ON pcolor.product_num = p.product_num "
 			+ "WHERE r.user_num = ? AND r.review_date BETWEEN ? AND ? ORDER BY r.review_date DESC LIMIT ?, ?";
+
 	// 날짜 기준 리뷰 개수
 	private final String COUNT_REVIEW_LIST_BETWEEN_DATES = "SELECT COUNT(*) FROM review r "
 			+ "WHERE r.user_num = ? AND r.review_date BETWEEN ? AND ?";
@@ -89,7 +106,6 @@ public class UserDAO {
 
 	// 유저 카드 내용
 	public UserCardVO getUserCard(int user_num) {
-
 		try {
 			return template.queryForObject(USER_CARD, new Object[] { user_num }, new UserCardRowMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -97,28 +113,45 @@ public class UserDAO {
 		}
 	}
 
-	// 유저 번호와 일치하는 테이블 레코드 수
-	public int getRecords(String tableName, int user_num) {
-		String sql = "SELECT COUNT(*) FROM " + tableName + " WHERE user_num = " + user_num;
+	/*
+	 * 주문/배송 현황(COUNT)
+	 */
 
-		return template.queryForObject(sql, Integer.class);
+	public UserOrdersVO orderCheck(int user_num) {
+		try {
+			System.out.println("orderCheck()");
+			Object[] args = { user_num, user_num, user_num, user_num };
+			return template.queryForObject(ORDER_CHECK, args, new OrderCheckRowMapper());
+
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 	// 나의 쇼핑
 	// 주문/배송 조회
 	public List<UserOrdersVO> getUserOrderList(UserOrdersVO vo) {
 
-		try {
-			return template.query(ORDER_LIST, new Object[] { vo.getUser_num(), vo.getStartDate(), vo.getEndDate() },
-					new UserOrderListRowMapper());
-		} catch (EmptyResultDataAccessException e) {
-			return Collections.emptyList();
+			try {
+				if (vo.getSearch_order().equals("")) {
+				return template.query(ORDER_LIST, new Object[] { vo.getUser_num(), vo.getStartDate(), vo.getEndDate() },
+						new UserOrderListRowMapper());
+				} else {
+					String search_name = "%" + vo.getSearch_order() + "%";
+					return template.query(ORDER_LIST_SEARCH, new Object[] { vo.getUser_num(), search_name },
+							new UserOrderRowMapper());
+				}
+			} catch (EmptyResultDataAccessException e) {
+				return Collections.emptyList();
+			}
 		}
-	}
 
-	// 취소/환불 신청
-	// 교환 신청
-	// 장바구니
+	// 유저 번호와 일치하는 테이블 레코드 수
+	public int getRecords(String tableName, int user_num) {
+		String sql = "SELECT COUNT(*) FROM " + tableName + " WHERE user_num = " + user_num;
+
+		return template.queryForObject(sql, Integer.class);
+	}
 
 	// 나의 혜택
 	// 포인트 내역
