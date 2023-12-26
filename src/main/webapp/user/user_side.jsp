@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script>
+	function openAddressPopup() {
+		window.open('/address.do', '주소 변경', 'width=650, height=1000');
+	}
+</script>
 
 <div id="ms">
 	<div>
@@ -19,6 +24,6 @@
 	<div>
 		<p>나의 정보</p>
 		<a href="/user/checkInfo.do">회원정보 변경</a> <a
-			href="/user/addressList.do">주소지 관리</a>
+			onclick="openAddressPopup()">주소지 관리</a>
 	</div>
 </div>

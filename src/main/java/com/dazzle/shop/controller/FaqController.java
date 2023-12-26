@@ -3,6 +3,9 @@ package com.dazzle.shop.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +14,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dazzle.shop.model.faq.*;
+import com.dazzle.shop.model.user.domain.UserCardVO;
+import com.dazzle.shop.model.user.domain.UserOrdersVO;
+import com.dazzle.shop.model.user.service.UserService;
 @Controller
 public class FaqController {
 	
 	@Autowired
 	private FaqService faqService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping(value="/faq.do")
-	public String getFaqCtgr(Integer sub_ctgr_num,Integer curr_page, Model model){
+	public String getFaqCtgr(HttpSession session,Integer sub_ctgr_num,Integer curr_page, Model model){
 		Integer pageSize = 5;
 		
 		if(curr_page == null) {
@@ -50,14 +59,47 @@ public class FaqController {
 		model.addAttribute("faqSubCtgr", faqSubCtgr);
 		
 		
+		int user_num = 0;
+		if (session.getAttribute("user_num") != null) {
+			user_num = (int) session.getAttribute("user_num");
+			UserOrdersVO vo = new UserOrdersVO();
+	
+			UserCardVO card = userService.getUserCard(user_num);
+			UserOrdersVO orderCount = userService.orderCheck(user_num);
+			if (vo.getSearch_order() == null) {
+				vo.setSearch_order("");
+			}
+			model.addAttribute("orderCount", orderCount);
+			model.addAttribute("rank_letter", card.getRank_letter());
+			model.addAttribute("user_rank", card.getUser_rank());
+			model.addAttribute("user_total_point", card.getUser_total_point());
+			model.addAttribute("delivering_items", card.getDelivering_items());
+		}
 		return "/faq/faq.jsp";
 	}
 	
 	@GetMapping(value="/faqWrite.do")
-	public String getFaqWrite(Model model){
+	public String getFaqWrite(HttpSession session, Model model){
 		List<FaqVO> detailCtgr = faqService.getDetailCtgr();
 		model.addAttribute("detailCtgr", detailCtgr);
 		
+
+		int user_num = 0;
+		if (session.getAttribute("user_num") != null) {
+			user_num = (int) session.getAttribute("user_num");
+			UserOrdersVO vo = new UserOrdersVO();
+	
+			UserCardVO card = userService.getUserCard(user_num);
+			UserOrdersVO orderCount = userService.orderCheck(user_num);
+			if (vo.getSearch_order() == null) {
+				vo.setSearch_order("");
+			}
+			model.addAttribute("orderCount", orderCount);
+			model.addAttribute("rank_letter", card.getRank_letter());
+			model.addAttribute("user_rank", card.getUser_rank());
+			model.addAttribute("user_total_point", card.getUser_total_point());
+			model.addAttribute("delivering_items", card.getDelivering_items());
+		}
 		
 		return "/faq/faqWrite.jsp";
 	}
@@ -70,13 +112,29 @@ public class FaqController {
 	}
 	
 	@GetMapping(value="/faqEdit.do")
-	public String getFaqEdit(FaqVO vo, Model model){
+	public String getFaqEdit(HttpSession session,FaqVO vo, Model model){
 		List<FaqVO> detailCtgr = faqService.getDetailCtgr();
 		model.addAttribute("detailCtgr", detailCtgr);
 		
 		FaqVO faq = faqService.getFaq(vo);
 		model.addAttribute("faq", faq);
-		
+
+		int user_num = 0;
+		if (session.getAttribute("user_num") != null) {
+			user_num = (int) session.getAttribute("user_num");
+			UserOrdersVO userVo = new UserOrdersVO();
+	
+			UserCardVO card = userService.getUserCard(user_num);
+			UserOrdersVO orderCount = userService.orderCheck(user_num);
+			if (userVo.getSearch_order() == null) {
+				userVo.setSearch_order("");
+			}
+			model.addAttribute("orderCount", orderCount);
+			model.addAttribute("rank_letter", card.getRank_letter());
+			model.addAttribute("user_rank", card.getUser_rank());
+			model.addAttribute("user_total_point", card.getUser_total_point());
+			model.addAttribute("delivering_items", card.getDelivering_items());
+		}
 		return "/faq/faqEdit.jsp";
 	}
 	

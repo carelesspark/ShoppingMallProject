@@ -180,7 +180,9 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE od.order_detail_num = ?";
 
-	private final String ORDER_REFUND_REQ = "INSERT INTO product_refund_or_change VALUES(DEFAULT, ?, NOW(), ?, ?, ?, ?, ?, DEFAULT, DEFAULT)";
+	private final String ORDER_REFUND_REQ = 
+			"INSERT INTO product_refund_or_change(order_detail_num, request_date, refund_or_change_reason, reason_detail, refund_change_amount, bank, account_num, cancel )"
+			+ " VALUES(?, NOW(), ?, ?, ?, ?, ?, 1)";
 	private final String CHANGE_PRODUCT_STATE = "UPDATE order_detail SET product_state = '취소/환불 요청 중' WHERE order_detail_num = ?";
 
 	private final String PRODUCT_CHANGE = "SELECT o.order_num, p.product_name, o.recipient, o.phone_num, o.address, o.detail_address, od.amount, od.order_detail_num"
@@ -190,7 +192,10 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE od.order_detail_num = ?";
 
-	private final String PRODUCT_CHANGE_REQ = "INSERT INTO product_refund_or_change VALUES(DEFAULT, ?, NOW(), ?, ?, ?, ?, ?, DEFAULT, DEFAULT, ?, DEFAULT)";
+	private final String PRODUCT_CHANGE_REQ = 
+			"INSERT INTO product_refund_or_change(order_detail_num, request_date, refund_or_change_reason, reason_detail, refund_change_amount, `change` )"
+			+ " VALUES(?, NOW(), ?, ?, ?, 1)";
+  
 	private final String CHANGE_PRODUCT_STATE2 = "UPDATE order_detail SET product_state = '교환 요청 중' WHERE order_detail_num = ?";
 
 	private final String ORDER_SUCC_INFO = "SELECT order_num, order_date, address, detail_address, postal_num, delivery_price, "
@@ -412,8 +417,8 @@ public class OrderDAO {
 
 		System.out.println("insertProductChange()");
 
-		jdbcTemplate.update(PRODUCT_CHANGE_REQ, vo.getOrder_detail_num(), vo.getRefund_or_change_reason(),
-				vo.getReason_detail(), vo.getAmount(), vo.getBank(), vo.getAccount_num(), vo.getResponse_detail());
+		jdbcTemplate.update(PRODUCT_CHANGE_REQ, vo.getOrder_detail_num(), vo.getRefund_or_change_reason(), vo.getReason_detail(), vo.getAmount());
+
 		return;
 	}
 
