@@ -5,31 +5,18 @@ html {
 }
 
 body {
-	height: 100%;
+	height: 1200px;
 	display: flex;
 	flex-direction: column;
 	margin: 0;
 }
 
-header {
-	width: 100%;
-	height: 50px;
-	background-color: black;
-	margin-bottom: 50px;
-	color: white;
-}
+
 
 main {
 	flex: 1;
 }
 
-footer {
-	width: 100%;
-	height: 50px;
-	background-color: black;
-	margin-top: 50px;
-	color: white;
-}
 
 #main-container {
 	width: 1080px;
@@ -214,112 +201,219 @@ section {
 	margin-bottom: 20px;
 }
 
+#main-order-container {
+	box-sizing: border-box;
+	border-bottom: 1px solid black;
+	margin-bottom: 20px;
+}
+
+#order_info_title {
+	font-size: 27px;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+/**/
 main {
 	width: 840px;
 }
 
-#order_info_title {
-	margin-bottom: 20px;
+#main_order_container {
 	border-bottom: 1px solid black;
+}
+
+#order_info_text {
+	box-sizing: border-box;
+	border-bottom: 1px solid black;
+	margin-bottom: 50px;
+	text-align: center;
+	height: 70px;
+}
+
+#order_info_box_title {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	place-items: center;
+	font-size: 13pt;
+	font-weight: bold;
+	height: 30px;
+}
+
+#product_info_title{
+	text-align: center;
+	width: 840px;
+	font-weight: bold;
+}
+
+#product_info_title p {
+	margin: 0;
+}
+
+#product_info_box {
+	box-sizing: border-box;
+	border-top: 1px solid #C3C3C3;
+	border-bottom: 1px solid #C3C3C3;
+	margin-bottom: 50px;
+	width: 840px;
+	height: 180px;
+}
+
+#prdocut_info_box_grid{
+	display: grid;
+	grid-template-columns: 100px 140px 600px;
+	width: 840px;
+	height: 180px;
+	place-items: center;
+}
+
+#shirt {
+	width: 100px;
+	height: 100px;
+}
+
+#product_info_left {
+	border-right: 1px solid #C3C3C3;
+	padding-right: 10px;
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	width: 140px;
+	height: 180px;
+	text-align: right;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#product_info_left p {
+	padding-top: 3px;
+}
+
+#product_info_right {
+	padding-left: 10px;
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	width: 600px;
+	height: 180px;
+	text-align: left;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#product_info_right p {
+	padding-top: 3px;
 }
 
 #order_info_box {
 	box-sizing: border-box;
-	border: 1px solid #bfbfbf;
-	width: 840px;
-	height: 600px;
-	margin: 0 auto;
+	border-top: 1px solid #C3C3C3;
+	border-bottom: 1px solid #C3C3C3;
 	margin-bottom: 20px;
+	text-align: center;
+	height: 260px;
 }
 
-#info_box_grid {
+#order_info_box_grid {
 	display: grid;
-	grid-template-columns: 340px 100px 400px;
-	height: 600px;
-}
-
-#order_pic{
-	 text-align: center;
-	 padding-top: 150px;
-	 border-right: 1px solid #bfbfbf;
-}
-
-#pic {
-	width: 240px;
-	height: 300px;
-}
-
-#info_box_middle_grid {
-	display: grid;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
-	height: 600px;
-	font-weight: bold;
-	font-size: 10pt;
-	text-align: right;
-	border-right: 1px solid #bfbfbf;
-	background-color: #e2e2e2;
-}
-
-#info_box_middle_grid p {
-	padding-top: 15px;
-	padding-right: 10px;
-}
-
-#border_bottom {
-	border-bottom: 1px solid #bfbfbf;
-}
-
-#info_box_right_grid{
-	display: grid;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
-	height: 600px;
-	font-weight: bold;
-	font-size: 10pt;
-	text-align: left;
-}
-
-#info_box_right_grid p {
-	padding-top: 15px;
-	padding-left: 10px;
-}
-
-#bottom_buttons {
-	padding-top: 20px;
-	border-top: 1px solid black;
-	display: grid;
-	grid-template-columns: 600px 140px 100px;
+	grid-template-columns: 100px 140px 160px 100px 140px 200px;
+	width: 840px;
+	height: 260px;
 	place-items: center;
 }
 
-#bottom_button_div1 {
-	padding-left: 500px;
-}
-
-#bottom_button_div2 {
-	padding-left: 20px;
-	padding-right: 20px;
-}
-
-#button3 {
-	font-size: 12pt;
-	font-weight: bold;
-	color: black;
+#truck {
 	width: 100px;
-	height: 40px;
+	height: 100px;
 }
 
-#button4 {
-	font-size: 12pt;
-	font-weight: bold;
-	color: black;
-	width: 100px;
-	height: 40px;
+#info_box_left1 {
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	width: 140px;
+	height: 260px;
+	border-right: 1px solid #C3C3C3;
 }
 
-#button5 {
-	font-size: 12pt;
+#info_box_left1_div {
+	text-align: right;
+	padding-right: 10px;
+	font-size: 13px;
 	font-weight: bold;
-	color: black;
-	width: 100px;
-	height: 40px;
+}
+
+#info_box_right1 {
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	width: 160px;
+	height: 260px;
+}
+
+#info_box_right1_div {
+	text-align: left;
+	padding-left: 10px;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#info_box_left2 {
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+	width: 140px;
+	height: 260px;
+	border-right: 1px solid #C3C3C3;
+}
+
+#info_box_left2_div {
+	text-align: right;
+	padding-right: 10px;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#info_box_right2 {
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+	width: 200px;
+	height: 260px;
+}
+
+#info_box_right2_div {
+	text-align: left;
+	padding-left: 10px;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#buttons {
+	display: grid;
+	grid-template-columns: 540px 300px;
+}
+
+#button_1 {
+	width: 150px;
+	height: 30px;
+	font-size: 9pt;
+	margin-left: 350px;
+}
+
+#button_2 {
+	width: 130px;
+	height: 30px;
+	font-size: 9pt;
+}
+
+#button_3 {
+	width: 150px;
+	height: 30px;
+	font-size: 9pt;
+}
+
+#question {
+	margin-top: 50px;
+	height: 50px;
+	font-size: 20pt;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+}
+
+#accordion {
+	margin-top: 10px;
 }

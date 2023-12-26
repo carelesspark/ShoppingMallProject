@@ -94,6 +94,12 @@ public class OrderServiceImpl implements OrderService {
 
 		return orderDAO.getOrderInfo(vo);
 	}
+	
+	@Override
+	public OrderVO getOrderDetailInfo(OrderVO vo) {
+
+		return orderDAO.getOrderDetailInfo(vo);
+	}
 
 	@Override
 	public List<OrderVO> getOrderList(OrderVO vo) {
@@ -109,5 +115,55 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public OrderVO getOrderSuccInfo(OrderVO vo) {
 		return orderDAO.getOrderSuccInfo(vo);
+	}
+	
+	@Override
+	public void updateOrderState(OrderVO vo) {
+		
+		orderDAO.updateOrderState(vo);	
+	}
+	
+	@Override
+	public void updateOrderDelv(OrderVO vo) {
+		
+		orderDAO.updateOrderDelv(vo);	
+	}
+	
+	@Override
+	public OrderVO getRefundInfo(OrderVO vo) {
+		return orderDAO.getRefundInfo(vo);
+	}
+	@Override
+	public void approveRequest(OrderVO vo) {
+		orderDAO.approveRequest(vo);
+	}
+	@Override
+	public List<OrderVO> getOrderListAdmin(){
+		return orderDAO.getOrderListAdmin();
+	}
+	@Override
+	public List<OrderVO> getOrderListAdminState(OrderVO vo) {
+		return orderDAO.getOrderListAdminState(vo);
+	}
+	@Override
+	public List<OrderVO> getOrderListAdminPName(OrderVO vo)
+	{
+		return orderDAO.getOrderListAdminPName(vo);
+	}
+	@Override
+	public List<OrderVO> getRefundList(){
+		return orderDAO.getRefundList();
+	}
+	@Override
+	public List<OrderVO> getRefundListPName(OrderVO vo) {
+		return orderDAO.getRefundListPName(vo);
+	}
+	@Override
+	public List<OrderVO> getRefundListApprove(OrderVO vo) {
+		return orderDAO.getRefundListApprove(vo);
+	}
+	@Override
+	public List<OrderVO> getProductState(){
+		return orderDAO.getProductState();
 	}
 }
