@@ -179,7 +179,7 @@
 									<div id="order_payment_div_css">
 										<input type="number" id="order_payment_point_box"
 											value="0" readonly />
-										<input type="number" id="hidden_use_points" name="points" value="${userPoint}" />
+										<input type="hidden" id="hidden_use_points" name="points" value="${userPoint}" />
 									</div>
 									<div id="order_payment_label_css">
 										<label>포인트</label>
@@ -216,8 +216,9 @@
 								<div id="order_payment_actual_price_value">
 									<c:set var="totalPrice" value="${totalPrice + delivery_price}" />
 									<p id="total_price">${totalPrice}원</p>
-									<input type="hidden" id="hidden_total_price"
+									<input type="hidden" id="hidden_total_price" name=""
 										value="${totalPrice }" />
+										<input type="hidden" id="hidden_total_price2" value="${totalPrice}"/>
 								</div>
 								<div id="order_payment_method_value">
 									<div>
@@ -264,6 +265,8 @@
 				const totalPrice_point = totalPrice - point;
 
 				$("#total_price").text(totalPrice_point + "원");
+				$("#hidden_total_price").val(totalPrice_point);
+				console.log(totalPrice_point);
 			});
 			
 			$("#order_payment_point_button2").on("click", function() {
@@ -272,8 +275,11 @@
 				$("#hidden_use_points").val(0);
 				$("#user_point").text(point + "포인트");
 				
+				const totalPrice2 = $("#hidden_total_price2").val();
+				$("#hidden_total_price").val(totalPrice2);
 				const totalPrice = $("#hidden_total_price").val();
-				$("#total_price").text(totalPrice + "원");	
+				$("#total_price").text(totalPrice + "원");
+				
 			});		
 		});
 		

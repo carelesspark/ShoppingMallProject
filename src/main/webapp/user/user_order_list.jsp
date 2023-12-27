@@ -124,7 +124,7 @@
 														<div class="cbb">
 															<div class="cbb1">
 																<button
-																	onclick="window.location.href='/orderInfo.do?order_num=${list.order_num}'">상세 조회</button>
+																	onclick="window.location.href='/orderInfo.do?order_detail_num=${list.order_detail_num}'">상세 조회</button>
 															</div>
 															<div class="cbb2">
 																<button

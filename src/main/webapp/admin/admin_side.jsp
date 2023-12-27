@@ -13,11 +13,7 @@
 	</div>
 	<div>
 		<p>주문 관리</p>
-		<a href="/admin/">주문 목록</a> <a href="/admin/">배송 목록</a> <a
-			href="/admin/">취소/환불 요청 목록</a> <a href="/admin/">반품 요청 목록</a>
-	</div>
-	<div>
-		<p>매출 관리</p>
-		<a href="/admin/">매출 목록</a> <a href="/admin/">가계부</a>
+		<a href="/admin/orderListAdmin.do">주문 목록</a> <a
+			href="/admin/orderRefundOrChange.do">환불/교환 요청 목록</a>
 	</div>
 </div>
