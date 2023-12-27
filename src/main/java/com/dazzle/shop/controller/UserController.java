@@ -102,6 +102,9 @@ public class UserController {
 		vo.setStartDate(startDate);
 		vo.setEndDate(endDate);
 
+		UserOrdersVO orderCount = userService.orderCheck(user_num);
+		model.addAttribute("orderCount", orderCount);
+
 		List<UserOrdersVO> list = userService.getUserOrderList(vo);
 		Map<Integer, List<UserOrdersVO>> map = list.stream().collect(Collectors.groupingBy(UserOrdersVO::getOrder_num));
 		// order_num을 기준으로 내림차순으로 정렬된 TreeMap 생성
@@ -604,43 +607,43 @@ public class UserController {
 		return "user_check_info.jsp";
 	}
 
-	@PostMapping("/checkInfo.do")
-	public String checkInfo(UserVO vo, HttpServletRequest request, Model model) {
-		System.out.println("UserController: checkInfo");
-
-		HttpSession session = request.getSession();
-		int user_num = (int) session.getAttribute("user_num");
-
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
-
-		Boolean checkInput = userService.checkPwd(user_num, vo.getPwd());
-
-		if (!checkInput) { // fail
-			model.addAttribute("error", "failed");
-
-			return "user_check_info.jsp";
-		}
-
-		UserVO user = userService.getUserInfo(user_num);
-		model.addAttribute("id", user.getId());
-		model.addAttribute("pwd", user.getPwd());
-		model.addAttribute("user_phone", user.getUser_phone());
-		model.addAttribute("user_email", user.getUser_email());
-
-		return "user_change_info.jsp";
-	}
-
-	// 회원정보 변경 - 정보 수정 및 업데이트
-	@RequestMapping("/changeInfo.do")
-	public String userChangeInfo(HttpServletRequest request, Model model) {
-		System.out.println("UserController: userChangeInfo");
-
-		return "user_order_list.jsp";
-	}
+//	@PostMapping("/checkInfo.do")
+//	public String checkInfo(UserVO vo, HttpServletRequest request, Model model) {
+//		System.out.println("UserController: checkInfo");
+//
+//		HttpSession session = request.getSession();
+//		int user_num = (int) session.getAttribute("user_num");
+//
+//		UserCardVO card = userService.getUserCard(user_num);
+//		model.addAttribute("rank_letter", card.getRank_letter());
+//		model.addAttribute("user_rank", card.getUser_rank());
+//		model.addAttribute("delivering_items", card.getDelivering_items());
+//		UserCardVO card2 = userService.getUserCard2(user_num);
+//		model.addAttribute("user_total_point", card2.getUser_total_point());
+//
+//		Boolean checkInput = userService.checkPwd(user_num, vo.getPwd());
+//
+//		if (!checkInput) { // fail
+//			model.addAttribute("error", "failed");
+//
+//			return "user_check_info.jsp";
+//		}
+//
+//		UserVO user = userService.getUserInfo(user_num);
+//		model.addAttribute("id", user.getId());
+//		model.addAttribute("pwd", user.getPwd());
+//		model.addAttribute("user_phone", user.getUser_phone());
+//		model.addAttribute("user_email", user.getUser_email());
+//
+//		return "user_change_info.jsp";
+//	}
+//
+//	// 회원정보 변경 - 정보 수정 및 업데이트
+//	@RequestMapping("/changeInfo.do")
+//	public String userChangeInfo(HttpServletRequest request, Model model) {
+//		System.out.println("UserController: userChangeInfo");
+//
+//		return "user_order_list.jsp";
+//	}
 
 }

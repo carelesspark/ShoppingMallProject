@@ -56,7 +56,6 @@
 						<div>등록일</div>
 						<div>상품명</div>
 						<div>평가</div>
-						<div>조회수</div>
 						<div>상세 페이지</div>
 					</div>
 					<div id="ml">
@@ -75,11 +74,10 @@
 											</div>
 										</div>
 										<div>${list.review_ratings}</div>
-										<div>${list.review_clicks}</div>
 										<div>
 											<div>
 												<button type="button"
-													onclick="window.location.href='.do?review_num=${list.review_num}'">&gt;</button>
+													onclick="window.location.href='/product.do?product_num=${list.product_num}'">&gt;</button>
 											</div>
 										</div>
 									</div>

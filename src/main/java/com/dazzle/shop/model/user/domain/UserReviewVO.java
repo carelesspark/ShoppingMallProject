@@ -25,7 +25,6 @@ public class UserReviewVO {
 	private String review_content;
 	private int review_ratings;
 	private Date review_date;
-	private int review_clicks;
 	// product_code
 	private String product_code;
 	// product_size
