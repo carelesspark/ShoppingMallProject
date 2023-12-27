@@ -1,8 +1,10 @@
 package com.dazzle.shop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,9 @@ import com.dazzle.shop.model.product.ProductVO;
 import com.dazzle.shop.model.product.ProductsVO;
 import com.dazzle.shop.model.product.ReviewVO;
 import com.dazzle.shop.model.product.SubCategoryVO;
+import com.dazzle.shop.model.faq.FaqVO;
 import com.dazzle.shop.model.product.CategoryVO;
+import com.dazzle.shop.model.product.InquiryVO;
 import com.dazzle.shop.model.product.ProductImgVO;
 import com.dazzle.shop.model.product.ProductService;
 import com.dazzle.shop.model.product.ProductSizeVO;
@@ -109,13 +113,46 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/product.do")
-	public String getProduct(Model _model, @RequestParam("product_num") int _product_num) {
+	public String getProduct(Model _model, @RequestParam("product_num") int _product_num, Integer curr_page) {
+
 
 		ProductVO product_info = product_service.product_info(_product_num);
 		_model.addAttribute("product_info", product_info);
 
 		ProductImgVO product_img = product_service.product_img(_product_num);
 		_model.addAttribute("product_img", product_img);
+
+		
+		ReviewVO vo = new ReviewVO();
+		vo.setProduct_num(_product_num);
+		Integer pageSize = 3;
+		
+		if(curr_page == null) {
+			curr_page = 1;
+		}
+		Integer reviewCount = 0;
+		ReviewVO count = product_service.getReviewCount(vo);
+		_model.addAttribute("count", count);
+		reviewCount = count.getCount();
+		
+		int total_pages = 0;
+		Integer remain = 0 ;
+		List<ReviewVO> review = new ArrayList();
+		
+		remain = reviewCount - (pageSize * (curr_page - 1));
+		review = product_service.getReview(_product_num, Math.min(remain, pageSize), (curr_page-1)*pageSize);
+
+		total_pages = (int)Math.ceil((double) reviewCount / pageSize);
+		_model.addAttribute("totalPages", total_pages);
+		_model.addAttribute("curr_page", curr_page);
+		_model.addAttribute("review", review);
+
+
+		List<InquiryVO> inquiryList = product_service.getInquiry(_product_num);
+		_model.addAttribute("inquiryList", inquiryList);
+		
+		InquiryVO inquiryCount = product_service.getInquiryCount(_product_num);
+		_model.addAttribute("inquiryCount", inquiryCount);
 
 		return "/product/product.jsp";
 	}
@@ -138,8 +175,32 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/inquiry.do")
-	public String getInquiry() {
+	public String getInquiry(HttpServletRequest request, @RequestParam(name = "product_num") int productNum, Model model) {
+		
+		HttpSession session = request.getSession();
+		Integer user_num = (Integer) session.getAttribute("user_num");
+		
+		
+		if(user_num == null) {
+			model.addAttribute("message", "회원에게만 접근 가능한 페이지입니다.");
+			model.addAttribute("url", "/sign/login.jsp");
+			
+			return "/user/user_alert.jsp";
+		}
+		
+		model.addAttribute("user_num", user_num);
+		model.addAttribute("product_num", productNum);
 		return "/product/inquiry.jsp";
+	}
+	
+	@RequestMapping(value = "/insertInquiry.do")
+	public String insertInquiry(HttpServletRequest request, InquiryVO vo) {
+		HttpSession session = request.getSession();
+		int user_num = (int)session.getAttribute("user_num");
+		vo.setUser_num(user_num);
+		product_service.insertInquiry(vo);
+		
+		return "redirect:/product.do?product_num=" + vo.getProduct_num();
 	}
 
 	@RequestMapping(value = "/add_to_cart.do")
