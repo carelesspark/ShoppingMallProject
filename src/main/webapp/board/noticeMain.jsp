@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,9 @@
 	<div class="wrapper">
 		<div class="title">
 			<h1>공지사항</h1>
+			<c:if test="${user_num eq 4 }">
 			<a href="/board/noticeWrite.jsp"><button>작성</button></a>
+			</c:if>
 		</div>
 		
 		<hr style="height: 3px; background-color: black;">
@@ -27,7 +30,7 @@
 			
 			<div style="text-align: center">
 			<c:forEach var="i" begin="1" end="${page/15 + 1 }">
-				<a href="noticeMain.do?pageNum=${i }" >${i }	</a>
+				<a href="noticeMain.do?pageNum=${i }" >${i }</a>
 			</c:forEach>
 			</div>
 			</table>

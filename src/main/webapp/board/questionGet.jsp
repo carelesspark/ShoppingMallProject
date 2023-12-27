@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,8 +26,16 @@
 			<div class="main">
 				<p class="main_quest">${quest.content }</p>
 				<input type="hidden" name="pno" value="${quest.pno }">
-				<textarea name="rcontent">${reply.rcontent }</textarea>
-				<input type="submit" value="답변 등록">
+				<c:choose>
+					<c:when test="${user_num eq 4 }">
+						<textarea name="rcontent">${reply.rcontent }</textarea>
+						<input type="submit" value="답변 등록">
+					</c:when>
+					
+					<c:otherwise>
+						<textarea name="rcontent" readonly="readonly">${reply.rcontent }</textarea>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			</form>
 			
