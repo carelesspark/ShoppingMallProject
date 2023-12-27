@@ -92,6 +92,20 @@ public class SignController {
 		return "redirect:/main/main.jsp";
 	}
 	
+	@RequestMapping("/logout.do")
+	public String logout(HttpServletRequest request) {
+	    System.out.println("SignController: logout");
+
+	    // 현재 세션을 가져옵니다.
+	    HttpSession session = request.getSession();
+
+	    // 세션을 소멸시킵니다.
+	    session.invalidate();
+
+	    return "redirect:/sign/login.jsp";
+	}
+
+	
 	/*
 	 * 관리자 로그인
 	 */
