@@ -131,6 +131,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ReviewVO getReviewCount(ReviewVO vo) {
 		return dao.getReviewCount(vo);
+	}
 
 	
 	@Override
@@ -140,9 +141,9 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<InquiryVO> getInquiry(int _product_num) {
+	public List<InquiryVO> getInquiry(int _product_num, int a, int b) {
 		
-		return dao.getInquiry(_product_num);
+		return dao.getInquiry(_product_num, a, b);
 
 	}
 
