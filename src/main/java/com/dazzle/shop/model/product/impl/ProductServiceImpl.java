@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dazzle.shop.model.product.CategoryVO;
+import com.dazzle.shop.model.product.InquiryVO;
 import com.dazzle.shop.model.product.PageVO;
 import com.dazzle.shop.model.product.ProductCodeVO;
 import com.dazzle.shop.model.product.ProductColorVO;
@@ -19,6 +20,9 @@ import com.dazzle.shop.model.product.SubCategoryVO;
 
 @Service("product_service")
 public class ProductServiceImpl implements ProductService{
+
+	
+
 
 	@Autowired
 	private ProductDAO dao;
@@ -115,6 +119,7 @@ public class ProductServiceImpl implements ProductService{
 	public ProductCodeVO get_product_code(int _size_num) {
 		return dao.get_product_code(_size_num);
 	}
+
 	@Override
 	public List<ReviewVO> getReview(Integer product_num, Integer start, Integer end){
 		return dao.getReview(product_num, start, end);
@@ -126,6 +131,19 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ReviewVO getReviewCount(ReviewVO vo) {
 		return dao.getReviewCount(vo);
+
+	
+	@Override
+	public void insertInquiry(InquiryVO vo) {
+		
+		dao.insertInquiry(vo);
+	}
+
+	@Override
+	public List<InquiryVO> getInquiry(int _product_num) {
+		
+		return dao.getInquiry(_product_num);
+
 	}
 	
 	
