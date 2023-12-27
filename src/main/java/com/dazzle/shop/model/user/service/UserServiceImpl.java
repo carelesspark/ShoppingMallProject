@@ -96,13 +96,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 	// 작성 댓글
+	@Override
 	public List<UserReplyVO> getUserReplyList(UserReplyVO vo) {
 		return userDAO.getUserReplyList(vo);
 	}
 
 	// 날짜 기준 작성 댓글 수
+	@Override
 	public int countReplyBetweenDates(int user_num, java.sql.Date startDate, java.sql.Date endDate) {
 
 		return userDAO.countReplyBetweenDates(user_num, startDate, endDate);
+	}
+
+	// 비밀번호 체크
+	@Override
+	public boolean checkPwd(int user_num, String pwd) {
+		return userDAO.checkPwd(user_num, pwd);
+	}
+
+	// 회원정보 불러오기
+	@Override
+	public UserVO getUserInfo(int user_num) {
+		return userDAO.getUserInfo(user_num);
 	}
 }
