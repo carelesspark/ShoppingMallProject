@@ -56,8 +56,8 @@ public class UserDAO {
 			+ "ON od.order_num = o.order_num WHERE p.user_num = ? AND o.order_date BETWEEN ? AND ?";
 
 	// 내가 작성한 리뷰 내역
-	private final String REVIEW_LIST = "SELECT r.review_ratings, r.review_date, r.review_clicks, "
-			+ "p.product_name, r.review_num, ps.size_name, pcolor.color_name "
+	private final String REVIEW_LIST = "SELECT r.review_ratings, r.review_date, "
+			+ "p.product_name, p.product_num, ps.size_name, pcolor.color_name "
 			+ "FROM review r INNER JOIN product_code pc ON r.product_code = pc.product_code "
 			+ "JOIN product_size ps ON pc.size_num = ps.size_num JOIN product_color pcolor "
 			+ "ON ps.color_num = pcolor.color_num JOIN product p ON pcolor.product_num = p.product_num "

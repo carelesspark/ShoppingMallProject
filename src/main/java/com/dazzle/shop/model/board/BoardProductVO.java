@@ -3,8 +3,8 @@ package com.dazzle.shop.model.board;
 import lombok.Data;
 
 @Data
-public class CateVO {
-	private int ctgr_num;
+public class BoardProductVO {
+	private int bpno;
 	private int pno;
-	private String ctgr_name;
+	private int product_num;
 }

@@ -16,10 +16,14 @@ public class BoardRowMapper implements RowMapper<BoardVO> {
 		
 		vo.setPno(rs.getInt("pno"));
 		vo.setUserNum(rs.getInt("user_num"));
+		vo.setCtgr_num(rs.getInt("ctgr_num"));
 		vo.setTitle(rs.getString("title"));
 		vo.setCate(rs.getString("cate"));
 		vo.setPosttime(rs.getDate("posttime"));
 		vo.setContent(rs.getString("content"));
+		
+		vo.setUser_name(rs.getString("user_name"));
+		vo.setCtgr_name(rs.getString("ctgr_name"));
 		
 		return vo;
 	}
