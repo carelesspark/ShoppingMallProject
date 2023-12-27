@@ -7,17 +7,16 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.dazzle.shop.model.product.SubCategoryVO;
 
-public class SubCategoryMapper implements RowMapper<SubCategoryVO>{
+public class SubCategoryRowMapper implements RowMapper<SubCategoryVO>{
 
 	@Override
 	public SubCategoryVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
 		SubCategoryVO vo = new SubCategoryVO();
 		
-		vo.setSub_category_num(rs.getInt(1));
-		vo.setSub_category_name(rs.getString(2));
-		vo.setSub_category_code(rs.getString(3));
-		vo.setCategory_num(rs.getInt(4));
+		vo.setSub_category_num(rs.getInt("sub_category_num"));
+		vo.setSub_category_name(rs.getString("sub_category_name"));
+		vo.setCategory_num(rs.getInt("category_num"));
 		
 		return vo;
 	}

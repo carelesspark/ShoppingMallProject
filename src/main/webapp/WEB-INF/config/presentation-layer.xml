@@ -8,4 +8,5 @@
 	<context:component-scan
 		base-package="com.dazzle.shop.controller"></context:component-scan>
 
+
 </beans>

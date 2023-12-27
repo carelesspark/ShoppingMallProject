@@ -1,6 +1,7 @@
 package com.dazzle.shop.model.product;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -16,7 +17,6 @@ public class ProductVO {
 	private Date modify_date;
 	private Date delete_date;
 	private int registration_status;
-	private String product_class_code;
 	private int sub_category_num;
-	
+	private List<ProductColorVO> colors;
 }

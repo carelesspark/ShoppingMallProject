@@ -51,8 +51,8 @@
 						href="/sign/sign_in.jsp">LOGIN</a></li>
 				</ul>
 
-				<form class="d-flex mt-3">
-					<input class="form-control me-1" type="search" placeholder="Search"
+				<form class="d-flex mt-3" action="/search_result.do">
+					<input class="form-control me-1" type="search" placeholder="Search" name="search_keyword"
 						aria-label="Search" />
 					<button class="btn btn-outline-success" type="submit">
 						<i class="fas fa-search"></i>

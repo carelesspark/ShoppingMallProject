@@ -52,3 +52,6 @@ const pageItems = document.querySelectorAll(".pagination .page-item");
         e.preventDefault();
         productInquirySection.scrollIntoView({ behavior: "smooth" });
       });
+      
+      
+      

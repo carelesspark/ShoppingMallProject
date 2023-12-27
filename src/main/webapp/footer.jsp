@@ -4,6 +4,7 @@
     />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/footer.css">
+
 <div class="footer">
 	<div class="container">
 		<div class="row">

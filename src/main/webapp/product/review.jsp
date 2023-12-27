@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,12 @@
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
+<%-- 					<input value="${user_num }" name="user_num" type="hidden"> --%>
 	<div class="container py-5">
 		<div class="row">
 			<div class="col-md-8 offset-md-2">
 				<div class="content-box">
-					<form>
+					<form action="/submit_review.do">
 						<div class="mb-3">
 							<label for="emailInput" class="form-label">상품이름</label>
 						</div>
@@ -33,16 +35,6 @@
 									class="fas fa-star"></i></span>
 							</div>
 							<input type="hidden" id="rating" name="rating" value="0" />
-						</div>
-						<div class="mb-3">
-							<label for="textInput" class="form-label">키</label> <input
-								type="text" class="form-control" id="textInput"
-								placeholder="Placeholder" />
-						</div>
-						<div class="mb-3">
-							<label for="textareaInput" class="form-label">사이즈</label> <input
-								type="text" class="form-control" id="textInput"
-								placeholder="Placeholder" />
 						</div>
 						<div class="mb-3">
 							<label class="form-label">사진 첨부</label>
