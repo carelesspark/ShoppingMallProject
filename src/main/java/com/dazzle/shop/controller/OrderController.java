@@ -65,22 +65,21 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/orderInfo.do")
-	public String getOrderInfo(HttpServletRequest request, OrderVO vo, Model model) throws Exception {
+	public String getOrderInfo(HttpServletRequest request, @RequestParam(name="order_detail_num") int orderDetailNum, OrderVO vo, Model model) throws Exception {
 
 		System.out.println("글 상세 조회 처리");
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
 		UserCardVO card = userService.getUserCard(user_num);
+		UserCardVO card2 = userService.getUserCard2(user_num);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 		model.addAttribute("delivering_items", card.getDelivering_items());
-		OrderVO orderInfo = orderService.getOrderInfo(vo);
-		
+		OrderVO orderInfo = orderService.getOrderInfo(orderDetailNum);
 		model.addAttribute("orderInfo", orderInfo);
-		int orderDetailNum = orderInfo.getOrder_detail_num();
-		System.out.println(orderDetailNum);
+		
 		OrderVO orderResult = orderService.getOrderResponseDetail(orderDetailNum);
 		model.addAttribute("orderResult", orderResult);
 
@@ -109,11 +108,11 @@ public class OrderController {
 		OrderVO product = orderService.getProductOrder(product_code, amount);
 		productOrder.add(product);
 
-		UserCardVO card = userService.getUserCard(user_num);
+		UserCardVO card2 = userService.getUserCard2(user_num);
 		AddressVO address = addressService.getBaseAddress(user_num);
 
 		model.addAttribute("user_num", user_num);
-		model.addAttribute("userPoint", card.getUser_total_point());
+		model.addAttribute("userPoint", card2.getUser_total_point());
 		model.addAttribute("productOrder", productOrder);
 		model.addAttribute("address", address);
 		System.out.println(productOrder);
@@ -136,11 +135,11 @@ public class OrderController {
 				productOrder.add(product);
 			}
 		}
-		UserCardVO card = userService.getUserCard(user_num);
 		AddressVO address = addressService.getBaseAddress(user_num);
+		UserCardVO card2 = userService.getUserCard2(user_num);
 
 		model.addAttribute("user_num", user_num);
-		model.addAttribute("userPoint", card.getUser_total_point());
+		model.addAttribute("userPoint", card2.getUser_total_point());
 		model.addAttribute("productOrder", productOrder);
 		model.addAttribute("address", address);
 
@@ -199,9 +198,10 @@ public class OrderController {
 		int user_num = (int) session.getAttribute("user_num");
 
 		UserCardVO card = userService.getUserCard(user_num);
+		UserCardVO card2 = userService.getUserCard2(user_num);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 		model.addAttribute("delivering_items", card.getDelivering_items());
 		
 		OrderVO orderRefund = orderService.getOrderRefund(vo);
@@ -219,9 +219,10 @@ public class OrderController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 		UserCardVO card = userService.getUserCard(user_num);
+		UserCardVO card2 = userService.getUserCard2(user_num);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 		model.addAttribute("delivering_items", card.getDelivering_items());
 
 		orderService.insertOrderRefund(vo);
@@ -238,9 +239,10 @@ public class OrderController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 		UserCardVO card = userService.getUserCard(user_num);
+		UserCardVO card2 = userService.getUserCard2(user_num);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 		model.addAttribute("delivering_items", card.getDelivering_items());
 		
 		OrderVO productChange = orderService.getProductChange(vo);

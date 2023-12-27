@@ -25,13 +25,15 @@ public class UserDAO {
 	// 나의 쇼핑
 	// 주문/배송 조회
 	private final String ORDER_LIST = "SELECT o.order_date, d.delivery_date, od.product_state, od.order_detail_num, "
-			+ "od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, o.order_num "
-			+ "FROM orders o LEFT JOIN delivery d ON o.order_num = d.order_num JOIN order_detail od ON o.order_num = od.order_num "
+			+ "od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, p.product_num, o.order_num "
+			+ "FROM orders o "
+			+ "LEFT JOIN delivery d ON o.order_num = d.order_num "
+			+ "JOIN order_detail od ON o.order_num = od.order_num "
 			+ "JOIN product_code pc ON od.product_code = pc.product_code "
 			+ "JOIN product_size ps ON pc.size_num = ps.size_num "
 			+ "JOIN product_color pcolor ON ps.color_num = pcolor.color_num "
 			+ "JOIN product p ON pcolor.product_num = p.product_num "
-			+ "WHERE o.user_num = ? AND o.order_date BETWEEN ? AND ? ORDER BY o.order_date DESC";
+			+ "WHERE o.user_num = ? AND o.order_date BETWEEN ? AND NOW() ORDER BY o.order_date DESC";
 
 	private final String ORDER_CHECK = "SELECT" + " (SELECT COUNT(*) FROM orders WHERE user_num = ?) AS total_orders,"
 			+ " (SELECT COUNT(*) FROM orders o INNER JOIN order_detail od ON o.order_num = od.order_num WHERE user_num = ? AND od.product_state = '상품 준비 중') AS orders_in_preparation,"
@@ -66,12 +68,13 @@ public class UserDAO {
 			+ "WHERE r.user_num = ? AND r.review_date BETWEEN ? AND ?";
 
 	// 1대1 질의응답 내역
-	private final String INQUIRY_LIST = "SELECT i.inquiry_date, i.inquiry_num, ia.answer, "
-			+ "p.product_name, pcolor.color_name, ps.size_name FROM inquiry i "
+	private final String INQUIRY_LIST = "SELECT i.inquiry_date, i.inquiry_num, ia.answer, i.product_num, "
+			+ "p.product_name, pcolor.color_name, ps.size_name "
+			+ "FROM inquiry i "
 			+ "LEFT OUTER JOIN inquiry_answer ia ON i.inquiry_num = ia.inquiry_num "
-			+ "JOIN product_code pc ON i.product_code = pc.product_code "
-			+ "JOIN product_size ps ON pc.size_num = ps.size_num JOIN product_color pcolor "
-			+ "ON ps.color_num = pcolor.color_num JOIN product p ON pcolor.product_num = p.product_num "
+			+ "JOIN product p ON p.product_num = i.product_num "
+			+ "JOIN product_color pcolor ON pcolor.product_num = p.product_num "
+			+ "JOIN product_size ps ON ps.color_num = pcolor.color_num "
 			+ "WHERE i.user_num = ? AND i.inquiry_date BETWEEN ? AND ? ORDER BY i.inquiry_date DESC LIMIT ?, ?";
 	// 날짜 기준 질의응답 개수
 	private final String COUNT_INQUIRY_LIST_BETWEEN_DATES = "SELECT COUNT(*) FROM inquiry "
@@ -130,7 +133,7 @@ public class UserDAO {
 	// 주문/배송 조회
 	public List<UserOrdersVO> getUserOrderList(UserOrdersVO vo) {
 		try {
-			return template.query(ORDER_LIST, new Object[] { vo.getUser_num(), vo.getStartDate(), vo.getEndDate() },
+			return template.query(ORDER_LIST, new Object[] { vo.getUser_num(), vo.getStartDate() },
 					new UserOrderListRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return Collections.emptyList();

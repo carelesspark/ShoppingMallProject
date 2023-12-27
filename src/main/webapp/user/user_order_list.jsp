@@ -127,7 +127,7 @@
 															</div>
 															<div class="cbb2">
 																<button
-																	onclick="window.location.href='#'">상품 문의하기</button>
+																	onclick="window.location.href='/product.do?product_num=${list.product_num}'">상품 문의하기</button>
 															</div>
 															<div class="cbb3">
 																<button
