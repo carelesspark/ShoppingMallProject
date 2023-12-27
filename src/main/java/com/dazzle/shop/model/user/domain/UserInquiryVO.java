@@ -45,4 +45,5 @@ public class UserInquiryVO {
 	private Date endDate;
 	private int currentPage;
 	private int itemsPerPage;
+	
 }
