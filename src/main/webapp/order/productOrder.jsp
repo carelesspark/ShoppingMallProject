@@ -245,7 +245,7 @@
 							onclick="location.href='/main.do'">홈으로 돌아가기</button>
 					</div>
 					<div id="order_buttons_div2">
-						<button type="submit" class="btn btn-dark" id="order_buy_button">구매하기</button>
+						<button type="submit" class="btn btn-dark" id="order_buy_button" disabled>구매하기</button>
 					</div>
 				</div>
 			</div>
@@ -280,7 +280,22 @@
 				$("#total_price").text(totalPrice + "원");
 				$("#order_payment_point_button1").prop("disabled", false);
 				
-			});		
+			});	
+			
+			
+			$("#credit_card").on("click", function() {
+				$("#order_buy_button").prop("disabled", false);
+			});
+			$("#deposit_without_passbook").on("click", function() {
+				$("#order_buy_button").prop("disabled", false);
+			});
+			$("#transfer").on("click", function() {
+				$("#order_buy_button").prop("disabled", false);
+			});
+			$("#kakaopay").on("click", function() {
+				$("#order_buy_button").prop("disabled", false);
+			});
+
 		});
 		
 		
