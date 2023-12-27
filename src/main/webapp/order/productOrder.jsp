@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,7 @@
 										id="order_list_pic1" /></a>
 								</div>
 								<div id="order_list_price">
-									<p>${order.amountMultiPrice}원</p>
+									<p><fmt:formatNumber value="${order.amountMultiPrice}" pattern="#,###"/>원</p>
 									<input type="hidden" value="${order.amountMultiPrice }"
 										name="amountMultiPrice_list" />
 									<c:set var="totalPrice"
@@ -66,7 +67,7 @@
 
 
 					<div id="order_list_total_price">
-						<p>전체 가격 : ${totalPrice} 원</p>
+						<p>전체 가격 : <fmt:formatNumber value="${totalPrice}" pattern="#,###"/>원</p>
 					</div>
 				</div>
 				<div id="order_address">
@@ -163,7 +164,7 @@
 							</div>
 							<div id="order_payment_grid_rows_2">
 								<div id="order_payment_price_value">
-									<p>${totalPrice}원</p>
+									<p><fmt:formatNumber value="${totalPrice}" pattern="#,###"/>원</p>
 								</div>
 								<div id="order_payment_coupon_value">
 									<select>
@@ -207,14 +208,14 @@
 									<c:if test="${totalPrice >= 30000}">
 										<c:set var="delivery_price" value="0" />
 									</c:if>
-									<p>${delivery_price }원</p>
+									<p><fmt:formatNumber value="${delivery_price }" pattern="#,###"/>원</p>
 									<input type="hidden" value="${delivery_price}"
 										name="delivery_price" />
 
 								</div>
 								<div id="order_payment_actual_price_value">
 									<c:set var="totalPrice" value="${totalPrice + delivery_price}" />
-									<p id="total_price">${totalPrice}원</p>
+									<p id="total_price"><fmt:formatNumber value="${totalPrice}" pattern="#,###"/>원</p>
 									<input type="hidden" id="hidden_total_price" name="totalPrice"
 										value="${totalPrice }" />
 										<input type="hidden" id="hidden_total_price2" value="${totalPrice}"/>

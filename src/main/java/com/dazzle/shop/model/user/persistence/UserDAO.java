@@ -75,7 +75,7 @@ public class UserDAO {
 			+ "JOIN product p ON p.product_num = i.product_num "
 			+ "JOIN product_color pcolor ON pcolor.product_num = p.product_num "
 			+ "JOIN product_size ps ON ps.color_num = pcolor.color_num "
-			+ "WHERE i.user_num = ? AND i.inquiry_date BETWEEN ? AND ? ORDER BY i.inquiry_date DESC LIMIT ?, ?";
+			+ "WHERE i.user_num = ? AND i.inquiry_date BETWEEN ? AND NOW() ORDER BY i.inquiry_date DESC LIMIT ?, ?";
 	// 날짜 기준 질의응답 개수
 	private final String COUNT_INQUIRY_LIST_BETWEEN_DATES = "SELECT COUNT(*) FROM inquiry "
 			+ "WHERE user_num = ? AND inquiry_date BETWEEN ? AND ?";
@@ -195,7 +195,7 @@ public class UserDAO {
 
 		try {
 			return template.query(INQUIRY_LIST,
-					new Object[] { vo.getUser_num(), vo.getStartDate(), vo.getEndDate(), offset, limit },
+					new Object[] { vo.getUser_num(), vo.getStartDate(), offset, limit },
 					new UserInquiryListRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return Collections.emptyList();

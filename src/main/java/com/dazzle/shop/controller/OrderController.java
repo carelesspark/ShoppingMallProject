@@ -229,7 +229,7 @@ public class OrderController {
 		orderService.updateProduct_state(vo);
 		model.addAttribute("order_num", vo.getOrder_num());
 
-		return "redirect:orderInfo.do";
+		return "redirect:orderInfo.do?order_detail_num=" + vo.getOrder_detail_num();
 	}
 
 	@RequestMapping(value = "/productChange.do")
@@ -258,9 +258,8 @@ public class OrderController {
 
 		orderService.insertProductChange(vo);
 		orderService.updateProduct_state2(vo);
-		model.addAttribute("order_num", vo.getOrder_num());
 
-		return "redirect:orderInfo.do";
+		return "redirect:orderInfo.do?order_detail_num=" + vo.getOrder_detail_num();
 	}
 
 }

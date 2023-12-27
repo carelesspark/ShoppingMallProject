@@ -105,8 +105,6 @@ public class UserController {
 		UserOrdersVO orderCount = userService.orderCheck(user_num);
 		model.addAttribute("orderCount", orderCount);
 
-		UserOrdersVO orderCount = userService.orderCheck(user_num);
-		model.addAttribute("orderCount", orderCount);
 
 		List<UserOrdersVO> list = userService.getUserOrderList(vo);
 		Map<Integer, List<UserOrdersVO>> map = list.stream().collect(Collectors.groupingBy(UserOrdersVO::getOrder_num));
