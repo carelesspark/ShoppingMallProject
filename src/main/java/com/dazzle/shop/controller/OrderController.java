@@ -74,12 +74,13 @@ public class OrderController {
 		UserCardVO card = userService.getUserCard(user_num);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_total_point", card.getUser_total_point());
 		model.addAttribute("delivering_items", card.getDelivering_items());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 		OrderVO orderInfo = orderService.getOrderInfo(vo);
 		
 		model.addAttribute("orderInfo", orderInfo);
-		int orderDetailNum = orderInfo.getOrder_detail_num();
+		int orderDetailNum = vo.getOrder_detail_num();
 		System.out.println(orderDetailNum);
 		OrderVO orderResult = orderService.getOrderResponseDetail(orderDetailNum);
 		model.addAttribute("orderResult", orderResult);

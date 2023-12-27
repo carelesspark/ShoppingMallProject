@@ -54,9 +54,14 @@
 #mh {
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: auto auto auto auto auto;
+	grid-template-columns: 2fr 4fr 1fr 1fr;
 	border-bottom: 1px solid #d4d4d4;
 	margin-bottom: 20px;
+}
+
+#mh3, #mh4 {
+	display: grid;
+	text-align: center;
 }
 
 /* 리스트 */
@@ -64,7 +69,7 @@
 	min-height: 400px;
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: auto;
+	grid-template-columns: auto; 
 	padding-bottom: 10px;
 	border-bottom: 1px solid #f1f1f1;
 	margin-bottom: 20px;
@@ -79,10 +84,39 @@
 .clb {
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: auto auto auto auto auto;
+	grid-template-columns: 2fr 4fr 1fr 1fr;
 	border-bottom: 1px solid #f1f1f1;
 	margin-bottom: 20px;
 }
+
+/* 제품 정보 */
+.cpb {
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: start;
+}
+
+.cpn {
+	display: grid;
+	grid-template-columns: auto 30px auto 30px auto;
+	justify-content: center;
+}
+
+.cpn div {
+	text-align: center;
+}
+
+.reviewRating {
+	display: grid;
+	justify-content: center;
+}
+
+.cbb1 {
+	display: grid;
+	justify-content: center;
+}
+
+/*  */
 
 /* 페이지 조정 */
 #mp {
