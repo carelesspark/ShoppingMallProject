@@ -62,7 +62,6 @@
 					<input class="form-control me-1" type="search" placeholder="Search" name="search_keyword"
 						aria-label="Search" />
 					<button class="btn btn-outline-success" type="submit">
-
 						<i class="fas fa-search"></i>
 					</button>
 				</form>
