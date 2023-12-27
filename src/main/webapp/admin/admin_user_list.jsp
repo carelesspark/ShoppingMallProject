@@ -38,7 +38,6 @@
 						</div>
 					</div>
 					<div id="mh">
-						<div>번호</div>
 						<div>이름</div>
 						<div>랭크</div>
 						<div>가입방식</div>
@@ -47,10 +46,6 @@
 						<div>탈퇴일</div>
 					</div>
 					<div id="ml">
-						<c:forEach var="num" begin="${realItemsStartNum}"
-							end="${realItemsStartNum - realItemsPerPage + 1}" step="-1">
-							<div>${num }</div>
-						</c:forEach>
 						<c:forEach var="list" items="${userList}">
 							<div>${list.user_name}</div>
 							<div>${list.user_rank}</div>
