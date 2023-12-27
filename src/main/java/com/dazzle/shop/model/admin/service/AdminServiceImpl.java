@@ -90,9 +90,37 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.getProductStock(product_num);
 	}
 
-	/*
-	 * 상품 추가
-	 */
+	// 상품 추가
+	// 1단계: 추가하고 product_num 가져오기
+	@Override
+	public int getProductNum(int subCategoryNum) {
+		return adminDAO.getProductNum(subCategoryNum);
+	}
+
+	// 2단계: 제품 기본정보 추가
+	@Override
+	public void updateProductBasicInfo(AdminProductVO vo) {
+		adminDAO.updateProductBasicInfo(vo);
+	}
+
+	// DB에 이미지 경로 추가
+	@Override
+	public void insertProductImg(int product_num, String img_name, int img_type) {
+		adminDAO.insertProductImg(product_num, img_name, img_type);
+	}
+
+	// 3단계: 제품 색상 추가
+	@Override
+	public int insertProductColor(int product_num, String color_name) {
+		return adminDAO.insertProductColor(product_num, color_name);
+	}
+
+	// 3단계: 제품 사이즈 및 재고 추가
+	@Override
+	public void insertProductSize(int color_num, String size_name, int product_stock) {
+		adminDAO.insertProductSize(color_num, size_name, product_stock);
+	}
+
 	/*
 	 * 상품 수정
 	 */

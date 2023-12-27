@@ -1,12 +1,20 @@
 package com.dazzle.shop.model.admin.persistence;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.dazzle.shop.model.admin.domain.*;
@@ -148,6 +156,93 @@ public class AdminDAO {
 			return template.query(PRODUCT_STOCK, new Object[] { product_num }, rowMapper);
 		} catch (EmptyResultDataAccessException e) {
 			return Collections.emptyList();
+		}
+	}
+
+	// 제품 추가 및 product_num 반환
+	public int getProductNum(int subCategoryNum) {
+		String sql = "INSERT INTO product (sub_category_num, product_name, product_info, product_date, product_price) "
+				+ "VALUES (? , '', '', CURRENT_DATE, 0)";
+
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+
+		template.update(new PreparedStatementCreator() {
+
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				pstmt.setInt(1, subCategoryNum);
+
+				return pstmt;
+			}
+
+		}, keyHolder);
+
+		int productNum = keyHolder.getKey().intValue();
+
+		return productNum;
+	}
+
+	// 제품 기본정보 추가
+	public void updateProductBasicInfo(AdminProductVO vo) {
+		String sql = "UPDATE product SET product_name = ?, product_info = ?, product_price = ? WHERE product_num = ?";
+
+		try {
+			template.update(sql, vo.getProduct_name(), vo.getProduct_info(), vo.getProduct_price(),
+					vo.getProduct_num());
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// DB에 이미지 경로 추가
+	public void insertProductImg(int product_num, String img_name, int img_type) {
+		String sql = "INSERT INTO product_img (product_num, img_name, img_type) VALUES (?, ?, ?)";
+
+		try {
+			template.update(sql, product_num, img_name, img_type);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 제품 색상 추가
+	public int insertProductColor(int product_num, String color_name) {
+		String sql = "INSERT INTO product_color (product_num, color_name) VALUES (?, ?)";
+
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+
+		try {
+			template.update(new PreparedStatementCreator() {
+
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+					PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+					pstmt.setInt(1, product_num);
+					pstmt.setString(2, color_name);
+
+					return pstmt;
+				}
+
+			}, keyHolder);
+
+			int color_num = keyHolder.getKey().intValue();
+
+			return color_num;
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
+	// 제품 사이즈 및 재고 추가
+	public void insertProductSize(int color_num, String size_name, int product_stock) {
+		String sql = "INSERT INTO product_size (color_num, size_name, product_stock) VALUES (?, ?, ?)";
+
+		try {
+			template.update(sql, color_num, size_name, product_stock);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
 		}
 	}
 

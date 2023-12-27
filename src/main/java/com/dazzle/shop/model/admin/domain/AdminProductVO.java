@@ -30,6 +30,8 @@ public class AdminProductVO {
 	private int img_num;
 	private String main_img;
 	private String sub_img;
+	private String img_name;
+	private int img_type;
 	// sub_category
 	private int sub_category_num;
 	private String sub_category_name;
