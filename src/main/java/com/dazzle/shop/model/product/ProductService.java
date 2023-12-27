@@ -36,7 +36,13 @@ public interface ProductService {
 	
 	ProductCodeVO get_product_code(int _size_num);
 	
+
+	List<ReviewVO> getReview(Integer product_num, Integer start, Integer end);
+	List<ReviewVO> getReviewSome(ReviewVO vo);
+	ReviewVO getReviewCount(ReviewVO vo);
+
 	void insertInquiry(InquiryVO vo);
 	
 	List<InquiryVO> getInquiry(int _product_num);
+
 }
