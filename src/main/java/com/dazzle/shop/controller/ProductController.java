@@ -113,8 +113,8 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/product.do")
+	public String getProduct(Model _model, @RequestParam("product_num") int _product_num, Integer curr_page) {
 
-	public String getProduct(Model _model, @RequestParam("product_num") int _product_num, Integer curr_page, InquiryVO vo) {
 
 		ProductVO product_info = product_service.product_info(_product_num);
 		_model.addAttribute("product_info", product_info);
@@ -151,6 +151,8 @@ public class ProductController {
 		List<InquiryVO> inquiryList = product_service.getInquiry(_product_num);
 		_model.addAttribute("inquiryList", inquiryList);
 		
+		InquiryVO inquiryCount = product_service.getInquiryCount(_product_num);
+		_model.addAttribute("inquiryCount", inquiryCount);
 
 		return "/product/product.jsp";
 	}

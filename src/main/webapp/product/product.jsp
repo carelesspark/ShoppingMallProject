@@ -165,7 +165,7 @@
 
 		<div class="review-qna-container" id="product-inquiry">
 			<div class="review-qna-header">
-				<div class="review-qna-title">상품문의 (454)</div>
+				<div class="review-qna-title">상품문의 (${inquiryCount.total_inquiry})</div>
 				<div class="review-qna-date">
 					<a href="/inquiry.do?product_num=${info.product_num }">문의 쓰기</a>
 				</div>

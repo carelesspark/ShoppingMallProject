@@ -184,6 +184,8 @@ public class ProductDAO {
 	private final String INSERT_INQUIRY = "INSERT INTO inquiry VALUES(DEFAULT, ?, ?, NOW(), ?, ?);";
 	
 	private final String GET_INQUIRY = "select * from inquiry WHERE product_num = ?";
+	
+	private final String GET_INQUIRY_COUNT = "select count(*) AS total_inquiry from inquiry WHERE product_num = ?";
 
 	public List<ProductsVO> get_category_by_products_paged(String _category_num, int limit, int offset) {
 	    return jdbc_template.query(get_category_by_products_paged, new Object[] { _category_num, limit, offset }, new ProductsRowMapper());
@@ -271,6 +273,11 @@ public class ProductDAO {
 		System.out.println("getInquiry()");
 		return jdbc_template.query(GET_INQUIRY, new Object[] {_product_num}, new InquiryRowMapper());
 
+	}
+	
+	public InquiryVO getInquiryCount(int _product_num) {
+		System.out.println("getInquiryCount()");
+		return jdbc_template.queryForObject(GET_INQUIRY_COUNT, new Object[] {_product_num}, new InquiryCountRowMapper());
 	}
 
 }

@@ -13,4 +13,5 @@ public class InquiryVO {
 	public String inquiry_content;
 	public String inquiry_title;
 	public Timestamp inquiry_date;
+	public int total_inquiry;
 }
