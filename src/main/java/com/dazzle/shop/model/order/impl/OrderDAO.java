@@ -199,9 +199,9 @@ public class OrderDAO {
 	private final String CHANGE_PRODUCT_STATE2 = "UPDATE order_detail SET product_state = '교환 요청 중' WHERE order_detail_num = ?";
 
 	private final String ORDER_SUCC_INFO = "SELECT order_num, order_date, address, detail_address, postal_num, delivery_price, "
-			+ "recipient, request, payment, phone_num FROM orders WHERE order_num = ?";
+			+ "recipient, request, payment, phone_num, points, totalPrice FROM orders WHERE order_num = ?";
 
-	private final String ORDER_SUCC_PRODUCT = "SELECT pimg.main_img, od.total_price, pc.product_code, ps.size_name, pco.color_name, p.product_price, p.product_name, od.amount"
+	private final String ORDER_SUCC_PRODUCT = "SELECT pimg.main_img, od.total_price, pc.product_code, ps.size_name, pco.color_name, p.product_price, p.product_name, od.amount, o.totalPrice, o.points"
 			+ " FROM orders o" + " JOIN order_detail od ON od.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
