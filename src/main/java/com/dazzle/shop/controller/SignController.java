@@ -61,16 +61,20 @@ public class SignController {
 
 		if (user == null) { // fail to login
 			model.addAttribute("error", "failed");
-			return "sign_in.jsp";
+			return "login.jsp";
 		}
 
 		// success to login
 		int user_num = user.getUser_num();
+		String user_name = user.getUser_name();
+		String login_type = user.getLogin_type();
+		int is_admin = user.getIs_admin();
 		// 서버 session 저장
 		// key: "user_num", value: user_num
 		request.getSession().setAttribute("user_num", user_num);
-		// key: "user_type", value: "user"
-		request.getSession().setAttribute("user_type", "user");
+		request.getSession().setAttribute("user_name", user_name);
+		request.getSession().setAttribute("login_type", login_type);
+		request.getSession().setAttribute("is_admin", is_admin);
 
 //		// 사용자 cookie에 "user_num":user_num 저장
 //		Cookie userNumCookie = new Cookie("user_num", String.valueOf(user_num));
@@ -86,6 +90,55 @@ public class SignController {
 		}
 
 		return "redirect:/main/main.jsp";
+	}
+	
+	@RequestMapping("/logout.do")
+	public String logout(HttpServletRequest request) {
+	    System.out.println("SignController: logout");
+
+	    // 현재 세션을 가져옵니다.
+	    HttpSession session = request.getSession();
+
+	    // 세션을 소멸시킵니다.
+	    session.invalidate();
+
+	    return "redirect:/sign/login.jsp";
+	}
+
+	
+	/*
+	 * 관리자 로그인
+	 */
+	@PostMapping("/loginAdmin.do")
+	public String loginAdmin(SignVO vo, Model model, HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("SignController: loginAdmin");
+
+		SignVO user = signService.loginAdmin(vo); // user_num or null
+
+		if (user == null) { // fail to login
+			model.addAttribute("error", "failed");
+			return "login_admin.jsp";
+		}
+
+		// success to login
+		int user_num = user.getUser_num();
+		String user_name = user.getUser_name();
+		String login_type = user.getLogin_type();
+		int is_admin = user.getIs_admin();
+		
+		if(is_admin == 0) { // 관리자가 아닐 경우
+			model.addAttribute("error", "none admin");
+			return "login.jsp";
+		}
+		
+		// 서버 session 저장
+		// key: "user_num", value: user_num
+		request.getSession().setAttribute("user_num", user_num);
+		request.getSession().setAttribute("user_name", user_name);
+		request.getSession().setAttribute("login_type", login_type);
+		request.getSession().setAttribute("is_admin", is_admin);
+
+		return "redirect:/admin/userList.do";
 	}
 
 	/*

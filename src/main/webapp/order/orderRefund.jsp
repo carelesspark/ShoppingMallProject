@@ -6,90 +6,20 @@
 <meta charset="UTF-8">
 <title>주문 취소/환불 요청 페이지</title>
 <link href="../resources/css/order/orderRefund.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="../resources/js/order/checkAgreement2.js"></script>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
-	<div id="main-container">
-		<div id="user-explanation">
-			<div id="user-explanation-grid">
-				<div>
-					<div id="user-explanation-rank-container">
-						<p>C</p>
-					</div>
-				</div>
-				<div id="user-explanation-1-container">
-					<div id="user-explanation-name-container">
-						<p>회원</p>
-					</div>
-					<div id="user-explanation-name-rank-container">
-						<p>CareLess</p>
-					</div>
-				</div>
-				<div id="user-explanation-2-container">
-					<div>
-						<p>포인트</p>
-					</div>
-					<div>
-						<p>10,000포인트</p>
-					</div>
-				</div>
-				<div id="user-explanation-3-container">
-					<div>
-						<p>장바구니</p>
-					</div>
-					<div>
-						<a href=""><p>클릭</p></a>
-					</div>
-				</div>
-				<div id="user-explanation-4-container">
-					<div>
-						<p>주문 현황</p>
-					</div>
-					<div>
-						<a href=""><p>클릭</p></a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="menu-container">
-			<section>
-				<div id="menu-user-container" class="menu-section">
-					<p class="menu-section-name">회원 정보</p>
-					<a href="" class="menu-section-anchor"><p
-							class="menu-section-name-detail">회원 정보 수정</p></a> <a href=""
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">배송지 정보 수정</p></a>
-				</div>
-				<div id="menu-product-container" class="menu-section">
-					<p class="menu-section-name">주문</p>
-					<a href="" class="menu-section-anchor"><p
-							class="menu-section-name-detail">장바구니</p></a> <a href=""
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">주문 목록 조회</p></a> <a href=""
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">상품 수정</p></a> <a href=""
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">상품 삭제</p></a>
-				</div>
-				<div id="menu-order-container" class="menu-section">
-					<p class="menu-section-name">주문 관리</p>
-					<a href="" class="menu-section-anchor"><p
-							class="menu-section-name-detail">주문 목록</p></a> <a href=""
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">반품 및 환불 목록</p></a> <a href=""
-						class="menu-section-anchor"><p
-							class="menu-section-name-detail">Q&A 목록</p></a>
-				</div>
-				<div id="menu-myinfo-container" class="menu-section">
-					<p class="menu-section-name">나의 정보</p>
-					<a href="" class="menu-section-anchor"><p
-							class="menu-section-name-detail">정보 변경</p></a>
-				</div>
-			</section>
+	<div id="m">
+		<%@ include file="../user/user_card.jsp"%>
+		<div id="mc">
+			<%@ include file="../user/user_side.jsp"%>
 			<main>
-				<form action="insertOrderRefund.do" method="post">
+				<form action="insertOrderRefund.do" method="post" name="form">
 					<div id="main_refund">
 						<div id="refund_title">
 							<h1>주문 취소/환불 요청</h1>
@@ -97,8 +27,9 @@
 						<div id="refund_content">
 
 							<input type="hidden" name="amount" value="${orderRefund.amount}" />
-							<input type="hidden" name="order_detail_num" value="${orderRefund.order_detail_num}" />
-							<input type="hidden" name="order_num" value="${orderRefund.order_num}"/>
+							<input type="hidden" name="order_detail_num"
+								value="${orderRefund.order_detail_num}" /> <input type="hidden"
+								name="order_num" value="${orderRefund.order_num}" />
 							<table id="refund_table">
 								<tr>
 									<td id="refund_table_left">주문 번호</td>
@@ -115,18 +46,18 @@
 								<tr>
 									<td id="refund_table_left">은행명</td>
 									<td id="refund_table_right"><input type="text" name="bank"
-										id="input1" /></td>
+										id="input" /></td>
 								</tr>
 								<tr>
 									<td id="refund_table_left">계좌번호</td>
 									<td id="refund_table_right"><input type="text"
-										name="account_num" id="input2" /></td>
+										name="account_num" id=input /></td>
 								</tr>
 								<tr>
 									<td id="refund_table_left">취소/환불 사유</td>
 									<td id="refund_table_right"><select id="select"
-										name="refund_or_change_reason"><option
-												value="상품 불량">상품 불량</option>
+										name="refund_or_change_reason"><option value="상품 불량">상품
+												불량</option>
 											<option value="단순 변심">단순 변심</option>
 											<option value="배송 지연">배송 지연</option>
 											<option value="상품정보와 상이">상품정보와 상이</option>
@@ -159,11 +90,12 @@
 						</div>
 						<div id="buttons">
 							<div id="button1">
-								<button type="button" class="btn btn-outline-secondary">돌아가기</button>
+								<button type="button" class="btn btn-outline-secondary"
+									onclick="location.href='/orderInfo.do?order_num=${orderRefund.order_num}'">돌아가기</button>
 							</div>
 							<div id="button2">
-								<button type="submit" class="btn btn-outline-secondary">취소/환불
-									등록</button>
+								<button type="button" class="btn btn-outline-secondary"
+									onclick="checkAgreement2()">취소/환불 등록</button>
 							</div>
 						</div>
 					</div>
@@ -172,5 +104,29 @@
 		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
+	<script type="text/javascript">
+		var rank = '${user_rank}';
+		var rankBadge = document.getElementById('cc-rb');
+
+		if ('${user_rank}' === 'BRONZE') {
+			rankBadge.innerText = 'B';
+			rankBadge.style.color = '#B87333';
+		} else if (rank === 'SILVER') {
+			rankBadge.innerText = 'S';
+			rankBadge.style.color = '#CCCCCC';
+		} else if (rank === 'GOLD') {
+			rankBadge.innerText = 'G';
+			rankBadge.style.color = '#FFD700';
+		} else if (rank === 'DIAMOND') {
+			rankBadge.innerText = 'D';
+			rankBadge.style.color = '#EEEEEE';
+		} else if (rank === 'VIP') {
+			rankBadge.innerText = 'V';
+			rankBadge.style.color = '#8A2BE2';
+		} else if (rank === 'ADMIN') {
+			rankBadge.innerText = 'A';
+			rankBadge.style.color = '#DD2476';
+		}
+	</script>
 </body>
 </html>

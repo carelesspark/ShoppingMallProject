@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+/* main div */
+#md {
+	display: grid;
+	grid-template-rows: auto auto;
+}
+
+#mh {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto;
+}
+
+#ml {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto;
+}
