@@ -5,10 +5,10 @@ import java.util.List;
 
 public interface FaqService {
 	//faq 카테고리 목록
-	public List<FaqCtgrVO> getCtgr();
+	public List<FaqVO> getCtgr();
 	
 	//faq 세부카테고리 목록
-	public List<FaqSubCtgrVO> getSubCtgr();
+	public List<FaqVO> getSubCtgr();
 	
 	//faq 개수
 	public Integer getFaqCount();
@@ -20,9 +20,9 @@ public interface FaqService {
 	
 	public List<FaqVO> getFaqSubCtgr(Integer start, Integer end ,Integer sub_ctgr_num);
 	
-	public FaqTotalCtgrVO getCurrCtgr(Integer sub_ctgr_num );
+	public FaqVO getCurrCtgr(Integer sub_ctgr_num );
 	
-	public List<FaqTotalCtgrVO> getDetailCtgr() ;
+	public List<FaqVO> getDetailCtgr() ;
 	
 	public FaqVO getFaq(FaqVO faq);
 	

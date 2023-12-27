@@ -34,7 +34,28 @@ public class SignDAO {
 	private final String SIGN_UP1 = "INSERT INTO users (user_name) VALUES (?)";
 	private final String SIGN_UP2 = "INSERT INTO auth_id (user_num, id, pwd, user_email) VALUES (?,?,?,?)";
 
-	// find_id
+	/*
+	 * 로그인
+	 */
+	public SignVO login(SignVO vo) {
+		System.out.println("SignDAO login");
+
+		RowMapper<SignVO> rowMapper = (rs, rowNum) -> {
+			SignVO user = new SignVO();
+			user.setUser_num(rs.getInt("user_num"));
+			return user;
+		};
+
+		try {
+			return template.queryForObject(SIGN_IN, rowMapper, vo.getId(), vo.getPwd());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
+	/*
+	 * 아이디 찾기
+	 */
 	public SignVO findId(SignVO vo) {
 		System.out.println("===> SignDAO findId()");
 
@@ -52,7 +73,9 @@ public class SignDAO {
 		}
 	}
 
-	// find_pwd
+	/*
+	 * 비밀번호 재설정 - 첫번째 단계
+	 */
 	public SignVO findPwd(SignVO vo) {
 		System.out.println("===> SignDAO findPwd()");
 
@@ -70,32 +93,18 @@ public class SignDAO {
 		}
 	}
 
-	// sign_in
-	public SignVO signIn(SignVO vo) {
-		System.out.println("===> SignDAO signIn()");
-
-		RowMapper<SignVO> rowMapper = (rs, rowNum) -> {
-			SignVO user = new SignVO();
-			user.setUser_num(rs.getInt("user_num"));
-			return user;
-		};
-
-		try {
-			return template.queryForObject(SIGN_IN, rowMapper, vo.getId(), vo.getPwd());
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-
-	// update_pwd
+	/*
+	 * 비밀번호 재설정 - 세번째 단계
+	 */
 	public void updatePwd(SignVO vo) {
 		System.out.println("===> SignDAO updatePwd()");
 
 		template.update(UPDATE_PWD, vo.getPwd(), vo.getUser_num());
 	}
 
-	////////////////////////// sign up에서 사용
-
+	/*
+	 * 회원가입 - 아이디 중복 확인(비동기)
+	 */
 	public boolean checkIdExist(String id) {
 		System.out.println("===> SignDAO updatePwd()");
 
@@ -112,6 +121,9 @@ public class SignDAO {
 		}
 	}
 
+	/*
+	 * 회원가입 - 이메일 중복 확인(비동기)
+	 */
 	public boolean checkEmailExist(String user_email) {
 		System.out.println("===> SignDAO updatePwd()");
 
@@ -128,8 +140,11 @@ public class SignDAO {
 		}
 	}
 
-	public void signUp(SignVO vo) {
-		System.out.println("===> SignDAO updatePwd()");
+	/*
+	 * 회원가입
+	 */
+	public void register(SignVO vo) {
+		System.out.println("===> SignDAO: register");
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -143,11 +158,9 @@ public class SignDAO {
 				return pstmt;
 			}
 		}, keyHolder);
-		System.out.println("여기!");
-		int userNum = keyHolder.getKey().intValue();
-		System.out.println(userNum);
-		template.update(SIGN_UP2, userNum, vo.getId(), vo.getPwd(), vo.getUser_email());
-		System.out.println("간다!");
-	}
 
+		int userNum = keyHolder.getKey().intValue();
+
+		template.update(SIGN_UP2, userNum, vo.getId(), vo.getPwd(), vo.getUser_email());
+	}
 }

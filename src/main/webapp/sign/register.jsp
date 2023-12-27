@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/sign/sign_up.css" />
-<title>sign up</title>
+	href="${pageContext.request.contextPath}/resources/css/sign/register.css" />
+<title>register</title>
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -14,7 +14,7 @@
 	<div id="mc">
 		<div id="mch">회원가입</div>
 		<div id="mcp">회원정보를 입력해 주세요.</div>
-		<form id="mcf" action="/practice/signUp.do" method="post"
+		<form id="mcf" action="/sign/register.do" method="post"
 			onsubmit="validateForm(this, event)">
 			<input type="text" name="id" id="mcf-id" placeholder="아이디를 입력해 주세요." />
 			<div id="id-dupl">
@@ -50,8 +50,8 @@
 
 	<%@ include file="../footer.jsp"%>
 
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/js/sign/sign_up.js"></script>
+		src="${pageContext.request.contextPath}/resources/js/sign/register.js"></script>
 </body>
 </html>

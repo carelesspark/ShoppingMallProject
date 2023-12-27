@@ -13,72 +13,112 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dazzle.shop.model.sign.domain.SignVO;
 import com.dazzle.shop.model.sign.service.SignService;
 
 @Controller
-@SessionAttributes("sign")
+@RequestMapping("/sign")
 public class SignController {
 
 	@Autowired
 	private SignService signService;
 
-	// check_email
-	// 비밀번호 재설정 기능 - 두번째 단계
-	@GetMapping("/checkEmailPwd.do")
-	public String checkEmailPwd(Model model, HttpServletRequest request) {
-		System.out.println("===> SignController: check email auth - pwd");
-
-		// 세션에 저장해놓은 인증번호
-		HttpSession session = request.getSession();
-		String authStrSession = (String) session.getAttribute("tAuthStr");
-		// 사용이 끝난 tAuthStr 세션에서 삭제
-		session.removeAttribute("tAuthStr");
-
-		// 유저가 전송한 인증번호
-		String authStrUser = request.getParameter("authStr");
-
-		if (!authStrSession.equals(authStrUser)) { // fail
-			model.addAttribute("error", "failed");
-			return "sign/find_pwd.jsp";
-		}
-
-		return "redirect:/sign/update_pwd.jsp";
+	/*
+	 * 바로 접근하는 주소 제공
+	 */
+	@RequestMapping("/goLogin.do")
+	public String goLogin() {
+		return "redirect:/sign/login.jsp";
 	}
 
-	// find_id
-	// 아이디 찾기 기능
+	@RequestMapping("/goFindId.do")
+	public String goFindId() {
+		return "redirect:/sign/find_id.jsp";
+	}
+
+	@RequestMapping("/goFindPwd.do")
+	public String goFindPwd() {
+		return "redirect:/sign/find_pwd.jsp";
+	}
+
+	@RequestMapping("/goRegister.do")
+	public String goRegister() {
+		return "redirect:/sign/register.jsp";
+	}
+
+	/*
+	 * 로그인
+	 */
+	@PostMapping("/login.do")
+	public String login(SignVO vo, Model model, HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("SignController: login");
+
+		SignVO user = signService.login(vo); // user_num or null
+
+		if (user == null) { // fail to login
+			model.addAttribute("error", "failed");
+			return "sign_in.jsp";
+		}
+
+		// success to login
+		int user_num = user.getUser_num();
+		// 서버 session 저장
+		// key: "user_num", value: user_num
+		request.getSession().setAttribute("user_num", user_num);
+		// key: "user_type", value: "user"
+		request.getSession().setAttribute("user_type", "user");
+
+//		// 사용자 cookie에 "user_num":user_num 저장
+//		Cookie userNumCookie = new Cookie("user_num", String.valueOf(user_num));
+//		userNumCookie.setMaxAge(7 * 24 * 60 * 60);
+//		response.addCookie(userNumCookie);
+
+		// 아이디 저장에 체크되어 있을 경우 cookie에 savedId 저장
+		String cbox = request.getParameter("saveId");
+		if ("on".equals(cbox)) { // 체크되어 있을 경우
+			Cookie savedIdCookie = new Cookie("user_id", vo.getId());
+			savedIdCookie.setMaxAge(7 * 24 * 60 * 60);
+			response.addCookie(savedIdCookie);
+		}
+
+		return "redirect:/main/main.jsp";
+	}
+
+	/*
+	 * 아이디 찾기
+	 */
 	@PostMapping("/findId.do")
 	public String findId(SignVO vo, Model model) {
-		System.out.println("===> SignController: find id");
+		System.out.println("SignController: findId");
 
 		SignVO user = signService.findId(vo);
 
 		if (user == null) { // fail
 			model.addAttribute("error", "failed");
-			return "sign/find_id.jsp";
+			return "find_id.jsp";
 		}
 
 		// success
 		model.addAttribute("id", user.getId());
-		return "sign/found_id.jsp";
+		return "found_id.jsp";
 	}
 
-	// find_pwd
-	// 비밀번호 재설정 기능 - 첫번째 단계
+	/*
+	 * 비밀번호 재설정 - 첫번째 단계
+	 */
 	@PostMapping("/findPwd.do")
 	public String findPwd(SignVO vo, Model model, HttpSession session) {
-		System.out.println("===> SignController: find pwd");
+		System.out.println("SignController: findPwd");
 
 		SignVO user = signService.findPwd(vo);
 
 		if (user == null) { // fail
 			model.addAttribute("error", "failed");
-			return "sign/find_pwd.jsp";
+			return "find_pwd.jsp";
 		}
 
 		// success
@@ -93,47 +133,39 @@ public class SignController {
 		// 이메일로 uuid 전송
 		signService.sendEmail(vo.getUser_email(), authStr);
 
-		return "redirect:/sign/check_email_pwd.jsp";
+		return "redirect:/sign/verification_email.jsp";
 	}
 
-	// sign_in
-	// 로그인 기능
-	@PostMapping("/signIn.do")
-	public String signId(SignVO vo, Model model, HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("===> SignController: sign in");
+	/*
+	 * 비밀번호 재설정 - 두번째 단계
+	 */
+	@GetMapping("/verificationEmail.do")
+	public String verificationEmail(HttpServletRequest request, Model model) {
+		System.out.println("SignController: verificationEmail");
 
-		SignVO user = signService.signIn(vo); // user_num or null
+		// 세션에 저장해놓은 인증번호
+		HttpSession session = request.getSession();
+		String authStrSession = (String) session.getAttribute("tAuthStr");
+		// 사용이 끝난 tAuthStr 세션에서 삭제
+		session.removeAttribute("tAuthStr");
 
-		if (user == null) { // fail to sign in
+		// 유저가 전송한 인증번호
+		String authStrUser = request.getParameter("authStr");
+
+		if (!authStrSession.equals(authStrUser)) { // fail
 			model.addAttribute("error", "failed");
-			return "sign/sign_in.jsp";
+			return "find_pwd.jsp";
 		}
 
-		// success to sign in
-		int user_num = user.getUser_num();
-		// 서버 session에 user_num 저장
-		request.getSession().setAttribute("user_num", String.valueOf(user_num));
-		// 사용자 cookie에 user_num 저장
-		Cookie userNumCookie = new Cookie("user_num", String.valueOf(user_num));
-		userNumCookie.setMaxAge(7 * 24 * 60 * 60);
-		response.addCookie(userNumCookie);
-
-		// 아이디 저장에 체크되어 있을 경우 cookie에 savedId 저장
-		String cbox = request.getParameter("saveId");
-		if ("on".equals(cbox)) { // 체크되어 있을 경우
-			Cookie savedIdCookie = new Cookie("savedId", vo.getId());
-			savedIdCookie.setMaxAge(7 * 24 * 60 * 60);
-			response.addCookie(savedIdCookie);
-		}
-
-		return "redirect:/main/main.jsp";
+		return "redirect:/sign/update_pwd.jsp";
 	}
 
-	// update_pwd
-	// 비밀번호 재설정 기능
+	/*
+	 * 비밀번호 재설정 - 세번째 단계
+	 */
 	@PostMapping("/updatePwd.do")
 	public String updatePwd(SignVO vo, HttpSession session) {
-		System.out.println("===> SignController: update pwd");
+		System.out.println("SignController: updatePwd");
 
 		// 세션에 저장해놓은 유저번호
 		int user_num = (int) session.getAttribute("tUserNum");
@@ -144,15 +176,16 @@ public class SignController {
 
 		signService.updatePwd(vo);
 
-		return "redirect:/sign/sign_in.jsp";
+		return "redirect:/sign/login.jsp";
 	}
 
-	/////////////////
-	// sign_up id 중복 체크
-	@PostMapping("/checkIdSignUp.do")
+	/*
+	 * 회원가입 - 아이디 중복 확인(비동기)
+	 */
+	@PostMapping("/checkIdDupl.do")
 	@ResponseBody
-	public ResponseEntity<String> checkIdSignUp(@RequestParam String id) {
-		System.out.println("===> SignController: check id dupl - sign up");
+	public ResponseEntity<String> checkIdDupl(@RequestParam String id) {
+		System.out.println("SignController: checkIdDupl");
 
 		boolean isIdDupl = signService.isIdDupl(id);
 
@@ -165,10 +198,13 @@ public class SignController {
 		}
 	}
 
-	@PostMapping("/checkEmailSignUp.do")
+	/*
+	 * 회원가입 - 이메일 중복 확인(비동기)
+	 */
+	@PostMapping("/checkEmailDupl.do")
 	@ResponseBody
-	public ResponseEntity<String> checkEmailSignUp(@RequestParam String user_email) {
-		System.out.println("===> SignController: check email dupl - sign up");
+	public ResponseEntity<String> checkEmailDupl(@RequestParam String user_email) {
+		System.out.println("SignController: checkEmailDupl");
 
 		if (user_email == "") {
 			return ResponseEntity.ok("Empty input");
@@ -184,15 +220,17 @@ public class SignController {
 			return ResponseEntity.ok("None duplicate email");
 		}
 	}
-	
-	@PostMapping("/signUp.do")
-	public String signUp(SignVO vo) {
-		System.out.println("===> SignController: sign up");
 
-		signService.signUp(vo);
+	/*
+	 * 회원가입
+	 */
+	@PostMapping("/register.do")
+	public String register(SignVO vo) {
+		System.out.println("===> SignController: register");
 
-		return "redirect:/sign/success_sign_up.jsp";
+		signService.register(vo);
+
+		return "redirect:/sign/welcome.jsp";
 	}
-
 
 }
