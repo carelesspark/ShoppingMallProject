@@ -11,7 +11,7 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/order/productOrderSucc.css"
 	rel="stylesheet" />
-<title>Document</title>
+<title>주문 성공 페이지</title>
 
 </head>
 <body>
@@ -95,7 +95,7 @@
 			<div>
 				<div id="order-fee">
 					<div>
-						<div>총 주문 금액</div>
+						<div id="order-fee-div-div">총 주문 금액</div>
 						<div>
 				        	<fmt:formatNumber value="${total_price}" pattern="#,###"/> 원
 				        </div>
@@ -109,11 +109,23 @@
 		            </svg>
 					</div>
 					<div>
-						<div>배송비</div>
+						<div id="order-fee-div-div">배송비</div>
 						<div>
 				        	<fmt:formatNumber value="${order.delivery_price }" pattern="#,###"/> 원
 				        </div>
 							<c:set var="total_price" value="${total_price + order.delivery_price}" />
+					</div>
+					<div>
+						<svg width="49" height="47" viewBox="0 0 49 47" fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+		                <path
+								d="M17.8718 18.027V1H23.8974H29.9231V18.027H48V28.973H29.9231V46H17.8718V44.7838V36.8784V28.973H1V18.027H17.8718Z"
+								fill="black" stroke="black" />
+		            </svg>
+					</div>
+					<div>
+						<div id="order-fee-div-div">포인트 차감</div>
+						<div>-<fmt:formatNumber value="${order.points}" pattern="#,###"/>포인트</div>
 					</div>
 					<div>
 						<svg width="50" height="30" viewBox="0 0 50 30" fill="none"
@@ -125,9 +137,9 @@
 		            </svg>
 					</div>
 					<div>
-						<div>총 결재 금액</div>
+						<div id="order-fee-div-div">총 결재 금액</div>
 						<div>
-				        	<fmt:formatNumber value="${total_price }" pattern="#,###"/> 원
+				        	<fmt:formatNumber value="${order.totalPrice }" pattern="#,###"/> 원
 				        </div>
 					</div>
 				</div>

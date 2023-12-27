@@ -1,48 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.dazzle.shop.model.product.ProductSizeVO" %>
+<%@ page import="com.dazzle.shop.model.product.ProductColorVO" %>
+<%@ page import="com.dazzle.shop.model.product.ProductVO" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/product/product.css">
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/product/product.css">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
+				<c:set value="${product_info }" var="info"></c:set>
+				<c:set value="${product_img }" var="img"></c:set>
+				<c:set value="${info.colors}" var="colors"></c:set>
+				
+
 
 	<div class="container my-5">
 		<div class="row">
 			<div class="col-md-6">
 				<div class="carousel slide" data-bs-ride="carousel"
-					id="productCarousel">	
+					id="productCarousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active">
 							<img alt="Placeholder image for product" class="d-block w-100"
-								height="600" src="https://placehold.co/600x600" width="600" />
+								height="600" src="${img.main_img }" width="600" />
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="product-info">
-					<h2>상품이름</h2>
-					<p class="price">가격 000,000</p>
-					<p class="discount">000p (1%) 적립</p>
+					<h2>${info.product_name }</h2>
+					<p class="price">${info.product_price }원</p>
+					<p class="discount">${(info.product_price * 0.01).intValue()}p (1%) 적립</p>
 					<p class="delivery-info">오늘출발 상품 오전 2시 이전 주문시 오늘 바로 출발</p>
 					<hr />
 					<div class="options">
-						<select aria-label="Default select example" class="form-select">
-							<option selected="">옵션 1</option>
-							<option value="1">옵션 2</option>
-							<option value="2">옵션 3</option>
-							<option value="3">옵션 4</option>
-						</select> <select aria-label="Default select example" class="form-select">
-							<option selected="">옵션 1</option>
-							<option value="1">옵션 2</option>
-							<option value="2">옵션 3</option>
-							<option value="3">옵션 4</option>
+						<select aria-label="Default select example" class="form-select"
+							id="colorSelect" onchange="updateSizeOptions()">	
+							<option selected>color</option>
+							<c:forEach items="${info.colors }" var="c">
+								<option value="${c.color_num }">${c.color_name }</option>							
+							</c:forEach>
+						</select>
+						 
+						<select aria-label="Default select example" class="form-select"
+							id="sizeSelect">
+							<option selected>size</option>
 						</select>
 					</div>
+
 					<hr />
 					<div class="quantity">
 						<button class="btn btn-outline-secondary" type="button"
@@ -52,8 +67,8 @@
 							onclick="incrementQuantity()">+</button>
 					</div>
 					<div class="buttons">
-						<button class="btn btn-outline-secondary">장바구니 담기</button>
-						<button class="btn btn-outline-secondary">바로 구매하기</button>
+						<button class="btn btn-outline-secondary" onclick="addToCart()">장바구니 담기</button>
+						<button class="btn btn-outline-secondary" onclick="buyNow()">바로 구매하기</button>
 					</div>
 				</div>
 			</div>
@@ -71,37 +86,33 @@
 		</div>
 		<div class="email-icon" id="product-detail">
 			<img alt="Placeholder image for product" class="d-block w-100 mb-5"
-				height="100%" src="https://placehold.co/600x600" width="100%" />
+				height="100%" src="${img.sub_img }" width="100%" />
 		</div>
 		<table class="table">
 			<tbody>
 				<tr>
-					<th>제품 소재</th>
-					<td class="score">●●●●</td>
+					<th>제품 명</th>
+					<td class="score">${info.product_name }</td>
 				</tr>
 				<tr>
 					<th>색상</th>
-					<td class="score">●●●●</td>
+					<td class="score">
+						<c:forEach items="${colors }" var="c">
+							${c.color_name }
+						</c:forEach>
+					</td>
 				</tr>
 				<tr>
-					<th>치수</th>
-					<td class="score">●●●●</td>
+					<th>사이즈</th>
+					<td class="score">
+						s m l
+					</td>
 				</tr>
 				<tr>
-					<th>제조자</th>
-					<td class="score">●●●●</td>
-				</tr>
-				<tr>
-					<th>제조국</th>
-					<td class="score">●●●●</td>
-				</tr>
-				<tr>
-					<th>세탁방법</th>
-					<td class="score">●●●●</td>
-				</tr>
-				<tr>
-					<th>제조연월</th>
-					<td class="score">●●●●</td>
+					<th>상품 등록 일</th>
+					<td class="score">
+						${info.product_date }
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -110,7 +121,7 @@
 			<div class="review-qna-header">
 				<div class="review-qna-title">리뷰 (454)</div>
 				<div class="review-qna-date">
-					<a href="">리뷰 쓰기</a>
+					<a href="/review.do?product_num=${info.product_num }">리뷰 쓰기</a>
 				</div>
 			</div>
 			<!-- Repeat for each review item -->
@@ -145,7 +156,7 @@
 			<div class="review-qna-header">
 				<div class="review-qna-title">상품문의 (454)</div>
 				<div class="review-qna-date">
-					<a href="">문의 쓰기</a>
+					<a href="/inquiry.do">문의 쓰기</a>
 				</div>
 			</div>
 			<!-- Repeat for each review item -->
@@ -180,6 +191,85 @@
 		integrity="sha384-kQtW33rZJAHjy8F/xzRnt+8DJSsIh2F5r2M5anjzL5F5K/3NS72V8h6Iq5a7LxN8"
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="../resources/js/product/product.js"></script>
+							 <script>
+        function updateSizeOptions() {
+            var selectedColor = document.getElementById("colorSelect").value;
+            var sizes = colorSizeMapping[selectedColor]; // 사전에 정의된 색상별 사이즈 매핑
+
+            if (sizes != null) {
+                var sizeSelect = document.getElementById("sizeSelect");
+                sizeSelect.innerHTML = '<option selected="">size</option>';
+            }
+
+            sizes.forEach(function(size) {
+                var option = document.createElement("option");
+                option.value = size.size_num;
+                option.text = size.size_name;
+                sizeSelect.appendChild(option);
+            });
+        }
+
+        var colorSizeMapping = {}; // 색상별 사이즈 매핑을 저장할 객체
+        window.onload = function() {
+            // 색상별 사이즈 매핑 초기화
+            <% ProductVO product = (ProductVO) request.getAttribute("product_info"); %>
+            <% for(ProductColorVO color : product.getColors()) { %>
+                colorSizeMapping["<%= color.getColor_num() %>"] = [
+                    <% for(ProductSizeVO size : color.getSizes()) { %>
+                        { size_num: <%= size.getSize_num() %>, size_name: "<%= size.getSize_name() %>" },
+                    <% } %>
+                ];
+            <% } %>
+        };
+        
+        
+        function addToCart() {
+            var sizeSelect = document.getElementById("sizeSelect");
+            var selectedSize = sizeSelect.options[sizeSelect.selectedIndex].value;
+
+            var quantityInput = document.getElementById("quantityInput");
+            var quantity = quantityInput.value;
+            
+            $.ajax({
+                type: "GET",
+                url: "/add_to_cart.do",
+                data: {
+                    size_num: selectedSize,
+                    quantity: quantity
+                },
+                success: function (response) {
+                    
+                },
+                error: function (error) {
+                    
+                }
+            });
+        }
+
+        function buyNow() {
+            var sizeSelect = document.getElementById("sizeSelect");
+            var selectedSize = sizeSelect.options[sizeSelect.selectedIndex].value;
+
+            var quantityInput = document.getElementById("quantityInput");
+            var quantity = quantityInput.value;
+            
+            $.ajax({
+                type: "GET",
+                url: "/buy_now.do", 
+                data: {
+                    size_num: selectedSize,
+                    quantity: quantity
+                },
+                success: function (response) {
+                    
+                },
+                error: function (error) {
+                    
+                }
+            });
+        }
+    
+    </script>
 	<%@ include file="../footer.jsp"%>
 </body>
 </html>

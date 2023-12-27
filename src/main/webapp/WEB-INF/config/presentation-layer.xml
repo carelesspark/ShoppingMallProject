@@ -10,6 +10,7 @@
 	<context:component-scan
 		base-package="com.dazzle.shop.controller"></context:component-scan>
 
+
 	<!-- interceptor 설정 -->
 	<mvc:interceptors>
 		<!-- AdminInterceptor를 /admin/** 경로에 적용 -->
@@ -23,5 +24,6 @@
 			<bean class="com.dazzle.shop.interceptor.UserInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+
 
 </beans>

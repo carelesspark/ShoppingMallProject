@@ -23,6 +23,8 @@ public class OrderSuccInfoRowMapper implements RowMapper<OrderVO>{
 		orderInfo.setRequest(rs.getString("request"));
 		orderInfo.setPayment(rs.getString("payment"));
 		orderInfo.setPhone_num(rs.getString("phone_num"));
+		orderInfo.setPoints(rs.getInt("points"));
+		orderInfo.setTotalPrice(rs.getInt("totalPrice"));
 		return orderInfo;
 	}
 

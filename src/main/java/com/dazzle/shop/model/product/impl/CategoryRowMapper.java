@@ -14,9 +14,8 @@ public class CategoryRowMapper implements RowMapper<CategoryVO>{
 		
 		CategoryVO vo = new CategoryVO();
 		
-		vo.setCategory_num(rs.getInt(1));
-		vo.setCategory_name(rs.getString(2));
-		vo.setCategory_code(rs.getString(3));
+		vo.setCategory_num(rs.getInt("category_num"));
+		vo.setCategory_name(rs.getString("category_name"));
 			
 		return vo;
 	}

@@ -58,10 +58,11 @@
 					</c:if>
 				</ul>
 
-				<form class="d-flex mt-3">
-					<input class="form-control me-1" type="search" placeholder="Search"
-						aria-label="Search" readonly />
-					<button class="btn btn-outline-success" type="submit" disabled>
+
+				<form class="d-flex mt-3" action="/search_result.do">
+					<input class="form-control me-1" type="search" placeholder="Search" name="search_keyword"
+						aria-label="Search" />
+					<button class="btn btn-outline-success" type="submit">
 						<i class="fas fa-search"></i>
 					</button>
 				</form>
