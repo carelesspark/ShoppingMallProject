@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.dazzle.shop.model.product.ProductSizeVO"%>
-<%@ page import="com.dazzle.shop.model.product.ProductColorVO"%>
-<%@ page import="com.dazzle.shop.model.product.ProductVO"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+<%@ page import="com.dazzle.shop.model.product.ProductSizeVO" %>
+<%@ page import="com.dazzle.shop.model.product.ProductColorVO" %>
+<%@ page import="com.dazzle.shop.model.product.ProductVO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,37 +116,51 @@
 
 		<div class="review-qna-container" id="product-review">
 			<div class="review-qna-header">
-				<div class="review-qna-title">리뷰 (454)</div>
+				<div class="review-qna-title">리뷰 (${count.count})</div>
 				<div class="review-qna-date">
-					<a href="/review.do?product_num=${info.product_num }">리뷰 쓰기</a>
+					
 				</div>
 			</div>
 			<!-- Repeat for each review item -->
-			<div class="review-qna-item">
-				<div class="review-qna-rating">★★★★★</div>
-				<div class="review-qna-rating">abc***</div>
-				<div class="review-qna-author">사이즈 : m</div>
-				<div class="review-qna-author">키 : 160cm</div>
-				<div class="review-qna-author">몸무게 : 44kg</div>
-				<div class="review-qna-content">택배가 어쩌구 저쩌구 상품이 어쩌구 저쩌구 다이어트
-					중인 저에게 딱 맞습니다</div>
-				<div class="review-qna-date">2023.12.05</div>
-			</div>
-			<!-- ... other review items ... -->
-			<div class="review-qna-pagination">
-				<nav aria-label="Page navigation">
-					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#">«</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a>
-						</li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">»</a></li>
-					</ul>
-				</nav>
-			</div>
+			<c:forEach var="review" items="${review}">
+			  <div class="review-qna-item">
+			    <div>
+			      <div class="review-qna-rating">
+			        <c:forEach var="i" begin="1" end="${review.review_ratings}">
+			          	<span style=" color: #FFD700;">★</span>
+			        </c:forEach>
+			      </div>
+			      <c:set var="maskedId" value="${fn:substring(review.id, 0, 2)}" />
+					<c:forEach begin="1" end="${fn:length(review.id)-2}" var="i">
+				    <c:set var="maskedId" value="${maskedId}*"/>
+				    </c:forEach>
+				    <div class="review-qna-rating">${maskedId}</div>
+				
+			      <div class="review-qna-author">사이즈 : ${review.size_name} 색상: ${review.color_name}</div>
+			      <div class="review-qna-content">${review.review_content}</div>
+			      <div class="review-qna-date">${review.review_date}</div>
+			    </div>
+			    <div>
+			      <c:if test="${not empty review.review_img}">
+			        <img height="200px" src="${review.review_img}" width="200px" />
+			      </c:if>
+			    </div>
+			  </div>
+			</c:forEach>
+			
+			 <div id="pageButtons" class="text-center mt-3">
+			        <c:forEach begin="1" end="${totalPages}" varStatus="loop">
+			            <c:url value="" var="url">
+			                <c:param name="curr_page" value="${loop.index}" />
+			                <c:param name="product_num" value="${info.product_num }" />
+			            </c:url>
+			            <a href="${url}" class="btn ${loop.index == curr_page ? 'active' : ''}">
+			                ${loop.index}
+			            </a>
+			        </c:forEach>
+			    </div>
+			<br>
+	
 		</div>
 
 		<div class="review-qna-container" id="product-inquiry">
@@ -273,7 +290,8 @@
                 }
             });
         }
-    
+    	
+        
     </script>
 	<%@ include file="../footer.jsp"%>
 </body>

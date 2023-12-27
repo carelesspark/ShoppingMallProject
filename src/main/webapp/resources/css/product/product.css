@@ -123,8 +123,10 @@ body {
 }
 
 .review-qna-item {
+	display: flex;
 	border-top: 1px solid #ccc;
 	padding: 20px 0;
+	 justify-content: space-between;
 }
 
 .review-qna-item:last-child {
