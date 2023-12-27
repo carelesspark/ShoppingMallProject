@@ -130,6 +130,12 @@ public class ProductServiceImpl implements ProductService{
 		
 		return dao.getInquiry(_product_num);
 	}
+
+	@Override
+	public InquiryVO getInquiryCount(int _product_num) {
+		
+		return dao.getInquiryCount(_product_num);
+	}
 	
 	
 }

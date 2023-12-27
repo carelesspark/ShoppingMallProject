@@ -39,4 +39,6 @@ public interface ProductService {
 	void insertInquiry(InquiryVO vo);
 	
 	List<InquiryVO> getInquiry(int _product_num);
+	
+	InquiryVO getInquiryCount(int _product_num);
 }
