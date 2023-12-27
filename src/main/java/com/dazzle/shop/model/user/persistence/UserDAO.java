@@ -54,8 +54,8 @@ public class UserDAO {
 			+ "ON od.order_num = o.order_num WHERE p.user_num = ? AND o.order_date BETWEEN ? AND ?";
 
 	// 내가 작성한 리뷰 내역
-	private final String REVIEW_LIST = "SELECT r.review_ratings, r.review_date, r.review_clicks, "
-			+ "p.product_name, r.review_num, ps.size_name, pcolor.color_name "
+	private final String REVIEW_LIST = "SELECT r.review_ratings, r.review_date, "
+			+ "p.product_name, p.product_num, ps.size_name, pcolor.color_name "
 			+ "FROM review r INNER JOIN product_code pc ON r.product_code = pc.product_code "
 			+ "JOIN product_size ps ON pc.size_num = ps.size_num JOIN product_color pcolor "
 			+ "ON ps.color_num = pcolor.color_num JOIN product p ON pcolor.product_num = p.product_num "
@@ -66,12 +66,9 @@ public class UserDAO {
 			+ "WHERE r.user_num = ? AND r.review_date BETWEEN ? AND ?";
 
 	// 1대1 질의응답 내역
-	private final String INQUIRY_LIST = "SELECT i.inquiry_date, i.inquiry_num, ia.answer, "
-			+ "p.product_name, pcolor.color_name, ps.size_name FROM inquiry i "
-			+ "LEFT OUTER JOIN inquiry_answer ia ON i.inquiry_num = ia.inquiry_num "
-			+ "JOIN product_code pc ON i.product_code = pc.product_code "
-			+ "JOIN product_size ps ON pc.size_num = ps.size_num JOIN product_color pcolor "
-			+ "ON ps.color_num = pcolor.color_num JOIN product p ON pcolor.product_num = p.product_num "
+	private final String INQUIRY_LIST = "SELECT i.inquiry_date, ia.answer, p.product_num, p.product_name "
+			+ "FROM inquiry i LEFT OUTER JOIN inquiry_answer ia ON i.inquiry_num = ia.inquiry_num "
+			+ "JOIN product p ON i.product_num = pc.product_num "
 			+ "WHERE i.user_num = ? AND i.inquiry_date BETWEEN ? AND ? ORDER BY i.inquiry_date DESC LIMIT ?, ?";
 	// 날짜 기준 질의응답 개수
 	private final String COUNT_INQUIRY_LIST_BETWEEN_DATES = "SELECT COUNT(*) FROM inquiry "

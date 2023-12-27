@@ -21,8 +21,11 @@
 
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" />
+			<mvc:mapping path="/cart.do"/>
 			<bean class="com.dazzle.shop.interceptor.UserInterceptor" />
 		</mvc:interceptor>
+		
+		
 	</mvc:interceptors>
 
 

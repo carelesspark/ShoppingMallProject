@@ -64,15 +64,7 @@
 								<c:forEach var="list" items="${inquiryList}">
 									<div class="clb">
 										<div>${list.inquiry_date}</div>
-										<div>
-											<div>
-												<div>${list.product_name}</div>
-												<div>&nbsp/&nbsp</div>
-												<div>${list.color_name}</div>
-												<div>&nbsp/&nbsp</div>
-												<div>${list.size_name}</div>
-											</div>
-										</div>
+										<div>${list.product_name}</div>
 										<c:choose>
 											<c:when test="${list.answer != null}">
 												<div>O</div>
@@ -84,7 +76,7 @@
 										<div>
 											<div>
 												<button type="button"
-													onclick="window.location.href='.do?review_num=${list.inquiry_num}'">&gt;</button>
+													onclick="window.location.href='/product.do?product_num=${list.product_num}'">&gt;</button>
 											</div>
 										</div>
 									</div>
