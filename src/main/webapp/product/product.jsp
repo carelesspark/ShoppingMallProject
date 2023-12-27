@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="com.dazzle.shop.model.product.ProductSizeVO" %>
-<%@ page import="com.dazzle.shop.model.product.ProductColorVO" %>
-<%@ page import="com.dazzle.shop.model.product.ProductVO" %>
+<%@ page import="com.dazzle.shop.model.product.ProductSizeVO"%>
+<%@ page import="com.dazzle.shop.model.product.ProductColorVO"%>
+<%@ page import="com.dazzle.shop.model.product.ProductVO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +16,10 @@
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
-				<c:set value="${product_info }" var="info"></c:set>
-				<c:set value="${product_img }" var="img"></c:set>
-				<c:set value="${info.colors}" var="colors"></c:set>
-				
+	<c:set value="${product_info }" var="info"></c:set>
+	<c:set value="${product_img }" var="img"></c:set>
+	<c:set value="${info.colors}" var="colors"></c:set>
+
 
 
 	<div class="container my-5">
@@ -40,19 +39,18 @@
 				<div class="product-info">
 					<h2>${info.product_name }</h2>
 					<p class="price">${info.product_price }원</p>
-					<p class="discount">${(info.product_price * 0.01).intValue()}p (1%) 적립</p>
+					<p class="discount">${(info.product_price * 0.01).intValue()}p
+						(1%) 적립</p>
 					<p class="delivery-info">오늘출발 상품 오전 2시 이전 주문시 오늘 바로 출발</p>
 					<hr />
 					<div class="options">
 						<select aria-label="Default select example" class="form-select"
-							id="colorSelect" onchange="updateSizeOptions()">	
+							id="colorSelect" onchange="updateSizeOptions()">
 							<option selected>color</option>
 							<c:forEach items="${info.colors }" var="c">
-								<option value="${c.color_num }">${c.color_name }</option>							
+								<option value="${c.color_num }">${c.color_name }</option>
 							</c:forEach>
-						</select>
-						 
-						<select aria-label="Default select example" class="form-select"
+						</select> <select aria-label="Default select example" class="form-select"
 							id="sizeSelect">
 							<option selected>size</option>
 						</select>
@@ -67,8 +65,10 @@
 							onclick="incrementQuantity()">+</button>
 					</div>
 					<div class="buttons">
-						<button class="btn btn-outline-secondary" onclick="addToCart()">장바구니 담기</button>
-						<button class="btn btn-outline-secondary" onclick="buyNow()">바로 구매하기</button>
+						<button class="btn btn-outline-secondary" onclick="addToCart()">장바구니
+							담기</button>
+						<button class="btn btn-outline-secondary" onclick="buyNow()">바로
+							구매하기</button>
 					</div>
 				</div>
 			</div>
@@ -96,23 +96,17 @@
 				</tr>
 				<tr>
 					<th>색상</th>
-					<td class="score">
-						<c:forEach items="${colors }" var="c">
+					<td class="score"><c:forEach items="${colors }" var="c">
 							${c.color_name }
-						</c:forEach>
-					</td>
+						</c:forEach></td>
 				</tr>
 				<tr>
 					<th>사이즈</th>
-					<td class="score">
-						s m l
-					</td>
+					<td class="score">s m l</td>
 				</tr>
 				<tr>
 					<th>상품 등록 일</th>
-					<td class="score">
-						${info.product_date }
-					</td>
+					<td class="score">${info.product_date }</td>
 				</tr>
 			</tbody>
 		</table>
@@ -156,17 +150,28 @@
 			<div class="review-qna-header">
 				<div class="review-qna-title">상품문의 (454)</div>
 				<div class="review-qna-date">
-					<a href="/inquiry.do">문의 쓰기</a>
+					<a href="/inquiry.do?product_num=${info.product_num }">문의 쓰기</a>
 				</div>
 			</div>
 			<!-- Repeat for each review item -->
-			<div class="review-qna-item">
-				<div class="review-qna-rating">abc***</div>
-				<div class="review-qna-author">@@문의</div>
-				<div class="review-qna-content">택배가 어쩌구 저쩌구 상품이 어쩌구 저쩌구 다이어트
-					중인 저에게 딱 맞습니다</div>
-				<div class="review-qna-date">2023.12.05</div>
-			</div>
+			<c:choose>
+				<c:when test="${not empty inquiryList}">
+					<c:forEach items="${inquiryList}" var="inquiryList">
+						<div class="review-qna-item">
+							<div class="review-qna-rating">*******</div>
+							<div class="review-qna-author">문의사항 :
+								${inquiryList.inquiry_title}</div>
+							<div class="review-qna-content">${inquiryList.inquiry_content}</div>
+							<div class="review-qna-date">${inquiryList.inquiry_date}</div>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div class="review-qna-item">
+						<div class="review-qna-content">작성된 문의 내역이 없습니다.</div>
+					</div>
+				</c:otherwise>
+			</c:choose>
 			<!-- ... other review items ... -->
 			<div class="review-qna-pagination">
 				<nav aria-label="Page navigation">
@@ -191,7 +196,7 @@
 		integrity="sha384-kQtW33rZJAHjy8F/xzRnt+8DJSsIh2F5r2M5anjzL5F5K/3NS72V8h6Iq5a7LxN8"
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="../resources/js/product/product.js"></script>
-							 <script>
+	<script>
         function updateSizeOptions() {
             var selectedColor = document.getElementById("colorSelect").value;
             var sizes = colorSizeMapping[selectedColor]; // 사전에 정의된 색상별 사이즈 매핑
@@ -212,14 +217,14 @@
         var colorSizeMapping = {}; // 색상별 사이즈 매핑을 저장할 객체
         window.onload = function() {
             // 색상별 사이즈 매핑 초기화
-            <% ProductVO product = (ProductVO) request.getAttribute("product_info"); %>
-            <% for(ProductColorVO color : product.getColors()) { %>
-                colorSizeMapping["<%= color.getColor_num() %>"] = [
-                    <% for(ProductSizeVO size : color.getSizes()) { %>
-                        { size_num: <%= size.getSize_num() %>, size_name: "<%= size.getSize_name() %>" },
-                    <% } %>
+            <%ProductVO product = (ProductVO) request.getAttribute("product_info");%>
+            <%for (ProductColorVO color : product.getColors()) {%>
+                colorSizeMapping["<%=color.getColor_num()%>"] = [
+                    <%for (ProductSizeVO size : color.getSizes()) {%>
+                        { size_num: <%=size.getSize_num()%>, size_name: "<%=size.getSize_name()%>" },
+                    <%}%>
                 ];
-            <% } %>
+            <%}%>
         };
         
         

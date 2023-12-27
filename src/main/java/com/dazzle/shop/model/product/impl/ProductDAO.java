@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.dazzle.shop.model.product.CategoryVO;
+import com.dazzle.shop.model.product.InquiryVO;
 import com.dazzle.shop.model.product.ProductCodeVO;
 import com.dazzle.shop.model.product.ProductColorVO;
 import com.dazzle.shop.model.product.ProductImgVO;
@@ -95,6 +96,10 @@ public class ProductDAO {
 	
 	private final String get_product_code = "SELECT * FROM product_code p "
 			+ "WHERE p.size_num = ?";
+	
+	private final String INSERT_INQUIRY = "INSERT INTO inquiry VALUES(DEFAULT, ?, ?, NOW(), ?, ?);";
+	
+	private final String GET_INQUIRY = "select * from inquiry WHERE product_num = ?";
 
 	public List<ProductsVO> get_category_by_products_paged(String _category_num, int limit, int offset) {
 	    return jdbc_template.query(get_category_by_products_paged, new Object[] { _category_num, limit, offset }, new ProductsRowMapper());
@@ -153,6 +158,17 @@ public class ProductDAO {
 	public ProductCodeVO get_product_code(int _size_num) {
 		System.out.println("상품코드");
 		return jdbc_template.queryForObject(get_product_code, new Object[] {_size_num}, new ProductCodeRowMapper());
+	}
+	
+	public void insertInquiry(InquiryVO vo) {
+		System.out.println("insertInquiry()");
+		jdbc_template.update(INSERT_INQUIRY, vo.getUser_num(), vo.getProduct_num(), vo.getInquiry_title(), vo.getInquiry_content());
+		return;
+	}
+	
+	public List<InquiryVO> getInquiry(int _product_num) {
+		System.out.println("getInquiry()");
+		return jdbc_template.query(GET_INQUIRY, new Object[] {_product_num}, new InquiryRowMapper());
 	}
 
 }
