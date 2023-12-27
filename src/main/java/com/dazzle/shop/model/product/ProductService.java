@@ -35,4 +35,8 @@ public interface ProductService {
 	int count_search_products(String _search_keyword);
 	
 	ProductCodeVO get_product_code(int _size_num);
+	
+	void insertInquiry(InquiryVO vo);
+	
+	List<InquiryVO> getInquiry(int _product_num);
 }
