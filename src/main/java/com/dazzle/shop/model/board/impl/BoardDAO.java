@@ -20,8 +20,10 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dazzle.shop.model.board.BoardProductVO;
 import com.dazzle.shop.model.board.BoardVO;
 import com.dazzle.shop.model.board.FileVO;
+import com.dazzle.shop.model.board.PVO;
 import com.dazzle.shop.model.board.ReplyVO;
 
 @Repository("boardDAO")
@@ -161,6 +163,14 @@ public class BoardDAO {
 
 		return keyHolder.getKey().intValue();
 	}
+	
+	public List<PVO> getProductList() {
+		String sql = "select product_num, product_name from product";
+		
+		List<PVO> productList = template.query(sql, new PRowMapper());
+		
+		return productList;
+	}
 
 	public void insertBoardImg(int pno, String mainImageName) {
 		String sql = "insert into file (pno, fname) values (?, ?)";
@@ -172,6 +182,12 @@ public class BoardDAO {
 			System.err.println("DAO 실패");
 		}
 
+	}
+	
+	public void insertPNum(BoardProductVO vo) {
+		String sql = "insert into board_product_num (pno, product_num) values (?, ?)";
+		
+		template.update(sql, vo.getPno(), vo.getProduct_num());
 	}
 	
 

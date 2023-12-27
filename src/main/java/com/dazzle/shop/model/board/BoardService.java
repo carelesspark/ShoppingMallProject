@@ -31,7 +31,11 @@ public interface BoardService {
 	
 	int writeBoard(BoardVO vo);
 	
+	List<PVO> getProductList();
+	
 	void insertBoardImg(int pno, String mainImageName);
+	
+	void insertPNum(BoardProductVO vo);
 	
 	void writeReply(ReplyVO vo);
 	

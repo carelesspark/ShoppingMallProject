@@ -16,7 +16,7 @@
 		<div class="board">
 			게시판
 			<c:if test="${user_num ne null }">
-			<button onclick="location.href='/board/boardWrite.jsp'">작성</button></c:if>
+			<button onclick="location.href='/board/writeBoard.do'">작성</button></c:if>
 		</div>
 		<hr>
 		<div class="tag_container">

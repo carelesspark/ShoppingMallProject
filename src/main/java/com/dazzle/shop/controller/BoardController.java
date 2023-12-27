@@ -26,9 +26,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.dazzle.shop.model.board.BoardProductVO;
 import com.dazzle.shop.model.board.BoardService;
 import com.dazzle.shop.model.board.BoardVO;
 import com.dazzle.shop.model.board.FileVO;
+import com.dazzle.shop.model.board.PVO;
 import com.dazzle.shop.model.board.ReplyVO;
 
 @Controller
@@ -154,9 +156,18 @@ public class BoardController {
 
 		return "/board/questionGet.jsp";
 	}
+	
+	@RequestMapping(value="/board/writeBoard.do")
+	public String writeBoard(Model model) {
+		List<PVO> productList = boardService.getProductList();
+		
+		model.addAttribute("product", productList);
+		
+		return "/board/boardWrite.jsp";
+	}
 
 	@RequestMapping(value = "/board/boardWrite.do")
-	public String writeBoard(BoardVO vo, HttpServletRequest request, MultipartHttpServletRequest mRequest) {
+	public String writeBoard(BoardVO vo, BoardProductVO bpvo, HttpServletRequest request, MultipartHttpServletRequest mRequest, @RequestParam(name = "product_num")List<Integer>product_nums) {
 		List<MultipartFile> mainImageList = mRequest.getFiles("file");
 		System.out.println(mainImageList);
 		HttpSession session = request.getSession();
@@ -188,6 +199,13 @@ public class BoardController {
 			}
 
 			boardService.insertBoardImg(pno, mainImageName);
+		}
+		
+		System.out.println(product_nums);
+		
+		for(int product_num : product_nums) {
+			bpvo.setPno(pno);
+			boardService.insertPNum(bpvo);
 		}
 
 		return "redirect:/boardMain.do";

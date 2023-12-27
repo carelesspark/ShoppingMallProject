@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dazzle.shop.model.board.BoardProductVO;
 import com.dazzle.shop.model.board.BoardService;
 import com.dazzle.shop.model.board.BoardVO;
 import com.dazzle.shop.model.board.FileVO;
+import com.dazzle.shop.model.board.PVO;
 import com.dazzle.shop.model.board.ReplyVO;
 
 @Service("BoardService")
@@ -95,9 +97,21 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public List<PVO> getProductList() {
+		// TODO Auto-generated method stub
+		return boardDAO.getProductList();
+	}
+	
+	@Override
 	public void insertBoardImg(int pno, String mainImageName) {
 		// TODO Auto-generated method stub
 		boardDAO.insertBoardImg(pno, mainImageName);
+	}
+	
+	@Override
+	public void insertPNum(BoardProductVO vo) {
+		// TODO Auto-generated method stub
+		boardDAO.insertPNum(vo);
 	}
 
 	@Override

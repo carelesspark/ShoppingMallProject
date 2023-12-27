@@ -45,8 +45,10 @@
 				<form action="writeReply.do">
 				<div class="input">
 					<input type="text" style="visibility: hidden; width: 0" name="pno" value="${board.pno }">
-					<input type="text" class="reply_input" placeholder="댓글 달기..." name="rcontent">
-					<input type="submit" class="reply_submit" value="게시">
+					<c:if test="${user_num ne null }">
+						<input type="text" class="reply_input" placeholder="댓글 달기..." name="rcontent">
+						<input type="submit" class="reply_submit" value="게시">
+					</c:if>
 				</div>
 				</form>
 			</div>
