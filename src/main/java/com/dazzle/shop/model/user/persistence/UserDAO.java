@@ -68,7 +68,7 @@ public class UserDAO {
 	// 1대1 질의응답 내역
 	private final String INQUIRY_LIST = "SELECT i.inquiry_date, ia.answer, p.product_num, p.product_name "
 			+ "FROM inquiry i LEFT OUTER JOIN inquiry_answer ia ON i.inquiry_num = ia.inquiry_num "
-			+ "JOIN product p ON i.product_num = pc.product_num "
+			+ "JOIN product p ON i.product_num = p.product_num "
 			+ "WHERE i.user_num = ? AND i.inquiry_date BETWEEN ? AND ? ORDER BY i.inquiry_date DESC LIMIT ?, ?";
 	// 날짜 기준 질의응답 개수
 	private final String COUNT_INQUIRY_LIST_BETWEEN_DATES = "SELECT COUNT(*) FROM inquiry "
