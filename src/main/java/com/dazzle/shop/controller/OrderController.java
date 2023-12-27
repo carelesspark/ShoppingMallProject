@@ -174,6 +174,8 @@ public class OrderController {
 		
 		if(!(vo.getPoints() == 0)) {
 			orderService.updatePoints(vo);
+		} else {
+			
 		}
 		
 		return "redirect:orderSuccess.do";

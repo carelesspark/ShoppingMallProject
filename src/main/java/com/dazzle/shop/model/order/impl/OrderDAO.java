@@ -136,7 +136,7 @@ public class OrderDAO {
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
-			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE o.order_num = ?";
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE od.order_detail_num = ?";
 
 	private final String PRODUCT_ORDER = "SELECT pimg.main_img, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, pc.product_code"
 			+ " FROM product_code pc" + " JOIN product_size ps ON ps.size_num = pc.size_num"
@@ -211,12 +211,13 @@ public class OrderDAO {
 
 	private final String GET_ORDER_RESPONSE_DETAIL = "select * from product_refund_or_change where order_detail_num = ?";
 	
-	private final String MINUS_POINTS = "UPDATE POINTS SET points 0 WHERE user_num = ?";
+	private final String MINUS_POINTS = "UPDATE POINTS SET points = 0 WHERE user_num = ?";
+	private final String PLUS_POINTS = "UPDATE POINTS SET points = price * 0.01 WHERE price = ? AND user_num = ?";
 
 	public OrderVO getOrderInfo(OrderVO vo) {
 		try {
 			System.out.println("getOrderInfo()");
-			Object[] args = { vo.getOrder_num() };
+			Object[] args = { vo.getOrder_detail_num() };
 			return jdbcTemplate.queryForObject(ORDER_INFO, args, new OrderInfoRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
