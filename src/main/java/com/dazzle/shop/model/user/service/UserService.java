@@ -13,6 +13,8 @@ public interface UserService {
 	// 유저 카드 내용 저장
 	UserCardVO getUserCard(int user_num);
 
+	UserCardVO getUserCard2(int user_num);
+
 	// 유저 번호와 일치하는 테이블 레코드 수
 	int countRecords(String tableName, int user_num);
 
