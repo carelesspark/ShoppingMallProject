@@ -60,6 +60,9 @@ public class UserController {
 		vo.setUser_num(user_num);
 		vo.setStartDate(new java.sql.Date(startDate.getTime()));
 		vo.setEndDate(new java.sql.Date(endDate.getTime()));
+		
+		UserOrdersVO orderCount = userService.orderCheck(user_num);
+		model.addAttribute("orderCount", orderCount);
 
 		List<UserOrdersVO> list = userService.getUserOrderList(vo);
 		Map<Integer, List<UserOrdersVO>> map = list.stream().collect(Collectors.groupingBy(UserOrdersVO::getOrder_num));
@@ -67,6 +70,8 @@ public class UserController {
 		Map<Integer, List<UserOrdersVO>> sortedMap = new TreeMap<>(Comparator.reverseOrder());
 		sortedMap.putAll(map);
 		model.addAttribute("orderMap", sortedMap); // sortedMap을 추가해야 함
+		
+		
 
 		return "user_order_list.jsp";
 	}
