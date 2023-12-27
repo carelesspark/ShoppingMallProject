@@ -41,6 +41,22 @@ public interface AdminService {
 	// 상품 상세 - 색상, 사이즈, 재고
 	List<AdminProductVO> getProductStock(int product_num);
 
+	// 상품 추가
+	// 1단계: 추가하고 product_num 가져오기
+	int getProductNum(int subCategoryNum);
+
+	// 2단계: 제품 기본정보 추가
+	void updateProductBasicInfo(AdminProductVO vo);
+
+	// DB에 이미지 경로 추가
+	void insertProductImg(int product_num, String img_name, int img_type);
+
+	// 3단계: 제품 색상 추가
+	int insertProductColor(int product_num, String color_name);
+
+	// 제품 사이즈 및 재고 추가
+	void insertProductSize(int color_num, String size_name, int product_stock);
+
 	/*
 	 * 상품 추가
 	 */

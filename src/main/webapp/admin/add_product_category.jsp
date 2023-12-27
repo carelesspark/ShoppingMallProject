@@ -6,8 +6,6 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/admin/admin.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/admin/admin_product_add.css?ver=1.0" />
 <title>add product</title>
 </head>
 <body>
@@ -18,11 +16,14 @@
 			<%@ include file="./admin_side.jsp"%>
 			<main>
 				<div id="md">
-					<div>1단계: 사진 및 기본 정보 입력</div>
+					<div id="mt">
+						<div id="mtd">상품 추가 1/3단계 - 카테고리 설정</div>
+					</div>
 					<div>
-						<form action="" method="post" enctype="multipart/form-data">
+						<form action="/admin/addProduct.do"
+							onsubmit="validateForm(this, event)">
 							<div>
-								<label for="cn">카테고리</label><select id="cn"
+								<label for="cn">카테고리</label> <select id="cn"
 									onchange="changeSubCategories()">
 									<option>top</option>
 									<option>bottom</option>
@@ -42,51 +43,17 @@
 								</select>
 							</div>
 							<div>
-								<label>상품명</label><input type="text" name="product_name"
-									placeholder="상품명">
-							</div>
-							<div>
-								<label>메인 이미지</label> <input type="file" name=""
-									accept="image/*">
-							</div>
-							<div>
-								<label>썸네일</label> <input type="file" name="" accept="image/*">
-							</div>
-							<div>
-								<label for="product_info">상품 정보</label>
-								<textarea name="product_info" placeholder="상품 정보" id="pi"></textarea>
-							</div>
-							<div>
-								<label>상품 가격</label><input type="number" placeholder="상품 가격">
-							</div>
-							<div>
-								<input type="submit" value="전송" />
+								<button type="submit">기본 설정 이동</button>
 							</div>
 						</form>
 					</div>
-					<div>2단계: 색상 입력</div>
-					<div></div>
-
-					<div>3단계: 사이즈 및 재고 입력</div>
-					<div></div>
-
 				</div>
 			</main>
 		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
 
-	<script
-		src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
-	<script>
-		document.addEventListener('DOMContentLoaded', ()=>{
-			ClassicEditor.create(document.querySelector("#pi"),{
-				ckfinder:{
-					uploadUrl: '/file/putInfoImage.do',
-				}
-			});
-		});
-	
+	<script type="text/javascript">
 		function changeSubCategories() {
 			var categorySelect = document.getElementById('cn');
 			var subcategorySelect = document.getElementById('scn');
