@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -39,7 +38,6 @@
 						</div>
 					</div>
 					<div id="mh">
-						<div>번호</div>
 						<div>이름</div>
 						<div>랭크</div>
 						<div>가입방식</div>
