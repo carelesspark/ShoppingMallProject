@@ -24,15 +24,15 @@
 			</div>
 			
 			<div class="category">
-				<select name="ctgr_name">
+				<select name="ctgr_num">
 					<option value="">카테고리를 골라주세요</option>
 					<option value="">없음</option>
-					<option value="ootd">오오티디</option>
-					<option value="trend">트렌드</option>
-					<option value="street">스트릿</option>
-					<option value="casual">캐주얼</option>
-					<option value="classic">클래식</option>
-					<option value="vintage">빈티지</option>
+					<option value="1">오오티디</option>
+					<option value="2">트렌드</option>
+					<option value="3">스트릿</option>
+					<option value="4">캐주얼</option>
+					<option value="5">클래식</option>
+					<option value="6">빈티지</option>
 				</select>
 			</div>
 			

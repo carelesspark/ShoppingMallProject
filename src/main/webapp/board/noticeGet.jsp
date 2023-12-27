@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +12,10 @@
 	<div class="wrapper">
 		<div class="title">
 			<h1>공지사항</h1>
+			<c:if test="${user_num eq 4 }">
 			<a href="deleteNotice.do?pno=${notice.pno }"><button>삭제</button></a>
 			<a href="/board/noticeEdit.do?pno=${notice.pno }"><button>수정</button></a>
+			</c:if>
 		</div>
 		
 		<hr style="height: 3px; background-color: black;">

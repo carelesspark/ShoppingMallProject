@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,9 @@
 	<div class="wrapper">
 		<div class="title">
 			<h1>문의사항</h1>
+			<c:if test="${user_num ne null }">
 			<a href="/board/questionWrite.jsp"><button>작성</button></a>
+			</c:if>
 		</div>
 		
 		<hr style="height: 3px; background-color: black;">
@@ -20,7 +23,19 @@
 			<table>
 			<c:forEach items="${questList }" var="quest">
 				<tr>
-					<a href="questionGet.do?pno=${quest.pno }">비밀글입니다.</a>
+				<c:choose>
+					<c:when test="${quest.userNum eq user_num }">
+						<a href="questionGet.do?pno=${quest.pno }">${quest.title }</a>
+					</c:when>
+					
+					<c:when test="${user_num eq 4 }">
+						<a href="questionGet.do?pno=${quest.pno }">${quest.title }</a>
+					</c:when>
+					
+					<c:otherwise>
+						<a href="" onclick="alert('작성자만 확인할수있습니다.')">비밀글입니다.</a>
+					</c:otherwise>
+				</c:choose>
 					<hr>
 				</tr>
 			</c:forEach>

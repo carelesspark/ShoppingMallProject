@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,8 @@
 	<div class="wrapper">
 		<div class="board">
 			게시판
-			<button onclick="location.href='/board/boardWrite.jsp'">작성</button>
+			<c:if test="${user_num ne null }">
+			<button onclick="location.href='/board/boardWrite.jsp'">작성</button></c:if>
 		</div>
 		<hr>
 		<div class="tag_container">
@@ -25,32 +27,32 @@
 						<p>전체 보기</p>
 					</li>
 					
-					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_name=ootd'">
+					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_num=1'">
 						<img alt="오오티디" src="../resources/image/boardIMG/ootd.jpg">
 						<p>오오티디</p>
 					</li>
 					
-					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_name=trend'">
+					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_num=2'">
 						<img alt="트렌드" src="../resources/image/boardIMG/trend.jpg">
 						<p>트렌드</p>
 					</li>
 					
-					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_name=street'">
+					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_num=3'">
 						<img alt="스트릿" src="../resources/image/boardIMG/street.jpg">
 						<p>스트릿</p>
 					</li>
 					
-					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_name=casual'">
+					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_num=4'">
 						<img alt="캐주얼" src="../resources/image/boardIMG/casual.jpg">
 						<p>캐주얼</p>
 					</li>
 					
-					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_name=classic'">
+					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_num=5'">
 						<img alt="클래식" src="../resources/image/boardIMG/classic.jpg">
 						<p>클래식</p>
 					</li>
 					
-					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_name=vintage'">
+					<li class="tag_tab" onclick="location.href='boardMain.do?ctgr_num=6'">
 						<img alt="빈티지" src="../resources/image/boardIMG/vintage.jpg">
 						<p>빈티지</p>
 					</li>
@@ -70,7 +72,7 @@
 							</div>
 							
 							<div class="card_id">
-								<p>${board.userNum }</p>
+								<p>${board.user_name }</p>
 							</div>
 							
 							<div class="card_title">
