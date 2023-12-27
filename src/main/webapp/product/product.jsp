@@ -190,20 +190,17 @@
 				</c:otherwise>
 			</c:choose>
 			<!-- ... other review items ... -->
-			<div class="review-qna-pagination">
-				<nav aria-label="Page navigation">
-					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#">«</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a>
-						</li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">»</a></li>
-					</ul>
-				</nav>
-			</div>
+			<div id="pageButtons" class="text-center mt-3">
+			        <c:forEach begin="1" end="${totalInquiryPages}" varStatus="loop">
+			            <c:url value="" var="url">
+			                <c:param name="curr_inq_page" value="${loop.index}" />
+			                <c:param name="product_num" value="${info.product_num }" />
+			            </c:url>
+			            <a href="${url}" class="btn ${loop.index == curr_inq_page ? 'active' : ''}">
+			                ${loop.index}
+			            </a>
+			        </c:forEach>
+			    </div>
 		</div>
 	</div>
 	<script crossorigin="anonymous"

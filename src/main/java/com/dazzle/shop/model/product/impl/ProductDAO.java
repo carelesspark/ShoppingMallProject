@@ -54,100 +54,161 @@ public class ProductDAO {
 			+ "ORDER BY size_num desc";
 
 	private final String product_img = "SELECT * FROM product_img WHERE product_num = ?";
-
+	
 	private final String get_category_by_products_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.main_img "
-			+ "FROM product p " + "JOIN sub_category s on p.sub_category_num = s.sub_category_num "
-			+ "JOIN category c ON s.category_num = c.category_num "
-			+ "JOIN product_img pi ON p.product_num = pi.product_num " + "WHERE c.category_num = ? LIMIT ? OFFSET ?";
-
-	private final String count_category_products = "SELECT COUNT(*) " + "FROM product p "
+		    + "FROM product p "
+		    + "JOIN sub_category s on p.sub_category_num = s.sub_category_num "
+		    + "JOIN category c ON s.category_num = c.category_num "
+		    + "JOIN product_img pi ON p.product_num = pi.product_num "
+		    + "WHERE c.category_num = ? LIMIT ? OFFSET ?";
+	
+	private final String count_category_products = "SELECT COUNT(*) " 
+			+ "FROM product p "
 			+ "JOIN sub_category s on p.sub_category_num = s.sub_category_num "
-			+ "JOIN category c ON s.category_num = c.category_num "
-			+ "JOIN product_img pi ON p.product_num = pi.product_num " + "WHERE c.category_num = ?";
-
+			+ "JOIN category c ON s.category_num = c.category_num " 
+			+ "JOIN product_img pi ON p.product_num = pi.product_num "
+			+ "WHERE c.category_num = ?";
+	
 	private final String get_sub_category_by_products_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.main_img "
-			+ "FROM product p " + "JOIN product_img pi ON p.product_num = pi.product_num "
-			+ "WHERE p.sub_category_num = ? LIMIT ? OFFSET ?";
-
-	private final String count_sub_category_products = "SELECT COUNT(*) " + "FROM product p "
-			+ "JOIN sub_category s on p.sub_category_num = s.sub_category_num "
-			+ "JOIN product_img pi ON p.product_num = pi.product_num " + "WHERE s.sub_category_num = ?";
+	        + "FROM product p "
+	        + "JOIN product_img pi ON p.product_num = pi.product_num "
+	        + "WHERE p.sub_category_num = ? LIMIT ? OFFSET ?";
+	
+	private final String count_sub_category_products = "SELECT COUNT(*) " 
+			+ "FROM product p "
+			+ "JOIN sub_category s on p.sub_category_num = s.sub_category_num " 
+			+ "JOIN product_img pi ON p.product_num = pi.product_num "
+			+ "WHERE s.sub_category_num = ?";
 
 	private final String search_result_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.main_img "
-			+ "FROM product p " + "JOIN product_img pi ON p.product_num = pi.product_num "
-			+ "WHERE p.product_name LIKE ? LIMIT ? OFFSET ?";
-
-	private final String count_search_keyword_products = "SELECT COUNT(*) " + "FROM product p "
-			+ "JOIN product_img pi ON p.product_num = pi.product_num " + "WHERE p.product_name LIKE ?";
-
+	        + "FROM product p "
+	        + "JOIN product_img pi ON p.product_num = pi.product_num "
+	        + "WHERE p.product_name LIKE ? LIMIT ? OFFSET ?";
+	
+	private final String count_search_keyword_products = "SELECT COUNT(*) " 
+			+ "FROM product p " 
+			+ "JOIN product_img pi ON p.product_num = pi.product_num "
+			+ "WHERE p.product_name LIKE ?";
+	
 	private final String insert_review = "INSERT INTO review "
-			+ "(user_num, product_code, review_content, review_ratings, review_date) " + "VALUES (1, ?, ?, 5, NOW())";
+			+ "(user_num, product_code, review_content, review_ratings, review_date) "
+			+ "VALUES (1, ?, ?, 5, NOW())";
+	
+	private final String  GET_REVIEW = "SELECT" + 
+			"    pc.product_code," + 
+			"    ps.size_name," + 
+			"    pr.color_name," + 
+			"    a.id," + 
+			"    ri.review_img," + 
+			"    r.review_date," + 
+			"    r.review_content," + 
+			"    r.review_ratings," + 
+			"    r.review_num" + 
+			" FROM" + 
+			"    review r" + 
+			" JOIN" + 
+			"    product_code pc ON r.product_code = pc.product_code" + 
+			" JOIN" + 
+			"    product_size ps ON pc.size_num = ps.size_num" + 
+			" JOIN" + 
+			"    product_color pr ON ps.color_num = pr.color_num" + 
+			" JOIN" + 
+			"	product p ON p.product_num = pr.product_num" + 
+			" JOIN" + 
+			"    users u ON r.user_num = u.user_num" + 
+			" JOIN" + 
+			"    auth_id a ON u.user_num = a.user_num" + 
+			" LEFT JOIN" + 
+			"    review_img ri ON r.review_num = ri.review_num" + 
+			" WHERE" + 
+			"    p.product_num = ?" + 
+			" ORDER BY r.review_date desc" +
+			" LIMIT ? OFFSET ?";
+	
+	private final String  GET_REVIEW_SOME = "SELECT" + 
+			"    pc.product_code," + 
+			"    ps.size_name," + 
+			"    pr.color_name," + 
+			"    a.id," + 
+			"    ri.review_img," + 
+			"    r.review_date," + 
+			"    r.review_content," + 
+			"    r.review_ratings," + 
+			"    r.review_num" + 
+			" FROM" + 
+			"    review r" + 
+			" JOIN" + 
+			"    product_code pc ON r.product_code = pc.product_code" + 
+			" JOIN" + 
+			"    product_size ps ON pc.size_num = ps.size_num" + 
+			" JOIN" + 
+			"    product_color pr ON ps.color_num = pr.color_num" + 
+			" JOIN" + 
+			"	product p ON p.product_num = pr.product_num" + 
+			" JOIN" + 
+			"    users u ON r.user_num = u.user_num" + 
+			" JOIN" + 
+			"    auth_id a ON u.user_num = a.user_num" + 
+			" LEFT JOIN" + 
+			"    review_img ri ON r.review_num = ri.review_num" + 
+			" WHERE" + 
+			"    p.product_num = ?" + 
+			" ORDER BY r.review_date desc" +
+			" LIMIT 3";
+	
+	private final String  GET_REVIEW_COUNT = "SELECT COUNT(*) as count" + 
+			" FROM" + 
+			"    review r" + 
+			" JOIN" + 
+			"    product_code pc ON r.product_code = pc.product_code" + 
+			" JOIN" + 
+			"    product_size ps ON pc.size_num = ps.size_num" + 
+			" JOIN" + 
+			"    product_color pr ON ps.color_num = pr.color_num" + 
+			" JOIN" + 
+			"	product p ON p.product_num = pr.product_num" + 
+			" JOIN" + 
+			"    users u ON r.user_num = u.user_num" + 
+			" JOIN" + 
+			"    auth_id a ON u.user_num = a.user_num" + 
+			" LEFT JOIN" + 
+			"    review_img ri ON r.review_num = ri.review_num" + 
+			" WHERE" + 
+			"    p.product_num = ?" ;
 
-	private final String GET_REVIEW = "SELECT" + "    pc.product_code," + "    ps.size_name," + "    pr.color_name,"
-			+ "    a.id," + "    ri.review_img," + "    r.review_date," + "    r.review_content,"
-			+ "    r.review_ratings," + "    r.review_num" + " FROM" + "    review r" + " JOIN"
-			+ "    product_code pc ON r.product_code = pc.product_code" + " JOIN"
-			+ "    product_size ps ON pc.size_num = ps.size_num" + " JOIN"
-			+ "    product_color pr ON ps.color_num = pr.color_num" + " JOIN"
-			+ "	product p ON p.product_num = pr.product_num" + " JOIN" + "    users u ON r.user_num = u.user_num"
-			+ " JOIN" + "    auth_id a ON u.user_num = a.user_num" + " LEFT JOIN"
-			+ "    review_img ri ON r.review_num = ri.review_num" + " WHERE" + "    p.product_num = ?"
-			+ " ORDER BY r.review_date desc" + " LIMIT ? OFFSET ?";
-
-	private final String GET_REVIEW_SOME = "SELECT" + "    pc.product_code," + "    ps.size_name,"
-			+ "    pr.color_name," + "    a.id," + "    ri.review_img," + "    r.review_date," + "    r.review_content,"
-			+ "    r.review_ratings," + "    r.review_num" + " FROM" + "    review r" + " JOIN"
-			+ "    product_code pc ON r.product_code = pc.product_code" + " JOIN"
-			+ "    product_size ps ON pc.size_num = ps.size_num" + " JOIN"
-			+ "    product_color pr ON ps.color_num = pr.color_num" + " JOIN"
-			+ "	product p ON p.product_num = pr.product_num" + " JOIN" + "    users u ON r.user_num = u.user_num"
-			+ " JOIN" + "    auth_id a ON u.user_num = a.user_num" + " LEFT JOIN"
-			+ "    review_img ri ON r.review_num = ri.review_num" + " WHERE" + "    p.product_num = ?"
-			+ " ORDER BY r.review_date desc" + " LIMIT 3";
-
-	private final String GET_REVIEW_COUNT = "SELECT COUNT(*) as count" + " FROM" + "    review r" + " JOIN"
-			+ "    product_code pc ON r.product_code = pc.product_code" + " JOIN"
-			+ "    product_size ps ON pc.size_num = ps.size_num" + " JOIN"
-			+ "    product_color pr ON ps.color_num = pr.color_num" + " JOIN"
-			+ "	product p ON p.product_num = pr.product_num" + " JOIN" + "    users u ON r.user_num = u.user_num"
-			+ " JOIN" + "    auth_id a ON u.user_num = a.user_num" + " LEFT JOIN"
-			+ "    review_img ri ON r.review_num = ri.review_num" + " WHERE" + "    p.product_num = ?";
-
-	private final String get_product_code = "SELECT * FROM product_code p " + "WHERE p.size_num = ?";
-
+	
+	
+	private final String get_product_code = "SELECT * FROM product_code p "
+			+ "WHERE p.size_num = ?";
+	
 	private final String INSERT_INQUIRY = "INSERT INTO inquiry VALUES(DEFAULT, ?, ?, NOW(), ?, ?);";
-
-	private final String GET_INQUIRY = "select * from inquiry WHERE product_num = ?";
-
+	
+	private final String GET_INQUIRY = "select * from inquiry WHERE product_num = ? LIMIT ? OFFSET ?";
+	
 	private final String GET_INQUIRY_COUNT = "select count(*) AS total_inquiry from inquiry WHERE product_num = ?";
 
 	public List<ProductsVO> get_category_by_products_paged(String _category_num, int limit, int offset) {
-		return jdbc_template.query(get_category_by_products_paged, new Object[] { _category_num, limit, offset },
-				new ProductsRowMapper());
+	    return jdbc_template.query(get_category_by_products_paged, new Object[] { _category_num, limit, offset }, new ProductsRowMapper());
 	}
-
+	
 	public List<ProductsVO> get_sub_category_by_products_paged(String _sub_category_num, int limit, int offset) {
-		return jdbc_template.query(get_sub_category_by_products_paged,
-				new Object[] { _sub_category_num, limit, offset }, new ProductsRowMapper());
+	    return jdbc_template.query(get_sub_category_by_products_paged, new Object[] { _sub_category_num, limit, offset }, new ProductsRowMapper());
 	}
 
 	public List<ProductsVO> search_result_paged(String _search_keyword, int limit, int offset) {
-		return jdbc_template.query(search_result_paged, new Object[] { _search_keyword, limit, offset },
-				new ProductsRowMapper());
+	    return jdbc_template.query(search_result_paged, new Object[] { _search_keyword, limit, offset }, new ProductsRowMapper());
 	}
-
+	
 	public int count_category_products(String _category_num) {
-		return jdbc_template.queryForObject(count_category_products, new Object[] { _category_num }, Integer.class);
+	    return jdbc_template.queryForObject(count_category_products, new Object[] { _category_num }, Integer.class);
 	}
-
+	
 	public int count_sub_category_products(String _sub_category_num) {
-		return jdbc_template.queryForObject(count_sub_category_products, new Object[] { _sub_category_num },
-				Integer.class);
+	    return jdbc_template.queryForObject(count_sub_category_products, new Object[] { _sub_category_num }, Integer.class);
 	}
-
+	
 	public int count_search_products(String _search_keyword) {
-		return jdbc_template.queryForObject(count_search_keyword_products, new Object[] { _search_keyword },
-				Integer.class);
+	    return jdbc_template.queryForObject(count_search_keyword_products, new Object[] { _search_keyword }, Integer.class);
 	}
 
 	public List<CategoryVO> get_category(String _category_num) {
@@ -179,47 +240,45 @@ public class ProductDAO {
 		System.out.println("이미지");
 		return jdbc_template.queryForObject(product_img, new Object[] { _product_num }, new ProductImgRowMapper());
 	}
-
+	
 	public ProductCodeVO get_product_code(int _size_num) {
 		System.out.println("상품코드");
-		return jdbc_template.queryForObject(get_product_code, new Object[] { _size_num }, new ProductCodeRowMapper());
+		return jdbc_template.queryForObject(get_product_code, new Object[] {_size_num}, new ProductCodeRowMapper());
 	}
+	
 
 	public List<ReviewVO> getReview(Integer product_num, Integer start, Integer end) {
 		System.out.println("리뷰 목록");
-		return jdbc_template.query(GET_REVIEW, new Object[] { product_num, start, end }, new ReviewRowMapper());
-
+		return jdbc_template.query(GET_REVIEW, new Object[] {product_num, start, end}, new ReviewRowMapper());
+		
 	}
-
+	
 	public List<ReviewVO> getReviewSome(ReviewVO vo) {
 		System.out.println("리뷰 목록");
-		return jdbc_template.query(GET_REVIEW_SOME, new Object[] { vo.getProduct_num() }, new ReviewRowMapper());
-
+		return jdbc_template.query(GET_REVIEW_SOME, new Object[] {vo.getProduct_num()}, new ReviewRowMapper());
+		
 	}
-
+	
 	public ReviewVO getReviewCount(ReviewVO vo) {
 		System.out.println("리뷰 개수");
-		return jdbc_template.queryForObject(GET_REVIEW_COUNT, new Object[] { vo.getProduct_num() },
-				new ReviewCountRowMapper());
+		return jdbc_template.queryForObject(GET_REVIEW_COUNT, new Object[] {vo.getProduct_num()}, new ReviewCountRowMapper());
 	}
 
 	public void insertInquiry(InquiryVO vo) {
 		System.out.println("insertInquiry()");
-		jdbc_template.update(INSERT_INQUIRY, vo.getUser_num(), vo.getProduct_num(), vo.getInquiry_title(),
-				vo.getInquiry_content());
+		jdbc_template.update(INSERT_INQUIRY, vo.getUser_num(), vo.getProduct_num(), vo.getInquiry_title(), vo.getInquiry_content());
 		return;
 	}
-
-	public List<InquiryVO> getInquiry(int _product_num) {
+	
+	public List<InquiryVO> getInquiry(int _product_num, int a, int b) {
 		System.out.println("getInquiry()");
-		return jdbc_template.query(GET_INQUIRY, new Object[] { _product_num }, new InquiryRowMapper());
+		return jdbc_template.query(GET_INQUIRY, new Object[] {_product_num, a, b}, new InquiryRowMapper());
 
 	}
-
+	
 	public InquiryVO getInquiryCount(int _product_num) {
 		System.out.println("getInquiryCount()");
-		return jdbc_template.queryForObject(GET_INQUIRY_COUNT, new Object[] { _product_num },
-				new InquiryCountRowMapper());
+		return jdbc_template.queryForObject(GET_INQUIRY_COUNT, new Object[] {_product_num}, new InquiryCountRowMapper());
 	}
 
 }
