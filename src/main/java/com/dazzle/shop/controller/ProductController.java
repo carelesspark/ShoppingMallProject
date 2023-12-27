@@ -113,7 +113,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/product.do")
-	public String getProduct(Model _model, @RequestParam("product_num") int _product_num, Integer curr_page) {
+	public String getProduct(Model _model, @RequestParam("product_num") int _product_num, Integer curr_page, Integer curr_inq_page) {
 
 
 		ProductVO product_info = product_service.product_info(_product_num);
@@ -146,13 +146,30 @@ public class ProductController {
 		_model.addAttribute("totalPages", total_pages);
 		_model.addAttribute("curr_page", curr_page);
 		_model.addAttribute("review", review);
-
-
-		List<InquiryVO> inquiryList = product_service.getInquiry(_product_num);
-		_model.addAttribute("inquiryList", inquiryList);
 		
+		InquiryVO vo2 = new InquiryVO();
+		
+		if(curr_inq_page == null) {
+			curr_inq_page = 1;
+		}
+
 		InquiryVO inquiryCount = product_service.getInquiryCount(_product_num);
 		_model.addAttribute("inquiryCount", inquiryCount);
+		
+		
+		int total_inquiry_pages = 0;
+		Integer inquiry_remain = 0;
+		
+		inquiry_remain = inquiryCount.getTotal_inquiry() - (pageSize * (curr_inq_page - 1));
+		List<InquiryVO> inquiryList = product_service.getInquiry(_product_num, Math.min(inquiry_remain, pageSize), (curr_inq_page-1)*pageSize);
+		
+		total_inquiry_pages = (int)Math.ceil((double) inquiryCount.getTotal_inquiry() / pageSize);
+		_model.addAttribute("totalInquiryPages", total_inquiry_pages);
+		_model.addAttribute("curr_inq_page", curr_inq_page);
+
+		
+		_model.addAttribute("inquiryList", inquiryList);
+		
 
 		return "/product/product.jsp";
 	}

@@ -183,7 +183,7 @@ public class ProductDAO {
 	
 	private final String INSERT_INQUIRY = "INSERT INTO inquiry VALUES(DEFAULT, ?, ?, NOW(), ?, ?);";
 	
-	private final String GET_INQUIRY = "select * from inquiry WHERE product_num = ?";
+	private final String GET_INQUIRY = "select * from inquiry WHERE product_num = ? LIMIT ? OFFSET ?";
 	
 	private final String GET_INQUIRY_COUNT = "select count(*) AS total_inquiry from inquiry WHERE product_num = ?";
 
@@ -262,6 +262,7 @@ public class ProductDAO {
 	public ReviewVO getReviewCount(ReviewVO vo) {
 		System.out.println("리뷰 개수");
 		return jdbc_template.queryForObject(GET_REVIEW_COUNT, new Object[] {vo.getProduct_num()}, new ReviewCountRowMapper());
+	}
 
 	public void insertInquiry(InquiryVO vo) {
 		System.out.println("insertInquiry()");
@@ -269,9 +270,9 @@ public class ProductDAO {
 		return;
 	}
 	
-	public List<InquiryVO> getInquiry(int _product_num) {
+	public List<InquiryVO> getInquiry(int _product_num, int a, int b) {
 		System.out.println("getInquiry()");
-		return jdbc_template.query(GET_INQUIRY, new Object[] {_product_num}, new InquiryRowMapper());
+		return jdbc_template.query(GET_INQUIRY, new Object[] {_product_num, a, b}, new InquiryRowMapper());
 
 	}
 	
