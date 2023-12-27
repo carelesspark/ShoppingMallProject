@@ -2,6 +2,8 @@ package com.dazzle.shop.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -194,9 +196,16 @@ public class AdminController {
 		List<MultipartFile> mainImageList = mRequest.getFiles("mainImage");
 		MultipartFile thumbnailImage = mRequest.getFile("thumbnailImage");
 
-		String webappPath = request.getSession().getServletContext().getRealPath("/");
+		String metaPath = request.getSession().getServletContext().getRealPath("/");
+		Path currentPath = Paths.get(metaPath);
+		Path webappPath = currentPath.getParent();
+		for (int i = 0; i < 5; i++) {
+			webappPath = webappPath.getParent();
+		}
 		System.out.println("webapp path: " + webappPath);
-		String imagePath = webappPath + "resources/image/product/" + product_num + "/";
+
+		String imagePath = webappPath + "/ShoppingMallProject/src/main/webapp/resources/image/product/" + product_num
+				+ "/";
 
 		System.out.println("Default Path: " + imagePath);
 

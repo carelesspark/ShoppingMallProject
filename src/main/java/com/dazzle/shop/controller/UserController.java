@@ -102,6 +102,9 @@ public class UserController {
 		vo.setStartDate(startDate);
 		vo.setEndDate(endDate);
 
+		UserOrdersVO orderCount = userService.orderCheck(user_num);
+		model.addAttribute("orderCount", orderCount);
+
 		List<UserOrdersVO> list = userService.getUserOrderList(vo);
 		Map<Integer, List<UserOrdersVO>> map = list.stream().collect(Collectors.groupingBy(UserOrdersVO::getOrder_num));
 		// order_num을 기준으로 내림차순으로 정렬된 TreeMap 생성
