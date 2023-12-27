@@ -44,8 +44,9 @@ public class UserController {
 		UserCardVO card = userService.getUserCard(user_num);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_total_point", card.getUser_total_point());
 		model.addAttribute("delivering_items", card.getDelivering_items());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		LocalDate currentDate = LocalDate.now();
@@ -60,7 +61,7 @@ public class UserController {
 		vo.setUser_num(user_num);
 		vo.setStartDate(new java.sql.Date(startDate.getTime()));
 		vo.setEndDate(new java.sql.Date(endDate.getTime()));
-		
+
 		UserOrdersVO orderCount = userService.orderCheck(user_num);
 		model.addAttribute("orderCount", orderCount);
 
@@ -70,8 +71,6 @@ public class UserController {
 		Map<Integer, List<UserOrdersVO>> sortedMap = new TreeMap<>(Comparator.reverseOrder());
 		sortedMap.putAll(map);
 		model.addAttribute("orderMap", sortedMap); // sortedMap을 추가해야 함
-		
-		
 
 		return "user_order_list.jsp";
 	}
@@ -88,8 +87,9 @@ public class UserController {
 		UserCardVO card = userService.getUserCard(user_num);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_total_point", card.getUser_total_point());
 		model.addAttribute("delivering_items", card.getDelivering_items());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
@@ -128,7 +128,8 @@ public class UserController {
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("delivering_items", card.getDelivering_items());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		LocalDate currentDate = LocalDate.now();
@@ -177,7 +178,8 @@ public class UserController {
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("delivering_items", card.getDelivering_items());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
@@ -220,7 +222,8 @@ public class UserController {
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("delivering_items", card.getDelivering_items());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		LocalDate currentDate = LocalDate.now();
@@ -269,7 +272,8 @@ public class UserController {
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("delivering_items", card.getDelivering_items());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
@@ -312,7 +316,8 @@ public class UserController {
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("delivering_items", card.getDelivering_items());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		LocalDate currentDate = LocalDate.now();
@@ -361,7 +366,8 @@ public class UserController {
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("delivering_items", card.getDelivering_items());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
@@ -404,7 +410,8 @@ public class UserController {
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("delivering_items", card.getDelivering_items());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		LocalDate currentDate = LocalDate.now();
@@ -453,7 +460,8 @@ public class UserController {
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("delivering_items", card.getDelivering_items());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
@@ -496,7 +504,8 @@ public class UserController {
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("delivering_items", card.getDelivering_items());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		LocalDate currentDate = LocalDate.now();
@@ -545,7 +554,8 @@ public class UserController {
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
 		model.addAttribute("delivering_items", card.getDelivering_items());
-		model.addAttribute("user_total_point", card.getUser_total_point());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
@@ -587,8 +597,9 @@ public class UserController {
 		UserCardVO card = userService.getUserCard(user_num);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_total_point", card.getUser_total_point());
 		model.addAttribute("delivering_items", card.getDelivering_items());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		return "user_check_info.jsp";
 	}
@@ -603,8 +614,9 @@ public class UserController {
 		UserCardVO card = userService.getUserCard(user_num);
 		model.addAttribute("rank_letter", card.getRank_letter());
 		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("user_total_point", card.getUser_total_point());
 		model.addAttribute("delivering_items", card.getDelivering_items());
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
 
 		Boolean checkInput = userService.checkPwd(user_num, vo.getPwd());
 

@@ -23,6 +23,11 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getUserCard(user_num);
 	}
 
+	@Override
+	public UserCardVO getUserCard2(int user_num) {
+		return userDAO.getUserCard2(user_num);
+	}
+
 	// 유저 번호와 일치하는 테이블 레코드 수
 	@Override
 	public int countRecords(String tableName, int user_num) {
@@ -56,7 +61,7 @@ public class UserServiceImpl implements UserService {
 	// 유저 주문 조회(COUNT)
 	@Override
 	public UserOrdersVO orderCheck(int user_num) {
-		
+
 		return userDAO.orderCheck(user_num);
 	}
 
@@ -101,4 +106,3 @@ public class UserServiceImpl implements UserService {
 		return userDAO.countReplyBetweenDates(user_num, startDate, endDate);
 	}
 }
-

@@ -18,11 +18,9 @@ public class UserDAO {
 
 	// 유저 카드 내용
 	private final String USER_CARD = "SELECT SUBSTR(ui.user_rank, 1,1) rank_letter, ui.user_rank, "
-			+ "COUNT(case when d.delivery_date IS NULL then 1 ELSE NULL END) delivering_items, "
-			+ "IFNULL(SUM(p.points), 0) user_total_point FROM user_info ui "
-			+ "JOIN point p ON ui.user_num = p.user_num JOIN orders o "
-			+ "ON ui.user_num = o.user_num JOIN delivery d ON o.order_num = d.order_num "
-			+ "WHERE ui.user_num = ? GROUP BY ui.user_num";
+			+ "COUNT(case when d.delivery_date IS NULL then 1 ELSE NULL END) delivering_items FROM user_info ui "
+			+ "JOIN orders o ON ui.user_num = o.user_num LEFT OUTER JOIN delivery d ON o.order_num = d.order_num "
+			+ "GROUP BY ui.user_num having ui.user_num = ?";
 
 	// 나의 쇼핑
 	// 주문/배송 조회
@@ -34,22 +32,6 @@ public class UserDAO {
 			+ "JOIN product_color pcolor ON ps.color_num = pcolor.color_num "
 			+ "JOIN product p ON pcolor.product_num = p.product_num "
 			+ "WHERE o.user_num = ? AND o.order_date BETWEEN ? AND ? ORDER BY o.order_date DESC";
-
-	/*
-	 * private final String ORDER_LIST_SEARCH =
-	 * "SELECT o.order_date, d.delivery_date, od.product_state, od.order_detail_num,"
-	 * +
-	 * " od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, o.order_num "
-	 * + " FROM orders o INNER JOIN delivery d ON o.order_num = d.order_num" +
-	 * " INNER JOIN order_detail od ON o.order_num = od.order_num" +
-	 * " INNER JOIN product_code pc ON od.product_code = pc.product_code" +
-	 * " INNER JOIN product_size ps ON ps.size_num = pc.size_num" +
-	 * " INNER JOIN product_color pcolor ON ps.color_num = pcolor.color_num" +
-	 * " INNER JOIN product p ON pcolor.product_num = p.product_num" +
-	 * " INNER JOIN product_img pimg ON pimg.product_num = p.product_num" +
-	 * " WHERE o.user_num = ? AND p.product_name LIKE ? " +
-	 * " ORDER BY o.order_date";
-	 */
 
 	private final String ORDER_CHECK = "SELECT" + " (SELECT COUNT(*) FROM orders WHERE user_num = ?) AS total_orders,"
 			+ " (SELECT COUNT(*) FROM orders o INNER JOIN order_detail od ON o.order_num = od.order_num WHERE user_num = ? AND od.product_state = '상품 준비 중') AS orders_in_preparation,"
@@ -111,8 +93,19 @@ public class UserDAO {
 
 	// 유저 카드 내용
 	public UserCardVO getUserCard(int user_num) {
+
 		try {
 			return template.queryForObject(USER_CARD, new Object[] { user_num }, new UserCardRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return new UserCardVO();
+		}
+	}
+
+	public UserCardVO getUserCard2(int user_num) {
+		String sql = "SELECT IFNULL(SUM(p.points), 0) user_total_point FROM point p WHERE p.user_num = ?";
+
+		try {
+			return template.queryForObject(sql, new Object[] { user_num }, new UserCard2RowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return new UserCardVO();
 		}
