@@ -131,7 +131,7 @@
 															</div>
 															<div class="cbb3">
 																<button
-																	onclick="window.location.href='#'">상품 리뷰쓰기</button>
+																	onclick="window.location.href='/review.do?product_code=${list.product_code}'">상품 리뷰쓰기</button>
 															</div>
 														</div>
 													</div>

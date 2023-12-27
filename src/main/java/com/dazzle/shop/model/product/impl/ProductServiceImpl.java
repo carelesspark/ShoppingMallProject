@@ -152,6 +152,16 @@ public class ProductServiceImpl implements ProductService{
 		
 		return dao.getInquiryCount(_product_num);
 	}
-	
-	
+	@Override
+	public void insertReview(ReviewVO vo) {
+		dao.insertReview(vo);
+	}
+	@Override
+	public ReviewVO getReviewOne(ReviewVO vo) {
+		return dao.getReviewOne(vo);
+	}
+	@Override
+	public void insertReviewImg(ReviewVO vo) {
+		dao.insertReviewImg(vo);
+	}
 }

@@ -23,6 +23,7 @@ public class UserOrderListRowMapper implements RowMapper<UserOrdersVO> {
 		vo.setProduct_name(rs.getString("product_name"));
 		vo.setOrder_num(rs.getInt("order_num"));
 		vo.setOrder_detail_num(rs.getInt("order_detail_num"));
+		vo.setProduct_code(rs.getInt("product_code"));
 
 		return vo;
 	}

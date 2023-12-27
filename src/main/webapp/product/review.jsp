@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,25 +15,19 @@
 		<div class="row">
 			<div class="col-md-8 offset-md-2">
 				<div class="content-box">
-					<form action="/submit_review.do">
-						<div class="mb-3">
-							<label for="emailInput" class="form-label">상품이름</label>
-						</div>
+					<form action="/submit_review.do"  method="post" enctype="multipart/form-data">
+						<input type="hidden" name="product_code" value="${product_code}">
 						<div class="mb-3">
 							<label class="form-label">평점을 남겨주세요</label>
 							<div id="ratingStars">
-								<span class="rating-star" data-rating="1"><i
-									class="fas fa-star"></i></span> <span class="rating-star"
-									data-rating="2"><i
-									class="fas fa-star"></i></span> <span class="rating-star"
-									data-rating="3"><i
-									class="fas fa-star"></i></span> <span class="rating-star"
-									data-rating="4"><i
-									class="fas fa-star"></i></span> <span class="rating-star"
-									data-rating="5"><i
-									class="fas fa-star"></i></span>
+								<select style=" color: #FFD700;" name="review_ratings">
+			                   		<option value="1">★</option>
+			                   		<option value="2">★★</option>
+			                   		<option value="3">★★★</option>
+			                   		<option value="4">★★★★</option>
+			                   		<option value="5">★★★★★</option>
+			                   	</select>
 							</div>
-							<input type="hidden" id="rating" name="rating" value="0" />
 						</div>
 						<div class="mb-3">
 							<label class="form-label">사진 첨부</label>
@@ -45,7 +38,7 @@
 									</div>
 								</div>
 								<div class="col-8">
-									<input type="file" accept="image/*" id="imageInput"
+									<input type="file" accept="image/*" id="imageInput" name="review_img2"
 										style="display: none" onchange="previewImage()" />
 									<button type="button" class="btn btn-primary"
 										onclick="document.getElementById('imageInput').click();">
@@ -55,7 +48,7 @@
 						</div>
 						<div class="mb-3">
 							<label for="contentTextarea" class="form-label">내용</label>
-							<textarea class="form-control" id="contentTextarea" rows="5"
+							<textarea class="form-control" id="contentTextarea" rows="5" name="review_content"
 								placeholder="리뷰 내용을 작성해주세요"></textarea>
 						</div>
 						<div class="checkbox-group">
