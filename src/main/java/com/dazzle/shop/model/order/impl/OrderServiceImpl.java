@@ -11,9 +11,17 @@ import com.dazzle.shop.model.order.OrderService;
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
 
+	
 	@Autowired
 	private OrderDAO orderDAO;
 
+	
+	
+	@Override
+	public OrderVO getOrderResponseDetail(int orderDetailNum) {
+		return orderDAO.getOrderResponseDetail(orderDetailNum);
+	}
+	
 	@Override
 	public List<OrderVO> getProductOrderFromCart(OrderVO vo) {
 
@@ -21,14 +29,31 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderVO> getProductOrder(int userNum, String productCode, int amount, OrderVO vo) {
+	public OrderVO getProductOrder(int productCode, int amount) {
 
-		return orderDAO.getProductOrder(userNum, productCode, amount, vo);
+		return orderDAO.getProductOrder(productCode, amount);
+	}
+	
+	@Override
+	public OrderVO getPoint(int user_num) {
+	
+		return orderDAO.getPoint(user_num);
 	}
 
 	@Override
 	public void insertBuyOrder(OrderVO vo) {
 		orderDAO.insertBuyOrder(vo);
+	}
+
+	@Override
+	public OrderVO getBuyOrder(OrderVO vo) {
+		return orderDAO.getBuyOrder(vo);
+	}
+	
+	
+	@Override
+	public void updatePoints(OrderVO vo) {
+		orderDAO.updatePoints(vo);
 	}
 
 	@Override
@@ -39,6 +64,25 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void insertOrderRefund(OrderVO vo) {
 		orderDAO.insertOrderRefund(vo);
+	}
+
+	@Override
+	public OrderVO getProductChange(OrderVO vo) {
+		
+		return orderDAO.getProductChange(vo);
+	}
+
+	@Override
+	public void insertProductChange(OrderVO vo) {
+		
+		orderDAO.insertProductChange(vo);	
+	}
+
+	@Override
+	public void updateProduct_state2(OrderVO vo) {
+		
+		orderDAO.updateProduct_state2(vo);
+		
 	}
 
 	@Override
@@ -63,10 +107,76 @@ public class OrderServiceImpl implements OrderService {
 
 		return orderDAO.getOrderInfo(vo);
 	}
+	
+	@Override
+	public OrderVO getOrderDetailInfo(OrderVO vo) {
+
+		return orderDAO.getOrderDetailInfo(vo);
+	}
 
 	@Override
 	public List<OrderVO> getOrderList(OrderVO vo) {
 
 		return orderDAO.getOrderList(vo);
+	}
+
+	@Override
+	public List<OrderVO> getOrderList2(OrderVO vo, int date) {
+		
+		return orderDAO.getOrderList2(vo, date);
+	}
+	@Override
+	public OrderVO getOrderSuccInfo(OrderVO vo) {
+		return orderDAO.getOrderSuccInfo(vo);
+	}
+	
+	@Override
+	public void updateOrderState(OrderVO vo) {
+		
+		orderDAO.updateOrderState(vo);	
+	}
+	
+	@Override
+	public void updateOrderDelv(OrderVO vo) {
+		
+		orderDAO.updateOrderDelv(vo);	
+	}
+	
+	@Override
+	public OrderVO getRefundInfo(OrderVO vo) {
+		return orderDAO.getRefundInfo(vo);
+	}
+	@Override
+	public void approveRequest(OrderVO vo) {
+		orderDAO.approveRequest(vo);
+	}
+	@Override
+	public List<OrderVO> getOrderListAdmin(){
+		return orderDAO.getOrderListAdmin();
+	}
+	@Override
+	public List<OrderVO> getOrderListAdminState(OrderVO vo) {
+		return orderDAO.getOrderListAdminState(vo);
+	}
+	@Override
+	public List<OrderVO> getOrderListAdminPName(OrderVO vo)
+	{
+		return orderDAO.getOrderListAdminPName(vo);
+	}
+	@Override
+	public List<OrderVO> getRefundList(){
+		return orderDAO.getRefundList();
+	}
+	@Override
+	public List<OrderVO> getRefundListPName(OrderVO vo) {
+		return orderDAO.getRefundListPName(vo);
+	}
+	@Override
+	public List<OrderVO> getRefundListApprove(OrderVO vo) {
+		return orderDAO.getRefundListApprove(vo);
+	}
+	@Override
+	public List<OrderVO> getProductState(){
+		return orderDAO.getProductState();
 	}
 }

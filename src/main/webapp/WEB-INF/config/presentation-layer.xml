@@ -13,9 +13,15 @@
 
 	<!-- interceptor 설정 -->
 	<mvc:interceptors>
+		<!-- AdminInterceptor를 /admin/** 경로에 적용 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<bean class="com.dazzle.shop.interceptor.AdminInterceptor" />
+		</mvc:interceptor>
+
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" />
-			<bean class="com.dazzle.interceptor.UserInterceptor" />
+			<bean class="com.dazzle.shop.interceptor.UserInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

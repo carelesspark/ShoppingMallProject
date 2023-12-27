@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+/* main div */
+#md {
+	display: grid;
+	grid-template-rows: auto auto;
+}
+
+/* 리스트 내 행 개수 */
+#rowNum {
+	display: grid;
+	grid-template-columns: auto auto;
+}
+
+#rNumChange {
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+}
+
+/* 리스트 헤더 */
+#mh {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto;
+}
+
+/* 리스트 바디 */
+#ml {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto;
+}
+
+/* 페이지 이동 */
+#pageBtn {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}

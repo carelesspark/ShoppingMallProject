@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -42,11 +43,21 @@
 				</ul>
 
 				<ul class="navbar-nav gap-2">
-					<li class="nav-item"><a class="nav-link" href="/cart.do">CART</a></li>
-					<li class="nav-item"><a class="nav-link" href="/user/userOrderList.do">MY PAGE</a></li>
-					<li class="nav-item"><a class="nav-link" href="/sign/goRegister.do">JOIN</a></li>
-					<li class="nav-item"><a class="nav-link" href="/sign/goLogin.do">LOGIN</a></li>
+					<li class="nav-item"><a class="nav-link" href="/cart.do?user_num=${sessionScope.user_num}">CART</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/user/orderList.do">MY PAGE</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/sign/goRegister.do">JOIN</a></li>
+					<c:if test="${sessionScope.user_name == null}">
+						<li class="nav-item"><a class="nav-link"
+						href="/sign/goLogin.do">LOGIN</a></li>
+					</c:if>
+					<c:if test="${sessionScope.user_name != null }">
+						<li class="nav-item"><a class="nav-link"
+						href="/sign/logout.do">LOGOUT</a></li>
+					</c:if>
 				</ul>
+
 
 				<form class="d-flex mt-3" action="/search_result.do">
 					<input class="form-control me-1" type="search" placeholder="Search" name="search_keyword"

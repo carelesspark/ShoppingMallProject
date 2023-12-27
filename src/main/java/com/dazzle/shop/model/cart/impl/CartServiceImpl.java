@@ -15,9 +15,21 @@ public class CartServiceImpl implements CartService {
 	private CartDAO cartDAO;
 
 	@Override
-	public List<CartVO> getCart(CartVO vo) {
+	public List<CartVO> getCart(int user_num) {
 		
-		return null;
+		return cartDAO.getCartList(user_num);
+	}
+
+	@Override
+	public void deleteCart(int cart_num) {	
+		
+		cartDAO.deleteCart(cart_num);
+	}
+
+	@Override
+	public void deleteCartAll(int user_num) {
+		
+		cartDAO.deleteCartAll(user_num);
 	}
 	
 }

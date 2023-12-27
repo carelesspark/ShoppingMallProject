@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +24,12 @@
 					<hr>
 				</tr>
 			</c:forEach>
+			
+			<div style="text-align: center">
+			<c:forEach var="i" begin="1" end="${page/15 + 1 }">
+				<a href="noticeMain.do?pageNum=${i }" >${i }	</a>
+			</c:forEach>
+			</div>
 			</table>
 		</div>
 	</div>

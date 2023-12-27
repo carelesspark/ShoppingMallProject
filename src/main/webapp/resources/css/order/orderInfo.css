@@ -6,213 +6,13 @@ html {
 
 body {
 	height: 100%;
-	display: flex;
-	flex-direction: column;
-	margin: 0;
-}
-
-header {
-	width: 100%;
-	height: 50px;
-	background-color: black;
-	margin-bottom: 50px;
-	color: white;
 }
 
 main {
-	flex: 1;
+	width: 840px;
+	margin-bottom: 100px;
 }
 
-footer {
-	width: 100%;
-	height: 50px;
-	background-color: black;
-	margin-top: 50px;
-	color: white;
-}
-
-#main-container {
-	width: 1080px;
-	margin: 0 auto 80px auto;
-}
-
-#user-explanation {
-	box-sizing: border-box;
-	height: 160px;
-	background-color: #f8f8f8;
-	border: 1px solid #f1f1f1;
-	margin: 0 auto 40px auto;
-}
-
-#user-explanation p {
-	margin: 0;
-}
-
-#user-explanation-grid {
-	height: 100px;
-	margin: 30px 20px 30px 20px;
-	display: grid;
-	grid-template-columns: 70px 1fr 1fr 1fr 1fr;
-}
-
-#user-explanation-rank-container {
-	box-sizing: border-box;
-	width: 70px;
-	height: 70px;
-	margin: 15px 0 15px 0;
-	background-color: #ffffff;
-	border: 1px solid #f1f1f1;
-	border-radius: 50%;
-	display: grid;
-	align-items: center;
-	justify-content: center;
-}
-
-#user-explanation-rank-container p {
-	font-size: 36px;
-	color: #686868;
-}
-
-#user-explanation-1-container {
-	margin-left: 20px;
-	display: grid;
-	grid-template-rows: auto auto;
-}
-
-#user-explanation-name-container {
-	display: grid;
-	align-items: center;
-}
-
-#user-explanation-name-container p {
-	font-size: 18px;
-}
-
-#user-explanation-name-rank-container {
-	display: grid;
-	align-items: center;
-}
-
-#user-explanation-name-rank-container p {
-	font-size: 24px;
-}
-
-#user-explanation-2-container {
-	padding: 0 20px;
-	box-sizing: border-box;
-	display: grid;
-	grid-template-rows: auto auto;
-	border-right: 1px solid #d4d4d4;
-}
-
-#user-explanation-2-container div {
-	display: grid;
-	align-items: center;
-	justify-content: right;
-}
-
-#user-explanation-2-container div p {
-	font-size: 18px;
-}
-
-#user-explanation-3-container {
-	padding: 0 20px;
-	box-sizing: border-box;
-	display: grid;
-	grid-template-rows: auto auto;
-	border-right: 1px solid #d4d4d4;
-}
-
-#user-explanation-3-container div {
-	display: grid;
-	align-items: center;
-	justify-content: right;
-}
-
-#user-explanation-3-container div p {
-	font-size: 18px;
-}
-
-#user-explanation-3-container div a {
-	box-sizing: border-box;
-	width: 60px;
-	height: 30px;
-	border: 1px solid #d4d4d4;
-	text-decoration: none;
-	background-color: #ffffff;
-	display: grid;
-	align-items: center;
-	justify-content: center;
-}
-
-#user-explanation-3-container div a p {
-	font-size: 14px;
-}
-
-#user-explanation-4-container {
-	display: grid;
-	grid-template-rows: auto auto;
-}
-
-#user-explanation-4-container div {
-	display: grid;
-	align-items: center;
-	justify-content: right;
-}
-
-#user-explanation-4-container div p {
-	font-size: 18px;
-}
-
-#user-explanation-4-container div a {
-	box-sizing: border-box;
-	width: 60px;
-	height: 30px;
-	border: 1px solid #d4d4d4;
-	text-decoration: none;
-	background-color: #ffffff;
-	display: grid;
-	align-items: center;
-	justify-content: center;
-}
-
-#user-explanation-4-container div a p {
-	font-size: 14px;
-}
-
-/**/
-#menu-container {
-	display: grid;
-	grid-template-columns: auto auto;
-}
-
-/**/
-section {
-	width: 200px;
-	margin-right: 40px;
-}
-
-.menu-section {
-	box-sizing: border-box;
-	border-bottom: 1px solid #f1f1f1;
-	margin-bottom: 20px;
-}
-
-.menu-section-anchor {
-	text-decoration-line: none;
-	color: black;
-}
-
-.menu-section-name {
-	font-size: 20px;
-	margin-top: 0;
-	margin-bottom: 20px;
-}
-
-.menu-section-name-detail {
-	font-size: 14px;
-	margin-bottom: 20px;
-}
 
 #main-order-container {
 	box-sizing: border-box;
@@ -278,8 +78,8 @@ main {
 	height: 180px;
 	place-items: center;
 }
-
-#shirt {
+	
+#product_img {
 	width: 100px;
 	height: 100px;
 }
@@ -429,4 +229,23 @@ main {
 
 #accordion {
 	margin-top: 10px;
+}
+
+#refund_change_result{
+	width: 840px;
+	height: 300px;
+	margin-top: 20px;
+}
+
+#refund_change_result_title {
+	width: 840px;
+	height: 40px;
+}
+
+#result_reason_textarea {
+	width: 840px;
+	height: 260px;
+	resize: none;
+	border-radius: 5px;
+	text-align: left;
 }

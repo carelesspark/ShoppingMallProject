@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +12,7 @@
 		<div class="title">
 			<h1>공지사항</h1>
 			<a href="deleteNotice.do?pno=${notice.pno }"><button>삭제</button></a>
+			<a href="/board/noticeEdit.do?pno=${notice.pno }"><button>수정</button></a>
 		</div>
 		
 		<hr style="height: 3px; background-color: black;">
