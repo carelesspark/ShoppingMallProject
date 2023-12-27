@@ -35,4 +35,8 @@ public interface ProductService {
 	int count_search_products(String _search_keyword);
 	
 	ProductCodeVO get_product_code(int _size_num);
+	
+	List<ReviewVO> getReview(Integer product_num, Integer start, Integer end);
+	List<ReviewVO> getReviewSome(ReviewVO vo);
+	ReviewVO getReviewCount(ReviewVO vo);
 }

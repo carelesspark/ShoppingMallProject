@@ -93,6 +93,90 @@ public class ProductDAO {
 			+ "(user_num, product_code, review_content, review_ratings, review_date) "
 			+ "VALUES (1, ?, ?, 5, NOW())";
 	
+	private final String  GET_REVIEW = "SELECT" + 
+			"    pc.product_code," + 
+			"    ps.size_name," + 
+			"    pr.color_name," + 
+			"    a.id," + 
+			"    ri.review_img," + 
+			"    r.review_date," + 
+			"    r.review_content," + 
+			"    r.review_ratings," + 
+			"    r.review_num" + 
+			" FROM" + 
+			"    review r" + 
+			" JOIN" + 
+			"    product_code pc ON r.product_code = pc.product_code" + 
+			" JOIN" + 
+			"    product_size ps ON pc.size_num = ps.size_num" + 
+			" JOIN" + 
+			"    product_color pr ON ps.color_num = pr.color_num" + 
+			" JOIN" + 
+			"	product p ON p.product_num = pr.product_num" + 
+			" JOIN" + 
+			"    users u ON r.user_num = u.user_num" + 
+			" JOIN" + 
+			"    auth_id a ON u.user_num = a.user_num" + 
+			" LEFT JOIN" + 
+			"    review_img ri ON r.review_num = ri.review_num" + 
+			" WHERE" + 
+			"    p.product_num = ?" + 
+			" ORDER BY r.review_date desc" +
+			" LIMIT ? OFFSET ?";
+	
+	private final String  GET_REVIEW_SOME = "SELECT" + 
+			"    pc.product_code," + 
+			"    ps.size_name," + 
+			"    pr.color_name," + 
+			"    a.id," + 
+			"    ri.review_img," + 
+			"    r.review_date," + 
+			"    r.review_content," + 
+			"    r.review_ratings," + 
+			"    r.review_num" + 
+			" FROM" + 
+			"    review r" + 
+			" JOIN" + 
+			"    product_code pc ON r.product_code = pc.product_code" + 
+			" JOIN" + 
+			"    product_size ps ON pc.size_num = ps.size_num" + 
+			" JOIN" + 
+			"    product_color pr ON ps.color_num = pr.color_num" + 
+			" JOIN" + 
+			"	product p ON p.product_num = pr.product_num" + 
+			" JOIN" + 
+			"    users u ON r.user_num = u.user_num" + 
+			" JOIN" + 
+			"    auth_id a ON u.user_num = a.user_num" + 
+			" LEFT JOIN" + 
+			"    review_img ri ON r.review_num = ri.review_num" + 
+			" WHERE" + 
+			"    p.product_num = ?" + 
+			" ORDER BY r.review_date desc" +
+			" LIMIT 3";
+	
+	private final String  GET_REVIEW_COUNT = "SELECT COUNT(*) as count" + 
+			" FROM" + 
+			"    review r" + 
+			" JOIN" + 
+			"    product_code pc ON r.product_code = pc.product_code" + 
+			" JOIN" + 
+			"    product_size ps ON pc.size_num = ps.size_num" + 
+			" JOIN" + 
+			"    product_color pr ON ps.color_num = pr.color_num" + 
+			" JOIN" + 
+			"	product p ON p.product_num = pr.product_num" + 
+			" JOIN" + 
+			"    users u ON r.user_num = u.user_num" + 
+			" JOIN" + 
+			"    auth_id a ON u.user_num = a.user_num" + 
+			" LEFT JOIN" + 
+			"    review_img ri ON r.review_num = ri.review_num" + 
+			" WHERE" + 
+			"    p.product_num = ?" ;
+
+	
+	
 	private final String get_product_code = "SELECT * FROM product_code p "
 			+ "WHERE p.size_num = ?";
 
@@ -153,6 +237,24 @@ public class ProductDAO {
 	public ProductCodeVO get_product_code(int _size_num) {
 		System.out.println("상품코드");
 		return jdbc_template.queryForObject(get_product_code, new Object[] {_size_num}, new ProductCodeRowMapper());
+	}
+	
+	public List<ReviewVO> getReview(Integer product_num, Integer start, Integer end) {
+		System.out.println("리뷰 목록");
+		return jdbc_template.query(GET_REVIEW, new Object[] {product_num, start, end}, new ReviewRowMapper());
+		
+	}
+	
+	public List<ReviewVO> getReviewSome(ReviewVO vo) {
+		System.out.println("리뷰 목록");
+		return jdbc_template.query(GET_REVIEW_SOME, new Object[] {vo.getProduct_num()}, new ReviewRowMapper());
+		
+	}
+	
+	public ReviewVO getReviewCount(ReviewVO vo) {
+		System.out.println("리뷰 개수");
+		return jdbc_template.queryForObject(GET_REVIEW_COUNT, new Object[] {vo.getProduct_num()}, new ReviewCountRowMapper());
+		
 	}
 
 }
