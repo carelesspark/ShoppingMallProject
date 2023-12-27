@@ -36,15 +36,6 @@ public class AdminController {
 
 	@Autowired
 	private OrderService orderService;
-	/*
-	 * 매출 관리
-	 */
-	/*
-	 * 매출 목록
-	 */
-	/*
-	 * 가계부
-	 */
 
 	// 회원 관리
 	// 회원 목록
@@ -114,9 +105,6 @@ public class AdminController {
 	@GetMapping("/productList.do")
 	public String adminProductList(HttpServletRequest request, Model model) {
 		System.out.println("AdminController: adminProductList");
-
-		String webappPath = request.getSession().getServletContext().getRealPath("/");
-		System.out.println("webapp path: " + webappPath);
 
 		List<SubCategoryVO> subCategory = adminService.getSubCategoryList();
 		model.addAttribute("subCategory", subCategory);
@@ -284,6 +272,31 @@ public class AdminController {
 
 		return "/admin/productList.do";
 	}
+
+	// 상품 수정
+
+	// 상품 활성화
+	@GetMapping("/activateProduct.do")
+	public String activateProduct(@RequestParam("product_num") int product_num, Model modeㅣ, Model model) {
+		System.out.println("AdminController: activateProduct");
+
+		adminService.activateProduct(product_num);
+		model.addAttribute("product_num", product_num);
+
+		return "productDetail.do";
+	}
+
+	// 상품 비활성화
+	@GetMapping("/deactivateProduct.do")
+	public String deactivateProduct(@RequestParam("product_num") int product_num, Model model) {
+		System.out.println("AdminController: deactivateProduct");
+
+		adminService.deactivateProduct(product_num);
+		model.addAttribute("product_num", product_num);
+
+		return "productDetail.do";
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping(value = "/orderListAdmin.do")
 	public String getOrderListAdmin(OrderVO vo, Model model) throws Exception {

@@ -246,4 +246,25 @@ public class AdminDAO {
 		}
 	}
 
+	// 상품 활성화
+	public void activateProduct(int product_num) {
+		String sql = "Update product SET registration_status 1 WHERE product_num = " + product_num;
+
+		try {
+			template.update(sql);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 상품 비활성화
+	public void deactivateProduct(int product_num) {
+		String sql = "Update product SET registration_status 0 WHERE product_num = " + product_num;
+
+		try {
+			template.update(sql);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+	}
 }
