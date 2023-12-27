@@ -155,14 +155,14 @@ public class OrderDAO {
 			+ " JOIN product p ON p.product_num = pco.product_num"
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE c.user_num = ?";
 
-	private final String BUY_ORDER = "INSERT INTO orders VALUES (DEFAULT, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private final String BUY_ORDER = "INSERT INTO orders VALUES (DEFAULT, ?, NOW(), ?, ?, ?, ?, ? ,? ,?, ?, DEFAULT, ?, ?)";
 
 	private final String GET_ORDER = "SELECT order_num FROM orders "
 			+ "where address = ? and detail_address=? and postal_num = ? and delivery_price = ? and "
 			+ "recipient = ? and request = ? and payment = ? and user_num = ? and phone_num = ? "
 			+ "order by order_num desc limit 1";
 
-	private final String BUY_ORDER_DETAIL = "INSERT INTO order_detail VALUES(DEFAULT, '상품 준비 중', ?, ?, ?, ?)";
+	private final String BUY_ORDER_DETAIL = "INSERT INTO order_detail VALUES(DEFAULT, ?, ?, '상품 준비 중', ?, ?)";
 
 	private final String SUCCESS_ORDER = "SELECT pimg.main_img, (p.product_price * ? ) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, o.order_num, o.order_date, o.delivery_price"
 			+ " FROM orders o" + " JOIN users u ON u.user_num = o.user_num"
@@ -199,9 +199,9 @@ public class OrderDAO {
 	private final String CHANGE_PRODUCT_STATE2 = "UPDATE order_detail SET product_state = '교환 요청 중' WHERE order_detail_num = ?";
 
 	private final String ORDER_SUCC_INFO = "SELECT order_num, order_date, address, detail_address, postal_num, delivery_price, "
-			+ "recipient, request, payment, phone_num FROM orders WHERE order_num = ?";
+			+ "recipient, request, payment, phone_num, points, totalPrice FROM orders WHERE order_num = ?";
 
-	private final String ORDER_SUCC_PRODUCT = "SELECT pimg.main_img, od.total_price, pc.product_code, ps.size_name, pco.color_name, p.product_price, p.product_name, od.amount"
+	private final String ORDER_SUCC_PRODUCT = "SELECT pimg.main_img, od.total_price, pc.product_code, ps.size_name, pco.color_name, p.product_price, p.product_name, od.amount, o.totalPrice, o.points"
 			+ " FROM orders o" + " JOIN order_detail od ON od.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
@@ -211,8 +211,8 @@ public class OrderDAO {
 
 	private final String GET_ORDER_RESPONSE_DETAIL = "select * from product_refund_or_change where order_detail_num = ?";
 	
-	private final String MINUS_POINTS = "UPDATE POINTS SET points = 0 WHERE user_num = ?";
-	private final String PLUS_POINTS = "UPDATE POINTS SET points = price * 0.01 WHERE price = ? AND user_num = ?";
+	private final String MINUS_POINTS = "UPDATE point SET points = 0 WHERE user_num = ?";
+	private final String PLUS_POINTS = "UPDATE point SET points = ? * 0.01 WHERE user_num = ?";
 
 	public OrderVO getOrderInfo(OrderVO vo) {
 		try {
@@ -358,9 +358,9 @@ public class OrderDAO {
 
 	public void insertBuyOrder(OrderVO vo) {
 		System.out.println("insertBuyOrder()");
-		jdbcTemplate.update(BUY_ORDER, vo.getAddress(), vo.getDetail_address(), vo.getPostal_num(),
-				vo.getDelivery_price(), vo.getRecipient(), vo.getRequest(), vo.getPayment(), vo.getUser_num(),
-				vo.getPhone_num(), vo.getPoints());
+		jdbcTemplate.update(BUY_ORDER, vo.getUser_num(), vo.getAddress(), vo.getDetail_address(), vo.getPostal_num(),
+				vo.getDelivery_price(), vo.getRecipient(), vo.getRequest(), vo.getPayment(),
+				vo.getPhone_num(), vo.getPoints(), vo.getTotalPrice());
 
 		return;
 	}
@@ -375,8 +375,7 @@ public class OrderDAO {
 
 	public void insertBuyOrderDetail(OrderVO vo) {
 		System.out.println("insertBuyOrderDetail()");
-		jdbcTemplate.update(BUY_ORDER_DETAIL, vo.getAmount(), vo.getAmountMultiPrice(), vo.getOrder_num(),
-				vo.getProduct_code());
+		jdbcTemplate.update(BUY_ORDER_DETAIL, vo.getOrder_num(),  vo.getProduct_code(), vo.getAmount(), vo.getAmountMultiPrice() );
 
 		return;
 	}
@@ -498,5 +497,10 @@ public class OrderDAO {
 	public void updatePoints(OrderVO vo) {
 		System.out.println("updatePoints()");
 		jdbcTemplate.update(MINUS_POINTS, vo.getUser_num());
+	}
+	
+	public void updatePoints2(OrderVO vo) {
+		System.out.println("updatePoints2()");
+		jdbcTemplate.update(PLUS_POINTS, vo.getTotalPrice(), vo.getUser_num());
 	}
 }
