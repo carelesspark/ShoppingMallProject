@@ -55,4 +55,5 @@ public class OrderVO {
 	private int refund_change_amount;
 	private int approve_search;
 	private int points;
+	private int totalPrice;
 }

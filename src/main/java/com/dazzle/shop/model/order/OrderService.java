@@ -40,6 +40,8 @@ public interface OrderService {
 	
 	OrderVO getOrderSuccInfo(OrderVO vo);
 	
+	void updatePoints2(OrderVO vo);
+	
 	void updateOrderState(OrderVO vo);
 	
 	void updateOrderDelv(OrderVO vo);
