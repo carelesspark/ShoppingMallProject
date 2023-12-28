@@ -52,7 +52,7 @@ public class BoardController {
 			
 			model.addAttribute("boardList", boardList);
 			
-			List<FileVO> fileList = boardService.getFileList();			
+			List<FileVO> fileList = boardService.getFileList(ctgr_num);			
 			
 			model.addAttribute("file", fileList);	
 		} else {			

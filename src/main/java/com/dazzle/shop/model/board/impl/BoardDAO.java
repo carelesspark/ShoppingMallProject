@@ -53,6 +53,14 @@ public class BoardDAO {
 		return fileList;
 	}
 	
+	public List<FileVO> getFileList(int ctgr_num) {
+		String sql = "select * from file, board where file.pno = board.pno and ctgr_num = " + ctgr_num + " group by file.pno order by file.pno desc";
+		
+		List<FileVO> fileList = template.query(sql, new FileRowMapper());
+		
+		return fileList;
+	}
+	
 	public List<BoardVO> getCtgrBoardList(int ctgr_num) {	// 게시판 카테고리별 보기
 		String sql = "select * from users right join board on board.user_num = users.user_num left join codi_ctgr on board.ctgr_num = codi_ctgr.ctgr_num where cate = 'board' and board.ctgr_num = " + ctgr_num + " order by pno desc";
 		
