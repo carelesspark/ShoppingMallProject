@@ -19,8 +19,11 @@
 		<div id="mc">
 			<%@ include file="./user_side.jsp"%>
 			<main>
-				개인정보 변경 폼
-				<div id="md"></div>
+				<div id="md">
+					<div id="mt">
+						<div id="mtd">회원정보 변경</div>
+					</div>
+				</div>
 			</main>
 		</div>
 	</div>

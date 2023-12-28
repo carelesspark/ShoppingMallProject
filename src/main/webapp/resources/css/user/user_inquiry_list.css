@@ -54,9 +54,14 @@
 #mh {
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: auto auto auto auto auto;
+	grid-template-columns: 2fr 4fr 1fr 1fr;
 	border-bottom: 1px solid #d4d4d4;
 	margin-bottom: 20px;
+}
+
+#mh3, #mh4 {
+	display: grid;
+	justify-content: center;
 }
 
 /* 리스트 */
@@ -79,10 +84,17 @@
 .clb {
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: auto auto auto auto auto;
+	grid-template-columns: 2fr 4fr 1fr 1fr;
 	border-bottom: 1px solid #f1f1f1;
 	margin-bottom: 20px;
 }
+
+.clb3, .clb4 {
+	display: grid;
+	justify-content: center;
+}
+
+/*  */
 
 /* 페이지 조정 */
 #mp {

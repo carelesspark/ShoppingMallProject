@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.dazzle.shop.model.user.domain.*;
@@ -242,4 +243,39 @@ public class UserDAO {
 		return template.queryForObject(COUNT_REPLY_LIST_BETWEEN_DATES, Integer.class, user_num, startDate, endDate);
 	}
 
+	public boolean checkPwd(int user_num, String pwd) {
+		String sql = "Select count(*) from auth_id where user_num = ? and pwd = ?";
+
+		RowMapper<Boolean> rowMapper = (rs, rowNum) -> {
+			int count = rs.getInt(1);
+
+			return count >= 1;
+		};
+
+		try {
+			return template.queryForObject(sql, rowMapper, user_num, pwd);
+		} catch (EmptyResultDataAccessException e) {
+			return false;
+		}
+	}
+
+	public UserVO getUserInfo(int user_num) {
+		String sql = "select ai.id, ui.user_phone, ai.user_email from user_info ui "
+				+ "join auth_id ai on ui.user_num = ai.user_num where ui.user_num = ?";
+
+		RowMapper<UserVO> rowMapper = (rs, rowNum) -> {
+			UserVO vo = new UserVO();
+			vo.setId(rs.getString("id"));
+			vo.setUser_phone(rs.getString("user_phone"));
+			vo.setUser_email(rs.getString("user_email"));
+
+			return vo;
+		};
+
+		try {
+			return template.queryForObject(sql, rowMapper, user_num);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 }

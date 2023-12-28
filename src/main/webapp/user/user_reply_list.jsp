@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_reply_list.css?v=1" />
+	href="${pageContext.request.contextPath}/resources/css/user/user_reply_list.css?v=1.1" />
 <title>user reply list</title>
 </head>
 <body>
@@ -62,9 +62,9 @@
 							<c:when test="${not empty replyList}">
 								<c:forEach var="list" items="${replyList}">
 									<div class="clb">
-										<div>${list.cate}</div>
-										<div>${list.title}</div>
-										<div>
+										<div class="clb1">${list.cate}</div>
+										<div class="clb2">${list.title}</div>
+										<div class="clb3">
 											<div>
 												<button type="button"
 													onclick="window.location.href='.do?pno=${list.pno}'">&gt;</button>
