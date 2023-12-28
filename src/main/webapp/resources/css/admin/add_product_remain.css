@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+/* main div */
+#md {
+	display: grid;
+	grid-template-rows: auto auto;
+}
+
+/* 메인 제목 */
+#mtd {
+	box-sizing: border-box;
+	font-size: 24px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #191919;
+	margin-bottom: 20px;
+}
+
+#formDiv {
+	display: grid;
+	justify-content: center;
+	align-items: center;
+}
+
+#form {
+	display: grid;
+	grid-template-columns: auto;
+	font-size: 18px;
+}
+
+#cDivName, #sDivName {
+	box-sizing: border-box;
+	width: 480px;
+	font-size: 24px;
+	text-align: center;
+	border-bottom: 1px solid #191919;
+	margin-bottom: 20px;
+}
+
+#colorList, #sizeList {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	margin-bottom: 20px;
+}
+
+#colorList div, #sizeList div {
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: space-around;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+#addColorBtnDiv, #addSizeBtnDiv {
+	box-sizing: border-box;
+	width: 120px;
+	height: 20px;
+	display: grid;
+	margin-bottom: 30px;
+}
+
+#stockDiv {
+	display: grid;
+	grid-template-columns: 120px 360px;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+#stockDiv input {
+	height: 40px;
+}
+
+#subBtnDiv {
+	width: 480px;
+	height: 40px;
+}
+
+#subBtnDiv button {
+	box-sizing: border-box;
+	width: 480px;
+	height: 40px;
+}
