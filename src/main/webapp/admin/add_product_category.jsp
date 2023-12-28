@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/admin/admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/admin/add_product_category.css?v=1.2" />
 <title>add product</title>
 </head>
 <body>
@@ -19,10 +21,10 @@
 					<div id="mt">
 						<div id="mtd">상품 추가 1/3단계 - 카테고리 설정</div>
 					</div>
-					<div>
+					<div id="formDiv">
 						<form action="/admin/addProduct.do"
-							onsubmit="validateForm(this, event)">
-							<div>
+							onsubmit="validateForm(this, event)" id="form">
+							<div id="iDiv1">
 								<label for="cn">카테고리</label> <select id="cn"
 									onchange="changeSubCategories()">
 									<option>top</option>
@@ -32,7 +34,7 @@
 									<option>etc</option>
 								</select>
 							</div>
-							<div>
+							<div id="iDiv2">
 								<label for="scn">세부 카테고리</label><select name="sub_category_num"
 									id="scn">
 									<option value="1">longSleeve</option>
@@ -42,7 +44,7 @@
 									<option value="5">collar</option>
 								</select>
 							</div>
-							<div>
+							<div id="iDiv3">
 								<button type="submit">기본 설정 이동</button>
 							</div>
 						</form>

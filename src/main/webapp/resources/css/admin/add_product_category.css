@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+/* main div */
+#md {
+	display: grid;
+	grid-template-rows: auto auto;
+}
+
+/* 메인 제목 */
+#mtd {
+	box-sizing: border-box;
+	font-size: 24px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #191919;
+	margin-bottom: 20px;
+}
+
+#formDiv {
+	display: grid;
+	justify-content: center;
+	align-items: center;
+}
+
+#form {
+	display: grid;
+	grid-template-columns: auto;
+	font-size: 18px;
+}
+
+#iDiv1, #iDiv2 {
+	display: grid;
+	grid-template-columns: 160px 320px;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+#iDiv1 select, #iDiv2 select {
+	height: 40px;
+}
+
+#iDiv3 {
+	box-sizing: border-box;
+	height: 40px;
+	display: grid;
+}
+
+#iDiv3 button {
+	box-sizing: border-box;
+	height: 40px;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+}

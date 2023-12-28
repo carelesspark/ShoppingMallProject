@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_board_list.css?v=1.1" />
+	href="${pageContext.request.contextPath}/resources/css/user/user_board_list.css?v=1.2" />
 
 <title>user board list</title>
 </head>
