@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_check_info.css" />
+	href="${pageContext.request.contextPath}/resources/css/user/user_check_info.css?v=1" />
 
 <title>user check info</title>
 </head>
@@ -19,13 +19,29 @@
 		<div id="mc">
 			<%@ include file="./user_side.jsp"%>
 			<main>
-				비밀번호 입력
-				<div id="md"></div>
+				<div id="md">
+					<div id="mt">
+						<div id="mtd">회원정보 변경</div>
+					</div>
+					<div id="mfd">
+						<form action="/user/checkInfo.do" method="post"
+							onsubmit="validateForm(this, event)" id="mf">
+							<input type="password" name="pwd" id="ipwd"
+								placeholder="비밀번호를 입력해 주세요.">
+							<button type="submit" id="isb">다음</button>
+						</form>
+					</div>
+				</div>
 			</main>
 		</div>
 	</div>
 	<%@ include file="../footer.jsp"%>
 
+	<c:if test="${!empty error}">
+		<script type="text/javascript">
+			alert("비밀번호 정보가 일치하지 않습니다.");
+		</script>
+	</c:if>
 	<script type="text/javascript">
 		var rank = '${user_rank}';
 		var rankBadge = document.getElementById('cc-rb');

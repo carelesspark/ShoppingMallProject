@@ -1,5 +1,7 @@
 package com.dazzle.shop.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.dazzle.shop.model.product.ProductVO;
 import com.dazzle.shop.model.product.ProductsVO;
 import com.dazzle.shop.model.product.ReviewVO;
 import com.dazzle.shop.model.product.SubCategoryVO;
+import com.dazzle.shop.model.admin.domain.AdminProductVO;
 import com.dazzle.shop.model.faq.FaqVO;
 import com.dazzle.shop.model.product.CategoryVO;
 import com.dazzle.shop.model.product.InquiryVO;
@@ -175,21 +180,65 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/review.do")
-	public String review(ReviewVO _vo, HttpServletRequest _req, @RequestParam("product_num") int _product_num,
-			Model _model) {
+	public String review(ReviewVO _vo, HttpServletRequest _req, Model _model) {
 
-		ProductVO product_info = product_service.product_info(_product_num);
-		_model.addAttribute("product_info", product_info);
-
+		/*
+		 * ProductVO product_info = product_service.product_info(_vo.getProduct_code());
+		 * _model.addAttribute("product_info", product_info);
+		 */
+		_model.addAttribute("product_code",_vo.getProduct_code());
+		_model.addAttribute("user_num", _req.getSession().getAttribute("user_num"));
 		return "/product/review.jsp";
 	}
 
 	@RequestMapping(value = "/submit_review.do")
-	public String submitReview(@RequestParam("review_content") String _review_content) {
+	public String submitReview(MultipartHttpServletRequest img, HttpSession session, ReviewVO vo, Model model) {
+		System.out.println(vo);
+		String webappPath = session.getServletContext().getRealPath("/");
+		System.out.println("webapp path: " + webappPath);
+		String imagePath = webappPath + "resources/image/review/" + vo.getProduct_code() + "/";
 
-		return "redirect:/product.do";
+		System.out.println("Default Path: " + imagePath);
+
+		File directory = new File(imagePath);
+		if (!directory.exists()) {
+			directory.mkdirs();
+		}
+		System.out.println("Image Directory: " + directory.getAbsolutePath());
+		MultipartFile mainImageFile = img.getFile("review_img2");
+
+		if (mainImageFile != null) {
+		    String mainImageName = mainImageFile.getOriginalFilename();
+		    String filePath = imagePath + mainImageName;
+		    System.out.println("Main Image Path: "	+ filePath);
+		    try {
+		    	mainImageFile.transferTo(new File(filePath));
+				System.out.println("Main image saved successfully: " + filePath);
+			} catch (IllegalStateException | IOException e) {
+				System.err.println("Error saving main file: " + e.getMessage());
+				e.printStackTrace();
+			}
+		    System.out.println(mainImageName);
+		    vo.setUser_num((int) session.getAttribute("user_num"));
+			product_service.insertReview(vo);
+			ReviewVO num = product_service.getReviewOne(vo);
+			
+			num.setReview_img(mainImageName); 
+			product_service.insertReviewImg(num);
+			
+			return "redirect:/user/orderList.do";
+		}else {
+			vo.setUser_num((int) session.getAttribute("user_num"));
+			product_service.insertReview(vo);
+			return "redirect:/user/orderList.do";
+		}
+		
+		
+		
 
 	}
+	
+	
 
 	@RequestMapping(value = "/inquiry.do")
 	public String getInquiry(HttpServletRequest request, @RequestParam(name = "product_num") int productNum, Model model) {

@@ -48,5 +48,7 @@ public interface ProductService {
 	
 	InquiryVO getInquiryCount(int _product_num);
 
-
+	void insertReview(ReviewVO vo);
+	ReviewVO getReviewOne(ReviewVO vo);
+	void insertReviewImg(ReviewVO vo);
 }
