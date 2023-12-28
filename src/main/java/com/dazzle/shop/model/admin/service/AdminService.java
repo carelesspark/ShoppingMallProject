@@ -14,15 +14,6 @@ public interface AdminService {
 
 	// 서브카테고리 번호, 이름 출력
 	List<SubCategoryVO> getSubCategoryList();
-	/*
-	 * 매출 관리
-	 */
-	/*
-	 * 매출 목록
-	 */
-	/*
-	 * 가계부
-	 */
 
 	// 회원 관리
 	// 회원 목록
@@ -57,15 +48,13 @@ public interface AdminService {
 	// 제품 사이즈 및 재고 추가
 	void insertProductSize(int color_num, String size_name, int product_stock);
 
-	/*
-	 * 상품 추가
-	 */
-	/*
-	 * 상품 수정
-	 */
-	/*
-	 * 상품 삭제
-	 */
+	// 상품 수정
+
+	// 상품 활성화
+	void activateProduct(int product_num);
+
+	// 상품 비활성화
+	void deactivateProduct(int product_num);
 
 	/*
 	 * 주문 관리

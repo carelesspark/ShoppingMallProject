@@ -22,17 +22,20 @@
 		}
 
 		#order-fee{
+			width: 708px;
 			display: grid;
-		    grid-template-columns: repeat(5, auto);
+		    grid-template-columns: 120px 70px 120px 70px 120px 70px 138px;
 		    justify-content: center;
 		    align-items: center;
+		    font-size: 11pt;
+		}
+		
+		#order-fee-div-div {
+			font-weight: bold;
 		}
 		
 		#order-fee > div{
-			margin-top: 10px;
-			margin-bottom: 10px;
-			margin-left: 30px;
-			margin-right: 30px;
+			text-align: center;
 		}
 
         .name {

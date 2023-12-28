@@ -19,15 +19,6 @@ public class UserInquiryVO {
 	// inquiry_answer
 	private Date answer_date;
 	private String answer;
-	// product_code
-	private String product_code;
-	// product_size
-	private int size_num;
-	private String size_name;
-	private Integer product_stock;
-	// product_color
-	private int color_num;
-	private String color_name;
 	// product
 	private int product_num;
 	private String product_name;
@@ -45,4 +36,5 @@ public class UserInquiryVO {
 	private Date endDate;
 	private int currentPage;
 	private int itemsPerPage;
+	
 }

@@ -13,9 +13,8 @@ public class UserReviewListRowMapper implements RowMapper<UserReviewVO> {
 	public UserReviewVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		UserReviewVO vo = new UserReviewVO();
 		vo.setReview_date(rs.getDate("review_date"));
-		vo.setReview_clicks(rs.getInt("review_clicks"));
 		vo.setReview_ratings(rs.getInt("review_ratings"));
-		vo.setReview_num(rs.getInt("review_num"));
+		vo.setProduct_num(rs.getInt("product_num"));
 		vo.setSize_name(rs.getString("size_name"));
 		vo.setColor_name(rs.getString("color_name"));
 		vo.setProduct_name(rs.getString("product_name"));

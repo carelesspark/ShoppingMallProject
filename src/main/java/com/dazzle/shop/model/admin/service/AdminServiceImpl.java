@@ -38,16 +38,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	/*
-	 * 매출 관리
-	 */
-	/*
-	 * 매출 목록
-	 */
-	/*
-	 * 가계부
-	 */
-
-	/*
 	 * 회원 관리
 	 */
 	/*
@@ -64,12 +54,8 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.getBlackist(pageSize, pageNum);
 	}
 
-	/*
-	 * 상품 관리
-	 */
-	/*
-	 * 상품 목록
-	 */
+	// 상품 관리
+	// 상품 목록
 	@Override
 	public List<AdminProductVO> getProductList(int subCategoryNum, int pageSize, int pageNum) {
 
@@ -121,12 +107,19 @@ public class AdminServiceImpl implements AdminService {
 		adminDAO.insertProductSize(color_num, size_name, product_stock);
 	}
 
-	/*
-	 * 상품 수정
-	 */
-	/*
-	 * 상품 삭제
-	 */
+	// 상품 수정
+
+	// 상품 활성화
+	@Override
+	public void activateProduct(int product_num) {
+		adminDAO.activateProduct(product_num);
+	}
+
+	// 상품 비활성화
+	@Override
+	public void deactivateProduct(int product_num) {
+		adminDAO.deactivateProduct(product_num);
+	}
 
 	/*
 	 * 주문 관리

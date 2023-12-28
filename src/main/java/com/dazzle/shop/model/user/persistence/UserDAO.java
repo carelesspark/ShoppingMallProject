@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.dazzle.shop.model.user.domain.*;
@@ -18,38 +19,21 @@ public class UserDAO {
 
 	// 유저 카드 내용
 	private final String USER_CARD = "SELECT SUBSTR(ui.user_rank, 1,1) rank_letter, ui.user_rank, "
-			+ "COUNT(case when d.delivery_date IS NULL then 1 ELSE NULL END) delivering_items, "
-			+ "IFNULL(SUM(p.points), 0) user_total_point FROM user_info ui "
-			+ "JOIN point p ON ui.user_num = p.user_num JOIN orders o "
-			+ "ON ui.user_num = o.user_num JOIN delivery d ON o.order_num = d.order_num "
-			+ "WHERE ui.user_num = ? GROUP BY ui.user_num";
+			+ "COUNT(case when d.delivery_date IS NULL then 1 ELSE NULL END) delivering_items FROM user_info ui "
+			+ "JOIN orders o ON ui.user_num = o.user_num LEFT OUTER JOIN delivery d ON o.order_num = d.order_num "
+			+ "GROUP BY ui.user_num having ui.user_num = ?";
 
 	// 나의 쇼핑
 	// 주문/배송 조회
 	private final String ORDER_LIST = "SELECT o.order_date, d.delivery_date, od.product_state, od.order_detail_num, "
-			+ "od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, o.order_num "
-			+ "FROM orders o LEFT JOIN delivery d ON o.order_num = d.order_num JOIN order_detail od ON o.order_num = od.order_num "
+			+ "od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, p.product_num, o.order_num "
+			+ "FROM orders o " + "LEFT JOIN delivery d ON o.order_num = d.order_num "
+			+ "JOIN order_detail od ON o.order_num = od.order_num "
 			+ "JOIN product_code pc ON od.product_code = pc.product_code "
 			+ "JOIN product_size ps ON pc.size_num = ps.size_num "
 			+ "JOIN product_color pcolor ON ps.color_num = pcolor.color_num "
 			+ "JOIN product p ON pcolor.product_num = p.product_num "
 			+ "WHERE o.user_num = ? AND o.order_date BETWEEN ? AND ? ORDER BY o.order_date DESC";
-
-	/*
-	 * private final String ORDER_LIST_SEARCH =
-	 * "SELECT o.order_date, d.delivery_date, od.product_state, od.order_detail_num,"
-	 * +
-	 * " od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, o.order_num "
-	 * + " FROM orders o INNER JOIN delivery d ON o.order_num = d.order_num" +
-	 * " INNER JOIN order_detail od ON o.order_num = od.order_num" +
-	 * " INNER JOIN product_code pc ON od.product_code = pc.product_code" +
-	 * " INNER JOIN product_size ps ON ps.size_num = pc.size_num" +
-	 * " INNER JOIN product_color pcolor ON ps.color_num = pcolor.color_num" +
-	 * " INNER JOIN product p ON pcolor.product_num = p.product_num" +
-	 * " INNER JOIN product_img pimg ON pimg.product_num = p.product_num" +
-	 * " WHERE o.user_num = ? AND p.product_name LIKE ? " +
-	 * " ORDER BY o.order_date";
-	 */
 
 	private final String ORDER_CHECK = "SELECT" + " (SELECT COUNT(*) FROM orders WHERE user_num = ?) AS total_orders,"
 			+ " (SELECT COUNT(*) FROM orders o INNER JOIN order_detail od ON o.order_num = od.order_num WHERE user_num = ? AND od.product_state = '상품 준비 중') AS orders_in_preparation,"
@@ -72,8 +56,8 @@ public class UserDAO {
 			+ "ON od.order_num = o.order_num WHERE p.user_num = ? AND o.order_date BETWEEN ? AND ?";
 
 	// 내가 작성한 리뷰 내역
-	private final String REVIEW_LIST = "SELECT r.review_ratings, r.review_date, r.review_clicks, "
-			+ "p.product_name, r.review_num, ps.size_name, pcolor.color_name "
+	private final String REVIEW_LIST = "SELECT r.review_ratings, r.review_date, "
+			+ "p.product_name, p.product_num, ps.size_name, pcolor.color_name "
 			+ "FROM review r INNER JOIN product_code pc ON r.product_code = pc.product_code "
 			+ "JOIN product_size ps ON pc.size_num = ps.size_num JOIN product_color pcolor "
 			+ "ON ps.color_num = pcolor.color_num JOIN product p ON pcolor.product_num = p.product_num "
@@ -84,12 +68,12 @@ public class UserDAO {
 			+ "WHERE r.user_num = ? AND r.review_date BETWEEN ? AND ?";
 
 	// 1대1 질의응답 내역
-	private final String INQUIRY_LIST = "SELECT i.inquiry_date, i.inquiry_num, ia.answer, "
-			+ "p.product_name, pcolor.color_name, ps.size_name FROM inquiry i "
+	private final String INQUIRY_LIST = "SELECT i.inquiry_date, i.inquiry_num, ia.answer, i.product_num, "
+			+ "p.product_name, pcolor.color_name, ps.size_name " + "FROM inquiry i "
 			+ "LEFT OUTER JOIN inquiry_answer ia ON i.inquiry_num = ia.inquiry_num "
-			+ "JOIN product_code pc ON i.product_code = pc.product_code "
-			+ "JOIN product_size ps ON pc.size_num = ps.size_num JOIN product_color pcolor "
-			+ "ON ps.color_num = pcolor.color_num JOIN product p ON pcolor.product_num = p.product_num "
+			+ "JOIN product p ON p.product_num = i.product_num "
+			+ "JOIN product_color pcolor ON pcolor.product_num = p.product_num "
+			+ "JOIN product_size ps ON ps.color_num = pcolor.color_num "
 			+ "WHERE i.user_num = ? AND i.inquiry_date BETWEEN ? AND ? ORDER BY i.inquiry_date DESC LIMIT ?, ?";
 	// 날짜 기준 질의응답 개수
 	private final String COUNT_INQUIRY_LIST_BETWEEN_DATES = "SELECT COUNT(*) FROM inquiry "
@@ -111,8 +95,19 @@ public class UserDAO {
 
 	// 유저 카드 내용
 	public UserCardVO getUserCard(int user_num) {
+
 		try {
 			return template.queryForObject(USER_CARD, new Object[] { user_num }, new UserCardRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return new UserCardVO();
+		}
+	}
+
+	public UserCardVO getUserCard2(int user_num) {
+		String sql = "SELECT IFNULL(SUM(p.points), 0) user_total_point FROM point p WHERE p.user_num = ?";
+
+		try {
+			return template.queryForObject(sql, new Object[] { user_num }, new UserCard2RowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return new UserCardVO();
 		}
@@ -252,4 +247,39 @@ public class UserDAO {
 		return template.queryForObject(COUNT_REPLY_LIST_BETWEEN_DATES, Integer.class, user_num, startDate, endDate);
 	}
 
+	public boolean checkPwd(int user_num, String pwd) {
+		String sql = "Select count(*) from auth_id where user_num = ? and pwd = ?";
+
+		RowMapper<Boolean> rowMapper = (rs, rowNum) -> {
+			int count = rs.getInt(1);
+
+			return count >= 1;
+		};
+
+		try {
+			return template.queryForObject(sql, rowMapper, user_num, pwd);
+		} catch (EmptyResultDataAccessException e) {
+			return false;
+		}
+	}
+
+	public UserVO getUserInfo(int user_num) {
+		String sql = "select ai.id, ui.user_phone, ai.user_email from user_info ui "
+				+ "join auth_id ai on ui.user_num = ai.user_num where ui.user_num = ?";
+
+		RowMapper<UserVO> rowMapper = (rs, rowNum) -> {
+			UserVO vo = new UserVO();
+			vo.setId(rs.getString("id"));
+			vo.setUser_phone(rs.getString("user_phone"));
+			vo.setUser_email(rs.getString("user_email"));
+
+			return vo;
+		};
+
+		try {
+			return template.queryForObject(sql, rowMapper, user_num);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 }

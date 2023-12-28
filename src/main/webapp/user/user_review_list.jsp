@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_review_list.css?v=1" />
+	href="${pageContext.request.contextPath}/resources/css/user/user_review_list.css?v=1.1" />
 <title>user review list</title>
 </head>
 <body>
@@ -53,11 +53,10 @@
 						</div>
 					</div>
 					<div id="mh">
-						<div>등록일</div>
-						<div>상품명</div>
-						<div>평가</div>
-						<div>조회수</div>
-						<div>상세 페이지</div>
+						<div id="mh1">등록일</div>
+						<div id="mh2">상품명</div>
+						<div id="mh3">평가</div>
+						<div id="mh4">상세 페이지</div>
 					</div>
 					<div id="ml">
 						<c:choose>
@@ -65,8 +64,8 @@
 								<c:forEach var="list" items="${reviewList}">
 									<div class="clb">
 										<div>${list.review_date}</div>
-										<div>
-											<div>
+										<div class="cpb">
+											<div class="cpn">
 												<div>${list.product_name}</div>
 												<div>&nbsp/&nbsp</div>
 												<div>${list.color_name}</div>
@@ -74,12 +73,11 @@
 												<div>${list.size_name}</div>
 											</div>
 										</div>
-										<div>${list.review_ratings}</div>
-										<div>${list.review_clicks}</div>
-										<div>
-											<div>
+										<div class="reviewRating">${list.review_ratings}</div>
+										<div class="cbb">
+											<div class="cbb1">
 												<button type="button"
-													onclick="window.location.href='.do?review_num=${list.review_num}'">&gt;</button>
+													onclick="window.location.href='/product.do?product_num=${list.product_num}'">&gt;</button>
 											</div>
 										</div>
 									</div>

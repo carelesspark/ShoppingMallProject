@@ -84,8 +84,12 @@
 					</div>
 					<div>
 						<button type="button" onclick="">상품 수정</button>
-						<button type="button" onclick="">상품 비활성화</button>
-						<button type="button" onclick="">상품 삭제</button>
+						<button type="button"
+							onclick="/admin/activateProduct.do?product_num=${product_num}">상품
+							활성화</button>
+						<button type="button"
+							onclick="/admin/deactivateProduct.do?product_num=${product_num}">상품
+							비활성화</button>
 					</div>
 				</div>
 			</main>

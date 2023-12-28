@@ -12,10 +12,10 @@ import com.dazzle.shop.model.order.OrderService;
 public class OrderServiceImpl implements OrderService {
 
 	
+	
 	@Autowired
 	private OrderDAO orderDAO;
 
-	
 	
 	@Override
 	public OrderVO getOrderResponseDetail(int orderDetailNum) {
@@ -54,6 +54,12 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updatePoints(OrderVO vo) {
 		orderDAO.updatePoints(vo);
+	}
+	
+	@Override
+	public void updatePoints2(OrderVO vo) {
+		orderDAO.updatePoints2(vo);
+		
 	}
 
 	@Override
@@ -103,9 +109,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderVO getOrderInfo(OrderVO vo) {
+	public OrderVO getOrderInfo(int orderDetailNum) {
 
-		return orderDAO.getOrderInfo(vo);
+		return orderDAO.getOrderInfo(orderDetailNum);
 	}
 	
 	@Override

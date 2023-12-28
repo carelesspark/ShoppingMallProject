@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dazzle.shop.model.product.CategoryVO;
+import com.dazzle.shop.model.product.InquiryVO;
 import com.dazzle.shop.model.product.PageVO;
 import com.dazzle.shop.model.product.ProductCodeVO;
 import com.dazzle.shop.model.product.ProductColorVO;
@@ -14,10 +15,14 @@ import com.dazzle.shop.model.product.ProductService;
 import com.dazzle.shop.model.product.ProductSizeVO;
 import com.dazzle.shop.model.product.ProductVO;
 import com.dazzle.shop.model.product.ProductsVO;
+import com.dazzle.shop.model.product.ReviewVO;
 import com.dazzle.shop.model.product.SubCategoryVO;
 
 @Service("product_service")
 public class ProductServiceImpl implements ProductService{
+
+	
+
 
 	@Autowired
 	private ProductDAO dao;
@@ -119,10 +124,49 @@ public class ProductServiceImpl implements ProductService{
 	public void insert_cart(int _user_num, int _product_code, int _amount) {	
 		dao.insert_cart(_user_num, _product_code, _amount);
 	}
+  
+	@Override
+	public List<ReviewVO> getReview(Integer product_num, Integer start, Integer end){
+		return dao.getReview(product_num, start, end);
+	}
+	@Override
+	public List<ReviewVO> getReviewSome(ReviewVO vo){
+		return dao.getReviewSome(vo);
+	}
+	@Override
+	public ReviewVO getReviewCount(ReviewVO vo) {
+		return dao.getReviewCount(vo);
+	}
+
 	
-	
-	
-	
-	
-	
+	@Override
+	public void insertInquiry(InquiryVO vo) {
+		
+		dao.insertInquiry(vo);
+	}
+
+	@Override
+	public List<InquiryVO> getInquiry(int _product_num, int a, int b) {
+		
+		return dao.getInquiry(_product_num, a, b);
+
+	}
+
+	@Override
+	public InquiryVO getInquiryCount(int _product_num) {
+		
+		return dao.getInquiryCount(_product_num);
+	}
+	@Override
+	public void insertReview(ReviewVO vo) {
+		dao.insertReview(vo);
+	}
+	@Override
+	public ReviewVO getReviewOne(ReviewVO vo) {
+		return dao.getReviewOne(vo);
+	}
+	@Override
+	public void insertReviewImg(ReviewVO vo) {
+		dao.insertReviewImg(vo);
+	}
 }

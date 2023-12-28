@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_board_list.css?v=1" />
+	href="${pageContext.request.contextPath}/resources/css/user/user_board_list.css?v=1.1" />
 
 <title>user board list</title>
 </head>
@@ -54,21 +54,21 @@
 						</div>
 					</div>
 					<div id="mh">
-						<div>등록일</div>
-						<div>카테고리</div>
-						<div>글 제목</div>
-						<div>댓글 수</div>
-						<div>상세 페이지</div>
+						<div id="mh1">등록일</div>
+						<div id="mh2">카테고리</div>
+						<div id="mh3">글 제목</div>
+						<div id="mh4">댓글 수</div>
+						<div id="mh5">상세 페이지</div>
 					</div>
 					<div id="ml">
 						<c:choose>
 							<c:when test="${not empty boardList}">
 								<c:forEach var="list" items="${boardList}">
 									<div class="clb">
-										<div>${list.posttime}</div>
-										<div>${list.cate}</div>
-										<div>${list.title}</div>
-										<div>${list.reply_count}</div>
+										<div class="clb1">${list.posttime}</div>
+										<div class="clb2">${list.cate}</div>
+										<div class="clb3">${list.title}</div>
+										<div class="clb4">${list.reply_count}</div>
 										<div>
 											<div>
 												<button type="button"

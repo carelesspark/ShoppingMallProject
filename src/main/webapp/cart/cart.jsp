@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +63,7 @@
 										value="${cart.amount }" min="1" max="10" /><input
 										type="hidden" id="amount" class="reset_product_amount"
 										value="${cart.amount }" /></td>
-									<td id="cart_product_price">${cart.product_price }원<input
+									<td id="cart_product_price"><fmt:formatNumber value="${cart.product_price }" pattern="#,###"/>원<input
 										type="hidden" id="cart_product_price2"
 										class="cart_product_price" value="${cart.product_price}" />
 									</td>

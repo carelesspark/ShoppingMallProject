@@ -5,23 +5,17 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface BoardService {
-	List<BoardVO> getBoardList();
+	List<BoardVO> getBoardList();	// 게시판 메인
 	
-	List<BoardVO> getBoardCateList(String ctgr_name);
+	List<FileVO> getFileList();
 	
-	List<FileVO> getFile();
-	
-	List<FileVO> getFileList(BoardVO vo);
+	List<BoardVO> getCtgrBoardList(int ctgr_num);	// 게시판 카테고리별 보기
 	
 	List<BoardVO> getNoticeList(int pageNum);
 	
 	List<BoardVO> getQuestList(int pageNum);
 	
 	BoardVO getBoard(BoardVO vo);
-	
-	CateVO getCate(BoardVO vo);
-	
-	BoardProCodeVO getCode(BoardVO vo);
 	
 	BoardVO getNotice(BoardVO vo);
 	
@@ -35,15 +29,13 @@ public interface BoardService {
 	
 	ReplyVO getQuestReply(BoardVO vo);
 	
-	void writeBoard(BoardVO vo);
+	int writeBoard(BoardVO vo);
 	
-	void fileUpload(MultipartFile file);
+	List<PVO> getProductList();
 	
-	void insertCate(CateVO vo);
+	void insertBoardImg(int pno, String mainImageName);
 	
-	void insertNullCate(CateVO vo);
-	
-	void insertProduct_code(BoardProCodeVO vo);
+	void insertPNum(BoardProductVO vo);
 	
 	void writeReply(ReplyVO vo);
 	
@@ -64,8 +56,6 @@ public interface BoardService {
 	void deleteQuest(BoardVO vo);
 	
 	void editBoard(BoardVO vo);
-	
-	void editBoardNoTag(BoardVO vo);
 	
 	void editNotice(BoardVO vo);
 	

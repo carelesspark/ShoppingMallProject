@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,8 +33,8 @@
 								name="order_num" value="${orderRefund.order_num}" />
 							<table id="refund_table">
 								<tr>
-									<td id="refund_table_left">주문 번호</td>
-									<td id="refund_table_right">${orderRefund.order_num }</td>
+									<td id="refund_table_left">주문 상세 번호</td>
+									<td id="refund_table_right">${orderRefund.order_detail_num}</td>
 								</tr>
 								<tr>
 									<td id="refund_table_left">고객명</td>
@@ -41,7 +42,7 @@
 								</tr>
 								<tr>
 									<td id="refund_table_left">환불액</td>
-									<td id="refund_table_right">${orderRefund.amountMultiPrice }원</td>
+									<td id="refund_table_right"><fmt:formatNumber value="${orderRefund.amountMultiPrice }" pattern="#,###"/>원</td>
 								</tr>
 								<tr>
 									<td id="refund_table_left">은행명</td>
@@ -91,7 +92,7 @@
 						<div id="buttons">
 							<div id="button1">
 								<button type="button" class="btn btn-outline-secondary"
-									onclick="location.href='/orderInfo.do?order_num=${orderRefund.order_num}'">돌아가기</button>
+									onclick="location.href='/orderInfo.do?order_detail_num=${orderRefund.order_detail_num}'">돌아가기</button>
 							</div>
 							<div id="button2">
 								<button type="button" class="btn btn-outline-secondary"

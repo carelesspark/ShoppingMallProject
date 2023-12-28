@@ -1,17 +1,15 @@
 package com.dazzle.shop.model.user.service;
 
-import java.util.Collections;
 import java.util.List;
 
-import org.springframework.dao.EmptyResultDataAccessException;
-
 import com.dazzle.shop.model.user.domain.*;
-import com.dazzle.shop.model.user.persistence.UserReplyListRowMapper;
 
 public interface UserService {
 
 	// 유저 카드 내용 저장
 	UserCardVO getUserCard(int user_num);
+
+	UserCardVO getUserCard2(int user_num);
 
 	// 유저 번호와 일치하는 테이블 레코드 수
 	int countRecords(String tableName, int user_num);
@@ -52,4 +50,9 @@ public interface UserService {
 	// 날짜 기준 작성 댓글 수
 	int countReplyBetweenDates(int user_num, java.sql.Date startDate, java.sql.Date endDate);
 
+	// 비밀번호 확인
+	boolean checkPwd(int user_num, String pwd);
+
+	// 회원정보 불러오기
+	UserVO getUserInfo(int user_num);
 }

@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.dazzle.shop.model.product.CategoryVO;
+import com.dazzle.shop.model.product.InquiryVO;
 import com.dazzle.shop.model.product.ProductCodeVO;
 import com.dazzle.shop.model.product.ProductColorVO;
 import com.dazzle.shop.model.product.ProductImgVO;
@@ -93,12 +94,110 @@ public class ProductDAO {
 			+ "(user_num, product_code, review_content, review_ratings, review_date) "
 			+ "VALUES (1, ?, ?, 5, NOW())";
 	
+	private final String  GET_REVIEW = "SELECT" + 
+			"    pc.product_code," + 
+			"    ps.size_name," + 
+			"    pr.color_name," + 
+			"    a.id," + 
+			"    ri.review_img," + 
+			"    r.review_date," + 
+			"    r.review_content," + 
+			"    r.review_ratings," + 
+			"    r.review_num" + 
+			" FROM" + 
+			"    review r" + 
+			" JOIN" + 
+			"    product_code pc ON r.product_code = pc.product_code" + 
+			" JOIN" + 
+			"    product_size ps ON pc.size_num = ps.size_num" + 
+			" JOIN" + 
+			"    product_color pr ON ps.color_num = pr.color_num" + 
+			" JOIN" + 
+			"	product p ON p.product_num = pr.product_num" + 
+			" JOIN" + 
+			"    users u ON r.user_num = u.user_num" + 
+			" JOIN" + 
+			"    auth_id a ON u.user_num = a.user_num" + 
+			" LEFT JOIN" + 
+			"    review_img ri ON r.review_num = ri.review_num" + 
+			" WHERE" + 
+			"    p.product_num = ?" + 
+			" ORDER BY r.review_date desc" +
+			" LIMIT ? OFFSET ?";
+	
+	private final String  GET_REVIEW_SOME = "SELECT" + 
+			"    pc.product_code," + 
+			"    ps.size_name," + 
+			"    pr.color_name," + 
+			"    a.id," + 
+			"    ri.review_img," + 
+			"    r.review_date," + 
+			"    r.review_content," + 
+			"    r.review_ratings," + 
+			"    r.review_num" + 
+			" FROM" + 
+			"    review r" + 
+			" JOIN" + 
+			"    product_code pc ON r.product_code = pc.product_code" + 
+			" JOIN" + 
+			"    product_size ps ON pc.size_num = ps.size_num" + 
+			" JOIN" + 
+			"    product_color pr ON ps.color_num = pr.color_num" + 
+			" JOIN" + 
+			"	product p ON p.product_num = pr.product_num" + 
+			" JOIN" + 
+			"    users u ON r.user_num = u.user_num" + 
+			" JOIN" + 
+			"    auth_id a ON u.user_num = a.user_num" + 
+			" LEFT JOIN" + 
+			"    review_img ri ON r.review_num = ri.review_num" + 
+			" WHERE" + 
+			"    p.product_num = ?" + 
+			" ORDER BY r.review_date desc" +
+			" LIMIT 3";
+	
+	private final String  GET_REVIEW_COUNT = "SELECT COUNT(*) as count" + 
+			" FROM" + 
+			"    review r" + 
+			" JOIN" + 
+			"    product_code pc ON r.product_code = pc.product_code" + 
+			" JOIN" + 
+			"    product_size ps ON pc.size_num = ps.size_num" + 
+			" JOIN" + 
+			"    product_color pr ON ps.color_num = pr.color_num" + 
+			" JOIN" + 
+			"	product p ON p.product_num = pr.product_num" + 
+			" JOIN" + 
+			"    users u ON r.user_num = u.user_num" + 
+			" JOIN" + 
+			"    auth_id a ON u.user_num = a.user_num" + 
+			" LEFT JOIN" + 
+			"    review_img ri ON r.review_num = ri.review_num" + 
+			" WHERE" + 
+			"    p.product_num = ?" ;
+
+	
+	
 	private final String get_product_code = "SELECT * FROM product_code p "
 			+ "WHERE p.size_num = ?";
 	
 	private final String add_cart = "INSERT INTO cart "
 			+ "(user_num, product_code, amount) "
 			+ "VALUES (?, ?, ?)";
+
+	private final String INSERT_INQUIRY = "INSERT INTO inquiry VALUES(DEFAULT, ?, ?, NOW(), ?, ?);";
+	
+	private final String GET_INQUIRY = "select * from inquiry WHERE product_num = ? LIMIT ? OFFSET ?";
+	
+	private final String GET_INQUIRY_COUNT = "select count(*) AS total_inquiry from inquiry WHERE product_num = ?";
+	
+	private final String INSERT_REVIEW = "INSERT INTO review(user_num, product_code, review_content, review_ratings, review_date)"
+			+ " VALUES(?, ?, ?, ?, NOW());";
+	
+	private final String GET_REVIEW_ONE = "SELECT review_num FROM review WHERE user_num = ? and product_code = ? and review_ratings = ? order by review_num desc LIMIT 1";
+	
+	private final String INSERT_REVIEW_IMG = "INSERT INTO review_img(review_num, review_img)"
+			+ " VALUES(?, ?);";
 
 	public List<ProductsVO> get_category_by_products_paged(String _category_num, int limit, int offset) {
 	    return jdbc_template.query(get_category_by_products_paged, new Object[] { _category_num, limit, offset }, new ProductsRowMapper());
@@ -165,4 +264,53 @@ public class ProductDAO {
 	}
 
 
+	public List<ReviewVO> getReview(Integer product_num, Integer start, Integer end) {
+		System.out.println("리뷰 목록");
+		return jdbc_template.query(GET_REVIEW, new Object[] {product_num, start, end}, new ReviewRowMapper());
+		
+	}
+	
+	public List<ReviewVO> getReviewSome(ReviewVO vo) {
+		System.out.println("리뷰 목록");
+		return jdbc_template.query(GET_REVIEW_SOME, new Object[] {vo.getProduct_num()}, new ReviewRowMapper());
+		
+	}
+	
+	public ReviewVO getReviewCount(ReviewVO vo) {
+		System.out.println("리뷰 개수");
+		return jdbc_template.queryForObject(GET_REVIEW_COUNT, new Object[] {vo.getProduct_num()}, new ReviewCountRowMapper());
+	}
+
+	public void insertInquiry(InquiryVO vo) {
+		System.out.println("insertInquiry()");
+		jdbc_template.update(INSERT_INQUIRY, vo.getUser_num(), vo.getProduct_num(), vo.getInquiry_title(), vo.getInquiry_content());
+		return;
+	}
+	
+	public void insertReview(ReviewVO vo) {
+		System.out.println("insertReview()");
+		jdbc_template.update(INSERT_REVIEW, vo.getUser_num(), vo.getProduct_code(), vo.getReview_content(), vo.getReview_ratings());
+		return;
+	} 
+	public List<InquiryVO> getInquiry(int _product_num, int a, int b) {
+		System.out.println("getInquiry()");
+		return jdbc_template.query(GET_INQUIRY, new Object[] {_product_num, a, b}, new InquiryRowMapper());
+
+	}
+	
+	public InquiryVO getInquiryCount(int _product_num) {
+		System.out.println("getInquiryCount()");
+		return jdbc_template.queryForObject(GET_INQUIRY_COUNT, new Object[] {_product_num}, new InquiryCountRowMapper());
+	}
+
+	public ReviewVO getReviewOne(ReviewVO vo) {
+		System.out.println("getReviewOne()");
+		return jdbc_template.queryForObject(GET_REVIEW_ONE, new Object[] {vo.getUser_num(), vo.getProduct_code(),
+				vo.getReview_ratings()}, new ReviewNumRowMapper());
+	}
+	public void insertReviewImg(ReviewVO vo) {
+		System.out.println("insertReviewImg()");
+		jdbc_template.update(INSERT_REVIEW_IMG, vo.getReview_num(), vo.getReview_img());
+		return;
+	} 
 }

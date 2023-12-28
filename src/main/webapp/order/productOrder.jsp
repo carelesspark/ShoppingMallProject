@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,7 @@
 										id="order_list_pic1" /></a>
 								</div>
 								<div id="order_list_price">
-									<p>${order.amountMultiPrice}원</p>
+									<p><fmt:formatNumber value="${order.amountMultiPrice}" pattern="#,###"/>원</p>
 									<input type="hidden" value="${order.amountMultiPrice }"
 										name="amountMultiPrice_list" />
 									<c:set var="totalPrice"
@@ -66,7 +67,7 @@
 
 
 					<div id="order_list_total_price">
-						<p>전체 가격 : ${totalPrice} 원</p>
+						<p>전체 가격 : <fmt:formatNumber value="${totalPrice}" pattern="#,###"/>원</p>
 					</div>
 				</div>
 				<div id="order_address">
@@ -163,7 +164,7 @@
 							</div>
 							<div id="order_payment_grid_rows_2">
 								<div id="order_payment_price_value">
-									<p>${totalPrice}원</p>
+									<p><fmt:formatNumber value="${totalPrice}" pattern="#,###"/>원</p>
 								</div>
 								<div id="order_payment_coupon_value">
 									<select>
@@ -207,15 +208,15 @@
 									<c:if test="${totalPrice >= 30000}">
 										<c:set var="delivery_price" value="0" />
 									</c:if>
-									<p>${delivery_price }원</p>
+									<p><fmt:formatNumber value="${delivery_price }" pattern="#,###"/>원</p>
 									<input type="hidden" value="${delivery_price}"
 										name="delivery_price" />
 
 								</div>
 								<div id="order_payment_actual_price_value">
 									<c:set var="totalPrice" value="${totalPrice + delivery_price}" />
-									<p id="total_price">${totalPrice}원</p>
-									<input type="hidden" id="hidden_total_price" name=""
+									<p id="total_price"><fmt:formatNumber value="${totalPrice}" pattern="#,###"/>원</p>
+									<input type="hidden" id="hidden_total_price" name="totalPrice"
 										value="${totalPrice }" />
 										<input type="hidden" id="hidden_total_price2" value="${totalPrice}"/>
 								</div>
@@ -245,7 +246,7 @@
 							onclick="location.href='/main.do'">홈으로 돌아가기</button>
 					</div>
 					<div id="order_buttons_div2">
-						<button type="submit" class="btn btn-dark" id="order_buy_button">구매하기</button>
+						<button type="submit" class="btn btn-dark" id="order_buy_button" disabled>구매하기</button>
 					</div>
 				</div>
 			</div>
@@ -265,7 +266,7 @@
 
 				$("#total_price").text(totalPrice_point + "원");
 				$("#hidden_total_price").val(totalPrice_point);
-				console.log(totalPrice_point);
+				 $("#order_payment_point_button1").prop("disabled", true);
 			});
 			
 			$("#order_payment_point_button2").on("click", function() {
@@ -278,8 +279,24 @@
 				$("#hidden_total_price").val(totalPrice2);
 				const totalPrice = $("#hidden_total_price").val();
 				$("#total_price").text(totalPrice + "원");
+				$("#order_payment_point_button1").prop("disabled", false);
 				
-			});		
+			});	
+			
+			
+			$("#credit_card").on("click", function() {
+				$("#order_buy_button").prop("disabled", false);
+			});
+			$("#deposit_without_passbook").on("click", function() {
+				$("#order_buy_button").prop("disabled", false);
+			});
+			$("#transfer").on("click", function() {
+				$("#order_buy_button").prop("disabled", false);
+			});
+			$("#kakaopay").on("click", function() {
+				$("#order_buy_button").prop("disabled", false);
+			});
+
 		});
 		
 		

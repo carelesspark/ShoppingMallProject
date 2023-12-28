@@ -11,7 +11,7 @@
 			<div id="cc-ur">${user_rank}</div>
 		</div>
 		<div id="cc-d">
-			<div id="cc-dn">배송 중</div>
+			<div id="cc-dn">준비/배송 중</div>
 			<div id="cc-dc">
 				<div>
 					<a href="/user/orderList.do">${delivering_items }</a>건

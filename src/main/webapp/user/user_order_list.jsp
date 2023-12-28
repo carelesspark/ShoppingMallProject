@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,7 +113,7 @@
 																	<div>${list.size_name}</div>
 																</div>
 																<div class="cpp">
-																	<div>${list.total_price}원</div>
+																	<div><fmt:formatNumber value="${list.total_price}" pattern="#,###"/>원</div>
 																	<div>&nbsp·&nbsp</div>
 																	<div>${list.amount}</div>
 																	<div>개</div>
@@ -127,7 +127,11 @@
 															</div>
 															<div class="cbb2">
 																<button
-																	onclick="window.location.href='#'">상품 문의하기</button>
+																	onclick="window.location.href='/product.do?product_num=${list.product_num}'">상품 문의하기</button>
+															</div>
+															<div class="cbb3">
+																<button
+																	onclick="window.location.href='/review.do?product_code=${list.product_code}'">상품 리뷰쓰기</button>
 															</div>
 														</div>
 													</div>

@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_inquiry_list.css?v=1" />
+	href="${pageContext.request.contextPath}/resources/css/user/user_inquiry_list.css?v=1.1" />
 
 <title>user inquiry list</title>
 </head>
@@ -53,38 +53,30 @@
 						</div>
 					</div>
 					<div id="mh">
-						<div>등록일</div>
-						<div>상품명</div>
-						<div>답변 여부</div>
-						<div>상세 페이지</div>
+						<div id="mh1">등록일</div>
+						<div id="mh2">상품명</div>
+						<div id="mh3">답변 여부</div>
+						<div id="mh4">상세 페이지</div>
 					</div>
 					<div id="ml">
 						<c:choose>
 							<c:when test="${not empty inquiryList}">
 								<c:forEach var="list" items="${inquiryList}">
 									<div class="clb">
-										<div>${list.inquiry_date}</div>
-										<div>
-											<div>
-												<div>${list.product_name}</div>
-												<div>&nbsp/&nbsp</div>
-												<div>${list.color_name}</div>
-												<div>&nbsp/&nbsp</div>
-												<div>${list.size_name}</div>
-											</div>
-										</div>
+										<div class="clb1">${list.inquiry_date}</div>
+										<div class="clb2">${list.product_name}</div>
 										<c:choose>
 											<c:when test="${list.answer != null}">
-												<div>O</div>
+												<div class="clb3">O</div>
 											</c:when>
 											<c:otherwise>
-												<div>X</div>
+												<div class="clb3">X</div>
 											</c:otherwise>
 										</c:choose>
-										<div>
+										<div class="clb4">
 											<div>
 												<button type="button"
-													onclick="window.location.href='.do?review_num=${list.inquiry_num}'">&gt;</button>
+													onclick="window.location.href='/product.do?product_num=${list.product_num}'">&gt;</button>
 											</div>
 										</div>
 									</div>
