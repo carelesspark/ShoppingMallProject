@@ -77,10 +77,9 @@ public class OrderController {
 		model.addAttribute("delivering_items", card.getDelivering_items());
 		UserCardVO card2 = userService.getUserCard2(user_num);
 		model.addAttribute("user_total_point", card2.getUser_total_point());
-		
-    OrderVO orderInfo = orderService.getOrderInfo(vo);
+
+		OrderVO orderInfo = orderService.getOrderInfo(orderDetailNum);
 		model.addAttribute("orderInfo", orderInfo);
-		int orderDetailNum = vo.getOrder_detail_num();
 		System.out.println(orderDetailNum);
 
 		OrderVO orderResult = orderService.getOrderResponseDetail(orderDetailNum);
