@@ -55,12 +55,12 @@ public class ProductDAO {
 
 	private final String product_img = "SELECT * FROM product_img WHERE product_num = ?";
 	
-	private final String get_category_by_products_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.main_img "
+	private final String get_category_by_products_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.img_name "
 		    + "FROM product p "
 		    + "JOIN sub_category s on p.sub_category_num = s.sub_category_num "
 		    + "JOIN category c ON s.category_num = c.category_num "
 		    + "JOIN product_img pi ON p.product_num = pi.product_num "
-		    + "WHERE c.category_num = ? LIMIT ? OFFSET ?";
+		    + "WHERE pi.img_type = 2 and c.category_num = ? LIMIT ? OFFSET ?";
 	
 	private final String count_category_products = "SELECT COUNT(*) " 
 			+ "FROM product p "
@@ -69,7 +69,7 @@ public class ProductDAO {
 			+ "JOIN product_img pi ON p.product_num = pi.product_num "
 			+ "WHERE c.category_num = ?";
 	
-	private final String get_sub_category_by_products_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.main_img "
+	private final String get_sub_category_by_products_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.img_name "
 	        + "FROM product p "
 	        + "JOIN product_img pi ON p.product_num = pi.product_num "
 	        + "WHERE p.sub_category_num = ? LIMIT ? OFFSET ?";
@@ -80,7 +80,7 @@ public class ProductDAO {
 			+ "JOIN product_img pi ON p.product_num = pi.product_num "
 			+ "WHERE s.sub_category_num = ?";
 
-	private final String search_result_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.main_img "
+	private final String search_result_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.img_name "
 	        + "FROM product p "
 	        + "JOIN product_img pi ON p.product_num = pi.product_num "
 	        + "WHERE p.product_name LIKE ? LIMIT ? OFFSET ?";
@@ -181,6 +181,10 @@ public class ProductDAO {
 	private final String get_product_code = "SELECT * FROM product_code p "
 			+ "WHERE p.size_num = ?";
 	
+	private final String add_cart = "INSERT INTO cart "
+			+ "(user_num, product_code, amount) "
+			+ "VALUES (?, ?, ?)";
+
 	private final String INSERT_INQUIRY = "INSERT INTO inquiry VALUES(DEFAULT, ?, ?, NOW(), ?, ?);";
 	
 	private final String GET_INQUIRY = "select * from inquiry WHERE product_num = ? LIMIT ? OFFSET ?";
@@ -194,7 +198,7 @@ public class ProductDAO {
 	
 	private final String INSERT_REVIEW_IMG = "INSERT INTO review_img(review_num, review_img)"
 			+ " VALUES(?, ?);";
-	
+
 	public List<ProductsVO> get_category_by_products_paged(String _category_num, int limit, int offset) {
 	    return jdbc_template.query(get_category_by_products_paged, new Object[] { _category_num, limit, offset }, new ProductsRowMapper());
 	}
@@ -254,6 +258,11 @@ public class ProductDAO {
 		return jdbc_template.queryForObject(get_product_code, new Object[] {_size_num}, new ProductCodeRowMapper());
 	}
 	
+	public void insert_cart(int _user_num, int _product_code, int _amount) {
+		System.err.println("장바구니 추가");
+		jdbc_template.update(add_cart, _user_num, _product_code, _amount);
+	}
+
 
 	public List<ReviewVO> getReview(Integer product_num, Integer start, Integer end) {
 		System.out.println("리뷰 목록");

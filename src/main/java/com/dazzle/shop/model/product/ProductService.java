@@ -36,6 +36,7 @@ public interface ProductService {
 	
 	ProductCodeVO get_product_code(int _size_num);
 	
+	void insert_cart(int _user_num, int _product_code, int _amount);
 
 	List<ReviewVO> getReview(Integer product_num, Integer start, Integer end);
 	List<ReviewVO> getReviewSome(ReviewVO vo);
@@ -51,4 +52,5 @@ public interface ProductService {
 	void insertReview(ReviewVO vo);
 	ReviewVO getReviewOne(ReviewVO vo);
 	void insertReviewImg(ReviewVO vo);
+
 }
