@@ -50,4 +50,9 @@ public interface UserService {
 	// 날짜 기준 작성 댓글 수
 	int countReplyBetweenDates(int user_num, java.sql.Date startDate, java.sql.Date endDate);
 
+	// 비밀번호 확인
+	boolean checkPwd(int user_num, String pwd);
+
+	// 회원정보 불러오기
+	UserVO getUserInfo(int user_num);
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface OrderService {
 	
-	OrderVO getOrderInfo(OrderVO vo);
+	OrderVO getOrderInfo(int orderDetailNum);
 	
 	OrderVO getOrderDetailInfo(OrderVO vo);
 	

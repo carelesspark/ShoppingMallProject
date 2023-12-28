@@ -54,13 +54,14 @@
 #mh {
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: 2fr 1fr 4fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
+	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid #d4d4d4;
 	margin-bottom: 20px;
 }
 
-#mh div {
+#mh1, #mh2, #mh3, #mh4, #mh5 {
 	display: grid;
 	justify-content: center;
 	align-items: center;
@@ -87,7 +88,7 @@
 .clb {
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: 2fr 1fr 4fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
 	align-items: center;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #f1f1f1;

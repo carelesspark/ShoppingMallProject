@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.dazzle.shop.model.user.domain.*;
@@ -25,8 +26,10 @@ public class UserDAO {
 	// 나의 쇼핑
 	// 주문/배송 조회
 	private final String ORDER_LIST = "SELECT o.order_date, d.delivery_date, od.product_state, od.order_detail_num, "
-			+ "od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, pc.product_code, o.order_num "
-			+ "FROM orders o LEFT JOIN delivery d ON o.order_num = d.order_num JOIN order_detail od ON o.order_num = od.order_num "
+			+ "od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, p.product_num, o.order_num "
+			+ "FROM orders o "
+			+ "LEFT JOIN delivery d ON o.order_num = d.order_num "
+			+ "JOIN order_detail od ON o.order_num = od.order_num "
 			+ "JOIN product_code pc ON od.product_code = pc.product_code "
 			+ "JOIN product_size ps ON pc.size_num = ps.size_num "
 			+ "JOIN product_color pcolor ON ps.color_num = pcolor.color_num "
@@ -66,9 +69,13 @@ public class UserDAO {
 			+ "WHERE r.user_num = ? AND r.review_date BETWEEN ? AND ?";
 
 	// 1대1 질의응답 내역
-	private final String INQUIRY_LIST = "SELECT i.inquiry_date, ia.answer, p.product_num, p.product_name "
-			+ "FROM inquiry i LEFT OUTER JOIN inquiry_answer ia ON i.inquiry_num = ia.inquiry_num "
-			+ "JOIN product p ON i.product_num = p.product_num "
+	private final String INQUIRY_LIST = "SELECT i.inquiry_date, i.inquiry_num, ia.answer, i.product_num, "
+			+ "p.product_name, pcolor.color_name, ps.size_name "
+			+ "FROM inquiry i "
+			+ "LEFT OUTER JOIN inquiry_answer ia ON i.inquiry_num = ia.inquiry_num "
+			+ "JOIN product p ON p.product_num = i.product_num "
+			+ "JOIN product_color pcolor ON pcolor.product_num = p.product_num "
+			+ "JOIN product_size ps ON ps.color_num = pcolor.color_num "
 			+ "WHERE i.user_num = ? AND i.inquiry_date BETWEEN ? AND ? ORDER BY i.inquiry_date DESC LIMIT ?, ?";
 	// 날짜 기준 질의응답 개수
 	private final String COUNT_INQUIRY_LIST_BETWEEN_DATES = "SELECT COUNT(*) FROM inquiry "
@@ -127,7 +134,7 @@ public class UserDAO {
 	// 주문/배송 조회
 	public List<UserOrdersVO> getUserOrderList(UserOrdersVO vo) {
 		try {
-			return template.query(ORDER_LIST, new Object[] { vo.getUser_num(), vo.getStartDate(), vo.getEndDate() },
+			return template.query(ORDER_LIST, new Objec[] { vo.getUser_num(), vo.getStartDate(), vo.getEndDate() },
 					new UserOrderListRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return Collections.emptyList();
@@ -242,4 +249,39 @@ public class UserDAO {
 		return template.queryForObject(COUNT_REPLY_LIST_BETWEEN_DATES, Integer.class, user_num, startDate, endDate);
 	}
 
+	public boolean checkPwd(int user_num, String pwd) {
+		String sql = "Select count(*) from auth_id where user_num = ? and pwd = ?";
+
+		RowMapper<Boolean> rowMapper = (rs, rowNum) -> {
+			int count = rs.getInt(1);
+
+			return count >= 1;
+		};
+
+		try {
+			return template.queryForObject(sql, rowMapper, user_num, pwd);
+		} catch (EmptyResultDataAccessException e) {
+			return false;
+		}
+	}
+
+	public UserVO getUserInfo(int user_num) {
+		String sql = "select ai.id, ui.user_phone, ai.user_email from user_info ui "
+				+ "join auth_id ai on ui.user_num = ai.user_num where ui.user_num = ?";
+
+		RowMapper<UserVO> rowMapper = (rs, rowNum) -> {
+			UserVO vo = new UserVO();
+			vo.setId(rs.getString("id"));
+			vo.setUser_phone(rs.getString("user_phone"));
+			vo.setUser_email(rs.getString("user_email"));
+
+			return vo;
+		};
+
+		try {
+			return template.queryForObject(sql, rowMapper, user_num);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 }
