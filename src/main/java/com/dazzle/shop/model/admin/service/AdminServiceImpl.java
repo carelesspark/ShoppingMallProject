@@ -50,14 +50,14 @@ public class AdminServiceImpl implements AdminService {
 	 * 회원 목록
 	 */
 	@Override
-	public List<AdminUserVO> getUserList(int currentPage, int usersPerPage) {
-		return adminDAO.getUserList(currentPage, usersPerPage);
+	public List<AdminUserVO> getUserList(int currentPage, int itemsPerPage) {
+		return adminDAO.getUserList(currentPage, itemsPerPage);
 	}
 
 	// 블랙리스트 목록
 	@Override
-	public List<AdminUserVO> getBlackist(int pageSize, int pageNum) {
-		return adminDAO.getBlackist(pageSize, pageNum);
+	public List<AdminUserVO> getBlackist(int currentPage, int itemsPerPage) {
+		return adminDAO.getBlackist(currentPage, itemsPerPage);
 	}
 
 	// 상품 관리
