@@ -62,7 +62,7 @@
 					<div id="product_info_box">
 						<div id="prdocut_info_box_grid">
 							<div>
-								<img src="${orderInfo.main_img }" id="product_img" />
+								<img src="${pageContext.request.contextPath}/resources/image/product/${orderInfo.product_num}/${orderInfo.img_name }" id="product_img" />
 							</div>
 							<div id="product_info_left">
 								<div>
