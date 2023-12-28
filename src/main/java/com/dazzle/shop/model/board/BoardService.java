@@ -61,6 +61,8 @@ public interface BoardService {
 	
 	void editBoard(BoardVO vo);
 	
+	void updateBoardImg(int pno, String mainImageName);
+	
 	void editNotice(BoardVO vo);
 	
 	void editQuest(BoardVO vo);

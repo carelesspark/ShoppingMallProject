@@ -185,6 +185,13 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		boardDAO.editBoard(vo);
 	}
+	
+	@Override
+	public void updateBoardImg(int pno, String mainImageName) {
+		// TODO Auto-generated method stub
+		boardDAO.updateBoardImg(pno, mainImageName);
+	}
+
 
 	@Override
 	public void editNotice(BoardVO vo) {
@@ -197,11 +204,4 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		boardDAO.editQuest(vo);
 	}
-
-	
-
-	
-
-	
-
 }
