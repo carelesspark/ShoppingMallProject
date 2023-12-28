@@ -105,6 +105,7 @@ public class UserController {
 		UserOrdersVO orderCount = userService.orderCheck(user_num);
 		model.addAttribute("orderCount", orderCount);
 
+
 		List<UserOrdersVO> list = userService.getUserOrderList(vo);
 		Map<Integer, List<UserOrdersVO>> map = list.stream().collect(Collectors.groupingBy(UserOrdersVO::getOrder_num));
 		// order_num을 기준으로 내림차순으로 정렬된 TreeMap 생성
@@ -358,7 +359,7 @@ public class UserController {
 
 		List<UserInquiryVO> list = userService.getUserInquiryList(vo);
 		model.addAttribute("inquiryList", list);
-
+		System.out.println(list);
 		return "user_inquiry_list.jsp";
 	}
 

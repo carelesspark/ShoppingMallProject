@@ -2,6 +2,8 @@ package com.dazzle.shop.model.product;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -17,4 +19,6 @@ public class ReviewVO {
 	private Date review_date;
 	private int product_num;
 	private int count;
+	private int user_num;
+	private MultipartFile real_img;
 }
