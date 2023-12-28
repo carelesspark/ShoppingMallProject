@@ -9,6 +9,9 @@ public interface AdminService {
 	// 테이블 행 개수 출력
 	int countTableRecord(String tableName);
 
+	// 서브 카테고리용 레코드 개수 반환
+	int countSubCategoryItems(int subCategoryNum);
+
 	// 블랙리스트인 유저 수 반환
 	int countBlacklist();
 
@@ -24,7 +27,7 @@ public interface AdminService {
 
 	// 상품 관리
 	// 상품 목록
-	List<AdminProductVO> getProductList(int subCategoryNum, int pageSize, int pageNum);
+	List<AdminProductVO> getProductList(int subCategoryNum, int itemsPerPage, int currentPage);
 
 	// 상품 상세 - 세부 정보
 	AdminProductVO getProductDetail(int product_num);

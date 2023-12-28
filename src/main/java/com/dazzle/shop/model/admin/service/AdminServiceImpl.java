@@ -23,6 +23,12 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.getTotalCount(tableName);
 	}
 
+	// 서브 카테고리용 레코드 개수 반환
+	@Override
+	public int countSubCategoryItems(int subCategoryNum) {
+		return adminDAO.countSubCategoryItems(subCategoryNum);
+	}
+
 	// 블랙리스트인 유저 수 반환
 	@Override
 	public int countBlacklist() {
@@ -57,9 +63,9 @@ public class AdminServiceImpl implements AdminService {
 	// 상품 관리
 	// 상품 목록
 	@Override
-	public List<AdminProductVO> getProductList(int subCategoryNum, int pageSize, int pageNum) {
+	public List<AdminProductVO> getProductList(int subCategoryNum, int itemsPerPage, int currentPage) {
 
-		return adminDAO.getProductList(subCategoryNum, pageSize, pageNum);
+		return adminDAO.getProductList(subCategoryNum, itemsPerPage, currentPage);
 	}
 
 	// 상품 상세 - 세부 정보

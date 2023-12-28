@@ -64,10 +64,6 @@
 								</div>
 							</c:otherwise>
 						</c:choose>
-
-
-
-
 					</div>
 					<div id="mp">
 						<div id="pBtn">
@@ -108,7 +104,6 @@
 										onclick="window.location.href='/admin/changeUserList.do?currentPage=1&itemsPerPage=30'">30</button>
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>
