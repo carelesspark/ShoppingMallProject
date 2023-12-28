@@ -3,6 +3,7 @@ package com.dazzle.shop.controller;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -16,14 +17,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dazzle.shop.model.user.domain.*;
 import com.dazzle.shop.model.user.service.UserService;
+import com.dazzle.shop.model.user.util.*;
 
 @Controller
 @RequestMapping("/user")
@@ -31,6 +31,19 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	private static final SimpleDateFormat SDF_YMD = new SimpleDateFormat("yyyy-MM-dd");
+
+	// Card 정보 model로 담는 메소드
+	private void addCardAttributeToModel(int user_num, Model model) {
+		UserCardVO card = userService.getUserCard(user_num);
+		model.addAttribute("rank_letter", card.getRank_letter());
+		model.addAttribute("user_rank", card.getUser_rank());
+		model.addAttribute("delivering_items", card.getDelivering_items());
+
+		UserCardVO card2 = userService.getUserCard2(user_num);
+		model.addAttribute("user_total_point", card2.getUser_total_point());
+	}
 
 	// 나의 쇼핑
 	// 주문/배송 조회
@@ -41,21 +54,12 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		LocalDate currentDate = LocalDate.now();
-		LocalDate oneMonthAgo = currentDate.minusMonths(1);
-		oneMonthAgo = oneMonthAgo.plusDays(1);
-		Date startDate = Date.from(oneMonthAgo.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		Date endDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = UserUtil.getStartDate();
+		Date endDate = UserUtil.getEndDate();
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		UserOrdersVO vo = new UserOrdersVO();
 		vo.setUser_num(user_num);
@@ -84,23 +88,19 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
-		java.sql.Date endDate = java.sql.Date.valueOf(eDate);
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = Date.from(LocalDate.parse(sDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+				.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date endDate = Date.from(LocalDate.parse(eDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atTime(23, 59, 59)
+				.atZone(ZoneId.systemDefault()).toInstant());
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		UserOrdersVO vo = new UserOrdersVO();
 		vo.setUser_num(user_num);
-		vo.setStartDate(startDate);
-		vo.setEndDate(endDate);
+		vo.setStartDate(new java.sql.Date(startDate.getTime()));
+		vo.setEndDate(new java.sql.Date(endDate.getTime()));
 
 		UserOrdersVO orderCount = userService.orderCheck(user_num);
 		model.addAttribute("orderCount", orderCount);
@@ -127,21 +127,12 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		LocalDate currentDate = LocalDate.now();
-		LocalDate oneMonthAgo = currentDate.minusMonths(1);
-		oneMonthAgo = oneMonthAgo.plusDays(1);
-		Date startDate = Date.from(oneMonthAgo.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		Date endDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = UserUtil.getStartDate();
+		Date endDate = UserUtil.getEndDate();
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		int totalItems = userService.countPointBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -177,18 +168,14 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
-		java.sql.Date endDate = java.sql.Date.valueOf(eDate);
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = Date.from(LocalDate.parse(sDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+				.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date endDate = Date.from(LocalDate.parse(eDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atTime(23, 59, 59)
+				.atZone(ZoneId.systemDefault()).toInstant());
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		int totalItems = userService.countPointBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -221,21 +208,12 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		LocalDate currentDate = LocalDate.now();
-		LocalDate oneMonthAgo = currentDate.minusMonths(1);
-		oneMonthAgo = oneMonthAgo.plusDays(1);
-		Date startDate = Date.from(oneMonthAgo.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		Date endDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = UserUtil.getStartDate();
+		Date endDate = UserUtil.getEndDate();
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		int totalItems = userService.countPointBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -271,18 +249,14 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
-		java.sql.Date endDate = java.sql.Date.valueOf(eDate);
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = Date.from(LocalDate.parse(sDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+				.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date endDate = Date.from(LocalDate.parse(eDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atTime(23, 59, 59)
+				.atZone(ZoneId.systemDefault()).toInstant());
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		int totalItems = userService.countReviewBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -315,21 +289,12 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		LocalDate currentDate = LocalDate.now();
-		LocalDate oneMonthAgo = currentDate.minusMonths(1);
-		oneMonthAgo = oneMonthAgo.plusDays(1);
-		Date startDate = Date.from(oneMonthAgo.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		Date endDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = UserUtil.getStartDate();
+		Date endDate = UserUtil.getEndDate();
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		int totalItems = userService.countInquiryBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -365,18 +330,14 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
-		java.sql.Date endDate = java.sql.Date.valueOf(eDate);
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = Date.from(LocalDate.parse(sDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+				.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date endDate = Date.from(LocalDate.parse(eDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atTime(23, 59, 59)
+				.atZone(ZoneId.systemDefault()).toInstant());
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		int totalItems = userService.countInquiryBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -409,21 +370,12 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		LocalDate currentDate = LocalDate.now();
-		LocalDate oneMonthAgo = currentDate.minusMonths(1);
-		oneMonthAgo = oneMonthAgo.plusDays(1);
-		Date startDate = Date.from(oneMonthAgo.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		Date endDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = UserUtil.getStartDate();
+		Date endDate = UserUtil.getEndDate();
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		int totalItems = userService.countBoardBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -459,18 +411,14 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
-		java.sql.Date endDate = java.sql.Date.valueOf(eDate);
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = Date.from(LocalDate.parse(sDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+				.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date endDate = Date.from(LocalDate.parse(eDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atTime(23, 59, 59)
+				.atZone(ZoneId.systemDefault()).toInstant());
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		int totalItems = userService.countBoardBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -503,21 +451,12 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		LocalDate currentDate = LocalDate.now();
-		LocalDate oneMonthAgo = currentDate.minusMonths(1);
-		oneMonthAgo = oneMonthAgo.plusDays(1);
-		Date startDate = Date.from(oneMonthAgo.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		Date endDate = Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = UserUtil.getStartDate();
+		Date endDate = UserUtil.getEndDate();
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		int totalItems = userService.countReplyBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -553,18 +492,14 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		java.sql.Date startDate = java.sql.Date.valueOf(sDate);
-		java.sql.Date endDate = java.sql.Date.valueOf(eDate);
-		model.addAttribute("startDate", sdf.format(startDate));
-		model.addAttribute("endDate", sdf.format(endDate));
+		Date startDate = Date.from(LocalDate.parse(sDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+				.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date endDate = Date.from(LocalDate.parse(eDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atTime(23, 59, 59)
+				.atZone(ZoneId.systemDefault()).toInstant());
+		model.addAttribute("startDate", SDF_YMD.format(startDate));
+		model.addAttribute("endDate", SDF_YMD.format(endDate));
 
 		int totalItems = userService.countReplyBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -597,12 +532,7 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
 		return "user_check_info.jsp";
 	}
@@ -614,12 +544,7 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		UserCardVO card = userService.getUserCard(user_num);
-		model.addAttribute("rank_letter", card.getRank_letter());
-		model.addAttribute("user_rank", card.getUser_rank());
-		model.addAttribute("delivering_items", card.getDelivering_items());
-		UserCardVO card2 = userService.getUserCard2(user_num);
-		model.addAttribute("user_total_point", card2.getUser_total_point());
+		addCardAttributeToModel(user_num, model);
 
 		String pwd = vo.getPwd();
 
