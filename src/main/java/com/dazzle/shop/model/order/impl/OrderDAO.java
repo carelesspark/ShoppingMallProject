@@ -106,7 +106,7 @@ public class OrderDAO {
 			+ " delivery_company = ?," + " invoice_num = ?"
 			+ " WHERE order_num IN (SELECT order_num FROM order_detail WHERE order_detail_num = ?)";
 
-	private final String ORDER_DETAIL_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_num, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.main_img"
+	private final String ORDER_DETAIL_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_num, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.img_name"
 			+ " FROM order_detail od" + " JOIN orders o ON o.order_num = od.order_num"
 			+ " LEFT JOIN delivery d ON d.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
@@ -130,7 +130,7 @@ public class OrderDAO {
 	private final String REFUND_CHANGE_APPROVE = "UPDATE product_refund_or_change" + " SET response_detail = ?, "
 			+ " approve = ? " + " WHERE refund_change_num = ?";
 
-	private final String ORDER_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_num, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.main_img"
+	private final String ORDER_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_num, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.img_name"
 			+ " FROM orders o" + " JOIN order_detail od ON o.order_num = od.order_num"
 			+ " LEFT JOIN delivery d ON d.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
@@ -139,15 +139,15 @@ public class OrderDAO {
 			+ " JOIN product p ON p.product_num = pco.product_num"
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE od.order_detail_num = ?";
 
-	private final String PRODUCT_ORDER = "SELECT pimg.main_img, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, pc.product_code"
+	private final String PRODUCT_ORDER = "SELECT pimg.img_name, p.product_num, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, pc.product_code"
 			+ " FROM product_code pc" + " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
-			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE pc.product_code = ?";
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE pc.product_code = ? AND pimg.img_type = 2";
 
 	private final String USER_POINT = "SELECT points FROM point where user_num = ?";
 
-	private final String PRODUCT_ORDER_CART = "SELECT pimg.main_img, (p.product_price * c.amount) AS total_price, c.amount, p.product_name, pco.color_name, ps.size_name"
+	private final String PRODUCT_ORDER_CART = "SELECT pimg.img_name, (p.product_price * c.amount) AS total_price, c.amount, p.product_name, pco.color_name, ps.size_name"
 			+ " FROM cart c" + " JOIN users u ON u.user_num = c.user_num"
 			+ " JOIN user_info ui ON ui.user_num = u.user_num"
 			+ " JOIN product_code pc ON pc.product_code = c.product_code"
@@ -165,7 +165,7 @@ public class OrderDAO {
 
 	private final String BUY_ORDER_DETAIL = "INSERT INTO order_detail VALUES(DEFAULT, ?, ?, '상품 준비 중', ?, ?)";
 
-	private final String SUCCESS_ORDER = "SELECT pimg.main_img, (p.product_price * ? ) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, o.order_num, o.order_date, o.delivery_price"
+	private final String SUCCESS_ORDER = "SELECT pimg.img_name, (p.product_price * ? ) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, o.order_num, o.order_date, o.delivery_price"
 			+ " FROM orders o" + " JOIN users u ON u.user_num = o.user_num"
 			+ " JOIN order_detail od ON od.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
@@ -202,7 +202,7 @@ public class OrderDAO {
 	private final String ORDER_SUCC_INFO = "SELECT order_num, order_date, address, detail_address, postal_num, delivery_price, "
 			+ "recipient, request, payment, phone_num, points, totalPrice FROM orders WHERE order_num = ?";
 
-	private final String ORDER_SUCC_PRODUCT = "SELECT pimg.main_img, od.total_price, pc.product_code, ps.size_name, pco.color_name, p.product_price, p.product_name, od.amount, o.totalPrice, o.points"
+	private final String ORDER_SUCC_PRODUCT = "SELECT pimg.img_name, od.total_price, pc.product_code, ps.size_name, pco.color_name, p.product_price, p.product_name, od.amount, o.totalPrice, o.points"
 			+ " FROM orders o" + " JOIN order_detail od ON od.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
@@ -328,7 +328,6 @@ public class OrderDAO {
 		try {
 			System.out.println("getProductOrder()");
 			Object[] args = { amount, amount, productCode };
-
 			return jdbcTemplate.queryForObject(PRODUCT_ORDER, args, new ProductOrderRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;

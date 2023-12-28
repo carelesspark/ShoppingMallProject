@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dazzle.shop.model.cart.CartVO;
 import com.dazzle.shop.model.product.CategoryVO;
 import com.dazzle.shop.model.product.InquiryVO;
 import com.dazzle.shop.model.product.PageVO;
@@ -24,6 +25,7 @@ public class ProductServiceImpl implements ProductService{
 	
 
 
+	
 	@Autowired
 	private ProductDAO dao;
 
@@ -168,5 +170,11 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void insertReviewImg(ReviewVO vo) {
 		dao.insertReviewImg(vo);
+	}
+	
+	@Override
+	public CartVO compareCart(CartVO vo) {
+		
+		return dao.compareCart(vo);
 	}
 }

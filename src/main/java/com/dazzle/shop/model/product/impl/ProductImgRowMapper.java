@@ -17,8 +17,6 @@ public class ProductImgRowMapper implements RowMapper<ProductImgVO>{
 		
 		vo.setImg_num(rs.getInt("img_num"));
 		vo.setProduct_num(rs.getInt("product_num"));
-		vo.setMain_img(rs.getString("main_img"));
-		vo.setSub_img(rs.getString("sub_img"));
 		vo.setImg_name(rs.getString("img_name"));
 		vo.setImg_type(rs.getInt("img_type"));
 		
