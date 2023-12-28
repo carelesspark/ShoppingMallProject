@@ -55,8 +55,7 @@
 									<td id="cart_table_first_td"><input type="checkbox"
 										id="cart_check_1" class="cart_product_checkbox" /> <input
 										type="hidden" id="checkbox" value="0" name="checkbox" /></td>
-									<td id="cart_table_product_img"><img
-										src="${cart.main_img }" /></td>
+									<td id="cart_table_product_img"><img src="${pageContext.request.contextPath}/resources/image/product/${cart.product_num}/${cart.main_img }"/></td>
 									<td id="cart_table_product_name">${cart.product_name }</td>
 									<td><input type="number" id="cart_product_count"
 										name="amount_list" class="cart_product_amount"
