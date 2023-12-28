@@ -26,8 +26,8 @@
 			
 			<div class="category">
 				<select name="ctgr_num">
-					<option value="">카테고리를 골라주세요</option>
-					<option value="">없음</option>
+					<option value="0">카테고리를 골라주세요</option>
+					<option value="0">없음</option>
 					<option value="1">오오티디</option>
 					<option value="2">트렌드</option>
 					<option value="3">스트릿</option>
@@ -65,7 +65,7 @@
 			}
 			
 			$('.selected').append('<input type="text" readonly="readonly" name="product_num[]" value=' + document.getElementById('searchWord').value + ' class="box"><br>');
-			
+		
 		}
 	</script>
 </body>

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -270,9 +271,21 @@ public class BoardDAO {
 	}
 
 	public void editBoard(BoardVO vo) { // 게시글 수정
-		String sql = "update board set title = ?, posttime = now() where pno = ?";
+		String sql = "update board set ctgr_num = ?, title = ?, posttime = now() where pno = ?";
 
-		template.update(sql, vo.getTitle(), vo.getPno());
+		template.update(sql, vo.getCtgr_num(), vo.getTitle(), vo.getPno());
+	}
+	
+	public void updateBoardImg(int pno, String mainImageName) {
+		String sql = "update file set fname = ? where pno = ?";
+
+		try {
+			template.update(sql, mainImageName, pno);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			System.err.println("DAO 실패");
+		}
+
 	}
 
 	public void editNotice(BoardVO vo) { // 공지사항 수정
