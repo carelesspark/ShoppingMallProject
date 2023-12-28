@@ -25,7 +25,7 @@ public class UserDAO {
 	// 나의 쇼핑
 	// 주문/배송 조회
 	private final String ORDER_LIST = "SELECT o.order_date, d.delivery_date, od.product_state, od.order_detail_num, "
-			+ "od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, o.order_num "
+			+ "od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, pc.product_code, o.order_num "
 			+ "FROM orders o LEFT JOIN delivery d ON o.order_num = d.order_num JOIN order_detail od ON o.order_num = od.order_num "
 			+ "JOIN product_code pc ON od.product_code = pc.product_code "
 			+ "JOIN product_size ps ON pc.size_num = ps.size_num "
