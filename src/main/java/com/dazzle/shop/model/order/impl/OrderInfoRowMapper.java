@@ -31,7 +31,7 @@ public class OrderInfoRowMapper implements RowMapper<OrderVO>{
 		orderInfo.setRequest(rs.getString("request"));
 		orderInfo.setOrder_detail_num(rs.getInt("order_detail_num"));
 		orderInfo.setUser_num(rs.getInt("user_num"));
-		orderInfo.setMain_img(rs.getString("main_img"));
+		orderInfo.setImg_name(rs.getString("img_name"));
 		
 		
 		return orderInfo;

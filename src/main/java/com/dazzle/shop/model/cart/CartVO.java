@@ -14,4 +14,6 @@ public class CartVO {
 	private String product_name;
 	private String color_name;
 	private String size_name;
+	private String img_name;
+	private int img_type;
 }

@@ -2,6 +2,8 @@ package com.dazzle.shop.model.product;
 
 import java.util.List;
 
+import com.dazzle.shop.model.cart.CartVO;
+
 public interface ProductService {
 	
 //	List<ProductsVO> get_category_by_products(String _category_num);
@@ -52,5 +54,7 @@ public interface ProductService {
 	void insertReview(ReviewVO vo);
 	ReviewVO getReviewOne(ReviewVO vo);
 	void insertReviewImg(ReviewVO vo);
+	
+	CartVO compareCart(CartVO vo);
 
 }

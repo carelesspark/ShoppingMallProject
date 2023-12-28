@@ -32,6 +32,8 @@ import com.dazzle.shop.model.order.impl.ProductOrderRowMapper;
 import com.dazzle.shop.model.product.CategoryVO;
 import com.dazzle.shop.model.product.ProductCodeVO;
 import com.dazzle.shop.model.admin.domain.AdminProductVO;
+import com.dazzle.shop.model.cart.CartService;
+import com.dazzle.shop.model.cart.CartVO;
 import com.dazzle.shop.model.faq.FaqVO;
 import com.dazzle.shop.model.product.InquiryVO;
 import com.dazzle.shop.model.product.ProductImgVO;
@@ -44,6 +46,7 @@ public class ProductController {
 
 	@Autowired
 	private ProductService product_service;
+
 
 	@RequestMapping(value = "/category_products.do")
 	public String get_category_by_products(Model _model, @RequestParam("category") String _category_num,
@@ -278,7 +281,7 @@ public class ProductController {
 	@RequestMapping(value = "/add_to_cart.do")
 	@ResponseBody
 	public String addToCart(HttpServletRequest _req, 
-	                        @RequestParam("size_num") int _size_num, @RequestParam("quantity") int _amount) {
+	                        @RequestParam("size_num") int _size_num, @RequestParam("quantity") int _amount, Model model) {
 		
 		if (_req.getSession().getAttribute("user_num") == null) {
 			return "error";
@@ -287,7 +290,19 @@ public class ProductController {
 		int user_num = (int) _req.getSession().getAttribute("user_num");
 
 	    ProductCodeVO vo = product_service.get_product_code(_size_num);
+	    
+	    
 	    int product_code = vo.getProduct_code();
+	    
+	    CartVO vo2 = new CartVO();
+	    vo2.setProduct_code(product_code);
+	    vo2.setUser_num(user_num);
+	    if(!(product_service.compareCart(vo2) == null)) {
+	    	
+			
+			return "error";
+	    }
+	    
 	    
 	    product_service.insert_cart(user_num, product_code, _amount);
 
@@ -313,7 +328,7 @@ public class ProductController {
 //		redirectAttributes.addAttribute("amount", _amount);
 //	    redirectAttributes.addAttribute("product_code", product_code);
 
-		return "success";
+		return Integer.toString(product_code);
 	}
 
 }

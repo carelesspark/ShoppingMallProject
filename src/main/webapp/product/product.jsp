@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page import="com.dazzle.shop.model.product.ProductSizeVO"%>
 <%@ page import="com.dazzle.shop.model.product.ProductColorVO"%>
 <%@ page import="com.dazzle.shop.model.product.ProductVO"%>
@@ -32,7 +32,8 @@
 					<div class="carousel-inner">
 						<div class="carousel-item active">
 							<img alt="Placeholder image for product" class="d-block w-100"
-								height="600" width="600" src="${pageContext.request.contextPath}/resources/image/product/${img.product_num}/${img.img_name}"/>
+								height="600" width="600"
+								src="${pageContext.request.contextPath}/resources/image/product/${img.product_num}/${img.img_name}" />
 						</div>
 					</div>
 				</div>
@@ -98,8 +99,7 @@
 				</tr>
 				<tr>
 					<th>색상 및 사이즈</th>
-					<td class="score">
-					<c:forEach items="${colors }" var="c">
+					<td class="score"><c:forEach items="${colors }" var="c">
 							${c.color_name }
 							사이즈 : 
 							<c:forEach items="${c.sizes}" var="size">
@@ -108,7 +108,7 @@
 							<br>
 						</c:forEach></td>
 				</tr>
-				
+
 				<tr>
 					<th>상품 등록 일</th>
 					<td class="score">${info.product_date }</td>
@@ -119,55 +119,56 @@
 		<div class="review-qna-container" id="product-review">
 			<div class="review-qna-header">
 				<div class="review-qna-title">리뷰 (${count.count})</div>
-				<div class="review-qna-date">
-					
-				</div>
+				<div class="review-qna-date"></div>
 			</div>
 			<!-- Repeat for each review item -->
 			<c:forEach var="review" items="${review}">
-			  <div class="review-qna-item">
-			    <div>
-			      <div class="review-qna-rating">
-			        <c:forEach var="i" begin="1" end="${review.review_ratings}">
-			          	<span style=" color: #FFD700;">★</span>
-			        </c:forEach>
-			      </div>
-			      <c:set var="maskedId" value="${fn:substring(review.id, 0, 2)}" />
-					<c:forEach begin="1" end="${fn:length(review.id)-2}" var="i">
-				    <c:set var="maskedId" value="${maskedId}*"/>
-				    </c:forEach>
-				    <div class="review-qna-rating">${maskedId}</div>
-				
-			      <div class="review-qna-author">사이즈 : ${review.size_name} 색상: ${review.color_name}</div>
-			      <div class="review-qna-content">${review.review_content}</div>
-			      <div class="review-qna-date">${review.review_date}</div>
-			    </div>
-			    <div>
-			      <c:if test="${not empty review.review_img}">
-			      <img height="200px" alt="${img_name}" src="${pageContext.request.contextPath}/resources/image/review/${review.product_code}/${review.review_img}">
-			      </c:if>
-			    </div>
-			  </div>
+				<div class="review-qna-item">
+					<div>
+						<div class="review-qna-rating">
+							<c:forEach var="i" begin="1" end="${review.review_ratings}">
+								<span style="color: #FFD700;">★</span>
+							</c:forEach>
+						</div>
+						<c:set var="maskedId" value="${fn:substring(review.id, 0, 2)}" />
+						<c:forEach begin="1" end="${fn:length(review.id)-2}" var="i">
+							<c:set var="maskedId" value="${maskedId}*" />
+						</c:forEach>
+						<div class="review-qna-rating">${maskedId}</div>
+
+						<div class="review-qna-author">사이즈 : ${review.size_name} 색상:
+							${review.color_name}</div>
+						<div class="review-qna-content">${review.review_content}</div>
+						<div class="review-qna-date">${review.review_date}</div>
+					</div>
+					<div>
+						<c:if test="${not empty review.review_img}">
+							<img height="200px" alt="${img_name}"
+								src="${pageContext.request.contextPath}/resources/image/review/${review.product_code}/${review.review_img}">
+						</c:if>
+					</div>
+				</div>
 			</c:forEach>
-			
-			 <div id="pageButtons" class="text-center mt-3">
-			        <c:forEach begin="1" end="${totalPages}" varStatus="loop">
-			            <c:url value="" var="url">
-			                <c:param name="curr_page" value="${loop.index}" />
-			                <c:param name="product_num" value="${info.product_num }" />
-			            </c:url>
-			            <a href="${url}" class="btn ${loop.index == curr_page ? 'active' : ''}">
-			                ${loop.index}
-			            </a>
-			        </c:forEach>
-			    </div>
+
+			<div id="pageButtons" class="text-center mt-3">
+				<c:forEach begin="1" end="${totalPages}" varStatus="loop">
+					<c:url value="" var="url">
+						<c:param name="curr_page" value="${loop.index}" />
+						<c:param name="product_num" value="${info.product_num }" />
+					</c:url>
+					<a href="${url}"
+						class="btn ${loop.index == curr_page ? 'active' : ''}">
+						${loop.index} </a>
+				</c:forEach>
+			</div>
 			<br>
-	
+
 		</div>
 
 		<div class="review-qna-container" id="product-inquiry">
 			<div class="review-qna-header">
-				<div class="review-qna-title">상품문의 (${inquiryCount.total_inquiry})</div>
+				<div class="review-qna-title">상품문의
+					(${inquiryCount.total_inquiry})</div>
 				<div class="review-qna-date">
 					<a href="/inquiry.do?product_num=${info.product_num }">문의 쓰기</a>
 				</div>
@@ -193,16 +194,16 @@
 			</c:choose>
 			<!-- ... other review items ... -->
 			<div id="pageButtons" class="text-center mt-3">
-			        <c:forEach begin="1" end="${totalInquiryPages}" varStatus="loop">
-			            <c:url value="" var="url">
-			                <c:param name="curr_inq_page" value="${loop.index}" />
-			                <c:param name="product_num" value="${info.product_num }" />
-			            </c:url>
-			            <a href="${url}" class="btn ${loop.index == curr_inq_page ? 'active' : ''}">
-			                ${loop.index}
-			            </a>
-			        </c:forEach>
-			    </div>
+				<c:forEach begin="1" end="${totalInquiryPages}" varStatus="loop">
+					<c:url value="" var="url">
+						<c:param name="curr_inq_page" value="${loop.index}" />
+						<c:param name="product_num" value="${info.product_num }" />
+					</c:url>
+					<a href="${url}"
+						class="btn ${loop.index == curr_inq_page ? 'active' : ''}">
+						${loop.index} </a>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 	<!-- 	<script crossorigin="anonymous" -->
@@ -260,18 +261,22 @@
                 },
                 dataType: "text",
                 success: function (data) {
-                	
+                if(data == "success"){
                     var userResponse = confirm("장바구니에 추가되었습니다. 장바구니 페이지로 이동하시겠습니까?");
                     if (userResponse) {
                         window.location.href = "/cart.do";                 
                     } else {
                         window.location.reload();
                     }
-
+                	} else{
+                		 var userResponse = confirm("동일한 상품이 장바구니에 존재합니다.");
+                     
+                	}
                 },
                 error: function (error) {
                 	console.error("Error response: ", error);
                 	
+                
                 }
             });
         }
@@ -289,14 +294,15 @@
                 data: {
                     size_num: selectedSize,
                     quantity: quantity
-                },
+                }, 
+                dataType: "text",
                 success: function (data) {
                 	
-                	if (data === "success") {
-                		window.location.href = "/productOrder.do?product_code=" + selectedSize + "&amount=" + quantity;
-                	} else {
+                	if (data === "error") {
                 		alert("로그인 후 이용 해주세요.")
                 		window.location.href = "/sign/login.jsp";
+                	} else {
+                		window.location.href = "/productOrder.do?product_code=" + parseInt(data) + "&amount=" + quantity;
                 	}
                 },
                 error: function (error) {
