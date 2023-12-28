@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -46,7 +43,7 @@ public class AdminController {
 		System.out.println("AdminController: adminUserList");
 
 		int totalItems = adminService.countTableRecord("user_info"); // 유저 총 개수
-		int itemsPerPage = 20; // 페이지 당 표시할 레코드 수
+		int itemsPerPage = 10; // 페이지 당 표시할 레코드 수
 		int currentPage = 1; // 현재 페이지
 		int totalPage = totalItems / itemsPerPage; // 전체 페이지
 		if (totalItems % itemsPerPage > 0) {
@@ -113,15 +110,19 @@ public class AdminController {
 		model.addAttribute("subCategoryNum", 0);
 		model.addAttribute("subCategoryStartNum", 0);
 
-		int totalRecordNum = adminService.countTableRecord("user_info");
-		int pageSize = 10;
-		int pageNum = 1;
-		model.addAttribute("pageSize", pageSize);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("totalPage", totalRecordNum / pageSize + 1);
+		int totalItems = adminService.countSubCategoryItems(1);
+		int itemsPerPage = 10;
+		int currentPage = 1;
+		int totalPage = totalItems / itemsPerPage; // 전체 페이지
+		if (totalItems % itemsPerPage > 0) {
+			totalPage++;
+		}
+		model.addAttribute("itemsPerPage", itemsPerPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPage", totalPage);
 
 		int subCategoryNum = 1;
-		List<AdminProductVO> list = adminService.getProductList(subCategoryNum, pageSize, pageNum);
+		List<AdminProductVO> list = adminService.getProductList(subCategoryNum, itemsPerPage, currentPage);
 		model.addAttribute("productList", list);
 
 		return "admin_product_list.jsp";
@@ -130,7 +131,7 @@ public class AdminController {
 	// 카테고리 버튼 누르면 그에 맞는 상품 리스트 보여줌
 	@GetMapping("/changeProductList.do")
 	public String changeProductList(@RequestParam("subCategoryNum") int subCategoryNum,
-			@RequestParam("pageSize") int pageSize, @RequestParam("pageNum") int pageNum, Model model) {
+			@RequestParam("currentPage") int currentPage, @RequestParam("itemsPerPage") int itemsPerPage, Model model) {
 		System.out.println("AdminController: changeProductList");
 
 		List<SubCategoryVO> subCategory = adminService.getSubCategoryList();
@@ -138,12 +139,16 @@ public class AdminController {
 		model.addAttribute("subCategoryNum", subCategoryNum);
 		model.addAttribute("subCategoryStartNum", (subCategoryNum / 5) * 5);
 
-		int totalRecordNum = adminService.countTableRecord("user_info");
-		model.addAttribute("pageSize", pageSize);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("totalPage", totalRecordNum / pageSize + 1);
+		int totalItems = adminService.countSubCategoryItems(subCategoryNum + 1);
+		int totalPage = totalItems / itemsPerPage; // 전체 페이지
+		if (totalItems % itemsPerPage > 0) {
+			totalPage++;
+		}
+		model.addAttribute("itemsPerPage", itemsPerPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPage", totalPage);
 
-		List<AdminProductVO> list = adminService.getProductList(subCategoryNum + 1, pageSize, pageNum);
+		List<AdminProductVO> list = adminService.getProductList(subCategoryNum + 1, itemsPerPage, currentPage);
 		model.addAttribute("productList", list);
 
 		return "admin_product_list.jsp";

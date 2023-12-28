@@ -40,8 +40,6 @@ public class AdminProductVO {
 	private String category_name;
 
 	// 추가
-	private int list_num;
-	private int page_num;
 	private int total_stock;
 
 }

@@ -25,12 +25,6 @@ public class AdminDAO {
 	@Autowired
 	private JdbcTemplate template;
 
-	public final String USER_LIST2 = "WITH blacklist AS ( SELECT ROW_NUMBER() OVER (ORDER BY ui.user_join_date DESC) AS list_num, "
-			+ "u.user_name, u.login_type, ui.user_rank, ui.is_black_list, ui.user_join_date, ui.user_delete_date "
-			+ "FROM users u JOIN user_info ui ON u.user_num = ui.user_num WHERE u.is_admin != 1) "
-			+ "SELECT list_num, user_name, login_type, user_rank, is_black_list, user_join_date, user_delete_date, "
-			+ "CEIL(list_num / ?) AS page_num FROM blacklist WHERE CEIL(list_num / ?) = ? ORDER BY list_num";
-
 	// 최근 가입한 유저 기준으로 (현재 페이지 - 1) * 페이지당 보여지는 유저 수, 페이지당 보여지는 유저 수
 	public final String USER_LIST = "SELECT u.user_name, u.login_type, ui.user_rank, ui.is_black_list, ui.user_join_date, ui.user_delete_date "
 			+ "FROM users u JOIN user_info ui ON u.user_num = ui.user_num WHERE u.is_admin = 0 ORDER BY ui.user_join_date DESC LIMIT ?, ?";
@@ -41,7 +35,12 @@ public class AdminDAO {
 			+ "SELECT list_num, user_name, login_type, user_rank, user_join_date, user_delete_date, "
 			+ "CEIL(list_num / ?) AS page_num FROM userlist WHERE CEIL(list_num / ?) = ? ORDER BY list_num";
 
-	public final String PRODUCT_LIST = "WITH productlist AS (SELECT ROW_NUMBER() OVER (ORDER BY p.product_date DESC) AS list_num, "
+	public final String PRODUCT_LIST = "select p.product_num, p.product_name, p.product_price, SUM(ps.product_stock) AS total_stock "
+			+ "FROM product p JOIN product_color pc ON p.product_num = pc.product_num "
+			+ "JOIN product_size ps ON pc.color_num = ps.color_num WHERE p.sub_category_num = ? "
+			+ "GROUP BY p.product_num, p.product_name, p.product_price ORDER BY p.product_date DESC LIMIT ?, ?";
+
+	public final String PRODUCT_LIST2 = "WITH productlist AS (SELECT ROW_NUMBER() OVER (ORDER BY p.product_date DESC) AS list_num, "
 			+ "p.product_num, p.product_name, p.product_price, SUM(ps.product_stock) AS total_stock "
 			+ "FROM product p JOIN product_color pc ON p.product_num = pc.product_num JOIN product_size ps ON pc.color_num = ps.color_num "
 			+ "WHERE p.sub_category_num = ? GROUP BY p.product_num, p.product_name, p.product_price) "
@@ -60,6 +59,13 @@ public class AdminDAO {
 	// 테이블 레코드 총 개수 반환
 	public int getTotalCount(String tableName) {
 		String sql = "select count(*) from " + tableName;
+
+		return template.queryForObject(sql, Integer.class);
+	}
+
+	// 서브 카테고리용 레코드 개수 반환
+	public int countSubCategoryItems(int subCategoryNum) {
+		String sql = "select count(*) from product where sub_category_num = " + subCategoryNum;
 
 		return template.queryForObject(sql, Integer.class);
 	}
@@ -97,16 +103,6 @@ public class AdminDAO {
 		}
 	}
 
-	// 유저 리스트 반환
-	public List<AdminUserVO> getUserList2(int pageSize, int pageNum) {
-
-		try {
-			return template.query(USER_LIST, new Object[] { pageSize, pageSize, pageNum }, new AdminUserRowMapper());
-		} catch (EmptyResultDataAccessException e) {
-			return Collections.emptyList();
-		}
-	}
-
 	// 유저 블랙리스트 반환
 	public List<AdminUserVO> getBlackist(int pageSize, int pageNum) {
 
@@ -119,10 +115,12 @@ public class AdminDAO {
 	}
 
 	// 제품 리스트 반환
-	public List<AdminProductVO> getProductList(int subCategoryNum, int pageSize, int pageNum) {
+	public List<AdminProductVO> getProductList(int subCategoryNum, int itemsPerPage, int currentPage) {
+		int offset = (currentPage - 1) * itemsPerPage;
+		int limit = itemsPerPage;
 
 		try {
-			return template.query(PRODUCT_LIST, new Object[] { subCategoryNum, pageSize, pageSize, pageNum },
+			return template.query(PRODUCT_LIST, new Object[] { subCategoryNum, offset, limit },
 					new ProductListRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return Collections.emptyList();
