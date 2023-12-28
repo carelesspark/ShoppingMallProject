@@ -9,6 +9,8 @@ public interface BoardService {
 	
 	List<FileVO> getFileList();
 	
+	List<FileVO> getFileList(int ctgr_num);
+	
 	List<BoardVO> getCtgrBoardList(int ctgr_num);	// 게시판 카테고리별 보기
 	
 	List<BoardVO> getNoticeList(int pageNum);
@@ -16,6 +18,8 @@ public interface BoardService {
 	List<BoardVO> getQuestList(int pageNum);
 	
 	BoardVO getBoard(BoardVO vo);
+	
+	List<FileVO> getFile(BoardVO vo);
 	
 	BoardVO getNotice(BoardVO vo);
 	
