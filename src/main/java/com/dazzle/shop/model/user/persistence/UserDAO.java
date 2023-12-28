@@ -19,8 +19,8 @@ public class UserDAO {
 
 	// 유저 카드 내용
 	private final String USER_CARD = "SELECT SUBSTR(ui.user_rank, 1,1) rank_letter, ui.user_rank, "
-			+ "COUNT(case when d.delivery_date IS NULL then 1 ELSE NULL END) delivering_items FROM user_info ui "
-			+ "JOIN orders o ON ui.user_num = o.user_num LEFT OUTER JOIN delivery d ON o.order_num = d.order_num "
+			+ "COUNT(CASE WHEN o.order_date IS NOT NULL AND d.delivery_date IS NULL THEN 1 ELSE 0 END) delivering_items FROM user_info ui "
+			+ "LEFT JOIN orders o ON ui.user_num = o.user_num LEFT OUTER JOIN delivery d ON o.order_num = d.order_num "
 			+ "GROUP BY ui.user_num having ui.user_num = ?";
 
 	// 나의 쇼핑
@@ -283,20 +283,36 @@ public class UserDAO {
 		}
 	}
 
+	public String getPwd(int user_num) {
+		String sql = "select pwd from auth_id where user_num = ?";
+		try {
+			return template.queryForObject(sql, new Object[] { user_num }, String.class);
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
 	//////////////////////////////////////////////////////////////////////
 	// 회원정보 변경 비동기
 	public boolean updatePwd(int user_num, String pwd) {
 		String sql = "update auth_id set pwd = '" + pwd + "' where user_num = " + user_num;
-
 		try {
 			template.update(sql);
-
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-
 			return false;
 		}
 	}
 
+	public boolean updatePhone(int user_num, String user_phone) {
+		String sql = "update user_info set user_phone = '" + user_phone + "' where user_num = " + user_num;
+		try {
+			template.update(sql);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

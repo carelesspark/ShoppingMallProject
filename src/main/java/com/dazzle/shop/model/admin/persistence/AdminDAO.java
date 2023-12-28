@@ -29,11 +29,9 @@ public class AdminDAO {
 	public final String USER_LIST = "SELECT u.user_name, u.login_type, ui.user_rank, ui.is_black_list, ui.user_join_date, ui.user_delete_date "
 			+ "FROM users u JOIN user_info ui ON u.user_num = ui.user_num WHERE u.is_admin = 0 ORDER BY ui.user_join_date DESC LIMIT ?, ?";
 
-	public final String BLACKLIST = "WITH userlist AS ( SELECT ROW_NUMBER() OVER (ORDER BY ui.user_join_date DESC) AS list_num, "
-			+ "u.user_name, u.login_type, ui.user_rank, ui.user_join_date, ui.user_delete_date "
-			+ "FROM users u JOIN user_info ui ON u.user_num = ui.user_num WHERE ui.is_black_list = 1) "
-			+ "SELECT list_num, user_name, login_type, user_rank, user_join_date, user_delete_date, "
-			+ "CEIL(list_num / ?) AS page_num FROM userlist WHERE CEIL(list_num / ?) = ? ORDER BY list_num";
+	public final String BLACKLIST = "SELECT u.user_name, u.login_type, ui.user_rank, ui.is_black_list, ui.user_join_date, ui.user_delete_date "
+			+ "FROM users u JOIN user_info ui ON u.user_num = ui.user_num WHERE u.is_admin = 0 and ui.is_black_list = 1 "
+			+ "ORDER BY ui.user_join_date DESC LIMIT ?, ?";
 
 	public final String PRODUCT_LIST = "select p.product_num, p.product_name, p.product_price, SUM(ps.product_stock) total_stock "
 			+ "FROM product p LEFT JOIN product_color pc ON p.product_num = pc.product_num "
@@ -104,11 +102,12 @@ public class AdminDAO {
 	}
 
 	// 유저 블랙리스트 반환
-	public List<AdminUserVO> getBlackist(int pageSize, int pageNum) {
+	public List<AdminUserVO> getBlackist(int currentPage, int itemsPerPage) {
+		int offset = (currentPage - 1) * itemsPerPage;
+		int limit = itemsPerPage;
 
 		try {
-			return template.query(BLACKLIST, new Object[] { pageSize, pageSize, pageNum },
-					new AdminBlacklistRowMapper());
+			return template.query(BLACKLIST, new Object[] { offset, limit }, new UserListRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return Collections.emptyList();
 		}
