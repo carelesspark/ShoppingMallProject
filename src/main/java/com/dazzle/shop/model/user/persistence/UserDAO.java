@@ -27,8 +27,7 @@ public class UserDAO {
 	// 주문/배송 조회
 	private final String ORDER_LIST = "SELECT o.order_date, d.delivery_date, od.product_state, od.order_detail_num, "
 			+ "od.amount, od.total_price, ps.size_name, pcolor.color_name, p.product_name, p.product_num, o.order_num "
-			+ "FROM orders o "
-			+ "LEFT JOIN delivery d ON o.order_num = d.order_num "
+			+ "FROM orders o " + "LEFT JOIN delivery d ON o.order_num = d.order_num "
 			+ "JOIN order_detail od ON o.order_num = od.order_num "
 			+ "JOIN product_code pc ON od.product_code = pc.product_code "
 			+ "JOIN product_size ps ON pc.size_num = ps.size_num "
@@ -70,8 +69,7 @@ public class UserDAO {
 
 	// 1대1 질의응답 내역
 	private final String INQUIRY_LIST = "SELECT i.inquiry_date, i.inquiry_num, ia.answer, i.product_num, "
-			+ "p.product_name, pcolor.color_name, ps.size_name "
-			+ "FROM inquiry i "
+			+ "p.product_name, pcolor.color_name, ps.size_name " + "FROM inquiry i "
 			+ "LEFT OUTER JOIN inquiry_answer ia ON i.inquiry_num = ia.inquiry_num "
 			+ "JOIN product p ON p.product_num = i.product_num "
 			+ "JOIN product_color pcolor ON pcolor.product_num = p.product_num "
@@ -134,7 +132,7 @@ public class UserDAO {
 	// 주문/배송 조회
 	public List<UserOrdersVO> getUserOrderList(UserOrdersVO vo) {
 		try {
-			return template.query(ORDER_LIST, new Objec[] { vo.getUser_num(), vo.getStartDate(), vo.getEndDate() },
+			return template.query(ORDER_LIST, new Object[] { vo.getUser_num(), vo.getStartDate(), vo.getEndDate() },
 					new UserOrderListRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return Collections.emptyList();
