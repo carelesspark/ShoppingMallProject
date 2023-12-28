@@ -146,9 +146,6 @@
 								<div id="order_payment_price">
 									<p>전체 상품가격</p>
 								</div>
-								<div id="order_payment_coupon">
-									<p>쿠폰</p>
-								</div>
 								<div id="order_payment_point">
 									<p>포인트</p>
 								</div>
@@ -165,15 +162,6 @@
 							<div id="order_payment_grid_rows_2">
 								<div id="order_payment_price_value">
 									<p><fmt:formatNumber value="${totalPrice}" pattern="#,###"/>원</p>
-								</div>
-								<div id="order_payment_coupon_value">
-									<select>
-										<option value="default">--- 적용할 수 있는 쿠폰이 없습니다. ---</option>
-										<option value="coupon1">--- 쿠폰1 ---</option>
-										<option value="coupon2">--- 쿠폰2 ---</option>
-										<option value="coupon3">--- 쿠폰3 ---</option>
-										<option value="coupon4">--- 쿠폰4 ---</option>
-									</select>
 								</div>
 								<div id="order_payment_point_value">
 									<div id="order_payment_div_css">
