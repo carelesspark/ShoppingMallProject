@@ -3,6 +3,7 @@ package com.dazzle.shop.model.product.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -250,7 +251,11 @@ public class ProductDAO {
 
 	public ProductImgVO product_img(int _product_num) {
 		System.out.println("이미지");
+		try {
 		return jdbc_template.queryForObject(product_img, new Object[] { _product_num }, new ProductImgRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 	
 	public ProductCodeVO get_product_code(int _size_num) {
