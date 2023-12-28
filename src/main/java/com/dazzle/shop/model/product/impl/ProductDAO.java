@@ -186,7 +186,15 @@ public class ProductDAO {
 	private final String GET_INQUIRY = "select * from inquiry WHERE product_num = ? LIMIT ? OFFSET ?";
 	
 	private final String GET_INQUIRY_COUNT = "select count(*) AS total_inquiry from inquiry WHERE product_num = ?";
-
+	
+	private final String INSERT_REVIEW = "INSERT INTO review(user_num, product_code, review_content, review_ratings, review_date)"
+			+ " VALUES(?, ?, ?, ?, NOW());";
+	
+	private final String GET_REVIEW_ONE = "SELECT review_num FROM review WHERE user_num = ? and product_code = ? and review_ratings = ? order by review_num desc LIMIT 1";
+	
+	private final String INSERT_REVIEW_IMG = "INSERT INTO review_img(review_num, review_img)"
+			+ " VALUES(?, ?);";
+	
 	public List<ProductsVO> get_category_by_products_paged(String _category_num, int limit, int offset) {
 	    return jdbc_template.query(get_category_by_products_paged, new Object[] { _category_num, limit, offset }, new ProductsRowMapper());
 	}
@@ -270,6 +278,11 @@ public class ProductDAO {
 		return;
 	}
 	
+	public void insertReview(ReviewVO vo) {
+		System.out.println("insertReview()");
+		jdbc_template.update(INSERT_REVIEW, vo.getUser_num(), vo.getProduct_code(), vo.getReview_content(), vo.getReview_ratings());
+		return;
+	} 
 	public List<InquiryVO> getInquiry(int _product_num, int a, int b) {
 		System.out.println("getInquiry()");
 		return jdbc_template.query(GET_INQUIRY, new Object[] {_product_num, a, b}, new InquiryRowMapper());
@@ -281,4 +294,14 @@ public class ProductDAO {
 		return jdbc_template.queryForObject(GET_INQUIRY_COUNT, new Object[] {_product_num}, new InquiryCountRowMapper());
 	}
 
+	public ReviewVO getReviewOne(ReviewVO vo) {
+		System.out.println("getReviewOne()");
+		return jdbc_template.queryForObject(GET_REVIEW_ONE, new Object[] {vo.getUser_num(), vo.getProduct_code(),
+				vo.getReview_ratings()}, new ReviewNumRowMapper());
+	}
+	public void insertReviewImg(ReviewVO vo) {
+		System.out.println("insertReviewImg()");
+		jdbc_template.update(INSERT_REVIEW_IMG, vo.getReview_num(), vo.getReview_img());
+		return;
+	} 
 }

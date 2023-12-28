@@ -43,7 +43,7 @@ public class UserOrdersVO {
 	private int amount;
 	private int total_price;
 	// product_code
-	private String product_code;
+	private int product_code;
 	// product_size
 	private int size_num;
 	private String size_name;
