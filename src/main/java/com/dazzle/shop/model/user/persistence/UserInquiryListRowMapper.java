@@ -14,8 +14,8 @@ public class UserInquiryListRowMapper implements RowMapper<UserInquiryVO> {
 		UserInquiryVO vo = new UserInquiryVO();
 		vo.setInquiry_date(rs.getDate("inquiry_date"));
 		vo.setAnswer(rs.getString("answer"));
+		vo.setInquiry_num(rs.getInt("inquiry_num"));
 		vo.setProduct_num(rs.getInt("product_num"));
-
 		vo.setProduct_name(rs.getString("product_name"));
 
 		return vo;

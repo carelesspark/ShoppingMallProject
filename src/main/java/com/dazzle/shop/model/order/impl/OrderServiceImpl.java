@@ -109,9 +109,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderVO getOrderInfo(OrderVO vo) {
+	public OrderVO getOrderInfo(int orderDetailNum) {
 
-		return orderDAO.getOrderInfo(vo);
+		return orderDAO.getOrderInfo(orderDetailNum);
 	}
 	
 	@Override

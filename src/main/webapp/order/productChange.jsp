@@ -31,8 +31,8 @@
 						<div id="change_content">
 							<table id="change_table">
 								<tr>
-									<td id="change_table_left">주문 번호</td>
-									<td id="change_table_right">${productChange.order_num }</td>
+									<td id="change_table_left">주문 상세 번호</td>
+									<td id="change_table_right">${productChange.order_detail_num}</td>
 								</tr>
 								<tr>
 									<td id="change_table_left">제품명</td>
@@ -88,10 +88,10 @@
 						<div id="buttons">
 							<div id="button1">
 								<button type="button" class="btn btn-outline-secondary"
-									onclick="location.href='/orderInfo.do?order_num=${productChange.order_num }'">돌아가기</button>
+									onclick="location.href='/orderInfo.do?order_detail_num=${productChange.order_detail_num}'">돌아가기</button>
 							</div>
 							<div id="button2">
-								<button type="button" class="btn btn-outline-secondary"
+								<button type="submit" class="btn btn-outline-secondary"
 									onclick="checkAgreement()">상품 교환 등록</button>
 							</div>
 						</div>

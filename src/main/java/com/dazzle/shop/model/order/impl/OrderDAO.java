@@ -131,7 +131,7 @@ public class OrderDAO {
 
 	private final String ORDER_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.main_img"
 			+ " FROM orders o" + " JOIN order_detail od ON o.order_num = od.order_num"
-			+ " JOIN delivery d ON d.order_num = o.order_num"
+			+ " LEFT JOIN delivery d ON d.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
@@ -214,10 +214,10 @@ public class OrderDAO {
 	private final String MINUS_POINTS = "UPDATE point SET points = 0 WHERE user_num = ?";
 	private final String PLUS_POINTS = "UPDATE point SET points = ? * 0.01 WHERE user_num = ?";
 
-	public OrderVO getOrderInfo(OrderVO vo) {
+	public OrderVO getOrderInfo(int orderDetailNum) {
 		try {
 			System.out.println("getOrderInfo()");
-			Object[] args = { vo.getOrder_detail_num() };
+			Object[] args = { orderDetailNum };
 			return jdbcTemplate.queryForObject(ORDER_INFO, args, new OrderInfoRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;

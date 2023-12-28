@@ -101,9 +101,10 @@ public class UserController {
 		vo.setUser_num(user_num);
 		vo.setStartDate(startDate);
 		vo.setEndDate(endDate);
-
+		
 		UserOrdersVO orderCount = userService.orderCheck(user_num);
 		model.addAttribute("orderCount", orderCount);
+
 
 		List<UserOrdersVO> list = userService.getUserOrderList(vo);
 		Map<Integer, List<UserOrdersVO>> map = list.stream().collect(Collectors.groupingBy(UserOrdersVO::getOrder_num));
@@ -397,7 +398,7 @@ public class UserController {
 
 		List<UserInquiryVO> list = userService.getUserInquiryList(vo);
 		model.addAttribute("inquiryList", list);
-
+		System.out.println(list);
 		return "user_inquiry_list.jsp";
 	}
 
