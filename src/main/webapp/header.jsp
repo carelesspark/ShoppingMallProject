@@ -43,7 +43,7 @@
 				</ul>
 
 				<ul class="navbar-nav gap-2">
-					<li class="nav-item"><a class="nav-link" href="/cart.do?user_num=${sessionScope.user_num}">CART</a></li>
+					<li class="nav-item"><a class="nav-link" href="/cart.do">CART</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="/user/orderList.do">MY PAGE</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -58,7 +58,6 @@
 					</c:if>
 				</ul>
 
-
 				<form class="d-flex mt-3" action="/search_result.do">
 					<input class="form-control me-1" type="search" placeholder="Search" name="search_keyword"
 						aria-label="Search" />
@@ -70,7 +69,7 @@
 		</div>
 	</nav>
 </header>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-kQtW33rZJAHjy8F/xC0k+O2eFgHgOnMm7e3f0sM/9f0zUYGPtFhQJhXdJiV6pG5a"
-	crossorigin="anonymous"></script>
+<!-- <script -->
+<!-- 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" -->
+<!-- 	integrity="sha384-kQtW33rZJAHjy8F/xC0k+O2eFgHgOnMm7e3f0sM/9f0zUYGPtFhQJhXdJiV6pG5a" -->
+<!-- 	crossorigin="anonymous"></script> -->

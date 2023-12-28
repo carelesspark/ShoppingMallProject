@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dazzle.shop.model.cart.CartService;
@@ -24,8 +27,13 @@ public class CartController {
 	private CartService cartService;
 	
 	@RequestMapping(value="/cart.do")
-	public String getCart(int user_num, CartVO vo, Model model) throws Exception {
+	public String getCart(HttpServletRequest req, CartVO vo, Model model) throws Exception {
 		
+		if (req.getSession().getAttribute("user_num") == null) {
+			return "/sign/login.jsp";
+		}
+		
+		int user_num = (int) req.getSession().getAttribute("user_num");
 		
 		System.out.println("장바구니 페이지 이동");
 		List<CartVO> cartList = new ArrayList();

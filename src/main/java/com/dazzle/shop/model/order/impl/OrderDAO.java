@@ -106,13 +106,14 @@ public class OrderDAO {
 			+ " delivery_company = ?," + " invoice_num = ?"
 			+ " WHERE order_num IN (SELECT order_num FROM order_detail WHERE order_detail_num = ?)";
 
-	private final String ORDER_DETAIL_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num"
+	private final String ORDER_DETAIL_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_num, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.main_img"
 			+ " FROM order_detail od" + " JOIN orders o ON o.order_num = od.order_num"
 			+ " LEFT JOIN delivery d ON d.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
-			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE od.order_detail_num = ?";
+			+ " JOIN product p ON p.product_num = pco.product_num" + 
+			" JOIN product_img pimg ON pimg.product_num = p.product_num" +" WHERE od.order_detail_num = ?";
 
 	private final String REFUND_INFO = "SELECT" + "  ps.size_name," + "  pco.color_name," + "  p.product_price,"
 			+ "  p.product_name," + "  od.amount," + "  pr.refund_change_amount," + "  pr.refund_change_num,"
@@ -129,7 +130,7 @@ public class OrderDAO {
 	private final String REFUND_CHANGE_APPROVE = "UPDATE product_refund_or_change" + " SET response_detail = ?, "
 			+ " approve = ? " + " WHERE refund_change_num = ?";
 
-	private final String ORDER_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.main_img"
+	private final String ORDER_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_num, p.product_price, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.main_img"
 			+ " FROM orders o" + " JOIN order_detail od ON o.order_num = od.order_num"
 			+ " LEFT JOIN delivery d ON d.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"

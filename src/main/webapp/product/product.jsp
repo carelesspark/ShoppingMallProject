@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="com.dazzle.shop.model.product.ProductSizeVO"%>
+<%@ page import="com.dazzle.shop.model.product.ProductColorVO"%>
+<%@ page import="com.dazzle.shop.model.product.ProductVO"%>
 
-<%@ page import="com.dazzle.shop.model.product.ProductSizeVO" %>
-<%@ page import="com.dazzle.shop.model.product.ProductColorVO" %>
-<%@ page import="com.dazzle.shop.model.product.ProductVO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,10 +18,10 @@
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
-	<c:set value="${product_info }" var="info"></c:set>
-	<c:set value="${product_img }" var="img"></c:set>
-	<c:set value="${info.colors}" var="colors"></c:set>
 
+	<c:set value="${product_img }" var="img"></c:set>
+	<c:set value="${product_info }" var="info"></c:set>
+	<c:set value="${info.colors}" var="colors"></c:set>
 
 
 	<div class="container my-5">
@@ -98,15 +97,18 @@
 					<td class="score">${info.product_name }</td>
 				</tr>
 				<tr>
-					<th>색상</th>
-					<td class="score"><c:forEach items="${colors }" var="c">
+					<th>색상 및 사이즈</th>
+					<td class="score">
+					<c:forEach items="${colors }" var="c">
 							${c.color_name }
+							사이즈 : 
+							<c:forEach items="${c.sizes}" var="size">
+							    ${size.size_name}
+							</c:forEach>
+							<br>
 						</c:forEach></td>
 				</tr>
-				<tr>
-					<th>사이즈</th>
-					<td class="score">s m l</td>
-				</tr>
+				
 				<tr>
 					<th>상품 등록 일</th>
 					<td class="score">${info.product_date }</td>
@@ -142,7 +144,7 @@
 			    </div>
 			    <div>
 			      <c:if test="${not empty review.review_img}">
-			        <img height="200px" src="${review.review_img}" width="200px" />
+			      <img height="200px" alt="${img_name}" src="${pageContext.request.contextPath}/resources/image/review/${review.product_code}/${review.review_img}">
 			      </c:if>
 			    </div>
 			  </div>
@@ -203,12 +205,12 @@
 			    </div>
 		</div>
 	</div>
-	<script crossorigin="anonymous"
-		integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+z0I5t9z5lFf5r5l5u5z5F5w5f5Oj04meM1a7xj"
-		src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-	<script crossorigin="anonymous"
-		integrity="sha384-kQtW33rZJAHjy8F/xzRnt+8DJSsIh2F5r2M5anjzL5F5K/3NS72V8h6Iq5a7LxN8"
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- 	<script crossorigin="anonymous" -->
+	<!-- 		integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+z0I5t9z5lFf5r5l5u5z5F5w5f5Oj04meM1a7xj" -->
+	<!-- 		src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script> -->
+	<!-- 	<script crossorigin="anonymous" -->
+	<!-- 		integrity="sha384-kQtW33rZJAHjy8F/xzRnt+8DJSsIh2F5r2M5anjzL5F5K/3NS72V8h6Iq5a7LxN8" -->
+	<!-- 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
 	<script src="../resources/js/product/product.js"></script>
 	<script>
         function updateSizeOptions() {
@@ -250,17 +252,26 @@
             var quantity = quantityInput.value;
             
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: "/add_to_cart.do",
                 data: {
                     size_num: selectedSize,
                     quantity: quantity
                 },
-                success: function (response) {
-                    
+                dataType: "text",
+                success: function (data) {
+                	
+                    var userResponse = confirm("장바구니에 추가되었습니다. 장바구니 페이지로 이동하시겠습니까?");
+                    if (userResponse) {
+                        window.location.href = "/cart.do";                 
+                    } else {
+                        window.location.reload();
+                    }
+
                 },
                 error: function (error) {
-                    
+                	console.error("Error response: ", error);
+                	
                 }
             });
         }
@@ -273,17 +284,23 @@
             var quantity = quantityInput.value;
             
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: "/buy_now.do", 
                 data: {
                     size_num: selectedSize,
                     quantity: quantity
                 },
-                success: function (response) {
-                    
+                success: function (data) {
+                	
+                	if (data === "success") {
+                		window.location.href = "/productOrder.do?product_code=" + selectedSize + "&amount=" + quantity;
+                	} else {
+                		alert("로그인 후 이용 해주세요.")
+                		window.location.href = "/sign/login.jsp";
+                	}
                 },
                 error: function (error) {
-                    
+                	console.error("Error response: ", error);
                 }
             });
         }

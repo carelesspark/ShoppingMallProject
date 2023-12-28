@@ -13,10 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -24,9 +27,12 @@ import com.dazzle.shop.model.product.ProductVO;
 import com.dazzle.shop.model.product.ProductsVO;
 import com.dazzle.shop.model.product.ReviewVO;
 import com.dazzle.shop.model.product.SubCategoryVO;
+import com.sun.net.httpserver.Authenticator.Success;
+import com.dazzle.shop.model.order.impl.ProductOrderRowMapper;
+import com.dazzle.shop.model.product.CategoryVO;
+import com.dazzle.shop.model.product.ProductCodeVO;
 import com.dazzle.shop.model.admin.domain.AdminProductVO;
 import com.dazzle.shop.model.faq.FaqVO;
-import com.dazzle.shop.model.product.CategoryVO;
 import com.dazzle.shop.model.product.InquiryVO;
 import com.dazzle.shop.model.product.ProductImgVO;
 import com.dazzle.shop.model.product.ProductService;
@@ -270,41 +276,44 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/add_to_cart.do")
-	public String addToCart(HttpServletRequest _req, Model _model, @RequestParam("size_num") int _size_num,
-			@RequestParam("quantity") int _quantity) {
+	@ResponseBody
+	public String addToCart(HttpServletRequest _req, 
+	                        @RequestParam("size_num") int _size_num, @RequestParam("quantity") int _amount) {
+		
+		if (_req.getSession().getAttribute("user_num") == null) {
+			return "error";
+		}
+		
+		int user_num = (int) _req.getSession().getAttribute("user_num");
 
-//		Integer session_user_num = (Integer) _req.getSession().getAttribute("user_num");
-//
-//		if (session_user_num == null) {
-//			return "redirect:/sign/sign_in.jsp";
-//		}
-//		
-//		int user_num = session_user_num.intValue();
+	    ProductCodeVO vo = product_service.get_product_code(_size_num);
+	    int product_code = vo.getProduct_code();
+	    
+	    product_service.insert_cart(user_num, product_code, _amount);
 
-		System.out.println(_size_num);
-		System.out.println(_quantity);
-
-		return null;
+	    return "success";
 	}
 
 	@RequestMapping(value = "/buy_now.do")
-	public String buyNow(HttpServletRequest _req, Model _model, @RequestParam("size_num") int _size_num,
-			@RequestParam("quantity") int _quantity) {
+	@ResponseBody
+	public String buyNow(RedirectAttributes redirectAttributes, HttpServletRequest _req, Model _model, @RequestParam("size_num") int _size_num,
+			@RequestParam("quantity") int _amount) {
 
-//		Integer session_user_num = (Integer) _req.getSession().getAttribute("user_num");
-//
-//		if (session_user_num == null) {
-//			return "redirect:/sign/sign_in.jsp";
-//		}
-		
-//		int user_num = session_user_num.intValue();
+		if (_req.getSession().getAttribute("user_num") == null) {
+			return "error";
+		}
 		
 		
+		ProductCodeVO vo = product_service.get_product_code(_size_num);
+		int product_code = vo.getProduct_code();
 		
-		System.out.println(_size_num);
-		System.out.println(_quantity);
+		System.out.println(_amount);
+		System.out.println(product_code);
+		
+//		redirectAttributes.addAttribute("amount", _amount);
+//	    redirectAttributes.addAttribute("product_code", product_code);
 
-		return null;
+		return "success";
 	}
 
 }

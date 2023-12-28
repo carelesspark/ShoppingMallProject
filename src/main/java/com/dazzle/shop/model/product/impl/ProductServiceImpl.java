@@ -121,6 +121,11 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+	public void insert_cart(int _user_num, int _product_code, int _amount) {	
+		dao.insert_cart(_user_num, _product_code, _amount);
+	}
+  
+	@Override
 	public List<ReviewVO> getReview(Integer product_num, Integer start, Integer end){
 		return dao.getReview(product_num, start, end);
 	}

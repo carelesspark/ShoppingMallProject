@@ -13,6 +13,7 @@ public class OrderInfoRowMapper implements RowMapper<OrderVO>{
 	public OrderVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
 		OrderVO orderInfo = new OrderVO();
+		orderInfo.setProduct_num(rs.getInt("product_num"));
 		orderInfo.setProduct_name(rs.getString("product_name"));
 		orderInfo.setSize_name(rs.getString("size_name"));
 		orderInfo.setColor_name(rs.getString("color_name"));
