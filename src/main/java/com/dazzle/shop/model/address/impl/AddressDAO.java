@@ -16,7 +16,7 @@ public class AddressDAO {
 	private JdbcTemplate jdbcTemplate;
 	
 
-	private final String ADDRESS_GET_LIST = "select * from address where user_num = ?";
+	private final String ADDRESS_GET_LIST = "select * from address where user_num = ? order by base desc";
 	private final String ADDRESS_GET = "select * from address where addr_num = ?";
 	private final String BASE_ADDRESS_GET = "SELECT * FROM address WHERE user_num = ? ORDER BY base DESC LIMIT 1";
 	private final String ADDRESS_UPDATE = "update address set address = ?, detail_address = ?, "
