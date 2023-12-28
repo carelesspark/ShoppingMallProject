@@ -32,7 +32,7 @@
 					<div class="carousel-inner">
 						<div class="carousel-item active">
 							<img alt="Placeholder image for product" class="d-block w-100"
-								height="600" src="${img.main_img }" width="600" />
+								height="600" width="600" src="${pageContext.request.contextPath}/resources/image/product/${img.product_num}/${img.img_name}"/>
 						</div>
 					</div>
 				</div>
@@ -88,7 +88,7 @@
 		</div>
 		<div class="email-icon" id="product-detail">
 			<img alt="Placeholder image for product" class="d-block w-100 mb-5"
-				height="100%" src="${img.sub_img }" width="100%" />
+				height="100%" src="https://placehold.co/300x200" width="100%" />
 		</div>
 		<table class="table">
 			<tbody>

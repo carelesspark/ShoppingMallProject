@@ -16,15 +16,15 @@
 		<div id="carouselExample" class="carousel slide mb-5">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="https://placehold.co/300x1000" class="d-block w-100"
+					<img src="${pageContext.request.contextPath}/resources/image/main/main1.png" class="d-block w-100"
 						alt="..." />
 				</div>
 				<div class="carousel-item">
-					<img src="https://placehold.co/200x200" class="d-block w-100"
+					<img src="${pageContext.request.contextPath}/resources/image/main/main4.png" class="d-block w-100"
 						alt="..." />
 				</div>
 				<div class="carousel-item">
-					<img src="https://placehold.co/100x200" class="d-block w-100"
+					<img src="${pageContext.request.contextPath}/resources/image/main/main3.png" class="d-block w-100"
 						alt="..." />
 				</div>
 			</div>
