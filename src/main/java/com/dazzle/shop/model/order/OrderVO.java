@@ -33,6 +33,7 @@ public class OrderVO {
 	private List<Integer> amount_list;
 	private int user_num;
 	private int product_code;
+	private int product_num;
 	private List<Integer> product_code_list;
 	private int user_point;
 	private String main_img;

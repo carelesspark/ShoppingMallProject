@@ -142,7 +142,7 @@
 			    </div>
 			    <div>
 			      <c:if test="${not empty review.review_img}">
-			        <img height="200px" src="${review.review_img}" width="200px" />
+			      <img height="200px" alt="${img_name}" src="${pageContext.request.contextPath}/resources/image/review/${review.product_code}/${review.review_img}">
 			      </c:if>
 			    </div>
 			  </div>
