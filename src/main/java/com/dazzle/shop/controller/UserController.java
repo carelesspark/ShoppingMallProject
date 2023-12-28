@@ -2,6 +2,7 @@ package com.dazzle.shop.controller;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -15,11 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dazzle.shop.model.user.domain.*;
 import com.dazzle.shop.model.user.service.UserService;
@@ -60,6 +63,8 @@ public class UserController {
 		Date endDate = UserUtil.getEndDate();
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		UserOrdersVO vo = new UserOrdersVO();
 		vo.setUser_num(user_num);
@@ -92,10 +97,12 @@ public class UserController {
 
 		Date startDate = Date.from(LocalDate.parse(sDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 				.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		Date endDate = Date.from(LocalDate.parse(eDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atTime(23, 59, 59)
-				.atZone(ZoneId.systemDefault()).toInstant());
+		Date endDate = Date.from(LocalDate.parse(eDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")).plusDays(1)
+				.atTime(23, 59, 59).atZone(ZoneId.systemDefault()).toInstant());
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		UserOrdersVO vo = new UserOrdersVO();
 		vo.setUser_num(user_num);
@@ -104,7 +111,6 @@ public class UserController {
 
 		UserOrdersVO orderCount = userService.orderCheck(user_num);
 		model.addAttribute("orderCount", orderCount);
-
 
 		List<UserOrdersVO> list = userService.getUserOrderList(vo);
 		Map<Integer, List<UserOrdersVO>> map = list.stream().collect(Collectors.groupingBy(UserOrdersVO::getOrder_num));
@@ -134,6 +140,8 @@ public class UserController {
 		Date endDate = UserUtil.getEndDate();
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		int totalItems = userService.countPointBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -177,6 +185,8 @@ public class UserController {
 				.atZone(ZoneId.systemDefault()).toInstant());
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		int totalItems = userService.countPointBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -215,6 +225,8 @@ public class UserController {
 		Date endDate = UserUtil.getEndDate();
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		int totalItems = userService.countPointBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -258,6 +270,8 @@ public class UserController {
 				.atZone(ZoneId.systemDefault()).toInstant());
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		int totalItems = userService.countReviewBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -296,6 +310,8 @@ public class UserController {
 		Date endDate = UserUtil.getEndDate();
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		int totalItems = userService.countInquiryBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -339,6 +355,8 @@ public class UserController {
 				.atZone(ZoneId.systemDefault()).toInstant());
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		int totalItems = userService.countInquiryBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -377,6 +395,8 @@ public class UserController {
 		Date endDate = UserUtil.getEndDate();
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		int totalItems = userService.countBoardBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -420,6 +440,8 @@ public class UserController {
 				.atZone(ZoneId.systemDefault()).toInstant());
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		int totalItems = userService.countBoardBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -458,6 +480,8 @@ public class UserController {
 		Date endDate = UserUtil.getEndDate();
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		int totalItems = userService.countReplyBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -501,6 +525,8 @@ public class UserController {
 				.atZone(ZoneId.systemDefault()).toInstant());
 		model.addAttribute("startDate", SDF_YMD.format(startDate));
 		model.addAttribute("endDate", SDF_YMD.format(endDate));
+		endDate = Date.from(LocalDateTime.ofInstant(endDate.toInstant(), ZoneId.systemDefault()).plusDays(1)
+				.atZone(ZoneId.systemDefault()).toInstant());
 
 		int totalItems = userService.countReplyBetweenDates(user_num, new java.sql.Date(startDate.getTime()),
 				new java.sql.Date(endDate.getTime())); // 해당하는 날짜 사이의 포인트 목록 총 개수
@@ -572,6 +598,23 @@ public class UserController {
 		System.out.println("UserController: userChangeInfo");
 
 		return "user_order_list.jsp";
+	}
+
+	@PostMapping("/updatePwd.do")
+	@ResponseBody
+	public ResponseEntity<String> updatePwd(@RequestParam("pwd") String pwd, HttpServletRequest request) {
+		System.out.println("UserController: updatePwd");
+
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+
+		bool successUpdate = userService.updatePwd(user_num, pwd);
+
+		if (!successUpdate) { // 실패시
+
+		} else { // 성공시
+
+		}
 	}
 
 }
