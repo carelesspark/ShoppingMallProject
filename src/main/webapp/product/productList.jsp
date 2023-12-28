@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/product/productList.css">
+	href="${pageContext.request.contextPath}/resources/css/product/productList.css?v=1">
 </head>
 <body>
 	<%@ include file="../header.jsp"%>
@@ -56,7 +56,8 @@
 								<div class="col-md-3">
 									<a href="product.do?product_num=${s.product_num }">
 										<div class="card">
-											<img class="card-img-top" height="200" src="${s.main_img }"
+											<img class="card-img-top" height="200"
+												src="${pageContext.request.contextPath}/resources/image/product/${s.product_num}/${s.img_name}"
 												width="300" />
 											<div class="card-body">
 												<h5 class="card-title">${s.product_name}</h5>
@@ -73,7 +74,8 @@
 								<div class="col-md-3">
 									<a href="product.do?product_num=${s.product_num }">
 										<div class="card">
-											<img class="card-img-top" height="200" src="${s.main_img }"
+											<img class="card-img-top" height="200"
+												src="${pageContext.request.contextPath}/resources/image/product/${s.product_num}/${s.img_name}"
 												width="300" />
 											<div class="card-body">
 												<h5 class="card-title">${s.product_name}</h5>

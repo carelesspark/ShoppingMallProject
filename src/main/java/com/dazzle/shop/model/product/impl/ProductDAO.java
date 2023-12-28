@@ -29,22 +29,10 @@ public class ProductDAO {
 	@Autowired
 	private ProductSizeRowMapper productSizeRowMapper;
 
-//	private final String get_category_by_products = "SELECT p.product_num, p.product_name, p.product_price, pi.main_img "
-//			+ "FROM product p " + "JOIN sub_category s on p.sub_category_num = s.sub_category_num "
-//			+ "JOIN category c ON s.category_num = c.category_num "
-//			+ "JOIN product_img pi ON p.product_num = pi.product_num " + "WHERE c.category_num = ?";
-
-//	private final String get_sub_category_by_products = "SELECT p.product_num, p.product_name, p.product_price, pi.main_img "
-//			+ "FROM product p " + "JOIN product_img pi ON p.product_num = pi.product_num "
-//			+ "WHERE p.sub_category_num = ?";
-
+	
 	private final String get_category = "SELECT * FROM category c " + "WHERE c.category_num = ?";
 
 	private final String get_sub_category = "SELECT * FROM sub_category s " + "WHERE s.category_num = ?";
-
-//	private final String search_result = "SELECT p.product_num, p.product_name, p.product_price, pi.main_img "
-//			+ "FROM product p " + "JOIN product_img pi ON p.product_num = pi.product_num "
-//			+ "WHERE p.product_name LIKE ?";
 
 	private final String product_info = "SELECT * FROM product " + "WHERE product_num = ?";
 
@@ -53,7 +41,7 @@ public class ProductDAO {
 	private final String product_sizes = "SELECT * FROM product_size " + "WHERE color_num = ? "
 			+ "ORDER BY size_num desc";
 
-	private final String product_img = "SELECT * FROM product_img WHERE product_num = ?";
+	private final String product_img = "SELECT * FROM product_img WHERE img_type = 0 and product_num = ?";
 	
 	private final String get_category_by_products_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.img_name "
 		    + "FROM product p "
@@ -72,7 +60,7 @@ public class ProductDAO {
 	private final String get_sub_category_by_products_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.img_name "
 	        + "FROM product p "
 	        + "JOIN product_img pi ON p.product_num = pi.product_num "
-	        + "WHERE p.sub_category_num = ? LIMIT ? OFFSET ?";
+	        + "WHERE pi.img_type = 2 and p.sub_category_num = ? LIMIT ? OFFSET ?";
 	
 	private final String count_sub_category_products = "SELECT COUNT(*) " 
 			+ "FROM product p "
@@ -83,16 +71,12 @@ public class ProductDAO {
 	private final String search_result_paged = "SELECT p.product_num, p.product_name, p.product_price, pi.img_name "
 	        + "FROM product p "
 	        + "JOIN product_img pi ON p.product_num = pi.product_num "
-	        + "WHERE p.product_name LIKE ? LIMIT ? OFFSET ?";
+	        + "WHERE pi.img_type = 2 and p.product_name LIKE ? LIMIT ? OFFSET ?";
 	
 	private final String count_search_keyword_products = "SELECT COUNT(*) " 
 			+ "FROM product p " 
 			+ "JOIN product_img pi ON p.product_num = pi.product_num "
 			+ "WHERE p.product_name LIKE ?";
-	
-	private final String insert_review = "INSERT INTO review "
-			+ "(user_num, product_code, review_content, review_ratings, review_date) "
-			+ "VALUES (1, ?, ?, 5, NOW())";
 	
 	private final String  GET_REVIEW = "SELECT" + 
 			"    pc.product_code," + 
