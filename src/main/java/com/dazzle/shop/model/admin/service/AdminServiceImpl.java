@@ -109,8 +109,14 @@ public class AdminServiceImpl implements AdminService {
 
 	// 3단계: 제품 사이즈 및 재고 추가
 	@Override
-	public void insertProductSize(int color_num, String size_name, int product_stock) {
-		adminDAO.insertProductSize(color_num, size_name, product_stock);
+	public int insertProductSize(int color_num, String size_name, int product_stock) {
+		return adminDAO.insertProductSize(color_num, size_name, product_stock);
+	}
+
+	// 프로덕트 코드 저장
+	@Override
+	public void insertProductCode(int size_num) {
+		adminDAO.insertProductCode(size_num);
 	}
 
 	// 상품 수정

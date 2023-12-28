@@ -43,6 +43,7 @@ public class AdminController {
 		System.out.println("AdminController: adminUserList");
 
 		int totalItems = adminService.countTableRecord("user_info"); // 유저 총 개수
+		System.out.println("total items: " + totalItems);
 		int itemsPerPage = 10; // 페이지 당 표시할 레코드 수
 		int currentPage = 1; // 현재 페이지
 		int totalPage = totalItems / itemsPerPage; // 전체 페이지
@@ -67,6 +68,7 @@ public class AdminController {
 		System.out.println("AdminController: changeUserList");
 
 		int totalItems = adminService.countTableRecord("user_info"); // 유저 총 개수
+		System.out.println("total items: " + totalItems);
 		int totalPage = totalItems / itemsPerPage; // 전체 페이지
 		if (totalItems % itemsPerPage > 0) {
 			totalPage++;
@@ -111,6 +113,7 @@ public class AdminController {
 		model.addAttribute("subCategoryStartNum", 0);
 
 		int totalItems = adminService.countSubCategoryItems(1);
+		System.out.println("total items: " + totalItems);
 		int itemsPerPage = 10;
 		int currentPage = 1;
 		int totalPage = totalItems / itemsPerPage; // 전체 페이지
@@ -124,6 +127,7 @@ public class AdminController {
 		int subCategoryNum = 1;
 		List<AdminProductVO> list = adminService.getProductList(subCategoryNum, itemsPerPage, currentPage);
 		model.addAttribute("productList", list);
+		System.out.println("개수: " + list.size());
 
 		return "admin_product_list.jsp";
 	}
@@ -207,12 +211,9 @@ public class AdminController {
 		for (int i = 0; i < 5; i++) {
 			webappPath = webappPath.getParent();
 		}
-		System.out.println("webapp path: " + webappPath);
 
 		String imagePath = webappPath + "/ShoppingMallProject/src/main/webapp/resources/image/product/" + product_num
 				+ "/";
-
-		System.out.println("Default Path: " + imagePath);
 
 		// 먼저, product_num으로 상품 정보 수정함
 		AdminProductVO vo = new AdminProductVO();
@@ -223,45 +224,49 @@ public class AdminController {
 
 		adminService.updateProductBasicInfo(vo);
 
-		// 메인 이미지 저장 및 DB에 기록
-		File directory = new File(imagePath);
-		if (!directory.exists()) {
-			directory.mkdirs(); // Create the directory if it doesn't exist
-		}
-		System.out.println("Image Directory: " + directory.getAbsolutePath());
+		if (mainImageList.get(0).getSize() == 0 && thumbnailImage.getSize() == 0) { // 비어있다면
+			System.out.println("이미지가 입력되지 않음");
+		} else { // 비어있지 않다면
+			// 메인 이미지 저장 및 DB에 기록
+			File directory = new File(imagePath);
+			if (!directory.exists()) {
+				directory.mkdirs(); // Create the directory if it doesn't exist
+			}
+			System.out.println("Image Directory: " + directory.getAbsolutePath());
 
-		for (MultipartFile mainImage : mainImageList) {
-			String mainImageName = mainImage.getOriginalFilename();
-			String filePath = imagePath + mainImageName;
+			for (MultipartFile mainImage : mainImageList) {
+				String mainImageName = mainImage.getOriginalFilename();
+				String filePath = imagePath + mainImageName;
 
-			System.out.println("Main Image Path: " + filePath);
+				System.out.println("Main Image Path: " + filePath);
+
+				try {
+					mainImage.transferTo(new File(filePath));
+					System.out.println("Main image saved successfully");
+				} catch (IllegalStateException | IOException e) {
+					System.err.println("Error saving main file: " + e.getMessage());
+					e.printStackTrace();
+				}
+
+				adminService.insertProductImg(product_num, mainImageName, 0);
+			}
+
+			// 썸네일 이미지 저장 및 DB에 기록
+			String thumbnailImageName = thumbnailImage.getOriginalFilename();
+			String thumbnailImagePath = imagePath + thumbnailImageName;
+
+			System.out.println("Thumbnail Image Path: " + thumbnailImagePath);
 
 			try {
-				mainImage.transferTo(new File(filePath));
-				System.out.println("Main image saved successfully: " + filePath);
+				thumbnailImage.transferTo(new File(thumbnailImagePath));
+				System.out.println("Thumbnail image saved successfully: " + thumbnailImagePath);
 			} catch (IllegalStateException | IOException e) {
-				System.err.println("Error saving main file: " + e.getMessage());
+				System.err.println("Error saving thumbnail file: " + e.getMessage());
 				e.printStackTrace();
 			}
 
-			adminService.insertProductImg(product_num, mainImageName, 0);
+			adminService.insertProductImg(product_num, thumbnailImageName, 2);
 		}
-
-		// 썸네일 이미지 저장 및 DB에 기록
-		String thumbnailImageName = thumbnailImage.getOriginalFilename();
-		String thumbnailImagePath = imagePath + thumbnailImageName;
-
-		System.out.println("Thumbnail Image Path: " + thumbnailImagePath);
-
-		try {
-			thumbnailImage.transferTo(new File(thumbnailImagePath));
-			System.out.println("Thumbnail image saved successfully: " + thumbnailImagePath);
-		} catch (IllegalStateException | IOException e) {
-			System.err.println("Error saving thumbnail file: " + e.getMessage());
-			e.printStackTrace();
-		}
-
-		adminService.insertProductImg(product_num, thumbnailImageName, 2);
 
 		model.addAttribute("product_num", product_num);
 
@@ -280,7 +285,8 @@ public class AdminController {
 		for (String color_name : colorNames) {
 			int color_num = adminService.insertProductColor(product_num, color_name);
 			for (String size_name : sizeNames) {
-				adminService.insertProductSize(color_num, size_name, product_stock);
+				int size_num = adminService.insertProductSize(color_num, size_name, product_stock);
+				adminService.insertProductCode(size_num);
 			}
 		}
 

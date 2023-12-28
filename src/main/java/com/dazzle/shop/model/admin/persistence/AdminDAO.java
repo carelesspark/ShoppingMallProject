@@ -35,9 +35,9 @@ public class AdminDAO {
 			+ "SELECT list_num, user_name, login_type, user_rank, user_join_date, user_delete_date, "
 			+ "CEIL(list_num / ?) AS page_num FROM userlist WHERE CEIL(list_num / ?) = ? ORDER BY list_num";
 
-	public final String PRODUCT_LIST = "select p.product_num, p.product_name, p.product_price, SUM(ps.product_stock) AS total_stock "
-			+ "FROM product p JOIN product_color pc ON p.product_num = pc.product_num "
-			+ "JOIN product_size ps ON pc.color_num = ps.color_num WHERE p.sub_category_num = ? "
+	public final String PRODUCT_LIST = "select p.product_num, p.product_name, p.product_price, SUM(ps.product_stock) total_stock "
+			+ "FROM product p LEFT JOIN product_color pc ON p.product_num = pc.product_num "
+			+ "LEFT JOIN product_size ps ON pc.color_num = ps.color_num WHERE p.sub_category_num = ? "
 			+ "GROUP BY p.product_num, p.product_name, p.product_price ORDER BY p.product_date DESC LIMIT ?, ?";
 
 	public final String PRODUCT_LIST2 = "WITH productlist AS (SELECT ROW_NUMBER() OVER (ORDER BY p.product_date DESC) AS list_num, "
@@ -234,11 +234,42 @@ public class AdminDAO {
 	}
 
 	// 제품 사이즈 및 재고 추가
-	public void insertProductSize(int color_num, String size_name, int product_stock) {
+	public int insertProductSize(int color_num, String size_name, int product_stock) {
 		String sql = "INSERT INTO product_size (color_num, size_name, product_stock) VALUES (?, ?, ?)";
 
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+
 		try {
-			template.update(sql, color_num, size_name, product_stock);
+			template.update(new PreparedStatementCreator() {
+
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+					PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+					pstmt.setInt(1, color_num);
+					pstmt.setString(2, size_name);
+					pstmt.setInt(3, product_stock);
+
+					return pstmt;
+				}
+
+			}, keyHolder);
+
+			return keyHolder.getKey().intValue();
+
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+
+			return -1;
+		}
+	}
+
+	public void insertProductCode(int size_num) {
+		System.out.println("insert into product_code");
+
+		String sql = "INSERT INTO product_code (size_num) VALUES (" + size_num + ")";
+
+		try {
+			template.update(sql);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
