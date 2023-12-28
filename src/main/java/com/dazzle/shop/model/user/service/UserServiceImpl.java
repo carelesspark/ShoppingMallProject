@@ -119,4 +119,10 @@ public class UserServiceImpl implements UserService {
 	public UserVO getUserInfo(int user_num) {
 		return userDAO.getUserInfo(user_num);
 	}
+
+	////////////////////////////////////// 비동기
+	@Override
+	public boolean updatePwd(int user_num, String pwd) {
+		return userDAO.updatePwd(user_num, pwd);
+	}
 }

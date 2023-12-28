@@ -285,7 +285,7 @@ public class UserDAO {
 
 	//////////////////////////////////////////////////////////////////////
 	// 회원정보 변경 비동기
-	public boolean updatePwd(int user_num, int pwd) {
+	public boolean updatePwd(int user_num, String pwd) {
 		String sql = "update auth_id set pwd = '" + pwd + "' where user_num = " + user_num;
 
 		try {
