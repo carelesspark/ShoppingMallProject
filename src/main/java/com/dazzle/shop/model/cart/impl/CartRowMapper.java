@@ -23,6 +23,7 @@ public class CartRowMapper implements RowMapper<CartVO>{
 		cart.setColor_name(rs.getString("color_name"));
 		cart.setSize_name(rs.getString("size_name"));
 		cart.setUser_num(rs.getInt("user_num"));
+		cart.setProduct_num(rs.getInt("product_num"));
 		
 		return cart;
 

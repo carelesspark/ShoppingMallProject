@@ -192,3 +192,8 @@ cart_table_first_tr td {
 #cart_buttons_div2 {
 	padding-right: 230px;
 }
+
+#cart_table_product_img img {
+	width: 150px;
+	height: 150px;
+}
