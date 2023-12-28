@@ -256,7 +256,7 @@ public class AdminController {
 			String thumbnailImageName = thumbnailImage.getOriginalFilename();
 			String tnBaseName = FilenameUtils.getBaseName(thumbnailImageName);
 			String tnExtention = FilenameUtils.getExtension(thumbnailImageName);
-			String thumbnailImagePath = imagePath + tnBaseName + "_tn" + tnExtention;
+			String thumbnailImagePath = imagePath + tnBaseName + "_tn." + tnExtention;
 
 			System.out.println("Thumbnail Image Path: " + thumbnailImagePath);
 
