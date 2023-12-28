@@ -114,7 +114,7 @@
 				                    </c:if>
 			                            <div>
 			                                <button type="button" class="btn btn-dark"
-			                                onclick="location.href='#'">
+			                                onclick="location.href='/questionMain.do'">
 			                                	문의 게시판 가기
 			                                </button>
 			                            </div>
