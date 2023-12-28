@@ -49,7 +49,10 @@ public interface AdminService {
 	int insertProductColor(int product_num, String color_name);
 
 	// 제품 사이즈 및 재고 추가
-	void insertProductSize(int color_num, String size_name, int product_stock);
+	int insertProductSize(int color_num, String size_name, int product_stock);
+
+	// 프로덕트 코드 저장
+	void insertProductCode(int size_num);
 
 	// 상품 수정
 

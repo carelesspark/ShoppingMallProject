@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_point_list.css?v=1.3" />
+	href="${pageContext.request.contextPath}/resources/css/user/user_point_list.css?v=1.4" />
 <title>user point list</title>
 </head>
 <body>
@@ -63,14 +63,14 @@
 								<c:forEach var="list" items="${pointList}">
 									<div class="clb">
 										<div>${list.order_date}</div>
-										<div>
+										<div class="clb1">
 											<c:choose>
 												<c:when test="${list.point_type == 0}">적립</c:when>
 												<c:when test="${list.point_type == 1}">사용</c:when>
 												<c:when test="${list.point_type == 2}">취소/환불</c:when>
 											</c:choose>
 										</div>
-										<div>
+										<div class="clb2">
 											<div>
 												<div>${list.product_name}</div>
 												<div>&nbsp/&nbsp</div>
