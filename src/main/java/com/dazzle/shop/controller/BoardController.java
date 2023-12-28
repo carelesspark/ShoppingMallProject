@@ -283,7 +283,23 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "deleteBoard.do")
-	public String deleteBoard(BoardVO vo) {
+	public String deleteBoard(BoardVO vo, HttpServletRequest request) {
+		// 게시물 수정 로직
+
+	    int pno = vo.getPno(); // 수정할 게시물의 번호
+
+	    // 기존 이미지 파일 삭제
+	    String existingImagePath = request.getSession().getServletContext().getRealPath("/resources/image/board/" + pno + "/");
+	    File existingImageDirectory = new File(existingImagePath);
+	    if (existingImageDirectory.exists()) {
+	        File[] existingImageFiles = existingImageDirectory.listFiles();
+	        if (existingImageFiles != null) {
+	            for (File file : existingImageFiles) {
+	                file.delete();
+	            }
+	        }
+	    }
+	    
 		boardService.deleteBoard(vo);
 
 		return "redirect:/boardMain.do";

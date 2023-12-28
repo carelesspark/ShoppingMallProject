@@ -26,8 +26,8 @@
 			
 			<div class="category">
 				<select name="ctgr_num">
-					<option value="">카테고리를 골라주세요</option>
-					<option value="">없음</option>
+					<option value="0">카테고리를 골라주세요</option>
+					<option value="0">없음</option>
 					<option value="1">오오티디</option>
 					<option value="2">트렌드</option>
 					<option value="3">스트릿</option>
@@ -35,19 +35,6 @@
 					<option value="5">클래식</option>
 					<option value="6">빈티지</option>
 				</select>
-			</div>
-			
-			
-			<div class="select">		
-				<input type="text" id="searchWord" list="like" placeholder="태그할 상품 검색" name="select">
-				<input type="button" value="확인" id="search" onclick="input()">
-				<datalist id="like">
-					
-				</datalist>
-				
-				<div class="selected">
-				
-				</div>
 			</div>
 			
 			<div class="buttonBox">
