@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -46,7 +43,7 @@ public class AdminController {
 		System.out.println("AdminController: adminUserList");
 
 		int totalItems = adminService.countTableRecord("user_info"); // 유저 총 개수
-		int itemsPerPage = 20; // 페이지 당 표시할 레코드 수
+		int itemsPerPage = 10; // 페이지 당 표시할 레코드 수
 		int currentPage = 1; // 현재 페이지
 		int totalPage = totalItems / itemsPerPage; // 전체 페이지
 		if (totalItems % itemsPerPage > 0) {

@@ -97,16 +97,6 @@ public class AdminDAO {
 		}
 	}
 
-	// 유저 리스트 반환
-	public List<AdminUserVO> getUserList2(int pageSize, int pageNum) {
-
-		try {
-			return template.query(USER_LIST, new Object[] { pageSize, pageSize, pageNum }, new AdminUserRowMapper());
-		} catch (EmptyResultDataAccessException e) {
-			return Collections.emptyList();
-		}
-	}
-
 	// 유저 블랙리스트 반환
 	public List<AdminUserVO> getBlackist(int pageSize, int pageNum) {
 
