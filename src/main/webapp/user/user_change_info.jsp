@@ -15,7 +15,37 @@
 <body>
 	<%@ include file="../header.jsp"%>
 	<div id="m">
-		<%@ include file="./user_card.jsp"%>
+		<div id="c">
+			<div id="cc">
+				<div id="cc-r">
+					<div id="cc-rb">
+						<c:out value="${rank_letter}" />
+					</div>
+				</div>
+				<div id="cc-u">
+					<div id="cc-un">${sessionScope.user_name}님&nbsp;환영합니다.</div>
+					<div id="cc-ur">
+						<c:out value="${user_rank}" />
+					</div>
+				</div>
+				<div id="cc-d">
+					<div id="cc-dn">준비/배송 중</div>
+					<div id="cc-dc">
+						<div>
+							<a href="/user/orderList.do">${delivering_items }</a>건
+						</div>
+					</div>
+				</div>
+				<div id="cc-p">
+					<div id="cc-pn">포인트</div>
+					<div id="cc-pc">
+						<div>
+							<a href="/user/pointList.do">${user_total_point }</a>원
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div id="mc">
 			<%@ include file="./user_side.jsp"%>
 			<main>
@@ -30,7 +60,7 @@
 							<div id="idDiv">
 								<div class="oValueDiv">
 									<div class="oName">아이디</div>
-									<div class="oValue">${id }</div>
+									<div class="oValue">${id}</div>
 									<div class="cBtnHidden"></div>
 								</div>
 							</div>
@@ -53,32 +83,32 @@
 							<div id="phoneDiv">
 								<div class="oValueDiv">
 									<div class="oName">전화번호</div>
-									<div class="oValue">${user_phone }</div>
+									<div class="oValue" id="oPNum">${user_phone}</div>
 									<div class="cBtn">
 										<button onclick="showHDivPhone()">변경</button>
 									</div>
 								</div>
-								<form onsubmit="valPhone(this, event);" class="nValueDiv"
-									id="phoneHD">
+								<form method="post" onsubmit="valPhone(this, event);"
+									class="nValueDiv" id="phoneHD">
 									<label class="nName">변경할 전화번호</label> <input class="nValue"
 										name="user_phone" id="iphone">
-									<button type="button">취소</button>
+									<button type="button" onclick="canclePhone();">취소</button>
 									<button type="submit">결정</button>
 								</form>
 							</div>
 							<div id="emailDiv">
 								<div class="oValueDiv">
 									<div class="oName">이메일</div>
-									<div class="oValue">${user_email }</div>
+									<div class="oValue">${user_email}</div>
 									<div class="cBtn">
 										<button onclick="showHDivEmail()">변경</button>
 									</div>
 								</div>
-								<form onsubmit="valEmail(this, event);" class="nValueDiv"
-									id="emailHD">
+								<form method="post" onsubmit="valEmail(this, event);"
+									class="nValueDiv" id="emailHD">
 									<label class="nName">변경할 이메일</label> <input class="nValue"
 										name="user_email" id="iemail">
-									<button type="button">취소</button>
+									<button type="button" onclick="cancleEmail();">취소</button>
 									<button type="submit">결정</button>
 								</form>
 							</div>
@@ -113,31 +143,32 @@
 				return false;
 			}
 
-			$.ajax({
-				type : "POST",
-				url : "/user/updatePwd.do",
-				data : {
-					pwd : password,
-				},
-				success : function(response) {
-					if (response === "update failed") {
-						alert("비밀번호 변경에 실패했습니다.");
-					} else {
-						alert("비밀번호 변경에 성공했습니다.");
+			return true;
 
-						var pwd = '${pwd }';
-						var divForStar = document.getElementById('starPwd');
-						var stars = '*'.repeat(pwd.length);
-						divForStar.innerText = stars;
-					}
-				},
-				error : function(error) {
-					alert("비밀번호 변경에 실패했습니다.");
-				}
-			});
+			/* 			$.ajax({
+			 type : "POST",
+			 url : "/user/updatePwd.do",
+			 data : {
+			 pwd : password,
+			 },
+			 success : function(response) {
+			 if (response === "update failed") {
+			 alert("비밀번호 변경에 실패했습니다.");
+			 } else {
+			 alert("비밀번호 변경에 성공했습니다.");
 
-			//return true;
+			 var pwd = '${pwd }';
+			 var stars = '*'.repeat(pwd.length);
+			 document.getElementById('starPwd').innerText = stars;
+			 }
+			 },
+			 error : function(error) {
+			 alert("비밀번호 변경에 실패했습니다.");
+			 }
+			 }); */
+
 		}
+
 		function valPhone(form, event) {
 			const phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
 			const phoneInput = document.getElementById('iphone');
@@ -154,7 +185,29 @@
 				return false;
 			}
 
-			return true;
+			$.ajax({
+				type : "POST",
+				url : "/user/updatePhone.do",
+				data : {
+					user_phone : phone,
+				},
+				success : function(response) {
+					if (response === "update failed") {
+						alert("전화번호 변경에 실패했습니다.");
+
+						event.preventDefault();
+						return false;
+					} else {
+						alert("전화번호 변경에 성공했습니다.");
+
+						var pNum = '${user_phone}';
+						document.getElementById('oPNum').innerText = pNum;
+					}
+				},
+				error : function(error) {
+					alert("전화번호 변경에 실패했습니다.");
+				}
+			});
 		}
 		function valEmail(form, event) {
 			const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -206,7 +259,16 @@
 		}
 
 		function canclePwd() {
-
+			document.getElementById('pwdHD').style.display = "none";
+			document.getElementById('ipwd').value = "";
+		}
+		function canclePhone() {
+			document.getElementById('phoneHD').style.display = "none";
+			document.getElementById('iphone').value = "";
+		}
+		function cancleEmail() {
+			document.getElementById('emailHD').style.display = "none";
+			document.getElementById('iemail').value = "";
 		}
 
 		var rank = '${user_rank}';
