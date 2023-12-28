@@ -113,10 +113,10 @@ public class OrderDAO {
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + 
-			" JOIN product_img pimg ON pimg.product_num = p.product_num" +" WHERE od.order_detail_num = ?";
+			" JOIN product_img pimg ON pimg.product_num = p.product_num" +" WHERE od.order_detail_num = ? AND pimg.img_type = 2";
 
-	private final String REFUND_INFO = "SELECT" + "  ps.size_name," + "  pco.color_name," + "  p.product_price,"
-			+ "  p.product_name," + "  od.amount," + "  pr.refund_change_amount," + "  pr.refund_change_num,"
+	private final String REFUND_INFO = "SELECT" + "  ps.size_name, p.product_num, " + "  pco.color_name," + "  p.product_price,"
+			+ "  p.product_name," + " pimg.img_name,"+ "  od.amount," + "  pr.refund_change_amount," + "  pr.refund_change_num,"
 			+ "  od.order_detail_num," + "  od.product_state," + "  pr.request_date," + "  pr.refund_or_change_reason,"
 			+ "  pr.reason_detail," + "  pr.bank," + "  pr.account_num," + "  pr.cancel," + "  pr.`change`,"
 			+ "  pr.response_detail," + "  pr.approve," + "  u.user_name " + "  FROM" + "  product_refund_or_change pr "
@@ -125,7 +125,8 @@ public class OrderDAO {
 			+ "  JOIN product_size ps ON pc.size_num = ps.size_num"
 			+ "  JOIN product_color pco ON ps.color_num = pco.color_num"
 			+ "  JOIN product p ON pco.product_num = p.product_num" + "  JOIN orders o ON o.order_num = od.order_num"
-			+ "  JOIN users u ON u.user_num = o.user_num" + "  WHERE pr.refund_change_num = ?";
+			+ "  JOIN users u ON u.user_num = o.user_num" + 
+			" JOIN product_img pimg ON pimg.product_num = p.product_num"+" WHERE pr.refund_change_num = ? AND pimg.img_type = 2";
 
 	private final String REFUND_CHANGE_APPROVE = "UPDATE product_refund_or_change" + " SET response_detail = ?, "
 			+ " approve = ? " + " WHERE refund_change_num = ?";
@@ -137,7 +138,8 @@ public class OrderDAO {
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
-			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE od.order_detail_num = ? AND img_type = 2";
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE od.order_detail_num = ? AND pimg.img_type = 2";
+
 
 	private final String PRODUCT_ORDER = "SELECT pimg.img_name, p.product_num, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, pc.product_code"
 			+ " FROM product_code pc" + " JOIN product_size ps ON ps.size_num = pc.size_num"
@@ -154,7 +156,7 @@ public class OrderDAO {
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
-			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE c.user_num = ?";
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE c.user_num = ? AND pimg.img_type = 2";
 
 	private final String BUY_ORDER = "INSERT INTO orders VALUES (DEFAULT, ?, NOW(), ?, ?, ?, ?, ? ,? ,?, ?, DEFAULT, ?, ?)";
 
@@ -172,7 +174,7 @@ public class OrderDAO {
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
-			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE u.user_num = ?";
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE u.user_num = ? AND pimg.img_type = 2";
 
 	private final String ORDER_REFUND = "SELECT o.order_num, o.recipient, (p.product_price * od.amount ) AS total_price, p.product_price, od.amount, od.order_detail_num"
 			+ " FROM orders o" + " JOIN order_detail od ON od.order_num = o.order_num"
@@ -208,7 +210,7 @@ public class OrderDAO {
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
-			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE o.order_num = ?";
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE o.order_num = ? AND pimg.img_type = 2";
 
 	private final String GET_ORDER_RESPONSE_DETAIL = "select * from product_refund_or_change where order_detail_num = ?";
 	
