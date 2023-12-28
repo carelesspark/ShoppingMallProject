@@ -42,12 +42,12 @@
 							</div>
 							<div id="iDiv4">
 								<label for="imi">메인 이미지</label><input type="file"
-									multiple="multiple" name="mainImage" value="" placeholder=""
+									multiple="multiple" name="mainImage" accept=".jpg, .jpeg, .png"
 									id="imi">
 							</div>
 							<div id="iDiv5">
 								<label for="itni">썸네일</label><input type="file"
-									name="thumbnailImage" value="" placeholder="" id="itni">
+									name="thumbnailImage" accept=".jpg, .jpeg, .png" id="itni">
 							</div>
 							<div id="iDiv6">
 								<button type="submit">색상 설정 이동</button>

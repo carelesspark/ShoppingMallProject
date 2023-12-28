@@ -282,4 +282,21 @@ public class UserDAO {
 			return null;
 		}
 	}
+
+	//////////////////////////////////////////////////////////////////////
+	// 회원정보 변경 비동기
+	public boolean updatePwd(int user_num, String pwd) {
+		String sql = "update auth_id set pwd = '" + pwd + "' where user_num = " + user_num;
+
+		try {
+			template.update(sql);
+
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			return false;
+		}
+	}
+
 }

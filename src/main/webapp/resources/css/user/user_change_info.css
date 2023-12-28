@@ -3,5 +3,87 @@
 /* main div */
 #md {
 	display: grid;
-	grid-template-rows: auto auto;
+}
+
+/* 메인 제목 */
+#mt {
+	margin-bottom: 100px;
+}
+
+#mtd {
+	box-sizing: border-box;
+	font-size: 24px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #191919;
+	margin-bottom: 20px;
+}
+
+#mainDiv {
+	display: grid;
+	justify-content: center;
+	font-size: 14px;
+}
+
+#infoDiv {
+	width: 600px;
+	display: grid;
+	grid-template-columns: auto;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+#idDiv, #pwdDiv, #phoneDiv, #emailDiv {
+	display: grid;
+	grid-template-columns: auto;
+	margin-bottom: 20px;
+}
+
+.oValueDiv {
+	width: 600px;
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: 2fr 6fr 1fr;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+.oName {
+	display: grid;
+	align-items: center;
+	margin-right: 20px;
+}
+
+.cBtn {
+	display: grid;
+	align-items: center;
+}
+
+.cBtn button {
+	width: 60px;
+}
+
+#pwdHD, #phoneHD, #emailHD {
+	display: none;
+}
+
+.nValueDiv {
+	box-sizing: border-box;
+	display: grid;
+	justify-content: space-between;
+	align-items: center;
+	grid-template-columns: 2fr 5fr 1fr 1fr;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #d4d4d4;
+	margin-bottom: 10px;
+}
+
+.nValue {
+	width: 300px;
+}
+
+.nValueDiv button {
+	width: 60px;
 }
