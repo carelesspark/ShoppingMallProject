@@ -3,13 +3,33 @@
 /* main div */
 #md {
 	display: grid;
-	grid-template-rows: auto auto;
+}
+
+/* 메인 제목 */
+#mtd {
+	box-sizing: border-box;
+	font-size: 24px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #191919;
+	margin-bottom: 20px;
 }
 
 /* 제품 상세 정보 */
 #pi {
+	box-sizing: border-box;
 	display: grid;
 	grid-template-columns: auto;
+	font-size: 14px;
+	border-bottom: 1px solid #d4d4d4;
+	margin-bottom: 20px;
+}
+
+.infoDiv {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: 160px auto;
+	align-items: center;
+	margin-bottom: 5px;
 }
 
 #pim {
@@ -17,17 +37,44 @@
 	grid-template-columns: auto;
 }
 
-#pim div {
-	display: grid;
-	grid-template-columns: auto auto;
+.name {
+	box-sizing: border-box;
+	border-bottom: 1px solid #d4d4d4;
+	margin-right: 20px;
+}
+
+.value {
+	font-size: 16px;
+}
+
+/*  */
+#remainInfoDiv {
+	margin-bottom: 20px;
 }
 
 #mh {
 	display: grid;
-	grid-template-columns: auto auto auto;
+	grid-template-columns: 1fr 1fr 1fr;
+	font-size: 18px;
+	justify-content: space-around;
+	align-items: center;
 }
 
-#ml {
+.ml {
 	display: grid;
-	grid-template-columns: auto auto auto;
+	grid-template-columns: 1fr 1fr 1fr;
+	justify-content: space-around;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+#buttonDiv {
+	width: 300px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+#buttonDiv  button {
+	width: 120px;
+	font-size: 14px;
 }
