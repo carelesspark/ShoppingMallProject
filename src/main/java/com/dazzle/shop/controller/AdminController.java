@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -253,7 +254,9 @@ public class AdminController {
 
 			// 썸네일 이미지 저장 및 DB에 기록
 			String thumbnailImageName = thumbnailImage.getOriginalFilename();
-			String thumbnailImagePath = imagePath + thumbnailImageName;
+			String tnBaseName = FilenameUtils.getBaseName(thumbnailImageName);
+			String tnExtention = FilenameUtils.getExtension(thumbnailImageName);
+			String thumbnailImagePath = imagePath + tnBaseName + "_tn." + tnExtention;
 
 			System.out.println("Thumbnail Image Path: " + thumbnailImagePath);
 

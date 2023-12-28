@@ -42,11 +42,11 @@
 										<button onclick="showHDivPwd()">변경</button>
 									</div>
 								</div>
-								<form onsubmit="valPwd(this, event);" class="nValueDiv"
-									id="pwdHD">
+								<form method="post" onsubmit="valPwd(this, event);"
+									class="nValueDiv" id="pwdHD">
 									<label class="nName">변경할 비밀번호</label> <input class="nValue"
 										name="pwd" id="ipwd">
-									<button type="button">취소</button>
+									<button type="button" onclick="canclePwd();">취소</button>
 									<button type="submit">결정</button>
 								</form>
 							</div>
@@ -120,7 +120,16 @@
 					pwd : password,
 				},
 				success : function(response) {
-					alert("비밀번호 변경에 성공했습니다.");
+					if (response === "update failed") {
+						alert("비밀번호 변경에 실패했습니다.");
+					} else {
+						alert("비밀번호 변경에 성공했습니다.");
+
+						var pwd = '${pwd }';
+						var divForStar = document.getElementById('starPwd');
+						var stars = '*'.repeat(pwd.length);
+						divForStar.innerText = stars;
+					}
 				},
 				error : function(error) {
 					alert("비밀번호 변경에 실패했습니다.");
@@ -194,6 +203,10 @@
 			} else {
 				hiddenDiv.style.display = "grid";
 			}
+		}
+
+		function canclePwd() {
+
 		}
 
 		var rank = '${user_rank}';

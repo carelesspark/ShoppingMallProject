@@ -608,12 +608,12 @@ public class UserController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
-		bool successUpdate = userService.updatePwd(user_num, pwd);
+		boolean successUpdate = userService.updatePwd(user_num, pwd);
 
 		if (!successUpdate) { // 실패시
-
+			return ResponseEntity.ok("update failed");
 		} else { // 성공시
-
+			return ResponseEntity.ok("update success");
 		}
 	}
 
