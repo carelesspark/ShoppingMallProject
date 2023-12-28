@@ -44,7 +44,6 @@ public class AdminController {
 		System.out.println("AdminController: adminUserList");
 
 		int totalItems = adminService.countTableRecord("user_info"); // 유저 총 개수
-		System.out.println("total items: " + totalItems);
 		int itemsPerPage = 10; // 페이지 당 표시할 레코드 수
 		int currentPage = 1; // 현재 페이지
 		int totalPage = totalItems / itemsPerPage; // 전체 페이지
@@ -69,7 +68,6 @@ public class AdminController {
 		System.out.println("AdminController: changeUserList");
 
 		int totalItems = adminService.countTableRecord("user_info"); // 유저 총 개수
-		System.out.println("total items: " + totalItems);
 		int totalPage = totalItems / itemsPerPage; // 전체 페이지
 		if (totalItems % itemsPerPage > 0) {
 			totalPage++;
@@ -89,14 +87,18 @@ public class AdminController {
 	public String userBlacklist(Model model) {
 		System.out.println("AdminController: userBlacklist");
 
-		int totalRecordNum = adminService.countBlacklist();
-		int pageSize = 10;
-		int pageNum = 1;
-		model.addAttribute("pageSize", pageSize);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("totalPage", totalRecordNum / pageSize + 1);
+		int totalItems = adminService.countBlacklist();
+		int itemsPerPage = 10; // 페이지 당 표시할 레코드 수
+		int currentPage = 1; // 현재 페이지
+		int totalPage = totalItems / itemsPerPage; // 전체 페이지
+		if (totalItems % itemsPerPage > 0) {
+			totalPage++;
+		}
+		model.addAttribute("itemsPerPage", itemsPerPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalPage", totalPage);
 
-		List<AdminUserVO> list = adminService.getBlackist(pageSize, pageNum);
+		List<AdminUserVO> list = adminService.getBlackist(currentPage, itemsPerPage);
 		model.addAttribute("userList", list);
 
 		return "admin_user_list.jsp";

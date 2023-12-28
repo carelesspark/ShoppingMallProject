@@ -55,7 +55,11 @@ public interface UserService {
 
 	// 회원정보 불러오기
 	UserVO getUserInfo(int user_num);
+	
+	String getPwd(int user_num);
 
 	///////////////////////////////// 비동기
 	boolean updatePwd(int user_num, String pwd);
+
+	boolean updatePhone(int user_num, String user_phone);
 }

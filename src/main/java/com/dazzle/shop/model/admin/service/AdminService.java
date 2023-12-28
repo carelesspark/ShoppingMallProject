@@ -20,10 +20,10 @@ public interface AdminService {
 
 	// 회원 관리
 	// 회원 목록
-	List<AdminUserVO> getUserList(int currentPage, int usersPerPage);
+	List<AdminUserVO> getUserList(int currentPage, int itemsPerPage);
 
 	// 블랙리스트 목록
-	List<AdminUserVO> getBlackist(int pageSize, int pageNum);
+	List<AdminUserVO> getBlackist(int currentPage, int itemsPerPage);
 
 	// 상품 관리
 	// 상품 목록

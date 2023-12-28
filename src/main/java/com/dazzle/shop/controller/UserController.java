@@ -592,23 +592,42 @@ public class UserController {
 		return "user_change_info.jsp";
 	}
 
-	// 회원정보 변경 - 정보 수정 및 업데이트
-	@RequestMapping("/changeInfo.do")
-	public String userChangeInfo(HttpServletRequest request, Model model) {
-		System.out.println("UserController: userChangeInfo");
+//	// 회원정보 변경 - 정보 수정 및 업데이트
+//	@RequestMapping("/changeInfo.do")
+//	public String userChangeInfo(HttpServletRequest request, Model model) {
+//		System.out.println("UserController: userChangeInfo");
+//
+//		return "user_order_list.jsp";
+//	}
 
-		return "user_order_list.jsp";
-	}
-
+	//////////////////////////////////////////////// 비동기
 	@PostMapping("/updatePwd.do")
-	@ResponseBody
-	public ResponseEntity<String> updatePwd(@RequestParam("pwd") String pwd, HttpServletRequest request) {
+	public String updatePwd(@RequestParam("pwd") String pwd, HttpServletRequest request, Model model) {
 		System.out.println("UserController: updatePwd");
 
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 
 		boolean successUpdate = userService.updatePwd(user_num, pwd);
+		model.addAttribute("pwd", pwd);
+
+		if (!successUpdate) { // 실패시
+			return "goCheckInfo.do";
+		} else { // 성공시
+			return "checkInfo.do";
+		}
+	}
+
+	@PostMapping("/updatePhone.do")
+	@ResponseBody
+	public ResponseEntity<String> updatePhone(@RequestParam("user_phone") String user_phone, HttpServletRequest request,
+			Model model) {
+		System.out.println("UserController: updatePhone");
+
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+
+		boolean successUpdate = userService.updatePhone(user_num, user_phone);
 
 		if (!successUpdate) { // 실패시
 			return ResponseEntity.ok("update failed");
@@ -616,5 +635,4 @@ public class UserController {
 			return ResponseEntity.ok("update success");
 		}
 	}
-
 }
