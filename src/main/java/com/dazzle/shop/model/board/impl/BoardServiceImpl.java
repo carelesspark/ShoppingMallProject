@@ -31,6 +31,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public List<FileVO> getFileList(int ctgr_num) {
+		// TODO Auto-generated method stub
+		return boardDAO.getFileList(ctgr_num);
+	}
+	
+	@Override
 	public List<BoardVO> getCtgrBoardList(int ctgr_num) {	// 게시판 카테고리별 보기
 		// TODO Auto-generated method stub
 		return boardDAO.getCtgrBoardList(ctgr_num);
@@ -64,6 +70,12 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVO getBoard(BoardVO vo) {
 		// TODO Auto-generated method stub
 		return boardDAO.getBoard(vo);
+	}
+	
+	@Override
+	public List<FileVO> getFile(BoardVO vo) {
+		// TODO Auto-generated method stub
+		return boardDAO.getFile(vo);
 	}
 
 	@Override
@@ -185,6 +197,10 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		boardDAO.editQuest(vo);
 	}
+
+	
+
+	
 
 	
 

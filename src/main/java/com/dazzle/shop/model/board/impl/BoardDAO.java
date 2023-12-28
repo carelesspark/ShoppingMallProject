@@ -46,7 +46,15 @@ public class BoardDAO {
 	}
 	
 	public List<FileVO> getFileList() {
-		String sql = "select * from file";
+		String sql = "select * from file, board where file.pno = board.pno group by file.pno order by file.pno desc";
+		
+		List<FileVO> fileList = template.query(sql, new FileRowMapper());
+		
+		return fileList;
+	}
+	
+	public List<FileVO> getFileList(int ctgr_num) {
+		String sql = "select * from file, board where file.pno = board.pno and ctgr_num = " + ctgr_num + " group by file.pno order by file.pno desc";
 		
 		List<FileVO> fileList = template.query(sql, new FileRowMapper());
 		
@@ -103,6 +111,16 @@ public class BoardDAO {
 		BoardVO board = template.queryForObject(sql, args, new BoardRowMapper());
 
 		return board;
+	}
+	
+	public List<FileVO> getFile(BoardVO vo) {
+		String sql = "select * from file where pno = ?";
+		
+		Object[] args = { vo.getPno() };
+		
+		List<FileVO> file = template.query(sql, args, new FileRowMapper());
+		
+		return file;
 	}
 
 	public List<ReplyVO> getReply(BoardVO vo) { // 댓글 조회

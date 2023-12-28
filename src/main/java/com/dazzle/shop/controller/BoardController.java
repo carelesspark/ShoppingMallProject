@@ -51,15 +51,19 @@ public class BoardController {
 			List<BoardVO> boardList = boardService.getCtgrBoardList(ctgr_num);
 			
 			model.addAttribute("boardList", boardList);
+			
+			List<FileVO> fileList = boardService.getFileList(ctgr_num);			
+			
+			model.addAttribute("file", fileList);	
 		} else {			
 			List<BoardVO> boardList = boardService.getBoardList();
 			
 			model.addAttribute("boardList", boardList);
+			
+			List<FileVO> fileList = boardService.getFileList();			
+			
+			model.addAttribute("file", fileList);	
 		}
-		
-		List<FileVO> fileList = boardService.getFileList();
-		
-		model.addAttribute("file", fileList);
 
 		return "/board/boardMain.jsp";
 	}
@@ -114,9 +118,11 @@ public class BoardController {
 		
 		BoardVO board = boardService.getBoard(vo);
 		List<ReplyVO> replyList = boardService.getReply(vo);
+		List<FileVO> file = boardService.getFile(vo);
 
 		model.addAttribute("board", board);
 		model.addAttribute("replyList", replyList);
+		model.addAttribute("file", file);
 
 		return "/board/boardGet.jsp";
 	}
@@ -167,7 +173,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/board/boardWrite.do")
-	public String writeBoard(BoardVO vo, BoardProductVO bpvo, HttpServletRequest request, MultipartHttpServletRequest mRequest, @RequestParam(name = "product_num")List<Integer>product_nums) {
+	public String writeBoard(BoardVO vo, BoardProductVO bpvo, HttpServletRequest request, MultipartHttpServletRequest mRequest) {
 		List<MultipartFile> mainImageList = mRequest.getFiles("file");
 		System.out.println(mainImageList);
 		HttpSession session = request.getSession();
@@ -176,9 +182,17 @@ public class BoardController {
 		vo.setUserNum(user_num);
 		int pno = boardService.writeBoard(vo);
 		System.out.println("pno: " + pno);
+		
+		String metaPath = request.getSession().getServletContext().getRealPath("/");
+		Path currentPath = Paths.get(metaPath);
+		Path webappPath = currentPath.getParent();
+		for (int i = 0; i < 5; i++) {
+			webappPath = webappPath.getParent();
+		}
+		System.out.println("webapp path: " + webappPath);
 
-		String webappPath = request.getSession().getServletContext().getRealPath("/");
-		String imagePath = webappPath + "resources/image/board/" + pno + "/";
+		String imagePath = webappPath + "/ShoppingMallProject/src/main/webapp/resources/image/board/" + pno
+				+ "/";
 
 		// 메인 이미지 저장 및 DB에 기록
 		File directory = new File(imagePath);
@@ -201,12 +215,12 @@ public class BoardController {
 			boardService.insertBoardImg(pno, mainImageName);
 		}
 		
-		System.out.println(product_nums);
-		
-		for(int product_num : product_nums) {
-			bpvo.setPno(pno);
-			boardService.insertPNum(bpvo);
-		}
+//		System.out.println(product_nums);
+//		
+//		for(int product_num : product_nums) {
+//			bpvo.setPno(pno);
+//			boardService.insertPNum(bpvo);
+//		}
 
 		return "redirect:/boardMain.do";
 
