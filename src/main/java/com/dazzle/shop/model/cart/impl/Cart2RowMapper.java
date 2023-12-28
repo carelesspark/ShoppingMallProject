@@ -14,9 +14,11 @@ public class Cart2RowMapper implements RowMapper<CartVO>{
 	public CartVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		CartVO cart = new CartVO();
 		cart.setCart_num(rs.getInt("cart_num"));
+		cart.setImg_name(rs.getString("img_name"));
 		cart.setProduct_code(rs.getInt("product_code"));
 		cart.setAmount(rs.getInt("amount"));		
 		cart.setUser_num(rs.getInt("user_num"));
+		cart.setProduct_num(rs.getInt("product_num"));
 		
 		return cart;
 

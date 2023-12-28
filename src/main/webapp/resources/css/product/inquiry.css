@@ -35,3 +35,13 @@
       .btn:hover {
         background-color: #343a40;
       }
+      
+      #inquiry_box {
+      	padding-bottom: 200px;
+      }
+      
+      #content{
+      	resize: none;
+      }
+      
+      

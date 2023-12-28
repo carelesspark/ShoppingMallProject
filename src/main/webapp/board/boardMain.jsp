@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/boardCSS/boardMain.css">
+<link rel="stylesheet" href="../resources/css/boardCSS/boardMain.css?ver=1">
 <script
 	src="../resources/js/boardJS/code.jquery.com_jquery-3.7.0.min.js"></script>
 </head>
