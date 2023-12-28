@@ -43,7 +43,11 @@ public class AddressDAO {
 		
 	public AddressVO getBaseAddress(int user_num) {
 		Object[] args = {user_num};
-		return jdbcTemplate.queryForObject(BASE_ADDRESS_GET, args, new AddressRowMapper());
+		try {
+			return jdbcTemplate.queryForObject(BASE_ADDRESS_GET, args, new AddressRowMapper());
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	//주소 수정

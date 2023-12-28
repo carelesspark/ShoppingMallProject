@@ -35,4 +35,6 @@ public interface ProductService {
 	int count_search_products(String _search_keyword);
 	
 	ProductCodeVO get_product_code(int _size_num);
+	
+	void insert_cart(int _user_num, int _product_code, int _amount);
 }

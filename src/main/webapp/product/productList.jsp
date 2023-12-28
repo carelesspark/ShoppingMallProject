@@ -12,7 +12,7 @@
 <body>
 	<%@ include file="../header.jsp"%>
 
-	<div class="container mt-5" id="main-content">
+	<div class="container mt-5 mb-5" id="main-content">
 		<div class="row">
 			<div class="col-md-2">
 				<ul class="top-menu">
@@ -38,7 +38,8 @@
 								<div class="col-md-3">
 									<a href="product.do?product_num=${c.product_num }">
 										<div class="card">
-											<img class="card-img-top" height="200" src="${c.main_img }"
+											<img class="card-img-top" height="200"
+												src="${pageContext.request.contextPath}/resources/image/product/${c.product_num}/${c.img_name}"
 												width="300" />
 											<div class="card-body">
 												<h5 class="card-title">${c.product_name}</h5>
@@ -90,7 +91,7 @@
 				</div>
 
 				<nav>
-					<ul class="pagination">
+					<ul class="pagination mb-5">
 						<!-- 이전 버튼 -->
 						<c:if test="${currentPage > 1}">
 							<li class="page-item"><c:choose>

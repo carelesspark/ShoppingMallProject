@@ -99,8 +99,10 @@ public class OrderController {
 
 	// 주문 상세 페이지에서 바로 구매할 때,
 	@RequestMapping(value = "/productOrder.do")
-	public String getProductOrder(HttpServletRequest request, int product_code, int amount, Model model) throws Exception {
+	public String getProductOrder(HttpServletRequest request, @RequestParam("product_code") int product_code, @RequestParam("amount") int amount, Model model) throws Exception {
 		System.out.println("상품 주문 페이지 이동(상품 상세페이지로 부터)");
+		System.out.println(product_code);
+		System.out.println(amount);
 		
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");

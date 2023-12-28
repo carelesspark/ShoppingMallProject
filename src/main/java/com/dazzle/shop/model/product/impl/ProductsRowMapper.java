@@ -17,7 +17,7 @@ public class ProductsRowMapper implements RowMapper<ProductsVO>{
 		vo.setProduct_num(rs.getInt("product_num"));
 		vo.setProduct_name(rs.getString("product_name"));
 		vo.setProduct_price(rs.getInt("product_price"));
-		vo.setMain_img(rs.getString("main_img"));
+		vo.setImg_name(rs.getString("img_name"));
 		
 		return vo;
 	}

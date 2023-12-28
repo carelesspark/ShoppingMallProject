@@ -114,6 +114,13 @@ public class ProductServiceImpl implements ProductService{
 	public ProductCodeVO get_product_code(int _size_num) {
 		return dao.get_product_code(_size_num);
 	}
+
+	@Override
+	public void insert_cart(int _user_num, int _product_code, int _amount) {	
+		dao.insert_cart(_user_num, _product_code, _amount);
+	}
+	
+	
 	
 	
 	
