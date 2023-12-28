@@ -65,6 +65,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDAO.getBoard(vo);
 	}
+	
+	@Override
+	public List<FileVO> getFile(BoardVO vo) {
+		// TODO Auto-generated method stub
+		return boardDAO.getFile(vo);
+	}
 
 	@Override
 	public BoardVO getNotice(BoardVO vo) {
@@ -185,6 +191,8 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		boardDAO.editQuest(vo);
 	}
+
+	
 
 	
 

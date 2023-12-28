@@ -27,9 +27,11 @@
 		</div>
 		
 		<div class="content">
+		<c:forEach items="${file }" var="files">
 			<div class="content_img">
-				<img alt="옷사진" src="">
+				<img alt="옷사진" src="${pageContext.request.contextPath}/resources/image/board/${files.pno}/${files.fname}">
 			</div>
+		</c:forEach>
 			
 			<div class="reply_box">
 				<div class="reply">

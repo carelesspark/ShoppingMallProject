@@ -17,6 +17,8 @@ public interface BoardService {
 	
 	BoardVO getBoard(BoardVO vo);
 	
+	List<FileVO> getFile(BoardVO vo);
+	
 	BoardVO getNotice(BoardVO vo);
 	
 	Integer getNoticeTotalPage();
