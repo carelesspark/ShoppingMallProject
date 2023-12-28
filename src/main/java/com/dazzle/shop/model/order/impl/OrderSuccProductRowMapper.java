@@ -12,8 +12,9 @@ public class OrderSuccProductRowMapper implements RowMapper<OrderVO>{
 	@Override
 	public OrderVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		OrderVO orderInfo = new OrderVO();
-		orderInfo.setMain_img(rs.getString("main_img"));
+		orderInfo.setImg_name(rs.getString("img_name"));
 		orderInfo.setProduct_code(rs.getInt("product_code"));
+		orderInfo.setProduct_num(rs.getInt("product_num"));
 		orderInfo.setSize_name(rs.getString("size_name"));
 		orderInfo.setColor_name(rs.getString("color_name"));
 		orderInfo.setProduct_price(rs.getInt("product_price"));

@@ -41,8 +41,8 @@
 								<input type="hidden" value="${order.product_code }"
 									name="product_code_list" />
 								<div id="order_list_pic">
-									<a href="${order.main_img }"><img src="${order.main_img }"
-										id="order_list_pic1" /></a>
+									<img src="${pageContext.request.contextPath}/resources/image/product/${order.product_num}/${order.img_name }"
+										id="order_list_pic1" />
 								</div>
 								<div id="order_list_price">
 									<p><fmt:formatNumber value="${order.amountMultiPrice}" pattern="#,###"/>원</p>

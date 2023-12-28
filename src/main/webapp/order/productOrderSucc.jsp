@@ -52,7 +52,7 @@
 				<c:forEach items="${productList}" var="product">
 				    <div class="product-list">
 				        <div class="image">
-				        	<img src="${product.main_img }" id="img" />
+				        	<img src="${pageContext.request.contextPath}/resources/image/product/${product.product_num}/${product.img_name }" id="img" />
 				        </div>
 				        <div class="product">
 				            <div class="product-name">${product.product_name}</div>

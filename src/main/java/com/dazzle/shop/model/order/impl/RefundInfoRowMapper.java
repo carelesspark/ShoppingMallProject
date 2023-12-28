@@ -33,7 +33,8 @@ public class RefundInfoRowMapper implements RowMapper<OrderVO>{
 		orderInfo.setApprove(rs.getInt("approve"));
 		orderInfo.setRefund_change_amount(rs.getInt("refund_change_amount"));
 		orderInfo.setUser_name(rs.getString("user_name"));
-		
+		orderInfo.setProduct_num(rs.getInt("product_num"));
+		orderInfo.setImg_name(rs.getString("img_name"));
 		return orderInfo;
 	}
 

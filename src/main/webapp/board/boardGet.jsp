@@ -2,7 +2,6 @@
 <%@page import="com.dazzle.shop.model.board.impl.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +11,7 @@
 <script src="../resources/js/boardJS/code.jquery.com_jquery-3.7.0.min.js"></script>
 </head>
 <body>
+<%@ include file="../header.jsp"%>
 	<div class="wrapper">
 		<div class="title">
 			<div class="title_content">
@@ -55,29 +55,7 @@
 				</form>
 			</div>
 		</div>
-		
-		
-		
-		<div class="product">
-			<div class="product_info">
-			<c:if test="${board.ctgr_num ne 0 }">
-				<p><a href="boardMain.do?ctgr_num=${board.ctgr_num }">
-					#${board.ctgr_name }
-					</a>
-				</p>
-			</c:if>
-				<span>상품 태그</span>
-			</div>
-			
-			<div class="product_box">
-				<div class="product_img">
-					<a href="">
-						<img alt="상품" src="../resources/image/boardIMG/all.png">
-						
-					</a>
-				</div>
-			</div>
-		</div>
 	</div>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>

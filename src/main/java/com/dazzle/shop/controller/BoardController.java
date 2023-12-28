@@ -214,16 +214,19 @@ public class BoardController {
 
 			boardService.insertBoardImg(pno, mainImageName);
 		}
-		
-//		System.out.println(product_nums);
-//		
-//		for(int product_num : product_nums) {
-//			bpvo.setPno(pno);
-//			boardService.insertPNum(bpvo);
-//		}
 
+//		return "/insertPnum.do";
 		return "redirect:/boardMain.do";
 
+	}
+	
+	@RequestMapping(value="/insertPnum.do")
+	public String insertPnum(BoardProductVO vo, @RequestParam(name="product_num[]")List<Integer> product_nums) {
+		
+		for(int product_num : product_nums) {
+			boardService.insertPNum(vo);
+		}
+		return "redirect:/boardMain.do";
 	}
 
 	@RequestMapping(value = "/writeReply.do")
@@ -239,7 +242,11 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/writeQuestReply.do")
-	public String writeQuestReply(ReplyVO vo) {
+	public String writeQuestReply(ReplyVO vo, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		int user_num = (int) session.getAttribute("user_num");
+		
+		vo.setUserNum(user_num);
 
 		if (boardService.ckQuestReply(vo) != 0) {
 			boardService.deleteQuestReply(vo);
@@ -315,6 +322,54 @@ public class BoardController {
 
 	@RequestMapping(value = "/board/editBoard.do")
 	public String editBoard(BoardVO vo) {
+		boardService.editBoard(vo);
+		
+		return "/board/editBoard2.do";
+	}
+	
+	@RequestMapping(value = "/board/editBoard2.do")
+	public String editBoard(BoardVO vo, BoardProductVO bpvo, HttpServletRequest request, MultipartHttpServletRequest mRequest) {
+	    // 게시물 수정 로직
+
+	    int pno = vo.getPno(); // 수정할 게시물의 번호
+
+	    // 기존 이미지 파일 삭제
+	    String existingImagePath = request.getSession().getServletContext().getRealPath("/resources/image/board/" + pno + "/");
+	    File existingImageDirectory = new File(existingImagePath);
+	    if (existingImageDirectory.exists()) {
+	        File[] existingImageFiles = existingImageDirectory.listFiles();
+	        if (existingImageFiles != null) {
+	            for (File file : existingImageFiles) {
+	                file.delete();
+	            }
+	        }
+	    }
+
+	    // 새로운 이미지 저장
+	    List<MultipartFile> mainImageList = mRequest.getFiles("file");
+	    String imagePath = request.getSession().getServletContext().getRealPath("/resources/image/board/" + pno + "/");
+	    File directory = new File(imagePath);
+	    if (!directory.exists()) {
+	        directory.mkdirs(); // Create the directory if it doesn't exist
+	    }
+
+	    for (MultipartFile mainImage : mainImageList) {
+	        String mainImageName = mainImage.getOriginalFilename();
+	        String filePath = imagePath + mainImageName;
+
+	        try {
+	            mainImage.transferTo(new File(filePath));
+	            System.out.println("이미지 업로드 성공: " + filePath);
+	        } catch (IllegalStateException | IOException e) {
+	            System.err.println("이미지 업로드 에러: " + e.getMessage());
+	            e.printStackTrace();
+	        }
+
+	        // DB에 이미지 정보 업데이트
+	        boardService.updateBoardImg(pno, mainImageName);
+	    }
+
+	    // 게시물 수정 로직 계속...
 
 		return "redirect:/boardGet.do?pno=" + vo.getPno();
 	}

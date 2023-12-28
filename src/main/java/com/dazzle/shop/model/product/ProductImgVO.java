@@ -6,8 +6,6 @@ import lombok.Data;
 public class ProductImgVO {
 	private int img_num;
 	private int product_num;
-	private String main_img;
-	private String sub_img;
 	private String img_name;
 	private int img_type;
 }

@@ -15,7 +15,7 @@ public class SuccessPageRowMapper implements RowMapper<OrderVO>{
 		OrderVO successOrderList = new OrderVO();
 		successOrderList.setOrder_num(rs.getInt("order_num"));
 		successOrderList.setOrder_date(rs.getTimestamp("order_date"));
-		successOrderList.setMain_img(rs.getString("main_img"));
+		successOrderList.setImg_name(rs.getString("img_name"));
 		successOrderList.setColor_name(rs.getString("color_name"));
 		successOrderList.setSize_name(rs.getString("size_name"));
 		successOrderList.setProduct_price(rs.getInt("product_price"));

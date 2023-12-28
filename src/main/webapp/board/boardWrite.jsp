@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/boardCSS/boardWrite.css">
 <script src="../resources/js/boardJS/code.jquery.com_jquery-3.7.0.min.js"></script>
 </head>
-<body>
+<body><%@ include file="../header.jsp"%>
 	<div class="wrapper">
 		<h1>게시물 작성</h1>
 		<hr style="height: 3px; background-color: black;">
@@ -26,8 +25,8 @@
 			
 			<div class="category">
 				<select name="ctgr_num">
-					<option value="">카테고리를 골라주세요</option>
-					<option value="">없음</option>
+					<option value="0">카테고리를 골라주세요</option>
+					<option value="0">없음</option>
 					<option value="1">오오티디</option>
 					<option value="2">트렌드</option>
 					<option value="3">스트릿</option>
@@ -35,20 +34,6 @@
 					<option value="5">클래식</option>
 					<option value="6">빈티지</option>
 				</select>
-			</div>
-			
-			<div class="select">		
-				<input type="text" id="searchWord" list="like" placeholder="태그할 상품 검색" name="select">
-				<input type="button" value="확인" id="search" onclick="input()">
-				<datalist id="like">
-					<c:forEach items="${product }" var="product">
-						<option value="${product.product_num }" label="${product.product_name }">
-					</c:forEach>
-				</datalist>
-				
-				<div class="selected">
-				
-				</div>
 			</div>
 			
 			<div class="buttonBox">
@@ -65,8 +50,8 @@
 			}
 			
 			$('.selected').append('<input type="text" readonly="readonly" name="product_num[]" value=' + document.getElementById('searchWord').value + ' class="box"><br>');
-			
+		
 		}
 	</script>
-</body>
+</body><%@ include file="../footer.jsp"%>
 </html>
