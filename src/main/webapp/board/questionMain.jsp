@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../resources/css/boardCSS/noticeMain.css">
 </head>
-<body>
+<body><%@ include file="../header.jsp"%>
 	<div class="wrapper">
 		<div class="title">
 			<h1>문의사항</h1>
@@ -48,5 +47,5 @@
 			</table>
 		</div>
 	</div>
-</body>
+</body><%@ include file="../footer.jsp"%>
 </html>

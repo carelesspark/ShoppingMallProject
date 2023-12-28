@@ -9,8 +9,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<a href="/noticeMain.do">NOTICE</a> <a href="#">ABOUT US</a> <a href="/orderList.do">MY
-					ORDER</a> <a href="/user.do">MY ACCOUNT</a> <a href="/faq.do">HELP</a>
+				<a href="/noticeMain.do">NOTICE</a> <a href="/questionMain.do">INQUIRY</a> <a href="/user/orderList.do">MY
+					ORDER</a> <a href="/faq.do">HELP</a>
 			</div>
 			<div class="col">
 				<div class="social-icons">

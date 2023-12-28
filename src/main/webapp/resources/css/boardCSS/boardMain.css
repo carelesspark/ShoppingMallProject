@@ -2,6 +2,7 @@
 
 .wrapper {
 	padding: 30px 15% 0;
+	padding-top: 50px;
 }
 
 .wrapper a {
@@ -27,7 +28,7 @@
 	height: 50px;
 	border: 1px solid;
 	position: absolute;
-	top: 30px;
+	top: 100px;
 	right: 17%;
 	
 }

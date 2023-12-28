@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +9,7 @@
 <script src="../resources/js/boardJS/code.jquery.com_jquery-3.7.0.min.js"></script>
 </head>
 <body>
+<%@ include file="../header.jsp"%>
 	<div class="wrapper">
 		<h1>게시물 작성</h1>
 		<hr style="height: 3px; background-color: black;">
@@ -56,6 +56,7 @@
 			</div>
 		</form>
 	</div>
+	
 	<script type="text/javascript">
 		var count = 1;
 		var input = function() {
@@ -69,5 +70,6 @@
 			count++;
 		}
 	</script>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>

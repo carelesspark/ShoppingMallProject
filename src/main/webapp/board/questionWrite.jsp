@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../resources/css/boardCSS/noticeWrite.css">
 </head>
-<body>
+<body><%@ include file="../header.jsp"%>
 	<div class="wrapper">
 	<form action="questionWrite.do">
 		<div class="title">
@@ -33,5 +33,5 @@
 		</div>
 		</form>
 	</div>
-</body>
+</body><%@ include file="../footer.jsp"%>
 </html>
