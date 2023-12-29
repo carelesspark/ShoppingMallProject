@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_point_list.css?v=1.4" />
+	href="${pageContext.request.contextPath}/resources/css/user/user_point_list.css?v=1.5" />
 <title>user point list</title>
 </head>
 <body>
@@ -54,7 +54,6 @@
 					<div id="mh">
 						<div>날짜</div>
 						<div>구별</div>
-						<div>주문 내역</div>
 						<div>적립금</div>
 					</div>
 					<div id="ml">
@@ -69,15 +68,6 @@
 												<c:when test="${list.point_type == 1}">사용</c:when>
 												<c:when test="${list.point_type == 2}">취소/환불</c:when>
 											</c:choose>
-										</div>
-										<div class="clb2">
-											<div>
-												<div>${list.product_name}</div>
-												<div>&nbsp/&nbsp</div>
-												<div>${list.color_name}</div>
-												<div>&nbsp/&nbsp</div>
-												<div>${list.size_name}</div>
-											</div>
 										</div>
 										<div>${list.points}</div>
 									</div>

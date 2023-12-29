@@ -16,10 +16,6 @@ public class UserPointListRowMapper implements RowMapper<UserPointVO> {
 		vo.setOrder_num(rs.getInt("order_num"));
 		vo.setPoint_type(rs.getInt("point_type"));
 		vo.setPoints(rs.getInt("points"));
-		vo.setSize_name(rs.getString("size_name"));
-		vo.setColor_name(rs.getString("color_name"));
-		vo.setProduct_name(rs.getString("product_name"));
-
 		return vo;
 	}
 
