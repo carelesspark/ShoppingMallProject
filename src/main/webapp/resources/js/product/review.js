@@ -8,18 +8,19 @@
         agreeCheck3.checked = isChecked;
       });
 
+
       function checkAgreement() {
-        const isChecked1 = agreeCheck1.checked;
-        const isChecked2 = agreeCheck2.checked;
-        const isChecked3 = agreeCheck3.checked;
+          const isChecked2 = agreeCheck2.checked;
+          const isChecked3 = agreeCheck3.checked;
 
-        if (isChecked1 && isChecked2 && isChecked3) {
-          alert("리뷰가 성공적으로 등록되었습니다.");
-        } else {
-          alert("모든 필수 항목에 동의해야 리뷰를 등록할 수 있습니다.");
+          if (isChecked2 && isChecked3) {
+            alert("리뷰가 성공적으로 등록되었습니다.");
+            document.forms['form'].submit();
+          } else {
+            alert("모든 필수 항목에 동의해야 리뷰를 등록할 수 있습니다.");
+          }
         }
-      }
-
+       
       function previewImage() {
         const imageInput = document.getElementById("imageInput");
         const imagePreview = document.getElementById("imagePreview");
