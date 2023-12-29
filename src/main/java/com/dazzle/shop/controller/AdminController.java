@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.dazzle.shop.model.admin.domain.*;
 import com.dazzle.shop.model.admin.service.AdminService;
+import com.dazzle.shop.model.admin.util.AdminUtil;
 import com.dazzle.shop.model.order.OrderService;
 import com.dazzle.shop.model.order.OrderVO;
 
@@ -109,6 +110,9 @@ public class AdminController {
 	@GetMapping("/productList.do")
 	public String adminProductList(HttpServletRequest request, Model model) {
 		System.out.println("AdminController: adminProductList");
+
+		String s = request.getSession().getServletContext().getRealPath("/");
+		System.out.println("rootpath: " + s);
 
 		List<SubCategoryVO> subCategory = adminService.getSubCategoryList();
 		model.addAttribute("subCategory", subCategory);
@@ -198,8 +202,10 @@ public class AdminController {
 
 	// 2단계: 상품의 기본 정보 및 이미지 저장
 	@PostMapping("/addProductBasicInfo.do")
-	public String addProductBasicInfo(MultipartHttpServletRequest mRequest, HttpServletRequest request, Model model) {
+	public String addProductBasicInfo(AdminProductVO data, MultipartHttpServletRequest mRequest,
+			HttpServletRequest request, Model model) {
 		System.out.println("AdminController: addProductBasicInfo");
+		System.out.println("data: " + data);
 
 		int product_num = Integer.parseInt(mRequest.getParameter("product_num"));
 		String product_name = mRequest.getParameter("product_name");
@@ -208,15 +214,23 @@ public class AdminController {
 		List<MultipartFile> mainImageList = mRequest.getFiles("mainImage");
 		MultipartFile thumbnailImage = mRequest.getFile("thumbnailImage");
 
-		String metaPath = request.getSession().getServletContext().getRealPath("/");
-		Path currentPath = Paths.get(metaPath);
-		Path webappPath = currentPath.getParent();
-		for (int i = 0; i < 5; i++) {
-			webappPath = webappPath.getParent();
-		}
+		System.out.println(product_num);
+		System.out.println(product_name);
+		System.out.println(product_info);
+		System.out.println(product_price);
 
-		String imagePath = webappPath + "/ShoppingMallProject/src/main/webapp/resources/image/product/" + product_num
-				+ "/";
+//		String metaPath = request.getSession().getServletContext().getRealPath("/");
+//		Path currentPath = Paths.get(metaPath);
+//		Path webappPath = currentPath.getParent();
+//		for (int i = 0; i < 5; i++) {
+//			webappPath = webappPath.getParent();
+//		}
+//
+//		String imagePath = webappPath + "/ShoppingMallProject/src/main/webapp/resources/image/product/" + product_num
+//				+ "/";
+
+		String imagePath = request.getSession().getServletContext().getRealPath("/") + "resources/image/product/"
+				+ product_num + "/";
 
 		// 먼저, product_num으로 상품 정보 수정함
 		AdminProductVO vo = new AdminProductVO();
@@ -259,7 +273,7 @@ public class AdminController {
 			String tnBaseName = FilenameUtils.getBaseName(thumbnailImageName);
 			String tnExtention = FilenameUtils.getExtension(thumbnailImageName);
 			String thumbnailImagePath = imagePath + tnBaseName + "_tn." + tnExtention;
-
+			String tnDBName = tnBaseName + "_tn." + tnExtention;
 			System.out.println("Thumbnail Image Path: " + thumbnailImagePath);
 
 			try {
@@ -270,7 +284,7 @@ public class AdminController {
 				e.printStackTrace();
 			}
 
-			adminService.insertProductImg(product_num, thumbnailImageName, 2);
+			adminService.insertProductImg(product_num, tnDBName, 2);
 		}
 
 		model.addAttribute("product_num", product_num);

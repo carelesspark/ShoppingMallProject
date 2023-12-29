@@ -67,7 +67,7 @@
 										<div class="clb3">
 											<div>
 												<button type="button"
-													onclick="window.location.href='.do?pno=${list.pno}'">&gt;</button>
+													onclick="window.location.href='/boardGet.do?pno=${list.pno}'">&gt;</button>
 											</div>
 										</div>
 									</div>
