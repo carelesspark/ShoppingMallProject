@@ -112,21 +112,23 @@ public class OrderDAO {
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
-			+ " JOIN product p ON p.product_num = pco.product_num" + 
-			" JOIN product_img pimg ON pimg.product_num = p.product_num" +" WHERE od.order_detail_num = ? AND pimg.img_type = 2";
+			+ " JOIN product p ON p.product_num = pco.product_num"
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
+			+ " WHERE od.order_detail_num = ? AND pimg.img_type = 2";
 
-	private final String REFUND_INFO = "SELECT" + "  ps.size_name, p.product_num, " + "  pco.color_name," + "  p.product_price,"
-			+ "  p.product_name," + " pimg.img_name,"+ "  od.amount," + "  pr.refund_change_amount," + "  pr.refund_change_num,"
-			+ "  od.order_detail_num," + "  od.product_state," + "  pr.request_date," + "  pr.refund_or_change_reason,"
-			+ "  pr.reason_detail," + "  pr.bank," + "  pr.account_num," + "  pr.cancel," + "  pr.`change`,"
-			+ "  pr.response_detail," + "  pr.approve," + "  u.user_name " + "  FROM" + "  product_refund_or_change pr "
+	private final String REFUND_INFO = "SELECT" + "  ps.size_name, p.product_num, " + "  pco.color_name,"
+			+ "  p.product_price," + "  p.product_name," + " pimg.img_name," + "  od.amount,"
+			+ "  pr.refund_change_amount," + "  pr.refund_change_num," + "  od.order_detail_num,"
+			+ "  od.product_state," + "  pr.request_date," + "  pr.refund_or_change_reason," + "  pr.reason_detail,"
+			+ "  pr.bank," + "  pr.account_num," + "  pr.cancel," + "  pr.`change`," + "  pr.response_detail,"
+			+ "  pr.approve," + "  u.user_name " + "  FROM" + "  product_refund_or_change pr "
 			+ "  JOIN order_detail od ON od.order_detail_num = pr.order_detail_num"
 			+ "  JOIN product_code pc ON od.product_code = pc.product_code"
 			+ "  JOIN product_size ps ON pc.size_num = ps.size_num"
 			+ "  JOIN product_color pco ON ps.color_num = pco.color_num"
 			+ "  JOIN product p ON pco.product_num = p.product_num" + "  JOIN orders o ON o.order_num = od.order_num"
-			+ "  JOIN users u ON u.user_num = o.user_num" + 
-			" JOIN product_img pimg ON pimg.product_num = p.product_num"+" WHERE pr.refund_change_num = ? AND pimg.img_type = 2";
+			+ "  JOIN users u ON u.user_num = o.user_num" + " JOIN product_img pimg ON pimg.product_num = p.product_num"
+			+ " WHERE pr.refund_change_num = ? AND pimg.img_type = 2";
 
 	private final String REFUND_CHANGE_APPROVE = "UPDATE product_refund_or_change" + " SET response_detail = ?, "
 			+ " approve = ? " + " WHERE refund_change_num = ?";
@@ -138,14 +140,15 @@ public class OrderDAO {
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
-			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE od.order_detail_num = ? AND pimg.img_type = 2";
-
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
+			+ " WHERE od.order_detail_num = ? AND pimg.img_type = 2";
 
 	private final String PRODUCT_ORDER = "SELECT pimg.img_name, p.product_num, (p.product_price * ?) AS total_price, ? AS amount, p.product_name, pco.color_name, ps.size_name, pc.product_code"
 			+ " FROM product_code pc" + " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
-			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE pc.product_code = ? AND pimg.img_type = 2";
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
+			+ " WHERE pc.product_code = ? AND pimg.img_type = 2";
 
 	private final String USER_POINT = "SELECT points FROM point where user_num = ?";
 
@@ -156,7 +159,8 @@ public class OrderDAO {
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
-			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE c.user_num = ? AND pimg.img_type = 2";
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
+			+ " WHERE c.user_num = ? AND pimg.img_type = 2";
 
 	private final String BUY_ORDER = "INSERT INTO orders VALUES (DEFAULT, ?, NOW(), ?, ?, ?, ?, ? ,? ,?, ?, DEFAULT, ?, ?)";
 
@@ -174,7 +178,8 @@ public class OrderDAO {
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
-			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE u.user_num = ? AND pimg.img_type = 2";
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
+			+ " WHERE u.user_num = ? AND pimg.img_type = 2";
 
 	private final String ORDER_REFUND = "SELECT o.order_num, o.recipient, (p.product_price * od.amount ) AS total_price, p.product_price, od.amount, od.order_detail_num"
 			+ " FROM orders o" + " JOIN order_detail od ON od.order_num = o.order_num"
@@ -183,8 +188,7 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE od.order_detail_num = ?";
 
-	private final String ORDER_REFUND_REQ = 
-			"INSERT INTO product_refund_or_change(order_detail_num, request_date, refund_or_change_reason, reason_detail, refund_change_amount, bank, account_num, cancel )"
+	private final String ORDER_REFUND_REQ = "INSERT INTO product_refund_or_change(order_detail_num, request_date, refund_or_change_reason, reason_detail, refund_change_amount, bank, account_num, cancel )"
 			+ " VALUES(?, NOW(), ?, ?, ?, ?, ?, 1)";
 	private final String CHANGE_PRODUCT_STATE = "UPDATE order_detail SET product_state = '취소/환불 요청 중' WHERE order_detail_num = ?";
 
@@ -195,10 +199,9 @@ public class OrderDAO {
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num" + " WHERE od.order_detail_num = ?";
 
-	private final String PRODUCT_CHANGE_REQ = 
-			"INSERT INTO product_refund_or_change(order_detail_num, request_date, refund_or_change_reason, reason_detail, refund_change_amount, `change` )"
+	private final String PRODUCT_CHANGE_REQ = "INSERT INTO product_refund_or_change(order_detail_num, request_date, refund_or_change_reason, reason_detail, refund_change_amount, `change` )"
 			+ " VALUES(?, NOW(), ?, ?, ?, 1)";
-  
+
 	private final String CHANGE_PRODUCT_STATE2 = "UPDATE order_detail SET product_state = '교환 요청 중' WHERE order_detail_num = ?";
 
 	private final String ORDER_SUCC_INFO = "SELECT order_num, order_date, address, detail_address, postal_num, delivery_price, "
@@ -210,12 +213,13 @@ public class OrderDAO {
 			+ " JOIN product_size ps ON ps.size_num = pc.size_num"
 			+ " JOIN product_color pco ON pco.color_num = ps.color_num"
 			+ " JOIN product p ON p.product_num = pco.product_num"
-			+ " JOIN product_img pimg ON pimg.product_num = p.product_num" + " WHERE o.order_num = ? AND pimg.img_type = 2";
+			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
+			+ " WHERE o.order_num = ? AND pimg.img_type = 2";
 
 	private final String GET_ORDER_RESPONSE_DETAIL = "select * from product_refund_or_change where order_detail_num = ?";
-	
-	private final String MINUS_POINTS = "UPDATE point SET points = 0 WHERE user_num = ?";
-	private final String PLUS_POINTS = "UPDATE point SET points = ? * 0.01 WHERE user_num = ?";
+
+	private final String MINUS_POINTS = "UPDATE point SET points = 0 and point_type = 2 WHERE user_num = ? and order_num = ?";
+	private final String PLUS_POINTS = "insert into point (order_num, user_num, points, point_type) values (?,?,?,0)";
 
 	public OrderVO getOrderInfo(int orderDetailNum) {
 		try {
@@ -361,8 +365,8 @@ public class OrderDAO {
 	public void insertBuyOrder(OrderVO vo) {
 		System.out.println("insertBuyOrder()");
 		jdbcTemplate.update(BUY_ORDER, vo.getUser_num(), vo.getAddress(), vo.getDetail_address(), vo.getPostal_num(),
-				vo.getDelivery_price(), vo.getRecipient(), vo.getRequest(), vo.getPayment(),
-				vo.getPhone_num(), vo.getPoints(), vo.getTotalPrice());
+				vo.getDelivery_price(), vo.getRecipient(), vo.getRequest(), vo.getPayment(), vo.getPhone_num(),
+				vo.getPoints(), vo.getTotalPrice());
 
 		return;
 	}
@@ -377,7 +381,8 @@ public class OrderDAO {
 
 	public void insertBuyOrderDetail(OrderVO vo) {
 		System.out.println("insertBuyOrderDetail()");
-		jdbcTemplate.update(BUY_ORDER_DETAIL, vo.getOrder_num(),  vo.getProduct_code(), vo.getAmount(), vo.getAmountMultiPrice() );
+		jdbcTemplate.update(BUY_ORDER_DETAIL, vo.getOrder_num(), vo.getProduct_code(), vo.getAmount(),
+				vo.getAmountMultiPrice());
 
 		return;
 	}
@@ -421,7 +426,8 @@ public class OrderDAO {
 
 		System.out.println("insertProductChange()");
 
-		jdbcTemplate.update(PRODUCT_CHANGE_REQ, vo.getOrder_detail_num(), vo.getRefund_or_change_reason(), vo.getReason_detail(), vo.getAmount());
+		jdbcTemplate.update(PRODUCT_CHANGE_REQ, vo.getOrder_detail_num(), vo.getRefund_or_change_reason(),
+				vo.getReason_detail(), vo.getAmount());
 
 		return;
 	}
@@ -495,14 +501,14 @@ public class OrderDAO {
 			return null;
 		}
 	}
-	
+
 	public void updatePoints(OrderVO vo) {
 		System.out.println("updatePoints()");
-		jdbcTemplate.update(MINUS_POINTS, vo.getUser_num());
+		jdbcTemplate.update(MINUS_POINTS, vo.getUser_num(), vo.getOrder_num());
 	}
-	
+
 	public void updatePoints2(OrderVO vo) {
 		System.out.println("updatePoints2()");
-		jdbcTemplate.update(PLUS_POINTS, vo.getTotalPrice(), vo.getUser_num());
+		jdbcTemplate.update(PLUS_POINTS, vo.getOrder_num(), vo.getUser_num(), vo.getTotalPrice() * 0.01);
 	}
 }
