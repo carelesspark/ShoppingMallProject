@@ -14,7 +14,7 @@ public class CartDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	private final String CART_LIST = "SELECT c.cart_num, c.user_num, pimg.img_name, c.product_code, p.product_price, p.product_num, (p.product_price * c.amount) AS total_price, c.amount, p.product_name, pco.color_name, ps.size_name"
+	private final String CART_LIST = "SELECT c.cart_num, c.user_num, pimg.img_name, c.product_code, p.product_price, (p.product_price * c.amount) AS total_price, c.amount, p.product_name, pco.color_name, ps.size_name, p.product_num"
 			+ " FROM cart c" + " JOIN users u ON u.user_num = c.user_num"
 			+ " JOIN user_info ui ON ui.user_num = u.user_num"
 			+ " JOIN product_code pc ON pc.product_code = c.product_code"
