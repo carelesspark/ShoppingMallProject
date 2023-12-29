@@ -57,4 +57,5 @@ public class OrderVO {
 	private int points;
 	private int totalPrice;
 	private String img_name;
+	private int addOrEdit;
 }

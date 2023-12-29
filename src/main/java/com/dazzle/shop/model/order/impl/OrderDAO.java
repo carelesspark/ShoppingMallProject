@@ -101,12 +101,13 @@ public class OrderDAO {
 
 	private final String ORDER_INFO_EDIT_STATE = "UPDATE order_detail" + " SET product_state = ?"
 			+ " WHERE order_detail_num = ?";
-
+	private final String ORDER_INFO_ADD_DELV = "INSERT INTO delivery(order_num, delivery_date, delivery_company, invoice_num)"
+			+ " VALUES(?, STR_TO_DATE(?, '%Y-%m-%d'), ?, ?)";
 	private final String ORDER_INFO_EDIT_DELV = "UPDATE delivery" + " SET delivery_date = STR_TO_DATE(?, '%Y-%m-%d'),"
 			+ " delivery_company = ?," + " invoice_num = ?"
-			+ " WHERE order_num IN (SELECT order_num FROM order_detail WHERE order_detail_num = ?)";
+			+ " WHERE order_num = ?";
 
-	private final String ORDER_DETAIL_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_num, p.product_name, od.product_state, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.img_name"
+	private final String ORDER_DETAIL_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_num, p.product_name, od.product_state,  d.delivery_num, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.img_name"
 			+ " FROM order_detail od" + " JOIN orders o ON o.order_num = od.order_num"
 			+ " LEFT JOIN delivery d ON d.order_num = o.order_num"
 			+ " JOIN product_code pc ON pc.product_code = od.product_code"
@@ -245,7 +246,7 @@ public class OrderDAO {
 		try {
 			System.out.println("getOrderInfo()");
 			Object[] args = { vo.getOrder_detail_num() };
-			return jdbcTemplate.queryForObject(ORDER_DETAIL_INFO, args, new OrderInfoRowMapper());
+			return jdbcTemplate.queryForObject(ORDER_DETAIL_INFO, args, new OrderDetailInfoRowMapper());
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
@@ -471,7 +472,16 @@ public class OrderDAO {
 		System.out.println("updateOrderInfo()");
 
 		jdbcTemplate.update(ORDER_INFO_EDIT_DELV, vo.getDelivery_date_string(), vo.getDelivery_company(),
-				vo.getInvoice_num(), vo.getOrder_detail_num());
+				vo.getInvoice_num(), vo.getOrder_num());
+		return;
+	}
+	
+	public void insertOrderDelv(OrderVO vo) {
+
+		System.out.println("insertOrderDelv()");
+
+		jdbcTemplate.update(ORDER_INFO_ADD_DELV, vo.getOrder_num(), vo.getDelivery_date_string(), vo.getDelivery_company(),
+				vo.getInvoice_num() );
 		return;
 	}
 

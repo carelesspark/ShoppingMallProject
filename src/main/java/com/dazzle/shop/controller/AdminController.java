@@ -390,8 +390,11 @@ public class AdminController {
 
 		System.out.println("글 수정 조회");
 		OrderVO orderInfo = orderService.getOrderDetailInfo(vo);
+		System.out.println(orderInfo);
+		
+		orderInfo.setAddOrEdit(orderInfo.getDelivery_num());
 		model.addAttribute("orderInfo", orderInfo);
-
+		
 		return "/admin/orderInfoEdit.jsp";
 	}
 
@@ -401,7 +404,15 @@ public class AdminController {
 		System.out.println("글 수정");
 
 		orderService.updateOrderState(vo);
-		orderService.updateOrderDelv(vo);
+		
+		if(vo.getAddOrEdit() == 0) {
+			orderService.insertOrderDelv(vo);
+		}
+		else {
+			
+			orderService.updateOrderDelv(vo);
+			
+		}
 
 		return "redirect:orderInfoAdmin.do?order_detail_num=" + vo.getOrder_detail_num();
 	}

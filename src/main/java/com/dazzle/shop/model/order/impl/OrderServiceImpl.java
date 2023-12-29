@@ -185,4 +185,9 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderVO> getProductState(){
 		return orderDAO.getProductState();
 	}
+
+	@Override
+	public void insertOrderDelv(OrderVO vo) {
+		orderDAO.insertOrderDelv(vo);
+	}
 }

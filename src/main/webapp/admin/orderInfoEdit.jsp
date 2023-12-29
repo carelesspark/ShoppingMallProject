@@ -89,7 +89,7 @@
 							<div id="info_box_left1">
 								<div></div>
 								<div id="info_box_left1_div">
-									<p>주문 번호</p>
+									<p>주문 상세 번호</p>
 								</div>
 								<div id="info_box_left1_div">
 									<p>물품 상태</p>
@@ -108,7 +108,8 @@
 							<div id="info_box_right1">
 								<div></div>
 								<div id="info_box_right1_div">
-									<p>${orderInfo.order_num }</p>
+									<p>${orderInfo.order_detail_num }</p>
+									<input type="hidden" name="order_num" value="${orderInfo.order_num }">
 									<input type="hidden" name="order_detail_num" value="${orderInfo.order_detail_num }">
 								</div>
 								<div id="info_box_right1_div">
@@ -119,13 +120,13 @@
 													<option id="default">물품 상태를 선택하세요</option>
 												</c:when>
 												<c:otherwise>
-													<option name="product_state" value="${orderInfo.product_state }">${orderInfo.product_state }</option>
+													<option value="${orderInfo.product_state }">${orderInfo.product_state }</option>
 												</c:otherwise>
 											</c:choose>
-											<option name="product_state" value="상품 준비 중">상품 준비 중</option>
-											<option name="product_state" value="배송 시작">배송 시작</option>
-											<option name="product_state" value="배송 중">배송 중</option>
-											<option name="product_state" value="배송 완료">배송 완료</option></select>
+											<option value="상품 준비 중">상품 준비 중</option>
+											<option value="배송 시작">배송 시작</option>
+											<option value="배송 중">배송 중</option>
+											<option value="배송 완료">배송 완료</option></select>
 											</p>
 								</div>
 								<div id="info_box_right1_div">
@@ -156,6 +157,7 @@
 									<div>
 										<p>
 										<input type="text" name="invoice_num" value="${orderInfo.invoice_num }"/></p>
+										<input type="hidden" name="addOrEdit" value="${orderInfo.addOrEdit }"/>
 									</div>
 								</div>
 								<div></div>
