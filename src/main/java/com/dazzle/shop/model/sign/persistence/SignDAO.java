@@ -191,5 +191,8 @@ public class SignDAO {
 		int userNum = keyHolder.getKey().intValue();
 
 		template.update(SIGN_UP2, userNum, vo.getId(), vo.getPwd(), vo.getUser_email());
+		String sql = "insert into user_info (user_num) VALUES (" + userNum + ")";
+		template.update(sql);
 	}
+
 }

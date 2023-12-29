@@ -40,42 +40,44 @@ public class BoardController {
 	private BoardService boardService;
 
 	@RequestMapping(value = "/boardMain.do")
-	public String getBoardList(Model model, @RequestParam(required = false, defaultValue="0")int ctgr_num, HttpServletRequest request) {
+	public String getBoardList(Model model, @RequestParam(required = false, defaultValue = "0") int ctgr_num,
+			HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user_num") != null) {			
+		if (session.getAttribute("user_num") != null) {
 			int user_num = (int) session.getAttribute("user_num");
 			model.addAttribute("user_num", user_num);
 		}
-		
-		if(ctgr_num != 0) {
+
+		if (ctgr_num != 0) {
 			List<BoardVO> boardList = boardService.getCtgrBoardList(ctgr_num);
-			
+
 			model.addAttribute("boardList", boardList);
-			
-			List<FileVO> fileList = boardService.getFileList(ctgr_num);			
-			
-			model.addAttribute("file", fileList);	
-		} else {			
+
+			List<FileVO> fileList = boardService.getFileList(ctgr_num);
+
+			model.addAttribute("file", fileList);
+		} else {
 			List<BoardVO> boardList = boardService.getBoardList();
-			
+
 			model.addAttribute("boardList", boardList);
-			
-			List<FileVO> fileList = boardService.getFileList();			
-			
-			model.addAttribute("file", fileList);	
+
+			List<FileVO> fileList = boardService.getFileList();
+
+			model.addAttribute("file", fileList);
 		}
 
 		return "/board/boardMain.jsp";
 	}
 
 	@RequestMapping(value = "/noticeMain.do")
-	public String getNoticeList(Model model, @RequestParam(defaultValue = "1") int pageNum, HttpServletRequest request) {
+	public String getNoticeList(Model model, @RequestParam(defaultValue = "1") int pageNum,
+			HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user_num") != null) {			
+		if (session.getAttribute("user_num") != null) {
 			int user_num = (int) session.getAttribute("user_num");
 			model.addAttribute("user_num", user_num);
 		}
-		
+
 		List<BoardVO> noticeList = boardService.getNoticeList(pageNum);
 
 		model.addAttribute("noticeList", noticeList);
@@ -92,11 +94,11 @@ public class BoardController {
 	@RequestMapping(value = "/questionMain.do")
 	public String getQuestList(Model model, @RequestParam(defaultValue = "1") int pageNum, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user_num") != null) {			
+		if (session.getAttribute("user_num") != null) {
 			int user_num = (int) session.getAttribute("user_num");
 			model.addAttribute("user_num", user_num);
 		}
-		
+
 		List<BoardVO> questList = boardService.getQuestList(pageNum);
 
 		model.addAttribute("questList", questList);
@@ -111,11 +113,11 @@ public class BoardController {
 	@RequestMapping(value = "/boardGet.do")
 	public String getBoard(BoardVO vo, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user_num") != null) {			
+		if (session.getAttribute("user_num") != null) {
 			int user_num = (int) session.getAttribute("user_num");
 			model.addAttribute("user_num", user_num);
 		}
-		
+
 		BoardVO board = boardService.getBoard(vo);
 		List<ReplyVO> replyList = boardService.getReply(vo);
 		List<FileVO> file = boardService.getFile(vo);
@@ -124,17 +126,28 @@ public class BoardController {
 		model.addAttribute("replyList", replyList);
 		model.addAttribute("file", file);
 
+		int pno = vo.getPno();
+		String cate = boardService.getCate(pno);
+		System.out.println(cate);
+		if ("quest".equals(cate)) {
+			System.out.println("questtion");
+			return "/questionGet.do";
+		}
+		if ("notice".equals(cate)) {
+			return "/noticeGet.do";
+		}
+
 		return "/board/boardGet.jsp";
 	}
 
 	@RequestMapping(value = "/noticeGet.do")
 	public String getNotice(BoardVO vo, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user_num") != null) {			
+		if (session.getAttribute("user_num") != null) {
 			int user_num = (int) session.getAttribute("user_num");
 			model.addAttribute("user_num", user_num);
 		}
-		
+
 		BoardVO notice = boardService.getBoard(vo);
 
 		model.addAttribute("notice", notice);
@@ -147,33 +160,33 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
 		model.addAttribute("user_num", user_num);
-		
+
 		BoardVO quest = boardService.getBoard(vo);
 		try {
 			ReplyVO reply = boardService.getQuestReply(vo);
 
 			model.addAttribute("reply", reply);
 		} catch (Exception e) {
-			// TODO: handle exception
-
+			e.getStackTrace();
 		}
 
 		model.addAttribute("quest", quest);
 
 		return "/board/questionGet.jsp";
 	}
-	
-	@RequestMapping(value="/board/writeBoard.do")
+
+	@RequestMapping(value = "/board/writeBoard.do")
 	public String writeBoard(Model model) {
 		List<PVO> productList = boardService.getProductList();
-		
+
 		model.addAttribute("product", productList);
-		
+
 		return "/board/boardWrite.jsp";
 	}
 
 	@RequestMapping(value = "/board/boardWrite.do")
-	public String writeBoard(BoardVO vo, BoardProductVO bpvo, HttpServletRequest request, MultipartHttpServletRequest mRequest) {
+	public String writeBoard(BoardVO vo, BoardProductVO bpvo, HttpServletRequest request,
+			MultipartHttpServletRequest mRequest) {
 		List<MultipartFile> mainImageList = mRequest.getFiles("file");
 		System.out.println(mainImageList);
 		HttpSession session = request.getSession();
@@ -182,16 +195,17 @@ public class BoardController {
 		vo.setUserNum(user_num);
 		int pno = boardService.writeBoard(vo);
 		System.out.println("pno: " + pno);
-		
-		String metaPath = request.getSession().getServletContext().getRealPath("/");
-		Path currentPath = Paths.get(metaPath);
-		Path webappPath = currentPath.getParent();
-		for (int i = 0; i < 5; i++) {
-			webappPath = webappPath.getParent();
-		}
-		System.out.println("webapp path: " + webappPath);
 
-		String imagePath = webappPath + "/ShoppingMallProject/src/main/webapp/resources/image/board/" + pno
+//		String metaPath = request.getSession().getServletContext().getRealPath("/");
+//		Path currentPath = Paths.get(metaPath);
+//		Path webappPath = currentPath.getParent();
+//		for (int i = 0; i < 5; i++) {
+//			webappPath = webappPath.getParent();
+//		}
+//		String imagePath = webappPath + "/ShoppingMallProject/src/main/webapp/resources/image/board/" + pno
+//				+ "/";
+
+		String imagePath = request.getSession().getServletContext().getRealPath("/") + "resources/image/board/" + pno
 				+ "/";
 
 		// 메인 이미지 저장 및 DB에 기록
@@ -219,11 +233,11 @@ public class BoardController {
 		return "redirect:/boardMain.do";
 
 	}
-	
-	@RequestMapping(value="/insertPnum.do")
-	public String insertPnum(BoardProductVO vo, @RequestParam(name="product_num[]")List<Integer> product_nums) {
-		
-		for(int product_num : product_nums) {
+
+	@RequestMapping(value = "/insertPnum.do")
+	public String insertPnum(BoardProductVO vo, @RequestParam(name = "product_num[]") List<Integer> product_nums) {
+
+		for (int product_num : product_nums) {
 			boardService.insertPNum(vo);
 		}
 		return "redirect:/boardMain.do";
@@ -233,9 +247,9 @@ public class BoardController {
 	public String writeReply(ReplyVO vo, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
-		
+
 		vo.setUserNum(user_num);
-		
+
 		boardService.writeReply(vo);
 
 		return "redirect:/boardGet.do?pno=" + vo.getPno();
@@ -245,7 +259,7 @@ public class BoardController {
 	public String writeQuestReply(ReplyVO vo, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
-		
+
 		vo.setUserNum(user_num);
 
 		if (boardService.ckQuestReply(vo) != 0) {
@@ -264,7 +278,7 @@ public class BoardController {
 		int user_num = (int) session.getAttribute("user_num");
 
 		vo.setUserNum(user_num);
-		
+
 		boardService.writeNotice(vo);
 
 		return "redirect:/noticeMain.do";
@@ -276,7 +290,7 @@ public class BoardController {
 		int user_num = (int) session.getAttribute("user_num");
 
 		vo.setUserNum(user_num);
-		
+
 		boardService.writeQuest(vo);
 
 		return "redirect:/questionMain.do";
@@ -286,20 +300,21 @@ public class BoardController {
 	public String deleteBoard(BoardVO vo, HttpServletRequest request) {
 		// 게시물 수정 로직
 
-	    int pno = vo.getPno(); // 수정할 게시물의 번호
+		int pno = vo.getPno(); // 수정할 게시물의 번호
 
-	    // 기존 이미지 파일 삭제
-	    String existingImagePath = request.getSession().getServletContext().getRealPath("/resources/image/board/" + pno + "/");
-	    File existingImageDirectory = new File(existingImagePath);
-	    if (existingImageDirectory.exists()) {
-	        File[] existingImageFiles = existingImageDirectory.listFiles();
-	        if (existingImageFiles != null) {
-	            for (File file : existingImageFiles) {
-	                file.delete();
-	            }
-	        }
-	    }
-	    
+		// 기존 이미지 파일 삭제
+		String existingImagePath = request.getSession().getServletContext()
+				.getRealPath("/resources/image/board/" + pno + "/");
+		File existingImageDirectory = new File(existingImagePath);
+		if (existingImageDirectory.exists()) {
+			File[] existingImageFiles = existingImageDirectory.listFiles();
+			if (existingImageFiles != null) {
+				for (File file : existingImageFiles) {
+					file.delete();
+				}
+			}
+		}
+
 		boardService.deleteBoard(vo);
 
 		return "redirect:/boardMain.do";
@@ -339,53 +354,55 @@ public class BoardController {
 	@RequestMapping(value = "/board/editBoard.do")
 	public String editBoard(BoardVO vo) {
 		boardService.editBoard(vo);
-		
+
 		return "/board/editBoard2.do";
 	}
-	
+
 	@RequestMapping(value = "/board/editBoard2.do")
-	public String editBoard(BoardVO vo, BoardProductVO bpvo, HttpServletRequest request, MultipartHttpServletRequest mRequest) {
-	    // 게시물 수정 로직
+	public String editBoard(BoardVO vo, BoardProductVO bpvo, HttpServletRequest request,
+			MultipartHttpServletRequest mRequest) {
+		// 게시물 수정 로직
 
-	    int pno = vo.getPno(); // 수정할 게시물의 번호
+		int pno = vo.getPno(); // 수정할 게시물의 번호
 
-	    // 기존 이미지 파일 삭제
-	    String existingImagePath = request.getSession().getServletContext().getRealPath("/resources/image/board/" + pno + "/");
-	    File existingImageDirectory = new File(existingImagePath);
-	    if (existingImageDirectory.exists()) {
-	        File[] existingImageFiles = existingImageDirectory.listFiles();
-	        if (existingImageFiles != null) {
-	            for (File file : existingImageFiles) {
-	                file.delete();
-	            }
-	        }
-	    }
+		// 기존 이미지 파일 삭제
+		String existingImagePath = request.getSession().getServletContext()
+				.getRealPath("/resources/image/board/" + pno + "/");
+		File existingImageDirectory = new File(existingImagePath);
+		if (existingImageDirectory.exists()) {
+			File[] existingImageFiles = existingImageDirectory.listFiles();
+			if (existingImageFiles != null) {
+				for (File file : existingImageFiles) {
+					file.delete();
+				}
+			}
+		}
 
-	    // 새로운 이미지 저장
-	    List<MultipartFile> mainImageList = mRequest.getFiles("file");
-	    String imagePath = request.getSession().getServletContext().getRealPath("/resources/image/board/" + pno + "/");
-	    File directory = new File(imagePath);
-	    if (!directory.exists()) {
-	        directory.mkdirs(); // Create the directory if it doesn't exist
-	    }
+		// 새로운 이미지 저장
+		List<MultipartFile> mainImageList = mRequest.getFiles("file");
+		String imagePath = request.getSession().getServletContext().getRealPath("/resources/image/board/" + pno + "/");
+		File directory = new File(imagePath);
+		if (!directory.exists()) {
+			directory.mkdirs(); // Create the directory if it doesn't exist
+		}
 
-	    for (MultipartFile mainImage : mainImageList) {
-	        String mainImageName = mainImage.getOriginalFilename();
-	        String filePath = imagePath + mainImageName;
+		for (MultipartFile mainImage : mainImageList) {
+			String mainImageName = mainImage.getOriginalFilename();
+			String filePath = imagePath + mainImageName;
 
-	        try {
-	            mainImage.transferTo(new File(filePath));
-	            System.out.println("이미지 업로드 성공: " + filePath);
-	        } catch (IllegalStateException | IOException e) {
-	            System.err.println("이미지 업로드 에러: " + e.getMessage());
-	            e.printStackTrace();
-	        }
+			try {
+				mainImage.transferTo(new File(filePath));
+				System.out.println("이미지 업로드 성공: " + filePath);
+			} catch (IllegalStateException | IOException e) {
+				System.err.println("이미지 업로드 에러: " + e.getMessage());
+				e.printStackTrace();
+			}
 
-	        // DB에 이미지 정보 업데이트
-	        boardService.updateBoardImg(pno, mainImageName);
-	    }
+			// DB에 이미지 정보 업데이트
+			boardService.updateBoardImg(pno, mainImageName);
+		}
 
-	    // 게시물 수정 로직 계속...
+		// 게시물 수정 로직 계속...
 
 		return "redirect:/boardGet.do?pno=" + vo.getPno();
 	}

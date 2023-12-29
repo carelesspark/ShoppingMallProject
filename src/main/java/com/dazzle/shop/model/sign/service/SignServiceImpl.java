@@ -25,7 +25,7 @@ public class SignServiceImpl implements SignService {
 	public SignVO login(SignVO vo) {
 		return signDAO.login(vo);
 	}
-	
+
 	/*
 	 * 관리자 로그인
 	 */
@@ -121,4 +121,5 @@ public class SignServiceImpl implements SignService {
 	public void register(SignVO vo) {
 		signDAO.register(vo);
 	}
+
 }

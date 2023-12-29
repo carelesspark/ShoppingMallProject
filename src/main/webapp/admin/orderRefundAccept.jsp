@@ -122,6 +122,8 @@
 							<div id="info_box_right1">
 								<div id="info_box_right1_div">
 									<p>${orderInfo.refund_change_num }</p>
+									<input type="hidden" value="${orderInfo.order_num }" name="order_num">
+									<input type="hidden" value="${orderInfo.user_num }" name="user_num">
 									<input type="hidden" value="${orderInfo.order_detail_num }" name="order_detail_num">
 									<input type="hidden" value="${orderInfo.refund_change_num }" name="refund_change_num">
 								</div>

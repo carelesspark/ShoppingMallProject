@@ -19,25 +19,25 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO;
 
 	@Override
-	public List<BoardVO> getBoardList() {	// 게시판 메인
+	public List<BoardVO> getBoardList() { // 게시판 메인
 		// TODO Auto-generated method stub
 		return boardDAO.getBoardList();
 	}
-	
+
 	@Override
 	public List<FileVO> getFileList() {
 		// TODO Auto-generated method stub
 		return boardDAO.getFileList();
 	}
-	
+
 	@Override
 	public List<FileVO> getFileList(int ctgr_num) {
 		// TODO Auto-generated method stub
 		return boardDAO.getFileList(ctgr_num);
 	}
-	
+
 	@Override
-	public List<BoardVO> getCtgrBoardList(int ctgr_num) {	// 게시판 카테고리별 보기
+	public List<BoardVO> getCtgrBoardList(int ctgr_num) { // 게시판 카테고리별 보기
 		// TODO Auto-generated method stub
 		return boardDAO.getCtgrBoardList(ctgr_num);
 	}
@@ -71,7 +71,7 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDAO.getBoard(vo);
 	}
-	
+
 	@Override
 	public List<FileVO> getFile(BoardVO vo) {
 		// TODO Auto-generated method stub
@@ -107,19 +107,19 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDAO.writeBoard(vo);
 	}
-	
+
 	@Override
 	public List<PVO> getProductList() {
 		// TODO Auto-generated method stub
 		return boardDAO.getProductList();
 	}
-	
+
 	@Override
 	public void insertBoardImg(int pno, String mainImageName) {
 		// TODO Auto-generated method stub
 		boardDAO.insertBoardImg(pno, mainImageName);
 	}
-	
+
 	@Override
 	public void insertPNum(BoardProductVO vo) {
 		// TODO Auto-generated method stub
@@ -185,13 +185,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		boardDAO.editBoard(vo);
 	}
-	
+
 	@Override
 	public void updateBoardImg(int pno, String mainImageName) {
 		// TODO Auto-generated method stub
 		boardDAO.updateBoardImg(pno, mainImageName);
 	}
-
 
 	@Override
 	public void editNotice(BoardVO vo) {
@@ -203,5 +202,11 @@ public class BoardServiceImpl implements BoardService {
 	public void editQuest(BoardVO vo) {
 		// TODO Auto-generated method stub
 		boardDAO.editQuest(vo);
+	}
+
+	//////////////////////////
+	@Override
+	public String getCate(int pno) {
+		return boardDAO.getCate(pno);
 	}
 }

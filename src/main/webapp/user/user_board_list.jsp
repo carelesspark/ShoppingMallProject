@@ -66,13 +66,21 @@
 								<c:forEach var="list" items="${boardList}">
 									<div class="clb">
 										<div class="clb1">${list.posttime}</div>
-										<div class="clb2">${list.cate}</div>
+
+										<c:choose>
+											<c:when test="${list.cate eq 'board'}">
+												<div class="clb2">게시판</div>
+											</c:when>
+											<c:otherwise>
+												<div class="clb2">문의사항</div>
+											</c:otherwise>
+										</c:choose>
 										<div class="clb3">${list.title}</div>
 										<div class="clb4">${list.reply_count}</div>
 										<div>
 											<div>
 												<button type="button"
-													onclick="window.location.href='.do?pno=${list.pno}'">&gt;</button>
+													onclick="window.location.href='/boardGet.do?pno=${list.pno}'">&gt;</button>
 											</div>
 										</div>
 									</div>

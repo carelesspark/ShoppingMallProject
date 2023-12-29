@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/user/user.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/user/user_reply_list.css?v=1.1" />
+	href="${pageContext.request.contextPath}/resources/css/user/user_reply_list.css?v=1.2" />
 <title>user reply list</title>
 </head>
 <body>
@@ -54,6 +54,7 @@
 					</div>
 					<div id="mh">
 						<div>카테고리</div>
+						<div>글 번호</div>
 						<div>글 제목</div>
 						<div>상세 페이지</div>
 					</div>
@@ -62,12 +63,20 @@
 							<c:when test="${not empty replyList}">
 								<c:forEach var="list" items="${replyList}">
 									<div class="clb">
-										<div class="clb1">${list.cate}</div>
+										<c:choose>
+											<c:when test="${list.cate eq 'board'}">
+												<div class="clb1">게시판</div>
+											</c:when>
+											<c:otherwise>
+												<div class="clb1">문의사항</div>
+											</c:otherwise>
+										</c:choose>
+										<div class="clb4">${list.pno}</div>
 										<div class="clb2">${list.title}</div>
 										<div class="clb3">
 											<div>
 												<button type="button"
-													onclick="window.location.href='.do?pno=${list.pno}'">&gt;</button>
+													onclick="window.location.href='/boardGet.do?pno=${list.pno}'">&gt;</button>
 											</div>
 										</div>
 									</div>

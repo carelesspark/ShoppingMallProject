@@ -6,7 +6,7 @@
 }
 
 .wrapper a {
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 .wrapper a:visited {
@@ -63,6 +63,8 @@
 
 .reply_content {
 	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 5fr;
 }
 
 .reply_content p {

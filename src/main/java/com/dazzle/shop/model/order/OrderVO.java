@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class OrderVO {
+	private int point_type;
 	private int order_num;
 	private String product_state;
 	private Date delivery_date;
@@ -57,4 +58,6 @@ public class OrderVO {
 	private int points;
 	private int totalPrice;
 	private String img_name;
+	private int addOrEdit;
+	private int totalPoints;
 }

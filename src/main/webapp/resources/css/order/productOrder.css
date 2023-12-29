@@ -1,403 +1,403 @@
 @charset "UTF-8";
 
 html {
-	height: 100%;
+   height: 100%;
 }
 
 body {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	margin: 0;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   margin: 0;
 }
 
 main {
-	flex: 1;
-	padding-top: 50px;
-	padding-bottom: 50px;
+   flex: 1;
+   padding-top: 50px;
+   padding-bottom: 50px;
 }
 
 #main_container {
-	width: 1080px;
-	margin: 0 auto 50px auto;
+   width: 1080px;
+   margin: 0 auto 50px auto;
 }
 
 #order_list {
-	margin-bottom: 40px;
+   margin-bottom: 40px;
 }
 
 #order_list_title {
-	border-bottom: 1px solid #C3C3C3;
-	margin-bottom: 15px;
+   border-bottom: 1px solid #C3C3C3;
+   margin-bottom: 15px;
 }
 
 #order_list_box {
-	box-sizing: border-box;
-	height: 100px;
-	border: 1px solid #C3C3C3;
-	margin: 0 auto;
-	border-radius: 10px;
-	overflow: scroll;
-	overflow-x: hidden;
+   box-sizing: border-box;
+   height: 100px;
+   border: 1px solid #C3C3C3;
+   margin: 0 auto;
+   border-radius: 10px;
+   overflow: scroll;
+   overflow-x: hidden;
 }
 
 #order_list_grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	place-items: center;
-	height: 100px;
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+   place-items: center;
+   height: 100px;
 
 }
 
 #order_list_pic {
-	width: 64px;
-	height: 64px;
+   width: 64px;
+   height: 64px;
 }
 
 #order_list_pic1 {
-	width: 64px;
-	height: 64px;
+   width: 64px;
+   height: 64px;
 }
 
 #order_list_price {
-	font-weight: bold;
-	font-size: 11pt;
+   font-weight: bold;
+   font-size: 11pt;
 }
 
 #order_list_amount {
-	font-weight: bold;
-	font-size: 11pt;
+   font-weight: bold;
+   font-size: 11pt;
 }
 
 #order_list_name {
-	font-weight: bold;
+   font-weight: bold;
 }
 
 #order_list_total_price {
-	text-align: right;
-	font-size: 15pt;
-	font-weight: bold;
-	border-bottom: 1px solid #C3C3C3;
-	margin-bottom: 15px;
+   text-align: right;
+   font-size: 15pt;
+   font-weight: bold;
+   border-bottom: 1px solid #C3C3C3;
+   margin-bottom: 15px;
 }
 
 #order_list_total_price p {
-	padding-bottom: 20px;
+   padding-bottom: 20px;
 }
 
 #order_address {
-	margin-bottom: 40px;
+   margin-bottom: 40px;
 }
 
 #order_address_title {
-	display: grid;
-	grid-template-columns: 1fr 6fr;
-	margin-bottom: 15px;
+   display: grid;
+   grid-template-columns: 1fr 6fr;
+   margin-bottom: 15px;
 }
 
 #order_address_button {
-	height: 30px;
-	font-size: 10pt;
-	margin-left: 10px;
+   height: 30px;
+   font-size: 10pt;
+   margin-left: 10px;
 }
 
 #order_address_box {
-	box-sizing: border-box;
-	height: 150px;
-	border-top: 1px solid #C3C3C3;
-	border-bottom: 1px solid #C3C3C3;
-	font-size: 10pt;
+   box-sizing: border-box;
+   height: 150px;
+   border-top: 1px solid #C3C3C3;
+   border-bottom: 1px solid #C3C3C3;
+   font-size: 10pt;
 }
 
 #order_address_grid {
-	display: grid;
-	grid-template-columns: 180px 900px;
-	place-items: center;
-	height: 150px;
+   display: grid;
+   grid-template-columns: 180px 900px;
+   place-items: center;
+   height: 150px;
 }
 
 #order_address_grid_rows_1 {
-	display: grid;
-	grid-template-rows: 37.5px 37.5px 37.5px 37.5px;
-	width: 180px;
-	height: 150px;
-	background-color: #C3C3C3;
-	place-items: center;
-	text-align: right;
-	font-size: 13px;
-	font-weight: bold;
+   display: grid;
+   grid-template-rows: 37.5px 37.5px 37.5px 37.5px;
+   width: 180px;
+   height: 150px;
+   background-color: #C3C3C3;
+   place-items: center;
+   text-align: right;
+   font-size: 13px;
+   font-weight: bold;
 }
 
 #order_address_name {
-	width: 180px;
-	height: 37.5px;
-	padding-right: 20px;
+   width: 180px;
+   height: 37.5px;
+   padding-right: 20px;
 }
 
 #order_address_address {
-	width: 180px;
-	height: 37.5px;
-	padding-right: 20px;
+   width: 180px;
+   height: 37.5px;
+   padding-right: 20px;
 }
 
 #order_address_phone {
-	width: 180px;
-	height: 37.5px;
-	padding-right: 20px;
+   width: 180px;
+   height: 37.5px;
+   padding-right: 20px;
 }
 
 #order_address_request {
-	width: 180px;
-	height: 37.5px;
-	padding-right: 20px;
+   width: 180px;
+   height: 37.5px;
+   padding-right: 20px;
 }
 
 #order_address_grid_rows_1 p {
-	padding-top: 10px;
-	padding-bottom: 8px;
-	margin-bottom: 0px;
+   padding-top: 10px;
+   padding-bottom: 8px;
+   margin-bottom: 0px;
 }
 
 #order_address_grid_rows_2 {
-	display: grid;
-	grid-template-rows: 37.5px 37.5px 37.5px 37.5px;
-	width: 900px;
-	height: 150px;
-	place-items: center;
-	text-align: left;
-	font-size: 13px;
+   display: grid;
+   grid-template-rows: 37.5px 37.5px 37.5px 37.5px;
+   width: 900px;
+   height: 150px;
+   place-items: center;
+   text-align: left;
+   font-size: 13px;
 }
 
 #order_address_name_value {
-	width: 900px;
-	height: 37.5px;
-	padding-left: 20px;
-	padding-top: 10px;
+   width: 900px;
+   height: 37.5px;
+   padding-left: 20px;
+   padding-top: 10px;
 }
 
 #order_address_address_value {
-	width: 900px;
-	height: 37.5px;
-	padding-left: 20px;
-	padding-top: 10px;
+   width: 900px;
+   height: 37.5px;
+   padding-left: 20px;
+   padding-top: 10px;
 }
 
 #order_address_phone_value {
-	width: 900px;
-	height: 37.5px;
-	padding-left: 20px;
-	padding-top: 10px;
+   width: 900px;
+   height: 37.5px;
+   padding-left: 20px;
+   padding-top: 10px;
 }
 
 #order_address_request_value {
-	width: 900px;
-	height: 37.5px;
-	padding-top: 8px;
-	padding-left: 20px;
+   width: 900px;
+   height: 37.5px;
+   padding-top: 8px;
+   padding-left: 20px;
 }
 
 #order_address_grid_rows_2 p {
-	padding-top: 10px;
-	padding-bottom: 8px;
-	margin-bottom: 0px;
+   padding-top: 10px;
+   padding-bottom: 8px;
+   margin-bottom: 0px;
 }
 
 #order_address_grid_rows_2 select {
-	margin-bottom: 0px;
-	height: 25px;
+   margin-bottom: 0px;
+   height: 25px;
 }
 
 #order_payment {
-	margin-bottom: 40px;	
+   margin-bottom: 40px;   
 }
 
 #order_payment_title {
-	margin-bottom: 15px;
+   margin-bottom: 15px;
 }
 
 #order_payment_box {
-	box-sizing: border-box;
-	height: 300px;
-	border-top: 1px solid #C3C3C3;
-	border-bottom: 1px solid #C3C3C3;
-	font-size: 10pt;
+   box-sizing: border-box;
+   height: 300px;
+   border-top: 1px solid #C3C3C3;
+   border-bottom: 1px solid #C3C3C3;
+   font-size: 10pt;
 }
 
 #order_payment_grid {
-	display: grid;
-	grid-template-columns: 180px 900px;
-	place-items: center;
-	height: 300px;
+   display: grid;
+   grid-template-columns: 180px 900px;
+   place-items: center;
+   height: 300px;
 }
 
 #order_payment_grid_rows_1 {
-	display: grid;
-	grid-template-rows: 50px 50px 50px 50px 50px;
-	width: 180px;
-	height: 250px;
-	background-color: #C3C3C3;
-	place-items: center;
-	text-align: right;
-	font-size: 13px;
-	font-weight: bold;
+   display: grid;
+   grid-template-rows: 50px 50px 50px 50px 50px;
+   width: 180px;
+   height: 250px;
+   background-color: #C3C3C3;
+   place-items: center;
+   text-align: right;
+   font-size: 13px;
+   font-weight: bold;
 }
 
 #order_payment_price {
-	width: 180px;
-	height: 50px;
-	padding-right: 20px;
+   width: 180px;
+   height: 50px;
+   padding-right: 20px;
 }
 
 #order_payment_coupon {
-	width: 180px;
-	height: 50px;
-	padding-right: 20px;
+   width: 180px;
+   height: 50px;
+   padding-right: 20px;
 }
 
 #order_payment_point {
-	width: 180px;
-	height: 50px;
-	padding-right: 20px;
+   width: 180px;
+   height: 50px;
+   padding-right: 20px;
 }
 
 #order_payment_delivery {
-	width: 180px;
-	height: 50px;
-	padding-right: 20px;
+   width: 180px;
+   height: 50px;
+   padding-right: 20px;
 }
 
 #order_payment_actual_price {
-	width: 180px;
-	height: 50px;
-	padding-right: 20px;
+   width: 180px;
+   height: 50px;
+   padding-right: 20px;
 }
 
 #order_payment_method {
-	width: 180px;
-	height: 50px;
-	padding-right: 20px;
+   width: 180px;
+   height: 50px;
+   padding-right: 20px;
 }
 
 #order_payment_grid_rows_1 p {
-	padding-top: 20px;
-	padding-bottom: 10px;
-	margin-bottom: 0px;
+   padding-top: 20px;
+   padding-bottom: 10px;
+   margin-bottom: 0px;
 }
 
 #order_payment_grid_rows_2 {
-	display: grid;
-	grid-template-rows: 50px 50px 50px 50px 50px;
-	width: 900px;
-	height: 250px;
-	place-items: center;
-	text-align: left;
-	font-size: 13px;
+   display: grid;
+   grid-template-rows: 50px 50px 50px 50px 50px;
+   width: 900px;
+   height: 250px;
+   place-items: center;
+   text-align: left;
+   font-size: 13px;
 }
 
 #order_payment_price_value {
-	width: 900px;
-	height: 50px;
-	padding-left: 20px;
+   width: 900px;
+   height: 50px;
+   padding-left: 20px;
 }
 
 #order_payment_coupon_value {
-	width: 900px;
-	height: 50px;
-	padding-left: 20px;
-	padding-top: 8px;
-	padding-bottom: 8px;
+   width: 900px;
+   height: 50px;
+   padding-left: 20px;
+   padding-top: 8px;
+   padding-bottom: 8px;
 }
 
 #order_payment_point_value {
-	width: 900px;
-	height: 50px;
-	padding-left: 20px;
-	display: grid;
-	grid-template-columns: 110px 60px 40px 100px 580px;
+   width: 900px;
+   height: 50px;
+   padding-left: 20px;
+   display: grid;
+   grid-template-columns: 110px 60px 40px 100px 580px;
 }
 
 #order_payment_delivery_value {
-	width: 900px;
-	height: 50px;
-	padding-left: 20px;
+   width: 900px;
+   height: 50px;
+   padding-left: 20px;
 }
 
 #order_payment_actual_price_value {
-	width: 900px;
-	height: 50px;
-	padding-left: 20px;
+   width: 900px;
+   height: 50px;
+   padding-left: 20px;
 }
 
 #order_payment_method_value {
-	width: 900px;
-	height: 50px;
-	padding-left: 20px;
-	display: grid;
-	grid-template-columns: 150px 100px 100px 550px;
+   width: 900px;
+   height: 50px;
+   padding-left: 20px;
+   display: grid;
+   grid-template-columns: 150px 100px 100px 550px;
 }
 
 #order_payment_method_value div {
-	padding-top: 23px;
+   padding-top: 23px;
 }
 
 #order_payment_grid_rows_2 p {
-	padding-top: 20px;
-	padding-bottom: 10px;
-	margin-bottom: 0px;
+   padding-top: 20px;
+   padding-bottom: 10px;
+   margin-bottom: 0px;
 }
 
 #order_payment_point_box {
-	width: 100px;
+   width: 100px;
 }
 
 #order_payment_point_button1 {
-	height: 25px;
-	font-size: 8pt;
+   height: 25px;
+   font-size: 8pt;
 }
 
 #order_payment_point_button2 {
-	height: 25px;
-	font-size: 8pt;
+   height: 25px;
+   font-size: 8pt;
 }
 
 #order_payment_grid_rows_2 select {
-	margin-bottom: 0px;
-	height: 25px;
+   margin-bottom: 0px;
+   height: 25px;
 }
 
 #order_payment_label_css {
-	padding-top: 23px;
+   padding-top: 23px;
 }
 
 #order_payment_div_css {
-	display: grid;
-	grid-template-columns: 120px 460px;
-	padding-top: 20px;
+   display: grid;
+   grid-template-columns: 120px 460px;
+   padding-top: 20px;
 }
 
 #order_buttons {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	place-items: center;
-	height: 100px;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   place-items: center;
+   height: 100px;
 }
 
 #return_home_button {
-	width: 250px;
-	height: 60px;
+   width: 250px;
+   height: 60px;
 }
 
 #order_buy_button {
-	width: 250px;
-	height: 60px;
+   width: 250px;
+   height: 60px;
 }
 
 #order_buttons_div1 {
-	padding-left: 230px;
+   padding-left: 230px;
 }
 
 #order_buttons_div2 {
-	padding-right: 230px;
+   padding-right: 230px;
 }
 
 .readonly {

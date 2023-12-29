@@ -89,7 +89,7 @@
 							<div id="info_box_left1">
 								<div></div>
 								<div id="info_box_left1_div">
-									<p>주문 번호</p>
+									<p>주문 상세 번호</p>
 								</div>
 								<div id="info_box_left1_div">
 									<p>물품 상태</p>
@@ -108,7 +108,7 @@
 							<div id="info_box_right1">
 								<div></div>
 								<div id="info_box_right1_div">
-									<p>${orderInfo.order_num }</p>
+									<p>${orderInfo.order_detail_num }</p>
 								</div>
 								<div id="info_box_right1_div">
 									<p>${orderInfo.product_state }</p>
