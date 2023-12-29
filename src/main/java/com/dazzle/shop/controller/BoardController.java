@@ -126,6 +126,17 @@ public class BoardController {
 		model.addAttribute("replyList", replyList);
 		model.addAttribute("file", file);
 
+		int pno = vo.getPno();
+		String cate = boardService.getCate(pno);
+		System.out.println(cate);
+		if ("quest".equals(cate)) {
+			System.out.println("questtion");
+			return "/questionGet.do";
+		}
+		if ("notice".equals(cate)) {
+			return "/noticeGet.do";
+		}
+
 		return "/board/boardGet.jsp";
 	}
 

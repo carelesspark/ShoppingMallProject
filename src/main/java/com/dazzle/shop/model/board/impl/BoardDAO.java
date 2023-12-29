@@ -35,7 +35,7 @@ public class BoardDAO {
 	public void setJdbcTemplate(DataSource dataSource) {
 		this.template = new JdbcTemplate(dataSource);
 	}
-	
+
 	private final String select = "select * from users right join board on board.user_num = users.user_num left join codi_ctgr on board.ctgr_num = codi_ctgr.ctgr_num";
 
 	public List<BoardVO> getBoardList() { // 게시판
@@ -45,34 +45,35 @@ public class BoardDAO {
 
 		return boardList;
 	}
-	
+
 	public List<FileVO> getFileList() {
 		String sql = "select * from file, board where file.pno = board.pno group by file.pno order by file.pno desc";
-		
+
 		List<FileVO> fileList = template.query(sql, new FileRowMapper());
-		
+
 		return fileList;
 	}
-	
+
 	public List<FileVO> getFileList(int ctgr_num) {
-		String sql = "select * from file, board where file.pno = board.pno and ctgr_num = " + ctgr_num + " group by file.pno order by file.pno desc";
-		
+		String sql = "select * from file, board where file.pno = board.pno and ctgr_num = " + ctgr_num
+				+ " group by file.pno order by file.pno desc";
+
 		List<FileVO> fileList = template.query(sql, new FileRowMapper());
-		
+
 		return fileList;
 	}
-	
-	public List<BoardVO> getCtgrBoardList(int ctgr_num) {	// 게시판 카테고리별 보기
-		String sql = "select * from users right join board on board.user_num = users.user_num left join codi_ctgr on board.ctgr_num = codi_ctgr.ctgr_num where cate = 'board' and board.ctgr_num = " + ctgr_num + " order by pno desc";
-		
+
+	public List<BoardVO> getCtgrBoardList(int ctgr_num) { // 게시판 카테고리별 보기
+		String sql = "select * from users right join board on board.user_num = users.user_num left join codi_ctgr on board.ctgr_num = codi_ctgr.ctgr_num where cate = 'board' and board.ctgr_num = "
+				+ ctgr_num + " order by pno desc";
+
 		List<BoardVO> boardList = template.query(sql, new BoardRowMapper());
-		
+
 		return boardList;
 	}
 
 	public List<BoardVO> getNoticeList(int pageNum) { // 공지사항
-		String sql = select + " where cate = 'notice' order by pno desc limit 15 offset "
-				+ ((pageNum - 1) * 15);
+		String sql = select + " where cate = 'notice' order by pno desc limit 15 offset " + ((pageNum - 1) * 15);
 
 		List<BoardVO> boardList = template.query(sql, new BoardRowMapper());
 
@@ -88,8 +89,7 @@ public class BoardDAO {
 	}
 
 	public List<BoardVO> getQuestList(int pageNum) { // 문의사항
-		String sql = select + " where cate = 'quest' order by pno desc limit 15 offset "
-				+ ((pageNum - 1) * 15);
+		String sql = select + " where cate = 'quest' order by pno desc limit 15 offset " + ((pageNum - 1) * 15);
 
 		List<BoardVO> boardList = template.query(sql, new BoardRowMapper());
 
@@ -113,19 +113,19 @@ public class BoardDAO {
 
 		return board;
 	}
-	
+
 	public List<FileVO> getFile(BoardVO vo) {
 		String sql = "select * from file where pno = ?";
-		
+
 		Object[] args = { vo.getPno() };
-		
+
 		List<FileVO> file = template.query(sql, args, new FileRowMapper());
-		
+
 		return file;
 	}
 
 	public List<ReplyVO> getReply(BoardVO vo) { // 댓글 조회
-		String sql = "select * from reply where pno = ? order by rno";
+		String sql = "select * from reply r join users u on u.user_num = r.user_num where pno = ? order by rno";
 
 		Object[] args = { vo.getPno() };
 
@@ -182,12 +182,12 @@ public class BoardDAO {
 
 		return keyHolder.getKey().intValue();
 	}
-	
+
 	public List<PVO> getProductList() {
 		String sql = "select product_num, product_name from product";
-		
+
 		List<PVO> productList = template.query(sql, new PRowMapper());
-		
+
 		return productList;
 	}
 
@@ -202,13 +202,12 @@ public class BoardDAO {
 		}
 
 	}
-	
+
 	public void insertPNum(BoardProductVO vo) {
 		String sql = "insert into board_product_num (pno, product_num) values (?, ?)";
-		
+
 		template.update(sql, vo.getPno(), vo.getProduct_num());
 	}
-	
 
 	public void writeReply(ReplyVO vo) { // 댓글 작성
 		String sql = "insert into reply (pno, user_num, rcontent) values (?, ?, ?)";
@@ -275,7 +274,7 @@ public class BoardDAO {
 
 		template.update(sql, vo.getCtgr_num(), vo.getTitle(), vo.getPno());
 	}
-	
+
 	public void updateBoardImg(int pno, String mainImageName) {
 		String sql = "update file set fname = ? where pno = ?";
 
@@ -298,5 +297,12 @@ public class BoardDAO {
 		String sql = "update board set title = ?, posttime = now(), content = ? where pno = ?";
 
 		template.update(sql, vo.getTitle(), vo.getContent(), vo.getPno());
+	}
+
+	//////////////////////////////
+	public String getCate(int pno) {
+		String sql = "select cate from board where pno = " + pno;
+
+		return template.queryForObject(sql, String.class);
 	}
 }

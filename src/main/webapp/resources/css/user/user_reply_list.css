@@ -54,7 +54,7 @@
 #mh {
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: 1fr 4fr 1fr;
+	grid-template-columns: 1fr 1fr 4fr 1fr;
 	align-items: center;
 	border-bottom: 1px solid #d4d4d4;
 	margin-bottom: 20px;
@@ -87,7 +87,7 @@
 .clb {
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: 1fr 4fr 1fr;
+	grid-template-columns: 1fr 1fr 4fr 1fr;
 	align-items: center;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #f1f1f1;
