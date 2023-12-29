@@ -167,8 +167,7 @@ public class BoardController {
 
 			model.addAttribute("reply", reply);
 		} catch (Exception e) {
-			// TODO: handle exception
-
+			e.getStackTrace();
 		}
 
 		model.addAttribute("quest", quest);

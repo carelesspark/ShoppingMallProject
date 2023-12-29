@@ -7,13 +7,14 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.dazzle.shop.model.order.OrderVO;
 
-public class RefundInfoRowMapper implements RowMapper<OrderVO>{
+public class RefundInfoRowMapper implements RowMapper<OrderVO> {
 
 	@Override
 	public OrderVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-		
+
 		OrderVO orderInfo = new OrderVO();
 		orderInfo.setProduct_name(rs.getString("product_name"));
+		orderInfo.setOrder_num(rs.getInt("order_num"));
 		orderInfo.setSize_name(rs.getString("size_name"));
 		orderInfo.setColor_name(rs.getString("color_name"));
 		orderInfo.setAmount(rs.getInt("amount"));
@@ -33,11 +34,10 @@ public class RefundInfoRowMapper implements RowMapper<OrderVO>{
 		orderInfo.setApprove(rs.getInt("approve"));
 		orderInfo.setRefund_change_amount(rs.getInt("refund_change_amount"));
 		orderInfo.setUser_name(rs.getString("user_name"));
+		orderInfo.setUser_num(rs.getInt("user_num"));
 		orderInfo.setProduct_num(rs.getInt("product_num"));
 		orderInfo.setImg_name(rs.getString("img_name"));
 		return orderInfo;
 	}
 
-	
-	
 }
