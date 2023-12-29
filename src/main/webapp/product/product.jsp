@@ -87,10 +87,17 @@
 				<a href="inquiry.do">상품문의</a>
 			</div>
 		</div>
-		<div class="email-icon" id="product-detail">
-			<img alt="Placeholder image for product" class="d-block w-100 mb-5"
-				height="100%" src="https://placehold.co/300x200" width="100%" />
+		<div class="product-info">
+			상품 설명 : 
+			<br>
+			<br>
+			${info.product_info }
 		</div>
+		
+<!-- 		<div class="email-icon" id="product-detail"> -->
+<!-- 			<img alt="Placeholder image for product" class="d-block w-100 mb-5" -->
+<!-- 				height="100%" src="https://placehold.co/300x200" width="100%" /> -->
+<!-- 		</div> -->
 		<table class="table">
 			<tbody>
 				<tr>
