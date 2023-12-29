@@ -56,6 +56,7 @@ public class UserController {
 
 		HttpSession session = request.getSession();
 		int user_num = (int) session.getAttribute("user_num");
+		System.out.println(user_num);
 
 		addCardAttributeToModel(user_num, model);
 
@@ -602,7 +603,8 @@ public class UserController {
 
 	//////////////////////////////////////////////// 비동기
 	@PostMapping("/updatePwd.do")
-	public String updatePwd(@RequestParam("pwd") String pwd, HttpServletRequest request, Model model) {
+	@ResponseBody
+	public ResponseEntity<String> updatePwd(@RequestParam("pwd") String pwd, HttpServletRequest request, Model model) {
 		System.out.println("UserController: updatePwd");
 
 		HttpSession session = request.getSession();
@@ -612,9 +614,9 @@ public class UserController {
 		model.addAttribute("pwd", pwd);
 
 		if (!successUpdate) { // 실패시
-			return "goCheckInfo.do";
+			return ResponseEntity.ok("update failed");
 		} else { // 성공시
-			return "checkInfo.do";
+			return ResponseEntity.ok("update success");
 		}
 	}
 

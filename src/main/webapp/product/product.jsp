@@ -88,8 +88,9 @@
 			</div>
 		</div>
 		<div class="email-icon" id="product-detail">
-			<img alt="Placeholder image for product" class="d-block w-100 mb-5"
-				height="100%" src="https://placehold.co/300x200" width="100%" />
+			<div class="product-info">
+				<br> <br> ${info.product_info }<br> <br>
+			</div>
 		</div>
 		<table class="table">
 			<tbody>

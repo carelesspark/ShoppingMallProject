@@ -66,4 +66,7 @@ public interface BoardService {
 	void editNotice(BoardVO vo);
 	
 	void editQuest(BoardVO vo);
+	
+	//////////////////////////////
+	String getCate(int pno);
 }

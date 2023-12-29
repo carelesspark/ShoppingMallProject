@@ -143,29 +143,27 @@
 				return false;
 			}
 
-			return true;
+			$.ajax({
+				type : "POST",
+				url : "/user/updatePwd.do",
+				data : {
+					pwd : password,
+				},
+				success : function(response) {
+					if (response === "update failed") {
+						alert("비밀번호 변경에 실패했습니다.");
+					} else {
+						alert("비밀번호 변경에 성공했습니다.");
 
-			/* 			$.ajax({
-			 type : "POST",
-			 url : "/user/updatePwd.do",
-			 data : {
-			 pwd : password,
-			 },
-			 success : function(response) {
-			 if (response === "update failed") {
-			 alert("비밀번호 변경에 실패했습니다.");
-			 } else {
-			 alert("비밀번호 변경에 성공했습니다.");
-
-			 var pwd = '${pwd }';
-			 var stars = '*'.repeat(pwd.length);
-			 document.getElementById('starPwd').innerText = stars;
-			 }
-			 },
-			 error : function(error) {
-			 alert("비밀번호 변경에 실패했습니다.");
-			 }
-			 }); */
+						var pwd = '${pwd }';
+						var stars = '*'.repeat(pwd.length);
+						document.getElementById('starPwd').innerText = stars;
+					}
+				},
+				error : function(error) {
+					alert("비밀번호 변경에 실패했습니다.");
+				}
+			});
 
 		}
 

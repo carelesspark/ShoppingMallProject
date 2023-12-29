@@ -54,7 +54,8 @@
 #mh {
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: auto auto auto auto;
+	grid-template-columns: 1fr 4fr 1fr;
+	justify-content: space-between;
 	border-bottom: 1px solid #d4d4d4;
 	margin-bottom: 20px;
 }
@@ -80,7 +81,8 @@
 .clb {
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: auto auto auto auto;
+	grid-template-columns: 1fr 4fr 1fr;
+	justify-content: space-between;
 	border-bottom: 1px solid #f1f1f1;
 	margin-bottom: 20px;
 }

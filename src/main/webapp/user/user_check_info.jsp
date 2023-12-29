@@ -39,7 +39,7 @@
 
 	<c:if test="${!empty error}">
 		<script type="text/javascript">
-			alert("비밀번호 정보가 일치하지 않습니다.");
+			// alert("비밀번호 정보가 일치하지 않습니다.");
 		</script>
 	</c:if>
 	<script type="text/javascript">
