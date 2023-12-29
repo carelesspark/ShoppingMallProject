@@ -67,4 +67,8 @@ public interface OrderService {
 	List<OrderVO> getProductState();
 	
 	OrderVO getOrderResponseDetail(int orderDetailNum);
+	
+	void insertOrderDelv(OrderVO vo) ;
+	
+	
 }
