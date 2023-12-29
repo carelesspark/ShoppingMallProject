@@ -104,8 +104,7 @@ public class OrderDAO {
 	private final String ORDER_INFO_ADD_DELV = "INSERT INTO delivery(order_num, delivery_date, delivery_company, invoice_num)"
 			+ " VALUES(?, STR_TO_DATE(?, '%Y-%m-%d'), ?, ?)";
 	private final String ORDER_INFO_EDIT_DELV = "UPDATE delivery" + " SET delivery_date = STR_TO_DATE(?, '%Y-%m-%d'),"
-			+ " delivery_company = ?," + " invoice_num = ?"
-			+ " WHERE order_num = ?";
+			+ " delivery_company = ?," + " invoice_num = ?" + " WHERE order_num = ?";
 
 	private final String ORDER_DETAIL_INFO = "SELECT o.order_num, ps.size_name, pco.color_name, od.amount, p.product_price, p.product_num, p.product_name, od.product_state,  d.delivery_num, d.delivery_date, d.delivery_company, d.invoice_num, o.recipient, o.address, o.detail_address, o.phone_num, o.request, od.order_detail_num, o.user_num, pimg.img_name"
 			+ " FROM order_detail od" + " JOIN orders o ON o.order_num = od.order_num"
@@ -117,12 +116,12 @@ public class OrderDAO {
 			+ " JOIN product_img pimg ON pimg.product_num = p.product_num"
 			+ " WHERE od.order_detail_num = ? AND pimg.img_type = 2";
 
-	private final String REFUND_INFO = "SELECT" + "  ps.size_name, p.product_num, " + "  pco.color_name,"
-			+ "  p.product_price," + "  p.product_name," + " pimg.img_name," + "  od.amount,"
-			+ "  pr.refund_change_amount," + "  pr.refund_change_num," + "  od.order_detail_num,"
-			+ "  od.product_state," + "  pr.request_date," + "  pr.refund_or_change_reason," + "  pr.reason_detail,"
-			+ "  pr.bank," + "  pr.account_num," + "  pr.cancel," + "  pr.`change`," + "  pr.response_detail,"
-			+ "  pr.approve," + "  u.user_name " + "  FROM" + "  product_refund_or_change pr "
+	private final String REFUND_INFO = "SELECT" + "  ps.size_name, p.product_num, "
+			+ "  pco.color_name, o.order_num, u.user_num, " + "  p.product_price," + "  p.product_name,"
+			+ " pimg.img_name," + "  od.amount," + "  pr.refund_change_amount," + "  pr.refund_change_num,"
+			+ "  od.order_detail_num," + "  od.product_state," + "  pr.request_date," + "  pr.refund_or_change_reason,"
+			+ "  pr.reason_detail," + "  pr.bank," + "  pr.account_num," + "  pr.cancel," + "  pr.`change`,"
+			+ "  pr.response_detail," + "  pr.approve," + "  u.user_name " + "  FROM" + "  product_refund_or_change pr "
 			+ "  JOIN order_detail od ON od.order_detail_num = pr.order_detail_num"
 			+ "  JOIN product_code pc ON od.product_code = pc.product_code"
 			+ "  JOIN product_size ps ON pc.size_num = ps.size_num"
@@ -219,7 +218,8 @@ public class OrderDAO {
 
 	private final String GET_ORDER_RESPONSE_DETAIL = "select * from product_refund_or_change where order_detail_num = ?";
 
-	private final String MINUS_POINTS = "UPDATE point SET points = 0 and point_type = 2 WHERE user_num = ? and order_num = ?";
+	private final String MINUS_POINTS1 = "insert into point (order_num, user_num, points, point_type) values (?,?,?,1)";
+	private final String MINUS_POINTS2 = "UPDATE point SET points = 0 and point_type = 2 WHERE user_num = ? and order_num = ?";
 	private final String PLUS_POINTS = "insert into point (order_num, user_num, points, point_type) values (?,?,?,0)";
 
 	public OrderVO getOrderInfo(int orderDetailNum) {
@@ -475,13 +475,13 @@ public class OrderDAO {
 				vo.getInvoice_num(), vo.getOrder_num());
 		return;
 	}
-	
+
 	public void insertOrderDelv(OrderVO vo) {
 
 		System.out.println("insertOrderDelv()");
 
-		jdbcTemplate.update(ORDER_INFO_ADD_DELV, vo.getOrder_num(), vo.getDelivery_date_string(), vo.getDelivery_company(),
-				vo.getInvoice_num() );
+		jdbcTemplate.update(ORDER_INFO_ADD_DELV, vo.getOrder_num(), vo.getDelivery_date_string(),
+				vo.getDelivery_company(), vo.getInvoice_num());
 		return;
 	}
 
@@ -514,11 +514,18 @@ public class OrderDAO {
 
 	public void updatePoints(OrderVO vo) {
 		System.out.println("updatePoints()");
-		jdbcTemplate.update(MINUS_POINTS, vo.getUser_num(), vo.getOrder_num());
+
+		jdbcTemplate.update(MINUS_POINTS2, vo.getUser_num(), vo.getOrder_num());
 	}
 
 	public void updatePoints2(OrderVO vo) {
 		System.out.println("updatePoints2()");
 		jdbcTemplate.update(PLUS_POINTS, vo.getOrder_num(), vo.getUser_num(), vo.getTotalPrice() * 0.01);
 	}
+
+	//////////////////////////
+	public void useAllPoints(OrderVO vo) {
+		jdbcTemplate.update(MINUS_POINTS1, vo.getOrder_num(), vo.getUser_num(), vo.getTotalPoints() * -1);
+	}
+
 }

@@ -391,10 +391,10 @@ public class AdminController {
 		System.out.println("글 수정 조회");
 		OrderVO orderInfo = orderService.getOrderDetailInfo(vo);
 		System.out.println(orderInfo);
-		
+
 		orderInfo.setAddOrEdit(orderInfo.getDelivery_num());
 		model.addAttribute("orderInfo", orderInfo);
-		
+
 		return "/admin/orderInfoEdit.jsp";
 	}
 
@@ -404,14 +404,13 @@ public class AdminController {
 		System.out.println("글 수정");
 
 		orderService.updateOrderState(vo);
-		
-		if(vo.getAddOrEdit() == 0) {
+
+		if (vo.getAddOrEdit() == 0) {
 			orderService.insertOrderDelv(vo);
-		}
-		else {
-			
+		} else {
+
 			orderService.updateOrderDelv(vo);
-			
+
 		}
 
 		return "redirect:orderInfoAdmin.do?order_detail_num=" + vo.getOrder_detail_num();
@@ -438,7 +437,9 @@ public class AdminController {
 	}
 
 	@PostMapping(value = "/orderRefundAccept.do")
-	public String orderRefundAcceptPost(OrderVO vo, Model model) throws Exception {
+	public String orderRefundAcceptPost(HttpServletRequest request, OrderVO vo, Model model) throws Exception {
+		System.out.println(vo.getUser_num());
+		System.out.println(vo.getOrder_num());
 
 		System.out.println("취소/환불 승인");
 		orderService.approveRequest(vo);
@@ -452,6 +453,10 @@ public class AdminController {
 			refund_or_change += " 승인";
 		else if (vo.getApprove() == -1)
 			refund_or_change += " 거절";
+
+		if (vo.getCancel() == 1 && vo.getApprove() == 1) {
+			orderService.updatePoints(vo);
+		}
 
 		System.out.println(refund_or_change);
 		vo.setProduct_state(refund_or_change);
