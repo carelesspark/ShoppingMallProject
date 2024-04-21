@@ -52,9 +52,9 @@ https://github.com/spring-attic/toolsuite-distribution/wiki/Spring-Tool-Suite-3
 
 ## 팀원 소개
 
-| 이름 | 역할 | 이메일 |
+| 이름 | 기여한 파트 | 이메일 |
 | --- | --- | --- |
-| 박종혁 | cart, order, product | kiae1234@naver.com |
+| 박종혁 | cart, admin, order, product | kiae1234@naver.com |
 | 안병현 | main, header&footer, product | abh4017@naver.com |
 | 김태윤 | admin, sign, user | xodbs97@gmail.com |
 | 김경민 | board | kkm6612@gmail.com |
