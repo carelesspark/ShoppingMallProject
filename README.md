@@ -49,3 +49,13 @@ https://github.com/spring-attic/toolsuite-distribution/wiki/Spring-Tool-Suite-3
  - -해당 SQL 적용
 
 ## ⚡주요 기능
+
+## 팀원 소개
+
+| 이름 | 역할 | 이메일 |
+| --- | --- | --- |
+| 박종혁 | cart, order, product | kiae1234@naver.com |
+| 안병현 | main, header&footer, product | abh4017@naver.com |
+| 김태윤 | admin, sign, user | xodbs97@gmail.com |
+| 김경민 | board | kkm6612@gmail.com |
+| 송민수 | address, admin, faq, order, product | mss5682@naver.com |
