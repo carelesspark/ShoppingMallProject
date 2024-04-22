@@ -69,7 +69,7 @@ https://github.com/spring-attic/toolsuite-distribution/wiki/Spring-Tool-Suite-3
     + 결제 페이지
       + 주소지 선택 - 추가/수정/삭제  
   + 리뷰/별점 추가
-  + 상품 문의 사항 추가
+  + 상품 문의 사항 작성
   + 장바구니 추가
 
 + 관리자
@@ -87,8 +87,8 @@ https://github.com/spring-attic/toolsuite-distribution/wiki/Spring-Tool-Suite-3
     + 교환/환불 목록
       + 교환/환불 상세
         + 승인/거절
-  + FAQ 관리 - 추가/수정/삭제
-  + 공지사항 관리 - 추가/수정/삭제
+  + FAQ 관리 - 작성/수정/삭제
+  + 공지사항 관리 - 작성/수정/삭제
   + 게시물 관리 - 수정/삭제
 
 + 게시판
@@ -96,8 +96,8 @@ https://github.com/spring-attic/toolsuite-distribution/wiki/Spring-Tool-Suite-3
   + 공지사항
   + 코디 게시판
     + 코디 상세
-      + 코디 추가/수정/삭제                 
-      + 댓글 추가/삭제
+      + 코디글 작성/수정/삭제                 
+      + 댓글 작성/삭제
 
 ## 팀원 소개
 
